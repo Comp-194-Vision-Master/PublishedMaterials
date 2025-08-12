@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-08-12">
+
+<title>ICA: Basic Python Data Types</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="ICA2-PythonDataTypes_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ICA2-PythonDataTypes_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="ICA2-PythonDataTypes_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="ICA2-PythonDataTypes_files/libs/quarto-html/popper.min.js"></script>
+<script src="ICA2-PythonDataTypes_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ICA2-PythonDataTypes_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ICA2-PythonDataTypes_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ICA2-PythonDataTypes_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ICA2-PythonDataTypes_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ICA2-PythonDataTypes_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ICA2-PythonDataTypes_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ICA: Basic Python Data Types</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 12, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#numbers" id="toc-numbers" class="nav-link" data-scroll-target="#numbers">Numbers</a></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings">Strings</a></li>
+  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">Lists</a></li>
+  <li><a href="#optional-challenge-question-for-those-who-get-this-far" id="toc-optional-challenge-question-for-those-who-get-this-far" class="nav-link" data-scroll-target="#optional-challenge-question-for-those-who-get-this-far">Optional Challenge Question for Those Who Get This Far</a></li>
+  <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This activity will introduce one of the true “core concepts” of computer science: the idea of data types. Every piece of data in a computer is stored as a collection of binary bits: ones and zeros. In order for the computer to manipulate data correctly, it is crucial that it keep track of what type the data is, so that it can correctly interpret the binary bits. When programming, it is also essential to pay close attention to data types.</p>
+<p>In this activity, you will look at several simple built-in types of data in Python. First you will learn about numbers, which may be separated into integers and floating-point (real) numbers. Then you will explore strings, which allow us to represent text data. And finally you will learn about lists, which store collections of other data.</p>
+<p><strong>To hand in:</strong> You will use Github Assignment to set up this assignment, and to <em>push</em> your code to save it to the cloud, to hand it in.</p>
+</section>
+<section id="numbers" class="level1">
+<h1>Numbers</h1>
+<p>Python has two main kinds of numbers: integers, and real, or floating point, numbers (There are other kinds of numbers, as well, but we probably won’t use any of them). The official names for these types are <code>int</code> and <code>float</code>. <a href="#tbl-arithops" class="quarto-xref">Table&nbsp;1</a> shows basic numeric operations and functions. Many more common mathematical operations are in the <code>math</code> module, which you can add in when you need it.</p>
+<div id="tbl-arithops" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-arithops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Basic built-in arithmetic operations, and functions on numbers
+</figcaption>
+<div aria-describedby="tbl-arithops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>3 + 12</code></td>
+<td style="text-align: left;">Adds two numbers, returning the result</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>45 - 19</code></td>
+<td style="text-align: left;">Subtracts second from first, returning the result</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>5 * 100</code></td>
+<td style="text-align: left;">Multiplies two numbers, returning the result</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>55.0 / 2</code></td>
+<td style="text-align: left;">Divides first by the second, returning the result as a <code>float</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>55 // 2</code></td>
+<td style="text-align: left;">Divides first by the second, returning the quotient portion as an <code>int</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>30 % 4</code></td>
+<td style="text-align: left;">Computes the remainder of first divided by second</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>2 ** 3</code></td>
+<td style="text-align: left;">Raises first to the power of the second</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>max(1, 5, 3)</code></td>
+<td style="text-align: left;">A function that returns the largest of values passed to it</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>min(1, 5, 3)</code></td>
+<td style="text-align: left;">A function that returns the smallest of values passed to it</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>abs(-3)</code></td>
+<td style="text-align: left;">A function that returns the absolute value of its argument</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>round(3.2)</code></td>
+<td style="text-align: left;">A function that rounds its argument</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>int(3.2)</code></td>
+<td style="text-align: left;">Converts its argument to an integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>float(2)</code></td>
+<td style="text-align: left;">Converts its argument to a floating-point number</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Integers and floats are treated as different, though related, kinds of data. This is why we have explicit operators to convert from one type to the other.</p>
+<p>In general, arithmetic operators follow this rule: <strong>If both operands are integers, then the result is an integer. If at least one operand is a floating-point number, then the result is a float, too.</strong> The single-slash, decimal division operator is an exception: it always returns a float.</p>
+<p>There are three division-related operators: decimal division (<code>/</code>), quotient division (<code>//</code>), and remainder (`%). Decimal division gives the normal calculator result for dividing two numbers. Quotient division returns only the integer part, the <em>quotient</em> of the division. It cuts off any part after the decimal point (another way of thinking about it is that it takes the <em>floor</em>, it rounds down to the nearest integer less than the value). The <em>remainder</em> operator gives the remainder of the division of its two operands.</p>
+<p>Examine the code below, which runs each of the examples above and prints their results, along with explanatory text. Can you correctly predict each result?</p>
+<div id="f764bca5" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">"3 + 12 ="</span>, <span class="dv">3</span> <span class="op">+</span> <span class="dv">12</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">print</span>(<span class="st">"45 - 19 ="</span>, <span class="dv">45</span> <span class="op">-</span> <span class="dv">19</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(<span class="st">"5 * 100 ="</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="bu">print</span>(<span class="st">"55.0 / 2 ="</span>, <span class="fl">55.0</span> <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="bu">print</span>(<span class="st">"55 // 2 ="</span>, <span class="dv">55</span> <span class="op">//</span> <span class="dv">2</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="bu">print</span>(<span class="st">"30 % 4 ="</span>, <span class="dv">30</span> <span class="op">%</span> <span class="dv">4</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="bu">print</span>(<span class="st">"2 ** 3 ="</span>, <span class="dv">2</span> <span class="op">**</span> <span class="dv">3</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="bu">print</span>(<span class="st">"max(1, 5, 3) ="</span>, <span class="bu">max</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="bu">print</span>(<span class="st">"min(1, 5, 3) ="</span>, <span class="bu">min</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="bu">print</span>(<span class="st">"abs(-3) ="</span>, <span class="bu">abs</span>(<span class="op">-</span><span class="dv">3</span>))</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="bu">print</span>(<span class="st">"round(3.7) ="</span>, <span class="bu">round</span>(<span class="fl">3.7</span>))</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="bu">print</span>(<span class="st">"int(3.7) ="</span>, <span class="bu">int</span>(<span class="fl">3.7</span>))</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="bu">print</span>(<span class="st">"float(2) ="</span>, <span class="bu">float</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3 + 12 = 15
+45 - 19 = 26
+5 * 100 = 500
+55.0 / 2 = 27.5
+55 // 2 = 27
+30 % 4 = 2
+2 ** 3 = 8
+max(1, 5, 3) = 5
+min(1, 5, 3) = 1
+abs(-3) = 3
+round(3.7) = 4
+int(3.7) = 3
+float(2) = 2.0</code></pre>
+</div>
+</div>
+<p>Create a new Python file in your project for this activity, and try copying this code and running it. Do you get the same results? Experiment with changing the values, especially changing <code>int</code> to <code>float</code> and vice versa, and examining the results. Ask questions if you aren’t sure what is happening here, or why you are getting a particular result.</p>
+<p><strong>Try this to hand in:</strong> Suppose you have a banana that is 15.5 cm long. If you had 5,100 such bananas, how many meters would they cover, laid end to end? Create a new Python file and put your answer in the file. Start with a Python statement to define variables <code>bananaLength</code> and a variable <code>numBananas</code>, and then create a statement that computes how long they would be, in meters. Make sure to print the final result, including units and explanatory text.</p>
+</section>
+<section id="strings" class="level1">
+<h1>Strings</h1>
+<p>Strings are collections of characters, and characters are keyboard symbols; each character represents a single keyboard key. Strings allow us to incorporate text into our programs, making them more readable. Programs can also perform text processing, though we will get to that later on.</p>
+<p>Strings and characters are written the same in Python. A character is just a string of length 1. Strings are written with quotes before and after them. You can either use double-quotes (<code>"</code>) or single-quotes (<code>'</code>), as the examples below show. You can also make triple-quoted strings that use three single-quotes or three double-quotes. Triple-quoted strings are the only ones that can be written over multiple lines, and we use them for program documentation as well.</p>
+<p>Below is a script that demonstrates various ways of writing strings, and printing their values.</p>
+<div id="374329fa" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">print</span>(<span class="st">'Hi there'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">print</span>(<span class="st">"Hi there"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="bu">print</span>(<span class="st">"I contain an apostrophe, don't I?"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">print</span>(<span class="st">'I was told, "Double quotes go inside single quotes!"'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>s1 <span class="op">=</span> <span class="st">"cat"</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>s2 <span class="op">=</span> <span class="st">"dog"</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>s3 <span class="op">=</span> <span class="st">'hi mom'</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>longStr <span class="op">=</span> <span class="st">"""As I was going to St. Ives,</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="st">I met a man with seven wives.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="st">Each wife had seven sacks,</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="st">Each sack had seven cats,</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="st">Each cat had seven kits.</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="st">Kits, cats, sacks, and wives:</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="st">How many were going to St. Ives?"""</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="bu">print</span>(s1, s2, s3)</span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="bu">print</span>(longStr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hi there
+Hi there
+I contain an apostrophe, don't I?
+I was told, "Double quotes go inside single quotes!"
+cat dog hi mom
+As I was going to St. Ives,
+I met a man with seven wives.
+Each wife had seven sacks,
+Each sack had seven cats,
+Each cat had seven kits.
+Kits, cats, sacks, and wives:
+How many were going to St. Ives?</code></pre>
+</div>
+</div>
+<p>Copy the script above to a test file in PyCharm, and experiment with it. What happens if you don’t match quotation marks, or you put a line break in a string that isn’t triple-quoted?</p>
+<p>The table below lists basic string operations. With these we can pull strings apart and put them together again, check their size, and ask about substrings within the larger string. When we <strong>concatenate</strong> two or more strings, we put them together as one big string. We <em>slice</em> a string when we extract a particular substring, based on its indices.</p>
+<p>Strings are indexed starting with 0 at the left end, and increasing as you go right. We can also use negative numbers to index characters from the right end going left (see <a href="#tbl-strIndex" class="quarto-xref">Table&nbsp;2</a> to see how to index the example string <code>"AB CD"</code>)</p>
+<div id="tbl-strIndex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-strIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Indices to reference individual characters in the string <code>"AB CD!"</code>
+</figcaption>
+<div aria-describedby="tbl-strIndex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: center;"><code>A</code></th>
+<th style="text-align: center;"><code>B</code></th>
+<th style="text-align: center;"><code></code></th>
+<th style="text-align: center;"><code>C</code></th>
+<th style="text-align: center;"><code>D</code></th>
+<th style="text-align: center;"><code>!</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">positive indices:</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">negative indices:</td>
+<td style="text-align: center;">-6</td>
+<td style="text-align: center;">-5</td>
+<td style="text-align: center;">-4</td>
+<td style="text-align: center;">-3</td>
+<td style="text-align: center;">-2</td>
+<td style="text-align: center;">-1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Add the script below to the script from earlier. You need the variable definitions for this to work.</p>
+<div id="f3665ecb" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a><span class="bu">print</span>(<span class="bu">len</span>(<span class="st">'foo'</span>), <span class="bu">len</span>(s1), <span class="bu">len</span>(longStr))</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a><span class="bu">print</span>(s1 <span class="op">+</span> <span class="st">"fish"</span>, <span class="st">'a'</span> <span class="op">+</span> <span class="st">'b'</span> <span class="op">+</span> <span class="st">'c'</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a><span class="bu">print</span>(<span class="st">'X'</span> <span class="op">*</span> <span class="dv">10</span>, <span class="dv">3</span> <span class="op">*</span> s2)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a><span class="bu">print</span>(<span class="st">'kits'</span> <span class="kw">in</span> longStr, <span class="st">'mom'</span> <span class="kw">in</span> s3, <span class="st">'Hi'</span> <span class="kw">in</span> s3)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-5" class="code-annotation-target"><a href="#annotated-cell-3-5"></a><span class="bu">print</span>(s1[<span class="dv">0</span>], s3[<span class="dv">3</span>], s2[<span class="op">-</span><span class="dv">1</span>])</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6">6</button><span id="annotated-cell-3-6" class="code-annotation-target"><a href="#annotated-cell-3-6"></a><span class="bu">print</span>(s1[<span class="dv">1</span>:<span class="dv">3</span>], s2[<span class="dv">0</span>:<span class="dv">2</span>], s3[<span class="dv">3</span>:<span class="dv">5</span>], longStr[<span class="dv">36</span>:<span class="dv">39</span>])</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="1" data-code-annotation="1"><code>len</code> returns the number of characters in its argument</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="2"><code>+</code> concatenates strings together</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="3"><code>*</code> concatenates a string with itself N times (<code>N * s</code> or <code>s * N</code>)</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="4"><code>in</code> checks if the first string occurs in the second string</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="5" data-code-annotation="5">Accessing with <code>[n]</code> returns the character at position <code>n</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="6" data-code-annotation="6">Slicing with <code>[s:e:j] returns the substring from</code>s<code>up to</code>e<code>, skipping by</code>j`</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3 3 198
+catfish abc
+XXXXXXXXXX dogdogdog
+True True False
+c m g
+at do mo man</code></pre>
+</div>
+</div>
+<p>Experiment with this script, changing which strings, positions, substrings are included. Ask questions if any result or operation does not make sense to you.</p>
+<p><strong>Try this to hand in:</strong> Make a new Python file, and write a program as described below to automate the writing of a thank-you note.</p>
+<p>First, define a variable with the name of the person who has given you a gift.</p>
+<div id="3f9adc32" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>kindPerson <span class="op">=</span> <span class="st">'Aunt Judi'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Build a second variable that holds your thank-you note, using the <code>+</code> operator so that instead of including a specific gift-giver’s name, you insert the variable <code>kindPerson</code>. Print the final string, which should look like:</p>
+<pre><code>Dear Aunt Judi,
+Thank you for the graduation present. I can’t wait to use it. I
+hope you are enjoying your summer. You’re the best, Aunt Judi!
+Love, Mittens</code></pre>
+</section>
+<section id="lists" class="level1">
+<h1>Lists</h1>
+<p>A list is a <strong>linear collection</strong> of data. That means that it is a container that holds multiple pieces of data, lining them up in some kind of order. In Python, lists can hold any type of data, including other lists, with varying data types even within a single list.</p>
+<p>You write a list by surrounding the data with square brackets. Both lists and strings share some of the same operations; see the examples below.</p>
+<div id="eadb1045" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1"></a>lst1 <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">16</span>, <span class="dv">2</span>]</span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a>lst2 <span class="op">=</span> [<span class="st">'Nauru'</span>, <span class="st">'Kiribati'</span>, <span class="st">'Vanuatu'</span>]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3"></a><span class="bu">print</span>(lst1, lst2)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3">3</button><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4"></a><span class="bu">print</span>(<span class="bu">len</span>(lst1), <span class="bu">len</span>(lst2))</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4">4</button><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5"></a>lst3 <span class="op">=</span> lst1 <span class="op">+</span> lst2</span>
+<span id="annotated-cell-6-6"><a href="#annotated-cell-6-6"></a>lst4 <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>] <span class="op">*</span> <span class="dv">5</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5">5</button><span id="annotated-cell-6-7" class="code-annotation-target"><a href="#annotated-cell-6-7"></a><span class="bu">print</span>(<span class="st">'Kiribati'</span> <span class="kw">in</span> lst2, <span class="st">"Fiji"</span> <span class="kw">in</span> lst2)</span>
+<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8"></a><span class="bu">print</span>(<span class="dv">6</span> <span class="kw">in</span> lst1, <span class="dv">5</span> <span class="kw">in</span> lst1, <span class="st">'K'</span> <span class="kw">in</span> lst2)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="6">6</button><span id="annotated-cell-6-9" class="code-annotation-target"><a href="#annotated-cell-6-9"></a><span class="bu">print</span>(lst1[<span class="dv">0</span>], lst2[<span class="dv">2</span>], lst4[<span class="op">-</span><span class="dv">2</span>])</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="7">7</button><span id="annotated-cell-6-10" class="code-annotation-target"><a href="#annotated-cell-6-10"></a><span class="bu">print</span>(lst1[<span class="dv">2</span>:<span class="dv">3</span>], lst2[<span class="dv">1</span>:], lst1[:<span class="dv">2</span>])</span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11"></a><span class="bu">print</span>(lst4[<span class="dv">0</span>:<span class="dv">10</span>:<span class="dv">2</span>], lst4[::<span class="op">-</span><span class="dv">1</span>])</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="1,2" data-code-annotation="1">Defining lists of numbers and strings</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="2">Printing lists</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="3"><code>len</code> returns the number of elements in a lists</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="5,6" data-code-annotation="4">Defining new lists with concatenation</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="7,8" data-code-annotation="5">Checking if an element is in a list</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="9" data-code-annotation="6">Accessing with <code>[n]</code> returns the element at position <code>n</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="10,11" data-code-annotation="7">Slicing with <code>[s:e:j]</code> returns a sublist of elements from <code>s</code> to <code>e</code> skipping by <code>j</code></span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[5, 1, 16, 2] ['Nauru', 'Kiribati', 'Vanuatu']
+4 3
+True False
+False True False
+5 Vanuatu a
+[16] ['Kiribati', 'Vanuatu'] [5, 1]
+['a', 'a', 'a', 'a', 'a'] ['b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a']</code></pre>
+</div>
+</div>
+<p><strong>A note about slicing:</strong> Slicing is an incredibly versatile operation. We can use it to select a sequential sublist, or to pull out every 3rd element, or other similar patterns. If we want to start or end at an end of the string, we can leave out the value on that side of the colon (<code>:</code>).</p>
+<p>Copy this script into a new file in your activity project. Look closely at each operation, and its result. Experiment with changing the numbers in the slicing, adding numbers where they are missing, or removing them. Ask questions if any operation or result is confusing to you.</p>
+<p><strong>Try this to hand in:</strong> Create a script that starts by defining a variable to hold a list of 6 numbers. From the list, pull out three values, at positions 0, 2, and 4 (use the square bracket access operator). Using arithmetic operators, add the three values together, and assign the result to the variable <code>evenSum</code>. This can be done in one line of Python, it you are careful. In another variable, <code>oddSum</code>, calculate the sum of the numbers at positions 1, 3, and 5. Print these two results. <strong>Make sure your script works correctly and prints the correct sums of odd and even values, even if you change the values in the original list!</strong></p>
+</section>
+<section id="optional-challenge-question-for-those-who-get-this-far" class="level1">
+<h1>Optional Challenge Question for Those Who Get This Far</h1>
+<p>Consider the problem of making change: figuring out how many bills and coins to give someone to make a specific amount of money. This example asks you to make a script to solve this problem. You might start by discussing this question with a neighbor, and developing together your ideas for how to solve the problem, in English or pseudocode. The key idea to making change is to take the quotient and remainder of an amount by the next monetary unit.</p>
+<p>Consider an example. If we start with $7.32, for simplicity (and to avoid floating-point numbers) we will represent it as 732 cents. If we take the quotient of 732 by 100 (for one dollar bills), then we get 7, and the remainder of 732 divided by 100 is 32. That means 32 cents is the part left over after paying 7 dollar bills. Then using the left over 32, repeat for the next coin: quarters. Divide 32 by 25, and get 1, and the remainder is 7 cents. Continue in this manner.</p>
+<p>Now, see if you can write a Python script, a series of expressions or statements in Python, that do this calculation and print out the results. Open a new Python file, Define a variable, <code>money</code>, that contains a money amount in cents (like 732 for $7.32, for example).</p>
+<p>Then, create a series of Python statements that calculate and print how to give change for the money value, in dollars, quarters, dimes, nickels, and pennies. The best solution will use integer division and the remainder operation.</p>
+<p>Below is an example of what might print when this script is run:</p>
+<pre><code>Making change for 732 cents:
+Dollars: 7
+Quarters: 1
+Dimes: 0
+Nickels: 1
+Pennies: 2</code></pre>
+<p>Once you get the script working for 732, change the value of money and test your script on other values to be sure it works more generally.</p>
+</section>
+<section id="what-to-hand-in" class="level1">
+<h1>What to hand in</h1>
+<p>You should have multiple Python files for this activity. You might have files containing the example scripts for each data type, along with your experiments. At the very least, you <strong>must</strong> have:</p>
+<ul>
+<li>A file containing your solution for the banana problem</li>
+<li>A file containing the thank you note script</li>
+<li>A file containing the odd-even list addition problem</li>
+<li>(Optional: the script for the change-making challenge question</li>
+</ul>
+<p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

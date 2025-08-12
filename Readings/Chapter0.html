@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-04-28">
+
+<title>Chapter 0, Things to Know Before You Start</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Chapter0_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Chapter0_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Chapter0_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Chapter0_files/libs/quarto-html/popper.min.js"></script>
+<script src="Chapter0_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Chapter0_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Chapter0_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Chapter0_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Chapter0_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Chapter0_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Chapter0_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="Chapter0_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="Chapter0_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="Chapter0_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Chapter 0, Things to Know Before You Start</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 28, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#things-to-know-before-you-start" id="toc-things-to-know-before-you-start" class="nav-link active" data-scroll-target="#things-to-know-before-you-start"><span class="header-section-number">0</span> Things to Know Before You Start</a>
+  <ul class="collapse">
+  <li><a href="#getting-ready-to-use-opencv" id="toc-getting-ready-to-use-opencv" class="nav-link" data-scroll-target="#getting-ready-to-use-opencv"><span class="header-section-number">0.1</span> Getting ready to use OpenCV</a></li>
+  <li><a href="#background-on-opencv" id="toc-background-on-opencv" class="nav-link" data-scroll-target="#background-on-opencv"><span class="header-section-number">0.2</span> Background on OpenCV</a></li>
+  <li><a href="#image-files-and-paths" id="toc-image-files-and-paths" class="nav-link" data-scroll-target="#image-files-and-paths"><span class="header-section-number">0.3</span> Image files and paths</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="things-to-know-before-you-start" class="level1" data-number="0">
+<h1 data-number="0"><span class="header-section-number">0</span> Things to Know Before You Start</h1>
+<section id="getting-ready-to-use-opencv" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="getting-ready-to-use-opencv"><span class="header-section-number">0.1</span> Getting ready to use OpenCV</h2>
+<p>As you look at resources online for OpenCV, or even printed textbooks, they often begin with detailed and complicated instructions for installing OpenCV. Beware of blindly following these instructions! Installation of OpenCV has changed dramatically in just a few years, and often instructions online are out of date. Instead, look for the resources and instructions provided by your instructor, as they will be more suitable.</p>
+<p>The key things you will need are:</p>
+<ul>
+<li>A current installation of Python</li>
+<li>A Python programming environment (PyCharm is recommended)</li>
+<li>The FFMPEG utility installed</li>
+<li>Numpy and OpenCV modules installed</li>
+</ul>
+<p>Get help from the instructor or preceptor on the best way to install each of these, or for help if you run into any difficulties.</p>
+</section>
+<section id="background-on-opencv" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="background-on-opencv"><span class="header-section-number">0.2</span> Background on OpenCV</h2>
+<p>OpenCV is one of the most widely-used computer vision libraries. It was originally created by Intel as a project to show off the abilities of their processor chips, and was released in 1999 (see <a href="https://en.wikipedia.org/wiki/OpenCV">OpenCV, on Wikipedia</a> for more details). OpenCV has always been an open-source project, which means that its source code is available to read, download, and modify, and it is updated and maintained by a community of ordinary people. Currently, OpenCV has both C++ and Python versions: we will use the Python one as it is much easier to learn.</p>
+<p>OpenCV implements hundreds of computer vision and image processing tools. We will explore a small percentage of what it offers. It integrates well with other libraries, including machine learning libraries.</p>
+<p>OpenCV has <a href="https://docs.opencv.org/4.x/index.html">thorough documentation</a> for all of its tools (outstanding quality compared to some other open-source projects). The documentation is not easy to read, but it is worth working at it, because you can learn how the tools work, how to use additional options, and even learning new tools that we won’t cover in class. I recommend that you use the following approach to the documentation:</p>
+<ol type="1">
+<li>Go to the main documentation page</li>
+<li>Use the search tool and type the name of the function you want, or a description of it</li>
+<li>Click on the suggested options until you find the one you want</li>
+<li>Read through the description of how the function works: Be sure to look for the description of how it is called in Python (different from C++)</li>
+</ol>
+<section id="example-imshow-documentation" class="level3" data-number="0.2.1">
+<h3 data-number="0.2.1" class="anchored" data-anchor-id="example-imshow-documentation"><span class="header-section-number">0.2.1</span> Example: <code>imshow</code> documentation</h3>
+<p><a href="#fig-imshowdoc" class="quarto-xref">Figure&nbsp;1</a> shows the entry for the <code>imshow</code> function (we went to the main page, typed <code>imshow</code> into the search box, and chose the first option).</p>
+<div id="fig-imshowdoc" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imshowdoc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch0-Images/Ch0-imshowDocs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: OpenCV documentation for imshow function, with 3 key elements highlighted."><img src="Ch0-Images/Ch0-imshowDocs.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imshowdoc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: OpenCV documentation for <code>imshow</code> function, with 3 key elements highlighted.
+</figcaption>
+</figure>
+</div>
+<p>Three parts of a typical documentation entry are marked:</p>
+<ol type="1">
+<li>This number marks the location of the python call interface. This describes the inputs to a call to <code>imshow</code>, and what values it returns. Here, we see that <code>imshow</code> takes in two inputs, called winname and mat, and it returns nothing. Both are required inputs: you have to pass two values of the right type to this function every time you call it!</li>
+<li>This number marks the description of what this function does. It probably has more details than you need (including what happens if you don’t pass it a typical image array), but the start of the description usually summarizes the main purpose, only read further if you need/want to</li>
+<li>This number explains what each input parameter means. Here, it tells us that <code>winname</code> is the name of the window (we might guess that this should be a string), and that <code>mat</code> is the image to be shown. The variable name <code>mat</code> here is short for “matrix” and typically is used to indicate an image array or matrix of some kind.</li>
+</ol>
+<p>This function also includes a note that is important for using it correctly. While it has more technical detail than you might want, the key point is important: you must follow a call to <code>imshow</code> with a call to the <code>waitKey</code> function, because <code>waitKey</code> actually causes the window to be displayed.</p>
+</section>
+<section id="example-imread-documentation" class="level3" data-number="0.2.2">
+<h3 data-number="0.2.2" class="anchored" data-anchor-id="example-imread-documentation"><span class="header-section-number">0.2.2</span> Example: <code>imread</code> documentation</h3>
+<p><a href="#fig-imreaddocs" class="quarto-xref">Figure&nbsp;2</a> shows the start of the entry for the <code>imread</code> function. Examine the call interfaces shown for this function. We usually use the first form, so let us look more closely at it. Inside the parentheses, you see two variables, <code>filename</code> and <code>flags</code>, and you can see that there is a return value, called <code>retval</code>. The first variable, <code>filename</code>, is just inside the call parentheses: this indicates that <code>filename</code> is a required input. This is a string which contains the path and filename needed to find the file on the computer (see the next section for more details).</p>
+<div id="fig-imreaddocs" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imreaddocs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch0-Images/Ch0-imreadDocs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: OpenCV documentation for imread function, showing how optional inputs to functions are denoted"><img src="Ch0-Images/Ch0-imreadDocs.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imreaddocs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: OpenCV documentation for <code>imread</code> function, showing how optional inputs to functions are denoted
+</figcaption>
+</figure>
+</div>
+<p>The second variable is inside square brackets. In the documentation, this indicates an optional input. Here, we can use the flags to read the data from the image file in different formats (BGR is the default, but we can also read in grayscale, or a format that preserves any alpha channel if the file has one).</p>
+<p>The return value is named vaguely: <code>retval</code> is just short for return value. This is because the return value can be two different things. If you read through the description carefully, it tells you that <code>retval</code> is either the “matrix” (Numpy array) containing the image data, if the read was successful, and if the read failed, <code>retval</code> will be the special Python value, <code>None</code>.</p>
+</section>
+</section>
+<section id="image-files-and-paths" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="image-files-and-paths"><span class="header-section-number">0.3</span> Image files and paths</h2>
+<p>On modern computers and other devices like phones and tables, a casual user may not know where files are stored, or how the computer knows the type of each file. The computer’s <strong>operating system</strong> hides those details from us, and we can use search functions to find and access our files for us.</p>
+<p>When we want to program our computers, however, we need to dig deeper and really understand how files are organized and labeled inside the computer. In this section, we will look at the hierarchical organization of files into folders, more formally called <strong>directories</strong>, and the use of filename extensions to indicate the type of the file.</p>
+<section id="configuring-your-computer-for-easier-access-to-directories-and-extensions" class="level3" data-number="0.3.1">
+<h3 data-number="0.3.1" class="anchored" data-anchor-id="configuring-your-computer-for-easier-access-to-directories-and-extensions"><span class="header-section-number">0.3.1</span> Configuring your computer for easier access to directories and extensions</h3>
+<p>Both Mac OS and Windows default to hiding certain very helpful information from us. To make your life easier, follow the steps below to make filename extensions on, and to make sure that important folders, like your home folder, are immediately visible when you use the Finder or File Explorer.</p>
+<section id="settings-for-finder-on-mac" class="level4">
+<h4 class="anchored" data-anchor-id="settings-for-finder-on-mac">Settings for Finder on Mac:</h4>
+<ul>
+<li><p>Open a Finder window by clicking on the Finder icon. If a window doesn’t automatically appear, <code>command-N</code> or <em>New Finder Window</em> under the <em>File</em> menu should work.</p></li>
+<li><p>Select <em>Settings</em> from the <em>Finder</em> menu, and click on <em>Sidebar</em>, and make sure that the following items are checked: Desktop, Documents, Downloads, and your home folder (whose icon is a house, and it is labeled with your username)</p></li>
+<li><p>Select the <em>Advanced</em> section from <em>Settings</em>, and check the option that says something like <em>Show all filename extensions</em></p></li>
+<li><p>Select the <em>View</em> menu from the menu bar (at the top of the window), and look for the <em>Show Path Bar/Hide Path Bar</em> option. Make sure it is set to show the path bar. This adds a bar at the bottom of the finder window that shows the whole path to the folder or file you have currently selected.</p></li>
+</ul>
+</section>
+<section id="settings-for-file-explorer-on-windows-11" class="level4">
+<h4 class="anchored" data-anchor-id="settings-for-file-explorer-on-windows-11">Settings for File Explorer on Windows 11:</h4>
+<ul>
+<li>Open the File Explorer (from taskbar, the Start menu, or the Windows logo key)</li>
+<li>Under the <em>View</em> menu, select <em>Show/Hide</em> and check the <em>File name extensions</em> option</li>
+<li>Just above the list of files in the current folder, the File Explorer has a “breadcrumb bar”. This bar shows the path to the current folder or file. You can right-click on this bar to copy the path.</li>
+<li>The Windows “Home” folder is not a real folder, but rather a collection of recent folders/files you have visited. Your actual home directory can be reached by going to <em>This PC</em> and then looking in the <em>Users</em> folder (or there may be a shortcut on your Desktop)</li>
+</ul>
+</section>
+</section>
+<section id="file-extensions" class="level3" data-number="0.3.2">
+<h3 data-number="0.3.2" class="anchored" data-anchor-id="file-extensions"><span class="header-section-number">0.3.2</span> File extensions</h3>
+<p>Most files on a computer have a filename that includes an <strong>extension</strong> at the end that defines the type of data in the file. The extension is usually 3-5 characters long, always at the end of the name, and is preceded by a period. For example, Microsoft Word documents use the extension <code>.docx</code>, and HTML documents use <code>.html</code>. Plain text files use <code>.txt</code>, and Python programs use <code>.py</code>. The computer uses the extension to figure out how to work with the file. When you double-click on a file that ends in <code>.docx</code>, the computer knows to open the file with Word. Both Windows and Mac OS will label files with a thumbnail icon that represents the type of data, so in our day-to-day use we don’t need to read the actual extension. However, when we work with files in programming, we have to remember that <strong>the extension is an actual part of the name of the file</strong>.</p>
+<p>Image files can be stored in many different formats, with PNG and JPEG the most common. Each format has its own way to store the data about the image, and uses its own method to compress the image data to make the file smaller. Thus, the computer has to know which format is used in order to read the data correctly.</p>
+<p>When we write a program that reads in data from a file, whether that data is text, a spreadsheet, images, or sounds, we have to use the full filename, including the extension, so that the computer knows how to read and interpret the file’s data.</p>
+<p><strong>Note:</strong> You can’t change the formatting of the data in a file just by changing the extension on the file! You must use an appropriate tool to convert one type of file into another.</p>
+</section>
+<section id="the-file-system" class="level3" data-number="0.3.3">
+<h3 data-number="0.3.3" class="anchored" data-anchor-id="the-file-system"><span class="header-section-number">0.3.3</span> The file system</h3>
+<p>Computers organize the files on them in a hierarchical way: with files in folders, and folders in folders. Folders are more correctly called <strong>directories</strong> in computer science. The term <em>folder</em> came about as a user-friendly metaphor, and can be used interchangeably with <em>directory</em>. The form of the hierarchy is called a tree, <strong>the directory tree</strong>, because it has a similar shape to a family tree. <a href="#fig-dirtree" class="quarto-xref">Figure&nbsp;3</a> shows a partial directory tree on a Mac (including just a few file/folders)</p>
+<div id="fig-dirtree" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dirtree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch0-Images/Ch0-FileSystemTree.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Mac user directory tree (partial) showing user folders &amp; files in context"><img src="Ch0-Images/Ch0-FileSystemTree.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dirtree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Mac user directory tree (partial) showing user folders &amp; files in context
+</figcaption>
+</figure>
+</div>
+<p>The top level of a computer is typically a directory containing a set of directories, one for each drive attached to the computer. Inside each of these folders is a hierarchy of folders and files organizing all the files stored on that device.</p>
+<p>Your own user space on the computer is its own folder. On both current Macs and current Windows machines, this folder is (usually) located inside the <em>Users</em> folder, which is at the top level of your main drive.</p>
+<p>Before continuing, take a few minutes to experiment with the file system hierarchy on your computer.</p>
+<section id="if-you-are-on-a-mac" class="level4">
+<h4 class="anchored" data-anchor-id="if-you-are-on-a-mac">If you are on a Mac:</h4>
+<ul>
+<li>Open a Finder window</li>
+<li>Look at the sidebar on the left, and find a section called <em>Locations</em> (if this is not visible, go into <em>Settings</em> and in the <em>Sidebar</em> section check all the options under *Locations)</li>
+<li>Click on the option that shows the name of your computer, with an icon that looks like your computer</li>
+<li>This should show you a directory containing your hard drive, and any other drives connected to your computer (including Network drives, external drives, flash drives, etc.)</li>
+<li>Click on the hard drive option; you should see folders for <em>Applications</em>, <em>Library</em>, <em>System</em>, and <em>Users</em></li>
+<li>Find your home folder from here, and explore other folders as well</li>
+<li>Notice the path bar at the bottom of the Finder window shows the sequence of enclosing directories (the folders from the top level down to the file or folder you’ve selected)</li>
+</ul>
+</section>
+<section id="if-you-are-on-a-windows-machine" class="level4">
+<h4 class="anchored" data-anchor-id="if-you-are-on-a-windows-machine">If you are on a Windows machine:</h4>
+<ul>
+<li>Open a File Explorer window</li>
+<li>Select <em>This PC</em>; this should show you a directory containing the drives currently connected to your computer</li>
+<li>Click on the main C drive, and you should see the top-level folders, including <em>Users</em> among others</li>
+<li>Find your home folder from here, and explore other folders as well</li>
+<li>Notice the path bar at the bottom of the Finder window shows the sequence of enclosing directories (the folders from the top level down to the file or folder you’ve selected)</li>
+</ul>
+<p>When we write programs that read from files, we need to tell the computer how to find the files we want to read. We do this by listing the <strong>path</strong> of the file: a condensed representation of the sequence of directories that contain the file. This serves as directions for the computer: the path tells the computer how to go about finding the file.</p>
+<p>In Python, as in many programming languages, paths are written as strings. Each string has a sequence of folder names, separated by a symbol. Mac OS and Windows use different symbols as dividers (of course they do!), but Python can make sense of the path even if you use the wrong symbols. On a Mac, we use the divide sign slash (<code>/</code>) to separate one folder from the folder it encloses, and we put a slash at the front of the string when we are giving the path from the top level (an <strong>absolute path</strong>, we will talk more about those a little bit later). On Windows, an absolute path starts with the identifier for the drive (for example, <code>C:\</code>) and then gives the sequence of folders, separated by the backslash symbol (<code>\</code>).</p>
+</section>
+</section>
+<section id="example-using-absolute-paths" class="level3" data-number="0.3.4">
+<h3 data-number="0.3.4" class="anchored" data-anchor-id="example-using-absolute-paths"><span class="header-section-number">0.3.4</span> Example: using absolute paths</h3>
+<p>Suppose that I have all my Pycharm projects in a folder called <code>PycharmProjects</code> that is stored in my home directory. I have a project for this class called <code>Comp194</code> inside the <code>PycharmProjects</code> folder, and it contains a Python code file, <code>hello.py</code>. <a href="#fig-absPath" class="quarto-xref">Figure&nbsp;4</a> shows the Finder, as if I have found this file starting at the top level of the computer’s hard drive. Note that this example and the one after use the directory tree structure from <a href="#fig-dirtree" class="quarto-xref">Figure&nbsp;3</a> earlier.</p>
+<div id="fig-absPath" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-absPath-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch0-Images/Ch0-absPath.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Finder window showing the path to example file hello.py."><img src="Ch0-Images/Ch0-absPath.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-absPath-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Finder window showing the path to example file <code>hello.py</code>.
+</figcaption>
+</figure>
+</div>
+<p>Notice the path bar at the bottom shows the absolute path, starting with the <em>Users</em> folder.</p>
+<p>If we write this absolute path in Python, it would look like this:</p>
+<p><code>"/Users/susan/PycharmProjects/Comp194/hello.py"</code></p>
+<p>On a Mac, you can copy the path in this format, minus the quotation marks, by right-clicking (or holding <code>control</code> and clicking) on the name of the file in the path bar, and selecting <em>Copy hello.py as pathname</em>. On Windows, you can copy the path similarly by right-clicking on the breadcrumbs bar at the top of the window, or by typing <code>shift-ctrl-c</code>.</p>
+<p>Try this for yourself: copy the path for a file on your computer, and paste it into a document where you can read it.</p>
+</section>
+<section id="absolute-versus-relative-paths" class="level3" data-number="0.3.5">
+<h3 data-number="0.3.5" class="anchored" data-anchor-id="absolute-versus-relative-paths"><span class="header-section-number">0.3.5</span> Absolute versus relative paths</h3>
+<p>An <strong>absolute path</strong> always starts at the top level of the drive where the data is stored. It completely specifies the location of a file or folder on the computer. It will always work, but it can get long and unwieldy to use. The example above was an absolute path.</p>
+<p>When we are programming or working with a <em>shell</em> tool on the computer (Terminal on the Mac, Command Prompt or PowerShell on Windows), the program always considers itself to be <strong>in</strong> or focused on, a particular folder (the current working directory). For example, when we program in Python, the program is by default *in** the folder where the <code>.py</code> file is stored. Using the example from the previous section, if we run the <code>hello.py</code> program, the running program would be in the <code>Comp194</code> folder.</p>
+<p>Because of the current working directory context, we can sometimes use a <strong>relative path</strong> instead of an absolute one. Instead of specifying the full path from the toop level folder on the computer, we may describe the location of a file or folder as <em>relative</em> to the current working directory: the path starts at the folder we are currently in. To indicate that something is a relative path, we leave off the leading slash (on Mac) or drive identifier (on Windows).</p>
+</section>
+<section id="examples-relative-versus-absolute-paths" class="level3" data-number="0.3.6">
+<h3 data-number="0.3.6" class="anchored" data-anchor-id="examples-relative-versus-absolute-paths"><span class="header-section-number">0.3.6</span> Examples: relative versus absolute paths</h3>
+<p><strong>Example 1:</strong> if the <code>hello.py</code> program wanted to read from the <code>test.qmd</code> file that is stored in the same folder, the relative path would just be <code>"test.qmd"</code>, because the files are in the same folder: there is no need to travel through other folders to find <code>test.qmd</code>.</p>
+<p><strong>Example 2:</strong> suppose the program wanted to read in an image, <code>mushrooms.jpg</code>, from the <code>SampleImages</code> folder that is inside the <code>Comp194</code> folder. The absolute path to this file would be <code>"/Users/susan/PycharmProjects/Comp194/SampleImages/mushrooms.jpg"</code>, whereas the relative path from the code file would be <code>"SampleImages/hello.py"</code>.</p>
+<p><strong>Example 3:</strong> Suppose the <code>hello.py</code> program wanted to open an image file, <code>CampingUpNorth2017.jpg</code> that is in the Desktop folder (see the directory tree in <a href="#fig-dirtree" class="quarto-xref">Figure&nbsp;3</a>). The Desktop folder sits inside the home folder, <code>susan</code>. Neither of these are inside the current folder <code>Comp194</code>, of course, so we somehow need to indicate in the path to go <em>up</em> the directory tree to a higher level.</p>
+<p>Paths use the special marker <code>..</code> to mean “go up one level in the directory tree.” In this example, we could either give an absolute path (<code>"/Users/susan/Desktop/CampingUpNorth2017.jpg"</code>) or a relative one (<code>"../../Desktop/CampingUpNorth2017.jpg"</code>). There are two copies of the <code>..</code> marker because of the way folders are nested: The first <code>..</code> tells the program to go up one level, from <code>Comp194</code> to <code>PycharmProjects</code>. The second <code>..</code> tells the program to go up one more level, from <code>PycharmProjects</code> to <code>susan</code>. From there we can continue the path downwards as normal.</p>
+<p><strong>Remember:</strong> you can always use an absolute path safely, but relative paths can be shorter and easier to remember.</p>
+<p>You will get lots of practice specifying paths and using filename extensions as we work with images.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

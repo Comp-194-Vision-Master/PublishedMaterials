@@ -1,0 +1,20 @@
+# PyCharm project files
+.idea/
+*.iml
+
+# Virtual environment
+venv/
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Distribution and build files
+dist/
+build/
+*.egg-info/
+
+# Logs and temporary files
+*.log
+*.tmp

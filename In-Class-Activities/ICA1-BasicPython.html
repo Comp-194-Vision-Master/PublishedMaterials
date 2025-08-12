@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-08-12">
+
+<title>ICA: Basic Python and PyCharm</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="ICA1-BasicPython_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ICA1-BasicPython_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="ICA1-BasicPython_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="ICA1-BasicPython_files/libs/quarto-html/popper.min.js"></script>
+<script src="ICA1-BasicPython_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ICA1-BasicPython_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ICA1-BasicPython_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ICA1-BasicPython_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ICA1-BasicPython_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ICA1-BasicPython_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ICA1-BasicPython_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ICA: Basic Python and PyCharm</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 12, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
+  <li><a href="#pycharm" id="toc-pycharm" class="nav-link" data-scroll-target="#pycharm">PyCharm</a></li>
+  <li><a href="#try-these-examples" id="toc-try-these-examples" class="nav-link" data-scroll-target="#try-these-examples">Try these examples</a></li>
+  <li><a href="#creating-scripts" id="toc-creating-scripts" class="nav-link" data-scroll-target="#creating-scripts">Creating scripts</a></li>
+  <li><a href="#debugging-programs" id="toc-debugging-programs" class="nav-link" data-scroll-target="#debugging-programs">Debugging Programs</a></li>
+  <li><a href="#create-your-own-script" id="toc-create-your-own-script" class="nav-link" data-scroll-target="#create-your-own-script">Create your own script</a></li>
+  <li><a href="#handing-in-this-assignment" id="toc-handing-in-this-assignment" class="nav-link" data-scroll-target="#handing-in-this-assignment">Handing in this assignment</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>Today you will learn a bit about Python, and some basic kinds of data Python can manipulate. You’ll learn how to store values in variables, and how to build expressions that can be evaluated to produce a value. You will learn how to put sequences of Python statements and expressions in a file, called a script, which can be saved and re-run at a later point.</p>
+<p><strong>What to hand in:</strong> This activity will use a Github assignment to distribute code to you (see the <a href="???">Github Assignment Basics</a> document for details). You will modify some of the files provided to you, and you will add two new files, <code>bikescript.py</code> and <code>flowers.py</code>. You will then <strong>push</strong> your code to the Github assignment to hand it in.</p>
+</section>
+<section id="python" class="level1">
+<h1>Python</h1>
+<p>Python provides an interactive shell that we use to communicate with it, much like a calculator provides an interface that we use to communicate with it. With Python, you can type a series of Python statements into the shell, and get immediate responses to each one. You can also package up a series of statements as a script, in a file. When you run the script, Python executes each statement in order.</p>
+</section>
+<section id="pycharm" class="level1">
+<h1>PyCharm</h1>
+<p>There are many different applications we could use when writing Python programs, much as there are many different text editor and word processor applications for writing papers. Your books may refer to a program editor called IDLE, which typically comes with Python when you download it. We will not use IDLE this semester. Instead, we will use an editor called PyCharm.</p>
+<p>First, look at the <a href="https://drive.google.com/open?id=1zInskGxgdmArqfjSdeERMd2dHTybAwhbUc51rDmEjA4">Getting Started with Python and PyCharm</a> document and work through the sections on starting up PyCharm, setting up a project, and creating a Python file.</p>
+<p>If you haven’t already done so, create a project for this activity. You should then see several areas in the PyCharm window, similar to <a href="#fig-pycharmlayout" class="quarto-xref">Figure&nbsp;1</a>. At the left is the Project panel, where you can see the project and the files that are in it. On the right, the largest panel is the editor, where you can create program files.</p>
+<div id="fig-pycharmlayout" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pycharmlayout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ICA-1-Images/PyCharmLayout.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pycharmlayout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: PyCharm Layout, annotated
+</figcaption>
+</figure>
+</div>
+<p>The panel at the bottom in <a href="#fig-pycharmlayout" class="quarto-xref">Figure&nbsp;1</a> is used to display the output when we run a Python code file, but it can also be used to interact with Python through the <em>Python Console</em>. Typically, you can find and open the <em>Python Console</em> by looking for the Python Icon (!Images/ICA-1-Images/PyConsoleIcon.png) and clicking on it. If you cannot find it, ask for help!</p>
+<p>Click in the Python Console area, where you see the &gt;&gt;&gt; symbol. That symbol is a prompt, it is Python’s way of telling you that it is ready to accept input from you. Note that you can change the size of each area in the window by clicking and dragging in the space between regions.</p>
+</section>
+<section id="try-these-examples" class="level1">
+<h1>Try these examples</h1>
+<p>Try the examples below in PyCharm’s console, typing each one in turn. Note: variables in computer science are similar to variables in math, but not identical. Think of a variable as being a name for a box in the computer’s memory, where you can stick a value of some kind.</p>
+<div id="9f8fbe28" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">5</span> <span class="op">+</span> <span class="dv">2</span>                   <span class="co"># Computes the sum of two numbers</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>x <span class="op">=</span> <span class="dv">100</span>                 <span class="co"># Assigns the value 100 to variable x</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>(<span class="dv">2</span> <span class="op">*</span> x) <span class="op">-</span> <span class="dv">33</span>            <span class="co"># Computes the value 2x-33</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dv">2</span> <span class="op">**</span> <span class="dv">4</span>                  <span class="co"># Computes the value $$2^4$$, (** means exponentiation)</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>z <span class="op">=</span> (x <span class="op">-</span> (<span class="dv">5</span> <span class="op">*</span> <span class="dv">4</span>))       <span class="co"># Assigns the value of the expression to variable z</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">*</span> <span class="dv">3</span>, x, z)     <span class="co"># Prints the values of each expression on a line</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>strng <span class="op">=</span> <span class="st">'Hello there'</span>   <span class="co"># Assigns variable strng to be the string</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="bu">print</span>(strng)            <span class="co"># Print the values of the strng variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>30 100 80
+Hello there</code></pre>
+</div>
+</div>
+<p>A variable in a programming language represents a piece of the computer’s memory, where we can store data. In Python any variable can hold any kind of data, no matter the size or type. A **variable assignment statement*, like <code>x = 100</code> above, assigns the name <code>x</code> to a particular location in memory, and stores the value of <code>100</code> in it. <strong>Only the value of the righthand side of the assignment is stored.</strong> We can reassign any variable to a new value at any time, just by writing another assignment statement.</p>
+<p>Experiment with this by adding to this script in PyCharm: insert two lines after the first <code>print</code> statement in the script. Reassign <code>x</code> to have the value 250, and then copy the <code>print</code> statement a second time after that. What happened to the value of <code>z</code>?</p>
+<p><strong>There is nothing to hand in for this part.</strong></p>
+</section>
+<section id="creating-scripts" class="level1">
+<h1>Creating scripts</h1>
+<p>Next, let’s experiment with the editor pane. We can write a series of Python statements in the editor pane, and save them to a file. Then we can ask Python to perform the entire set of statements one after the other.</p>
+<p>To create a new Python code file, you can either (1) select <em>New…</em> from the <em>File</em> menu , (2) right-click (control-click on Mac) on either the project folder name or one of the code file names and select <em>New</em>, or (3) use the keyboard shortcut (command-N on Mac, alt-Insert on Windows). Make sure to select <em>Python File</em> as the type of new thing to create, and give a name for the file when prompted. PyCharm will add the <code>.py</code> extension to the filename if you leave it off.</p>
+<p>Create a new Python file, and copy the Python statements below into that file. The script below calculate how many days a bicycle trip will take, if you can bike 50 miles each day.</p>
+<div id="02505659" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>tripDist <span class="op">=</span> <span class="dv">420</span>   <span class="co"># total miles in the trip</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>bikePerDay <span class="op">=</span> <span class="dv">50</span>   <span class="co"># miles you can bicycle in a day</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>tripDays <span class="op">=</span> tripDist <span class="op">/</span> bikePerDay</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">print</span>(<span class="st">"To bike"</span>, tripDist, <span class="st">"miles, "</span>, bikePerDay, <span class="st">"miles per day,"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="bu">print</span>(<span class="st">" takes"</span>, tripDays, <span class="st">"days."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>To bike 420 miles,  50 miles per day,
+ takes 8.4 days.</code></pre>
+</div>
+</div>
+<p>To run this script, either select <em>Current File</em> as the current run option, and then click the green arrow run button (both in the upper right corner of the window), or right-click on the background of the editor panel and select Run. Once you have run the program once, you can use the right arrow in the bottom left or the upper right to run it again. Holding down <code>control-shift-r</code> will also run the script.</p>
+<p>Run your script, and make sure that you get the same result as is displayed above.</p>
+<p><strong>To hand in:</strong> You will hand in this script file when you are done, so don’t erase it or overwrite the script contents!</p>
+</section>
+<section id="debugging-programs" class="level1">
+<h1>Debugging Programs</h1>
+<p>Your project should already have a folder called <code>buggyScripts</code> that contains five Python code files. Each of these files has a bug of one kind or another in it.</p>
+<p>Just as when you write a paper, you must take time to proofread it to find typos and other mistakes, when you write a program, you must <strong>debug</strong> it to find all errors in your scripts. But because you are communicating with a machine, not a person, you have to be exact: the computer cannot understand you at all if there are errors, <strong>bugs</strong>, in your code. Or the computer may do exactly what you wrote, but not what you meant to do.</p>
+<p>It is also important that you learn to read code, and to predict what will happen when you run the code. Just like learning a human language, you must learn to read if you want to learn to write!</p>
+<p>Your reading talked about three kinds of errors in a program: syntax errors, runtime errors, and semantic errors. Look at each of the scripts stored in files <code>scriptA.py</code> through <code>scriptE.py</code>, in the <code>buggyscripts</code> folder. Open each script in PyCharm, and find the bug or bugs in it. Change the script to correct the bug (or at least to stop it from happening). Add a comment to the file that describes what you did.</p>
+<p>How do you find the bugs? Take it step by step:</p>
+<ul>
+<li>Start by seeing if PyCharm itself finds anything wrong, and read what it says. Look for a red squiggly line under code, or a red horizontal line at the right edge of the edit panel. Hover over the red line, and it will pop up an explanation of what it sees as wrong.</li>
+<li>Try running the program, and read any error message that appears (printed in red). It will specify the kind of error, and tell you on what line of the code the error was detected.</li>
+<li>Add print statements before the line where the error, if any, took place, and display the values of variables, or just a message to tell you that the program got to that line.</li>
+<li>Read through the program line by line and predict what should happen, then check if it really is what is happening.</li>
+<li>If no error is detected by PyCharm, and no error occurs when you run the program, the last step is to check if the output of the program is correct. Logical errors occur when we calculate something incorrectly: <strong>always check if the output is correct!</strong></li>
+</ul>
+<p><strong>To hand in:</strong> Hand in these scripts, with corrections and comments added (as described above).</p>
+</section>
+<section id="create-your-own-script" class="level1">
+<h1>Create your own script</h1>
+<p>Suppose I want to plant a garden bed with flowers. Each flower must sit in the middle of a 6 inch by 6 inch square to ensure it has enough room to grow. Because I am obsessive about order, I want the flowers laid out in a perfect grid: rows and columns. If my garden bed is 10 feet long, and 2 feet wide, how many flowers would I need to buy to make my grid? (For those new to American units, there are 12 inches in a foot.)</p>
+<p>You can compute how many rows of flowers will fit in the bed, and how many columns for each row. Then multiply to find the total number of flowers.</p>
+<p>Create a new script file called <code>flowers.py</code>. In that file, define a variable <code>bedLen</code> to hold the value 10 (the length in feet of my garden bed), and define variable <code>bedWidth</code> to be the value 2 (the width in feet of my garden bed). Then write a Python expression to calculate how many rows of flowers will fit in the bed, and how many columns of flowers. Define variables to hold each of these values. Then compute and print the total number of flowers, along with an explanatory string.</p>
+<p>Run the script, and use the tools from earlier sections to debug your program until it computes the right value.</p>
+<p>Change <code>bedLen</code> to be 30 and <code>bedWidth</code> to be 3.5, and test your program. Does it correctly calculate the number of flowers for this new garden bed size? Make your program general enough to work for any reasonable length and width.</p>
+<p><em>To hand in:</em> The <code>flowers.py</code> file should be saved, not deleted or overwritten, to hand in.</p>
+</section>
+<section id="handing-in-this-assignment" class="level1">
+<h1>Handing in this assignment</h1>
+<p>Once you have finished editing all the Python files for this activity, you will need to <em>Commit</em> and then <em>Push</em> your code. See the appropriate section of the <a href="???">Github Assignment Basics</a> for details, and ask for help if you need it.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
