@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-14">
 
 <title>Chapter 3, Webcams and Videos</title>
 <style>
@@ -77,16 +77,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <body class="quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Chapter 3, Webcams and Videos</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 14, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#indefinite-looping" id="toc-indefinite-looping" class="nav-link active" data-scroll-target="#indefinite-looping"><span class="header-section-number">1</span> Indefinite looping</a>
   <ul class="collapse">
   <li><a href="#what-is-a-while-loop-and-why-do-we-need-another-kind-of-loop" id="toc-what-is-a-while-loop-and-why-do-we-need-another-kind-of-loop" class="nav-link" data-scroll-target="#what-is-a-while-loop-and-why-do-we-need-another-kind-of-loop"><span class="header-section-number">1.1</span> What is a while loop, and why do we need another kind of loop?</a></li>
-  <li><a href="#the-break-and-continue-statements" id="toc-the-break-and-continue-statements" class="nav-link" data-scroll-target="#the-break-and-continue-statements"><span class="header-section-number">1.2</span> The break and continue statements</a></li>
+  <li><a href="#the-break-and-continue-statements" id="toc-the-break-and-continue-statements" class="nav-link" data-scroll-target="#the-break-and-continue-statements"><span class="header-section-number">1.2</span> The break and continue statements</a>
+  <ul class="collapse">
+  <li><a href="#strategic-use-of-infinite-loops" id="toc-strategic-use-of-infinite-loops" class="nav-link" data-scroll-target="#strategic-use-of-infinite-loops"><span class="header-section-number">1.2.1</span> Strategic use of infinite loops</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#connecting-to-a-built-in-webcam" id="toc-connecting-to-a-built-in-webcam" class="nav-link" data-scroll-target="#connecting-to-a-built-in-webcam"><span class="header-section-number">2</span> Connecting to a built-in webcam</a>
   <ul class="collapse">
@@ -97,37 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Chapter 3, Webcams and Videos</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Susan Eileen Fox </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 12, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <p>This chapter will introduce two main new concepts, one from Python and one from OpenCV. The Python concepts is indefinite looping (also called <code>while</code> loops). Unlike a <code>for</code> loop, which repeats a fixed number of times, <code>while</code> loops repeat until some condition changes. They can repeat any number of times, including zero times! The OpenCV concept is working with video. You might think of video as a completely different medium from regular still images, but to OpenCV, a video is just a series of images, and we can process them one by one.</p>
@@ -139,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-is-a-while-loop-and-why-do-we-need-another-kind-of-loop" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="what-is-a-while-loop-and-why-do-we-need-another-kind-of-loop"><span class="header-section-number">1.1</span> What is a while loop, and why do we need another kind of loop?</h2>
 <p>A <code>while</code> loop has a simpler structure than a <code>for</code> loop (in fact, you can duplicate the behavior of a <code>for</code> loop with a <code>while</code> loop, using accumulator variables. After the keyword <code>while</code>, we put a boolean expression. So long as that boolean expression evaluates to <code>True</code> (or any non-<code>False</code> value), the loop will continue.</p>
-<div id="74537d42" class="cell" data-execution_count="1">
+<div id="3dbbe836" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">while</span> <span class="op">&lt;</span>boolean expression<span class="op">&gt;</span>:</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="op">&lt;</span>indented statements<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -161,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Examine the examples below before proceeding.</p>
 <p><strong>Bad uses of <code>break</code> and <code>continue</code>:</strong> the examples below show what happens if <code>break</code> or <code>continue</code> are placed, without being <em>guarded</em> by an <code>if</code> statement, inside a loop.</p>
-<div id="81e2bd16" class="cell" data-execution_count="2">
+<div id="8c75bfd2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    <span class="bu">print</span>(i, <span class="st">"   (before break)"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">break</span></span>
@@ -182,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Using <code>break</code> and <code>continue</code> in a single loop:</strong> The first example stops the <code>while</code> loop if the user enters <code>'quit'</code>, and the second example skips negative numbers in adding up the contents of a list.</p>
-<div id="94b7ef9e" class="cell" data-execution_count="3">
+<div id="6e2ddb9c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>names <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="cf">while</span> <span class="va">True</span>:   <span class="co"># A way to specify "loop forever"</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>    nextName <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the next name, or quit to end: "</span>)</span>
@@ -191,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6"></a>    names.append(nextName)</span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="bu">print</span>(names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="4a6291d5" class="cell" data-execution_count="4">
+<div id="9ce5534d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="cf">for</span> v <span class="kw">in</span> [<span class="dv">25</span>, <span class="dv">101</span>, <span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">40</span>, <span class="op">-</span><span class="dv">35</span>, <span class="op">-</span><span class="dv">1023</span>]:</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    <span class="cf">if</span> v <span class="op">&lt;</span> <span class="dv">0</span>:</span>
@@ -203,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>**Using <code>break</code> and <code>continue</code> in nested loops: The first example uses <code>break</code> to stop the inner loop whenever the inner loop variable is greater than the outer loop variable.</p>
-<div id="77daa05d" class="cell" data-execution_count="5">
+<div id="d79a4bf9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    <span class="bu">print</span>(<span class="st">"i ="</span>, i)</span>
 <span id="cb7-3"><a href="#cb7-3"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
@@ -242,7 +246,7 @@ i = 3
 </div>
 </div>
 <p>The second example uses <code>continue</code> instead, causing the inner loop to continue, without completing the last step.</p>
-<div id="657bba55" class="cell" data-execution_count="6">
+<div id="a0ffed89" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
 <span id="cb9-2"><a href="#cb9-2"></a>    <span class="bu">print</span>(<span class="st">"i ="</span>, i)</span>
 <span id="cb9-3"><a href="#cb9-3"></a>    <span class="cf">for</span> j <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>]:</span>
@@ -286,7 +290,7 @@ i = 3
 <section id="strategic-use-of-infinite-loops" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="strategic-use-of-infinite-loops"><span class="header-section-number">1.2.1</span> Strategic use of infinite loops</h3>
 <p>One of the examples above showed how to build an <strong>infinite loop</strong>. If a <code>while</code> loop has <code>True</code> as the boolean expression for its test, then it cannot every stop looping naturally. However, we can include conditions checked by <code>if</code> statements inside the loop, and we can break out of the loop when we need to.</p>
-<div id="62e4c266" class="cell" data-execution_count="7">
+<div id="c0acd800" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb11-2"><a href="#cb11-2"></a>    ...</span>
 <span id="cb11-3"><a href="#cb11-3"></a>    <span class="cf">if</span> <span class="op">&lt;</span>test<span class="op">&gt;</span>:</span>
@@ -340,7 +344,7 @@ i = 3
 <li>We use the <code>not ret</code> boolean expression to determine if no camera frame was read, and we break out of the loop if none</li>
 <li>Our call to <code>waitKey</code> here has an input, a positive number!</li>
 </ul>
-<div id="57d4f22e" class="cell" data-execution_count="8">
+<div id="f186911a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> cv2</span>
 <span id="cb12-2"><a href="#cb12-2"></a></span>
 <span id="cb12-3"><a href="#cb12-3"></a>vidCap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
@@ -373,7 +377,7 @@ i = 3
 <li>It prints the character value, along with its numeric value</li>
 <li>If the user typed a <code>'q'</code>, then it breaks out of the loop</li>
 </ul>
-<div id="6e6c0aae" class="cell" data-execution_count="9">
+<div id="a42f4038" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> cv2</span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>cap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
@@ -399,7 +403,7 @@ i = 3
 <h1 data-number="3"><span class="header-section-number">3</span> Reading frames from a video file</h1>
 <p>There are multiple formats for video files. Only some of them can be read by OpenCV, and which ones may be dependent on your version of Python and your operating system. Most videos in .AVI format (an MJPEG format) work with OpenCV, as do .MP4 files, at least on some machines. OpenCV does not process the audio from these video files, just the images.</p>
 <p>To read frames from a video file, we just change the call to <code>VideoCapture</code> to pass a string containing the path and filename of the video we want to view. Below is a simple example using one of the videos in the <code>SampleVideos</code> folder.</p>
-<div id="f3e3a834" class="cell" data-execution_count="10">
+<div id="6ccef1de" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">import</span> cv2</span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
 <span id="cb14-3"><a href="#cb14-3"></a>cap <span class="op">=</span> cv2.VideoCapture(<span class="st">"SampleVideos/StreetScene.avi"</span>)</span>
@@ -467,7 +471,7 @@ i = 3
 <li>Write each frame to the VideoWriter` object, and display it</li>
 <li>After the loop ends, we release both camera and video writer objects (very important step!)</li>
 </ul>
-<div id="b340b544" class="cell" data-execution_count="11">
+<div id="bfc0cae2" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>cap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb15-2"><a href="#cb15-2"></a></span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="co"># First determine the size of frames</span></span>
