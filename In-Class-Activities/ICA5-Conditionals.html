@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-16">
 
 <title>ICA: Booleans and Conditionals</title>
 <style>
@@ -71,8 +71,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="ICA5-Conditionals_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="ICA5-Conditionals_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="ICA5-Conditionals_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="ICA5-Conditionals_files/libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="ICA5-Conditionals_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 
 
 </head>
@@ -99,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">August 16, 2025</p>
       </div>
     </div>
     
@@ -140,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level1">
 <h1>Overview</h1>
 <p>In this activity, we will practice with the Boolean data type, which allows us to reason about statements as true or false, and we will explore how to effectively use the <code>if</code> statement. An <code>if</code> statement is called <strong>conditionals</strong> because the actions taken are “conditional” on the value of the boolean expression in it. The conditional asks a question, or a series of questions, and it performs the set of actions associate with the first question that is true. The <code>if</code> statement syntax is more complex than the <code>for</code> loop:</p>
-<div id="5ab5f0ad" class="cell" data-execution_count="1">
+<div id="150cbf4e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> <span class="op">&lt;</span>test1<span class="op">&gt;</span>:</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="op">&lt;</span>statements to do (once) <span class="cf">if</span> test1 <span class="kw">is</span> true<span class="op">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="cf">elif</span> <span class="op">&lt;</span>test2<span class="op">&gt;</span>:</span>
@@ -207,7 +205,7 @@ these are constants in Python. Try typing them into the Python shell, without an
 </tbody>
 </table>
 <p>For each boolean expression, below, examine it and see if you can describe what question is being asked, and what the answer should be. Type each of the statements or expressions below in the Python console, or make a script file, where you print the value of each expression. Where you are wrong about the outcome, discuss with a neighbor, and ask for help!</p>
-<div id="4179c483" class="cell" data-execution_count="2">
+<div id="ac92b914" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># first we’ll assign three variables to values</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>x <span class="op">=</span> <span class="dv">25</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>y <span class="op">=</span> <span class="dv">30</span></span>
@@ -267,7 +265,7 @@ len(s) == 7 is True
 </table>
 <p>Add the lines below to the script you started for the previous section. These depend on the variables defined earlier. Which of the following are <code>True</code>, and which <code>False</code>? Can you explain why each one produces the value it does? Discuss with a teammate, and ask if you are unsure.</p>
 <p>Recall that the percent sign means to take the remainder of the first operand divided by the second operand. Also recall that the square bracket notation extracts single characters from a string based on position, where the first character is at position zero.</p>
-<div id="07620860" class="cell" data-execution_count="3">
+<div id="d9d979a0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">print</span>(<span class="st">"Are x and y multiples of 5?   "</span>, (x <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>) <span class="kw">and</span> (y <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>))</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(<span class="st">"Does s start with b, or is it more than 10 long?   "</span>, (s[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'b'</span>) <span class="kw">or</span> (<span class="bu">len</span>(s) <span class="op">&gt;=</span> <span class="dv">10</span>))</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="bu">print</span>(<span class="st">"Does s not contain the character i?   "</span>, <span class="st">'i'</span> <span class="kw">not</span> <span class="kw">in</span> s)</span>
@@ -295,7 +293,7 @@ Is x between 15 and 50, inclusive   True</code></pre>
 <section id="conditional-statements" class="level1">
 <h1>Conditional statements</h1>
 <p>We often use boolean expressions in conditional statements, if statements, to cause the computer to choose one or another in a set of actions. The general form of an if statement is shown below. An if must have at least the first part, and has elif parts and an else optionally. Note that all the indented code options must be indented exactly the same amount.</p>
-<div id="a28cddea" class="cell" data-execution_count="4">
+<div id="e184a36e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span> <span class="op">&lt;</span>boolean<span class="op">-</span>expression<span class="op">&gt;</span>:</span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="op">&lt;</span>code<span class="op">-</span>to<span class="op">-</span>perform<span class="op">&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="cf">elif</span> <span class="op">&lt;</span>boolean<span class="op">-</span>expression<span class="op">&gt;</span>:</span>
@@ -306,7 +304,7 @@ Is x between 15 and 50, inclusive   True</code></pre>
 </div>
 <p>Python evaluates each boolean expression in an if statement in order, stopping when it finds an expression that evaluates to <code>True</code>. It then performs the code associated with the true test, and then skips the rest of the conditional statement.</p>
 <p>Look at the example below. Before typing it into an editor, try to figure out what it might print, given different values for <code>x</code> and <code>y</code>. Then put it in your Python file, and run it. Choose different values for <code>x</code> and <code>y</code> to cause different parts of the <code>if</code> statement to run. Explain your choices.</p>
-<div id="d2c9d724" class="cell" data-execution_count="5">
+<div id="78edc840" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter a value for x: "</span>))</span>
 <span id="cb7-2"><a href="#cb7-2"></a>y <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter a value for y: "</span>))</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="cf">if</span> x <span class="op">&gt;</span> y:</span>
@@ -382,7 +380,7 @@ Is x between 15 and 50, inclusive   True</code></pre>
 <p>Every typical keyboard character, including control characters that are typically not printable, is represented inside the computer by a one-byte integer value as defined by the ASCII table (Python uses the much larger Unicode representation, but ASCII is a subset of that, and it’s all we will focus on). Open a copy of <a href="https://www.rapidtables.com/code/text/ascii-table.html">the ASCII table.</a>. Focus on the <em>Dec</em> and <em>Char</em> columns in this table. The <em>Dec</em> column shows the decimal value from 0 to 127, and the <em>Char</em> column shows the character that corresponds to that integer value. The ones shown in all-caps are non-printable characters, like control characters. ASCII only uses half of the byte, a <strong>nibble</strong>, to represent typical characters, the values from 128 to 255 are special “extended” characters that we won’t need for now. Look for the values of alphabetic characters, upper and lower case, and the digits.</p>
 <p>Once you have looked at the ASCII table, run the program you’ve created above, and try typing different keys: the value returned from <code>waitKey</code> is the integer that corresponds to the key you typed.</p>
 <p>We can convert between a character and its integer counterpart using the <code>ord</code> and <code>chr</code> functions: <code>ord</code> takes a character and returns its integer value, <code>chr</code> takes an integer and returns its character value:</p>
-<div id="b6f5e17b" class="cell" data-execution_count="6">
+<div id="500a34e2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>a1 <span class="op">=</span> <span class="dv">67</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>a2 <span class="op">=</span> <span class="dv">111</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>n3 <span class="op">=</span> <span class="st">'o'</span></span>
@@ -425,8 +423,7 @@ L 76</code></pre>
 <p>For this optional challenge, you will create a program to draw a moving circle on the screen, and have it bounce off the edges of the screen. We do this by keeping accumulator variables for the x and y center position of the ball, and separately keeping accumulator variables, <code>deltaX</code> and <code>deltaY</code>, for the changes in position in x and y directions (how much the x value should change from one frame to the next, and similarly how much the y direction should change). When the ball reaches one of the edges of the background image, we will change <code>deltaX</code> or <code>deltaY</code> or both, so that the ball moves in a different direction.</p>
 <p><em>Hint:</em> For this to work, you will need to know the width and height of the background image. You can either look this up yourself by clicking on the image in PyCharm, and then hard-coding the values into your program. <strong>Or</strong>, you can access the size of the image (if it were in variable <code>img</code>) like this: <code>(height, width, depth) = img.shape</code>.</p>
 <p>Start, as before with the flying saucer program from last time: * As in the previous program, initialize <code>x</code> and <code>y</code> to be 10 before the <code>for</code> loop, and remove the lines inside the loop that compute <code>x</code> and <code>y</code> in terms of <code>i</code>. * Add a definition of <code>deltaX</code> to be 5 and <code>deltaY</code> to be 3 before the <code>for</code> loop as well * Change what is drawn each time from an ellipse to a circle to simplify matters * Increase the number of iterations of the <code>for</code> loop so that the program will run longer * Make sure that the <code>waitKey</code> call is passed a number for the millisecond delay, we want this program to run without user input * On the lines below the call to <code>waitKey</code>, add two lines to update <code>x</code> and <code>y</code> by adding <code>deltaX</code> and <code>deltaY</code> to them, respectively * Below that, add four <code>if</code> statements (not an <code>if</code>-<code>elif</code>, but separate statements) * In the first <code>if</code> statement, check to see if <code>x</code> plus the circle’s radius is <code>&gt;=</code> the image width * If it is, then set <code>deltaX</code> to be -5 * No <code>else</code> needed for this conditional * In the second <code>if</code> statement, check to see if <code>x</code> minus the circle’s radius is <code>&lt;=</code> 0 * If it is, then set <code>deltaX</code> to be 5 (this can only happen if the circle is moving left in the x direction, so <code>deltaX</code> must currently be -5). * No <code>else</code> needed for this conditional * Implement the other two <code>if</code> statements similarly for the <code>y</code> variable, using -3 and 3 as the values for <code>deltaY</code></p>
-<p>Below is a short video showing what your program might look like:</p>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="ICA5-Images/ICA5-BouncingBall.mp4"></video></div>
+<p>A link to a video showing what this should look like will be available through Moodle.</p>
 </section>
 </section>
 <section id="what-to-hand-in" class="level1">
@@ -883,7 +880,6 @@ L 76</code></pre>
   });
   </script>
 </div> <!-- /content -->
-<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
