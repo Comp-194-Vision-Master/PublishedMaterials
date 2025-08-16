@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-15">
 
 <title>ICA: Loops and Images</title>
 <style>
@@ -129,7 +129,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">August 15, 2025</p>
       </div>
     </div>
     
@@ -163,7 +163,7 @@ window.Quarto = {
 <h1>Overview</h1>
 <p>In this activity, you will practice with <code>for</code> loops and closely related ideas about sequences and accumulator variables, particularly applying them to images. This is our first <strong>control structure</strong>, programming tools that change the line-by-line, step-by-step process of evaluating a program. In this case, a <code>for</code> loop allows us to repeat a set of statements over and over again. Loops, like other control structures, are essential for making our code concise and efficient to write.</p>
 <p>To avoid repeated typing, and the chance for errors to creep in, we use loops to tell the computer to repeat some actions. The <code>for</code> loop in Python is very convenient. It has a very specific syntax (the parts shown with angled brackets around them are <em>placeholders</em>, not part of the syntax:</p>
-<div id="e9682f5f" class="cell" data-execution_count="1">
+<div id="0dbf3f48" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>sequence<span class="op">&gt;</span>:</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2"></a>    <span class="op">&lt;</span>statements to be repeated (indented)<span class="op">&gt;</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
@@ -186,7 +186,7 @@ window.Quarto = {
 <p>The <code>range</code> function is used in <code>for</code> loops to generate a sequence of integers. It works in a way similar to string or list slicing, though not with the same syntax.</p>
 <p>Try each of the following, by copying it into a code file in PyCharm and running it. Vary the values and try to predict the output.</p>
 <p><strong>A simple use of <code>range</code> to count:</strong></p>
-<div id="6d3a3584" class="cell" data-execution_count="2">
+<div id="157385af" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -198,7 +198,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Counting upward, but not starting at 0:</strong></p>
-<div id="ac371138" class="cell" data-execution_count="3">
+<div id="01bb26e8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>, <span class="dv">26</span>):</span>
 <span id="cb3-2"><a href="#cb3-2"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -211,7 +211,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Counting while skipping:</strong></p>
-<div id="80a1d74c" class="cell" data-execution_count="4">
+<div id="054d916d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">2</span>):</span>
 <span id="cb5-2"><a href="#cb5-2"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -238,7 +238,7 @@ window.Quarto = {
 <p>The <code>for</code> loops in the previous section are the simplest form: just using a loop variable to repeat something a fixed number of times. We often use simple variable names for the loop variables with this kind of loop, like <code>i</code>, <code>j</code>, or <code>k</code>.</p>
 <p>Here you will practice with using this kind of loop when drawing on an image.</p>
 <p><strong>Try this to hand in:</strong> Examine the starter code shown below.</p>
-<div id="0c6bce2a" class="cell" data-execution_count="5">
+<div id="53816a25" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a><span class="im">import</span> random</span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a></span>
@@ -291,7 +291,7 @@ Figure&nbsp;1: Typical output when loop repeats 50 times
 <h1>Looping over lists</h1>
 <p>Another common pattern for a <code>for</code> loop is to build a list of data, and then use that as the sequence for the loop. When we do this, the loop variable is assigned to the values in the list, one at a time, and it repeats the loop body once for each value in the list. We typically choose a name for the loop variable that describes what it contains, even if that is just <code>val</code>. This helps human readers to distinguish this kind of loop from the earlier type (Python doesn’t care).</p>
 <p>Try the example below to see how this kind of loop works.</p>
-<div id="e80a0e9f" class="cell" data-execution_count="6">
+<div id="560fe87e" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> name <span class="kw">in</span> [<span class="st">'Cindy'</span>, <span class="st">'Marco'</span>, <span class="st">'Fatima'</span>, <span class="st">'Thomas'</span>, <span class="st">'Yutong'</span>]:</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    <span class="bu">print</span>(<span class="st">"Hello and welcome"</span>, name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -303,7 +303,7 @@ Hello and welcome Yutong</code></pre>
 </div>
 </div>
 <p><strong>Try this to hand in:</strong> Start with the code snippet shown below. It creates a blank image using <code>zeros</code> and sets it to a light beige-yellow color.</p>
-<div id="45f5567e" class="cell" data-execution_count="7">
+<div id="952e972c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> cv2</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-3"><a href="#cb9-3"></a></span>
@@ -346,8 +346,8 @@ Figure&nbsp;3: Final result
 </section>
 <section id="accumulator-variables-and-for-loops" class="level1">
 <h1>Accumulator variables and <code>for</code> loops</h1>
-<p>An **accumulator variable* is an extra variable, not the loop variable, that collects values across the iterations of a loop. Below is a simple example, where the loop variable counts from 30 to 40, and the accumulator collects the sum of all the values the loop variable takes on.</p>
-<div id="be173299" class="cell" data-execution_count="8">
+<p>An <strong>accumulator variable</strong> is an extra variable, not the loop variable, that collects values across the iterations of a loop. Below is a simple example, where the loop variable counts from 30 to 40, and the accumulator collects the sum of all the values the loop variable takes on.</p>
+<div id="babe5482" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
 <span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>, <span class="dv">41</span>):</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3"></a>    total <span class="op">=</span> total <span class="op">+</span> i</span>
@@ -375,7 +375,7 @@ Figure&nbsp;3: Final result
 </ul>
 <p>Read the example below that uses two accumulator variables to calculate positions for a series of lines. It also uses an in-loop variable that sets the color with a formula based on the loop variable.</p>
 <p><strong>Before running this program:</strong> Read through this program line by line, and figure out what the values of each variable should be during the first pass through the for loop. Discuss with your teammates, and predict what the picture should look like. Then extend that to the other runs of the loop. Only after that, run the program and see if you were right.</p>
-<div id="6f652ee4" class="cell" data-execution_count="9">
+<div id="374b245b" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> cv2</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/landscape1MuchSmaller.jpg"</span>)</span>
@@ -391,8 +391,8 @@ Figure&nbsp;3: Final result
 <span id="cb11-13"><a href="#cb11-13"></a>    yPos <span class="op">=</span> yPos <span class="op">+</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you can’t predict what the lines of code will do, try adding print statements so that you can see the values of the variables from one step to the next. Adding explanatory strings to your print statements will help!</p>
-<p><strong>Try this to hand in:</strong> Make a new Python file for this script. This script will make a custom light-blue blank image, and will then draw a line of circles, each of a different color, spaced out across the image, as shown in <a href="#fig-circleLine" class="quarto-xref">Figure&nbsp;4</a>.</p>
-<div id="ece58648" class="cell" data-execution_count="10">
+<p><strong>Try this to hand in:</strong> Make a new Python file for this script. This script will make a custom light-green blank image, and will then draw a line of circles, each of a different color, spaced out across the image, as shown in <a href="#fig-circleLine" class="quarto-xref">Figure&nbsp;4</a>.</p>
+<div id="2035924d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="im">import</span> cv2</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-3"><a href="#cb12-3"></a></span>
