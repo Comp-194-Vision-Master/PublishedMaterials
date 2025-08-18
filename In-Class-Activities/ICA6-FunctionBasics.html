@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-18">
 
 <title>ICA: Function Basics</title>
 <style>
@@ -129,7 +129,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">August 18, 2025</p>
       </div>
     </div>
     
@@ -177,7 +177,7 @@ window.Quarto = {
 <section id="function-definitions" class="level2">
 <h2 class="anchored" data-anchor-id="function-definitions">Function definitions</h2>
 <p>Remember the format for a function definition. A function definition needs to specify (1) the name of the function, (2) the inputs to the function, and (3) what should happen when the function is called including what value should be returned, if any. Below is an outline of what a function definition looks like–it’s not a real function, though.</p>
-<div id="896df8c6" class="cell" data-execution_count="1">
+<div id="db52f090" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> functionName(var1, var2, …):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    function body, indented statements that say what to do when the function <span class="kw">is</span> called</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -216,7 +216,7 @@ window.Quarto = {
 <p>To gain a better understanding of how functions work, we will trace by hand what happens when a call is made to a function we have defined. We will also try other tools within Python and PyCharm and elsewhere such as the <a href="https://pythontutor.com/python-compiler.html#mode=edit">Online Compiler, Visual Debugger, and AI Tutor</a> to help us visualize what is happening.</p>
 <p><strong>Try this to hand in:</strong> Save your answer for this activity into a Python file called <code>tracing.py</code>.</p>
 <p>Consider the following function, which was used to show tracing by hand in videos/class notes, as well. The <code>smallestDiff</code> function takes in three numbers and returns the smallest difference between the three numbers.</p>
-<div id="d28804d6" class="cell" data-execution_count="2">
+<div id="d31a8136" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> smallestDiff(x, y, z):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    diff1 <span class="op">=</span> <span class="bu">abs</span>(x <span class="op">-</span> y)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    diff2 <span class="op">=</span> <span class="bu">abs</span>(y <span class="op">-</span> z)</span>
@@ -244,18 +244,18 @@ Figure&nbsp;1: Labeled function <code>smallestDiff</code>
 </ul>
 <p>When we trace a function by hand, we write out the local environment at the start of the function call, and update it whenever a variable is altered or a new variable is added. We showed this in the videos for today.</p>
 <p>Copy the definition of <code>smallestDiff</code> to the file you created. But before running it, trace the function call below by hand. Draw the local environment table (you can just put it in the Python file as a comment). Just draw the final state of the local environment, just before the functionr returns.</p>
-<div id="9a341b53" class="cell" data-execution_count="3">
+<div id="719744c1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>smallestDiff(<span class="dv">32</span>, <span class="dv">43</span>, <span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once you are sure what the return value would be for this call, add this call to your file, printing the result. Were you right? If so, move on. If not, ask for help!</p>
 <p>Next add the function definition below to your file. This function takes in the price of an item at a store, and the sales tax rate, and it calculates what the total price to be paid is.</p>
-<div id="a034ba7b" class="cell" data-execution_count="4">
+<div id="03527f64" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> addTax(price, taxRate):</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    taxAmt <span class="op">=</span> price <span class="op">*</span> taxRate</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">return</span> price <span class="op">+</span> taxAmt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Trace this function with the call shown below, drawing the local environment table for this function. Notice that the returned value is not just a value stored in a variable, but an arithmetic expression. That’s okay, it doesn’t get added to the local environment table, just returned.</p>
-<div id="a7072be8" class="cell" data-execution_count="5">
+<div id="ab5a8e08" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>addTax(<span class="fl">26.0</span>, <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -270,12 +270,12 @@ Figure&nbsp;1: Labeled function <code>smallestDiff</code>
 </ul>
 <p><strong>Try this to hand in:</strong> Save your answer for this part into the same Python file as before.</p>
 <p>Add the following line to the definition of <code>smallestDiff</code>, by adding a line just below the function header (the <code>def</code> line), don’t forget to indent it in order to be a part of the function’s statements.</p>
-<div id="11d94875" class="cell" data-execution_count="6">
+<div id="9b44462f" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">print</span>(<span class="st">'smallestDiff inputs:'</span>, x, y, z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This line will print the input parameter values, so we can check that they are what we expect.</p>
 <p>Then add the following line just before the <code>return</code> line, also indented to be a part of the function.</p>
-<div id="5b87ffcc" class="cell" data-execution_count="7">
+<div id="def7773f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">print</span>(diff1, diff2, diff3, <span class="st">'return value:'</span>, minDiff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will print the local variables, and especially the variable holding the return value, so we can check that each line did what we wanted it to.</p>
@@ -290,7 +290,7 @@ Figure&nbsp;1: Labeled function <code>smallestDiff</code>
 <p>We will comment out the print statements from the previous section, and then see how the debugger can show us the same kind of information.</p>
 <ul>
 <li>Comment out any print statements inside <code>smallestDiff</code> and <code>addTax</code>.</li>
-<li>Make sure the script part of the code includes at least one call to <code>smallestDiff</code> to the bottom of the file.</li>
+<li>Make sure the script part of the code includes at least one call to <code>smallestDiff</code> at the bottom of the file.</li>
 <li>Add a breakpoint at the first line inside the body of the <code>smallestDiff</code> function. To add a breakpoint, click the mouse either on the line number or in the bar just to the right of the line number. A red dot will appear there.</li>
 <li>Run the debugger by clicking on the Debug, you click on the Debug button, rather than the Run button. It looks like a bug. The debugger should run the file up to the point where the breakpoint is, and then pause.</li>
 </ul>
@@ -336,7 +336,7 @@ Figure&nbsp;3: PyCharm debugging after a few steps
 <h1>Practice with tracing and debugging</h1>
 <p>You have been provided with a starter program in <code>barChart.py</code>. This program includes a function definition, and then a main script that sets up an image and data, and runs the <code>drawBarChart</code> function, displaying the result. The <code>drawBarChart</code> function is copied below.</p>
 <p>This program is supposed to draw a bar chart based on some number data stored as a list. One bar per number, and the height of the bar should be proportional to the value of the number, with the tallest bar close to the height of the image.</p>
-<div id="de390c28" class="cell" data-execution_count="8">
+<div id="cba57eac" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a><span class="kw">def</span> drawBarChart(image, chartData):</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2"></a>    (wid, hgt, dep) <span class="op">=</span> image.shape</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3"></a>    numItems <span class="op">=</span> <span class="bu">len</span>(chartData)</span>
@@ -401,7 +401,7 @@ Figure&nbsp;3: PyCharm debugging after a few steps
 </dl>
 </div>
 </div>
-<p>The correct sult for this program is shown in <a href="#fig-barChart" class="quarto-xref">Figure&nbsp;4</a> below. However, this code has <strong>four bugs</strong> in it, all <strong>logical errors</strong>. That means the program runs, but produces the wrong result.</p>
+<p>The correct result for this program is shown in <a href="#fig-barChart" class="quarto-xref">Figure&nbsp;4</a> below. However, this code has <strong>four bugs</strong> in it, all <strong>logical errors</strong>. That means the program runs, but produces the wrong result.</p>
 <div id="fig-barChart" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-barChart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -420,12 +420,12 @@ Figure&nbsp;4: Correct output for the bar chart program
 </section>
 <section id="defining-and-testing-new-functions" class="level1">
 <h1>Defining and testing new functions</h1>
-<p><strong>Try this to hand in:</strong> Create a single code file where you implement each function below, along with a using a part of the main script to make one or two demo calls to each function.</p>
+<p><strong>Try this to hand in:</strong> Create a single code file where you implement each function below. Organize the code file with import statements at the top, function definitions next, and then a single main script at the bottom that includes one or two demo calls to each function.</p>
 <ul>
 <li>Define a function called <code>ave3</code> that takes three numbers as inputs: <code>x</code>, <code>y</code>, <code>z</code>. It should compute the average of the three by adding them up and dividing by 3.0. It should return the resulting value.</li>
 </ul>
-<p>To test your program automatically when the file is run, put calls to the function after the function definition in your file as shown below. Make sure the calls are not indented.</p>
-<div id="42d9625e" class="cell" data-execution_count="9">
+<p>To test your program automatically when the file is run, put calls to the function in the main script at the bottom of your file as shown below. Make sure the calls are not indented.</p>
+<div id="c7478d44" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>res <span class="op">=</span> ave3(<span class="dv">2</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
