@@ -166,7 +166,7 @@ window.Quarto = {
 <h1>Functions with nested loops</h1>
 <p>Any Python construct can be put inside any other Python construct. You can put loops inside of functions, and loops inside of loops. Nested loops are a very useful pattern.</p>
 <p>Copy the function below into your file.</p>
-<div id="60e15056" class="cell" data-execution_count="1">
+<div id="a42a9a0f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> printPairs(n, m):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="co">"""Prints pairs of numbers, the first number varies from 0 to n-1</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co">    and each first number is paired with each second number. The second</span></span>
@@ -238,7 +238,7 @@ Figure&nbsp;2: Results from two example calls to <code>drawGrid</code>: (a) crea
 <p>We have already been using the accumulator pattern, so here we will look at it in the context of a function, and we will focus on practicing debugging skills.</p>
 <p>Below is an example of a function that includes a <code>for</code> loop and an accumulator variable. It has three bugs in it. Some might be syntax errors, or will cause a runtime error, some may be logical errors.</p>
 <p>This function is supposed to add up the numbers in a list, and return the sum at the end.</p>
-<div id="d920f09b" class="cell" data-execution_count="2">
+<div id="fd9ba0ab" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> sumListNums(dataList):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">for</span> val <span class="kw">in</span> <span class="bu">len</span>(dataList):</span>
@@ -259,8 +259,8 @@ Figure&nbsp;2: Results from two example calls to <code>drawGrid</code>: (a) crea
 <h1>Functions that call other functions</h1>
 <p>We build programs in Python out of collections of functions. One function calls another function to do part of the work.</p>
 <p>Because writing programs accurately is difficult and time-consuming, one program design principle is to avoid writing the same code over and over. If you write the exact same statements in more than one place, then you have to debug each place separately. It is often worth your time to package those statements as a function, so that you can debug it once, and then only have to call the function for every use. Because functions have meaningful, descriptive names, calling functions can also improve the readability of your code, by substituting a single descriptive name for lines of code.</p>
-<p><strong>Try this to hand in:</strong> You have been provided with a starter program in <code>stickMonsters.py</code>. This program has 5 functions, plus a main script. We have provided three of functions for you: <code>drawStickFigure,</code>drawMonster<code>, and computeHeadOffsets</code>. You will implement the other two: <code>drawOneHead</code> and <code>drawHeads</code>. Below we have provided the <code>drawStickFigure</code> function, as a core element of the code.</p>
-<div id="9b6537d2" class="cell" data-execution_count="3">
+<p><strong>Try this to hand in:</strong> You have been provided with a starter program in <code>stickMonsters.py</code>. This program has 5 functions, plus a main script. We have provided three of functions for you: <code>drawStickFigure</code>, <code>drawMonster</code>, and <code>computeHeadOffsets</code>. You will implement the other two: <code>drawOneHead</code> and <code>drawHeads</code>. Below we have provided the <code>drawStickFigure</code> function, as a core element of the code.</p>
+<div id="9e725af4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="kw">def</span> drawStickFigure(img, startPos, color):</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>    <span class="co">"""Takes in the image to draw on, a reference point on the stick figure (at the base of the neck/shoulders),</span></span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a><span class="co">    and a color, and it draws the stick figure at that position."""</span></span>
