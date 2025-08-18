@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-18">
 
 <title>ICA: Function Practice</title>
 <style>
@@ -129,7 +129,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">August 18, 2025</p>
       </div>
     </div>
     
@@ -160,13 +160,13 @@ window.Quarto = {
 <section id="overview" class="level1">
 <h1>Overview</h1>
 <p>This activity follows on the earlier functions activity, giving you more practice with defining functions, including some with nested for loops and accumulator variables. It will also ask you to practice with writing functions that are called by other functions.</p>
-<p>Save all the functions you write into a <strong>single file</strong> for this activity: this will be the pattern going forward. Your file should have all necessary <code>import</code> statements at the top, followed by the function definitions, with explanatory comments included. At the bottom of the file, you should include the main script, using the <code>if __name__ == "__main__":</code> conditional, with all your script elements indented as a part of the conditional</p>
+<p>Save all the functions you write into a <strong>single file</strong> for this activity: this will be the pattern going forward. Your file should have all necessary <code>import</code> statements at the top, followed by the function definitions, with explanatory comments included. At the bottom of the file, you should include the main script, using the <code>if __name__ == "__main__":</code> conditional, with all your script elements indented as a part of the conditional.</p>
 </section>
 <section id="functions-with-nested-loops" class="level1">
 <h1>Functions with nested loops</h1>
 <p>Any Python construct can be put inside any other Python construct. You can put loops inside of functions, and loops inside of loops. Nested loops are a very useful pattern.</p>
 <p>Copy the function below into your file.</p>
-<div id="da0bcc1f" class="cell" data-execution_count="1">
+<div id="60e15056" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> printPairs(n, m):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="co">"""Prints pairs of numbers, the first number varies from 0 to n-1</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co">    and each first number is paired with each second number. The second</span></span>
@@ -212,16 +212,16 @@ Figure&nbsp;1: Example for <code>drawGrid</code>, for square size of 40
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ICA7-Images/drawGrid-6-50.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="`drawGrid(img, 6, 50) results"><img src="ICA7-Images/drawGrid-6-50.png" class="img-fluid figure-img"></a></p>
-<figcaption>`drawGrid(img, 6, 50) results</figcaption>
+<p><a href="ICA7-Images/drawGrid-6-50.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="drawGrid(img, 6, 50) results"><img src="ICA7-Images/drawGrid-6-50.png" class="img-fluid figure-img"></a></p>
+<figcaption><code>drawGrid(img, 6, 50)</code> results</figcaption>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ICA7-Images/drawGrid-10-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="`drawGrid(img, 10, 10) results"><img src="ICA7-Images/drawGrid-10-10.png" class="img-fluid figure-img"></a></p>
-<figcaption>`drawGrid(img, 10, 10) results</figcaption>
+<p><a href="ICA7-Images/drawGrid-10-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="drawGrid(img, 10, 10) results"><img src="ICA7-Images/drawGrid-10-10.png" class="img-fluid figure-img"></a></p>
+<figcaption><code>drawGrid(img, 10, 10)</code> results</figcaption>
 </figure>
 </div>
 </div>
@@ -238,7 +238,7 @@ Figure&nbsp;2: Results from two example calls to <code>drawGrid</code>: (a) crea
 <p>We have already been using the accumulator pattern, so here we will look at it in the context of a function, and we will focus on practicing debugging skills.</p>
 <p>Below is an example of a function that includes a <code>for</code> loop and an accumulator variable. It has three bugs in it. Some might be syntax errors, or will cause a runtime error, some may be logical errors.</p>
 <p>This function is supposed to add up the numbers in a list, and return the sum at the end.</p>
-<div id="92ba77d6" class="cell" data-execution_count="2">
+<div id="d920f09b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> sumListNums(dataList):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="cf">for</span> val <span class="kw">in</span> <span class="bu">len</span>(dataList):</span>
@@ -260,7 +260,7 @@ Figure&nbsp;2: Results from two example calls to <code>drawGrid</code>: (a) crea
 <p>We build programs in Python out of collections of functions. One function calls another function to do part of the work.</p>
 <p>Because writing programs accurately is difficult and time-consuming, one program design principle is to avoid writing the same code over and over. If you write the exact same statements in more than one place, then you have to debug each place separately. It is often worth your time to package those statements as a function, so that you can debug it once, and then only have to call the function for every use. Because functions have meaningful, descriptive names, calling functions can also improve the readability of your code, by substituting a single descriptive name for lines of code.</p>
 <p><strong>Try this to hand in:</strong> You have been provided with a starter program in <code>stickMonsters.py</code>. This program has 5 functions, plus a main script. We have provided three of functions for you: <code>drawStickFigure,</code>drawMonster<code>, and computeHeadOffsets</code>. You will implement the other two: <code>drawOneHead</code> and <code>drawHeads</code>. Below we have provided the <code>drawStickFigure</code> function, as a core element of the code.</p>
-<div id="b6a1c866" class="cell" data-execution_count="3">
+<div id="9b6537d2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="kw">def</span> drawStickFigure(img, startPos, color):</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a>    <span class="co">"""Takes in the image to draw on, a reference point on the stick figure (at the base of the neck/shoulders),</span></span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a><span class="co">    and a color, and it draws the stick figure at that position."""</span></span>
@@ -379,7 +379,11 @@ Figure&nbsp;3: Results from 4 runs of <code>stickMonsters</code>, changing the n
 </section>
 <section id="what-to-hand-in" class="level1">
 <h1>What to hand in</h1>
-<p>You should have two files for this activity, one that contains your work, plus the edited <code>stickMonsters.py</code>: * definitions of <code>printPairs</code> and <code>drawGrid</code> * The debugged version of <code>sumListNums</code> * The completed <code>stickMonsters.py</code> file</p>
+<p>You should have two files for this activity, one that contains your work, plus the edited <code>stickMonsters.py</code>:</p>
+<ul>
+<li>Your file containing definitions of <code>printPairs</code> and <code>drawGrid</code> and the debugged version of <code>sumListNums</code></li>
+<li>The completed <code>stickMonsters.py</code> file</li>
+</ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
 </section>
 
