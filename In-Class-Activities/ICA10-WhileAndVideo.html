@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-18">
 
 <title>ICA: While Loops and Webcams/Video</title>
 <style>
@@ -97,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">August 18, 2025</p>
       </div>
     </div>
     
@@ -141,9 +141,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="while-loops" class="level1">
 <h1><code>while</code> loops</h1>
 <p>A while loop starts with a Boolean test expression, and then has a block of indented Python statements in its body. As long as the test expression evaluates to True, the program keeps repeating the statements in the loop body, and then re-checking the test expression. It stops only when the test evaluates to False.</p>
-<div id="27254147" class="cell" data-execution_count="2">
+<div id="8c15915f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">while</span> boolean<span class="op">-</span>expression:</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  loop<span class="op">-</span>body</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a>    loop<span class="op">-</span>body</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In a <code>for</code> loop the loop variable is very obvious; it is declared as a part of the main line of the loop. The <code>while</code> loop also must have a loop variable, but sometimes it is harder to figure out. Often, it actually follows the accumulator pattern!</p>
 <p>There are typically at least three statements involved in the loop that related to the loop variable:</p>
@@ -153,11 +153,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A statement inside the loop that modifies the value of the loop variable</li>
 </ul>
 <p>In the example below, the loop variable is <code>count</code>. It is initialized to 1 in the first line, it is compared to <code>total</code> in the boolean test of the <code>while</code> loop, and it is incremented in the last line inside the <code>while</code> loop.</p>
-<div id="28795afc" class="cell" data-execution_count="3">
+<div id="a4638597" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>count <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="cf">while</span> count <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="bu">print</span>(count)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  count <span class="op">=</span> count <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="bu">print</span>(count)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    count <span class="op">=</span> count <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1
 2
@@ -177,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="first-example" class="level2">
 <h2 class="anchored" data-anchor-id="first-example">First example</h2>
 <p>This function takes in an integer input, and it prints every other number from that input value down to zero. Then it prints Done!.</p>
-<div id="472cdd40" class="cell" data-execution_count="4">
+<div id="988cc8c2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> printEveryOther(x):</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    <span class="cf">while</span> x <span class="op">&gt;=</span> <span class="dv">0</span>:  <span class="co"># x is the loop variable</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>        <span class="bu">print</span>(x)</span>
@@ -192,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Work through a call to this function by hand, figuring out the effect of each and every line and repetition; consider a call like <code>printEveryOther(7)</code>.</p>
 <p><strong>Try this to hand in:</strong> Make a copy of <code>printEveryOther</code> function, called <code>printEveryFifth</code>, that prints every fifth value from x down to zero. Below are a couple of sample calls to show how this function should work:</p>
-<div id="f0a13299" class="cell" data-execution_count="6">
+<div id="a7eccb32" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>printEveryFifth(<span class="dv">20</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>printEveryFifth(<span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -212,31 +212,31 @@ Done!</code></pre>
 <section id="second-example" class="level2">
 <h2 class="anchored" data-anchor-id="second-example">Second example</h2>
 <p>The next example shows the indeterminate nature of a while loop. In this case, the loop repeats until the user enters a negative number, printing the square of each number the user enters.</p>
-<div id="e2c1c991" class="cell" data-execution_count="7">
+<div id="c3836c28" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">def</span> squareUserNums():</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="co"># Initialize loop variable </span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  userInp <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the next number (negative to quit): "</span>)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>  userNum <span class="op">=</span> <span class="bu">int</span>(userInp)</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="cf">while</span> userNum <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="bu">print</span>(userNum, <span class="st">"squared is"</span>, userNum <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    userInp <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the next number (negative to quit): "</span>)</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    userNum <span class="op">=</span> <span class="bu">int</span>(userInp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="co"># Initialize loop variable </span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    userInp <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the next number (negative to quit): "</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    userNum <span class="op">=</span> <span class="bu">int</span>(userInp)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="cf">while</span> userNum <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb7-6"><a href="#cb7-6"></a>        <span class="bu">print</span>(userNum, <span class="st">"squared is"</span>, userNum <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>        userInp <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the next number (negative to quit): "</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>        userNum <span class="op">=</span> <span class="bu">int</span>(userInp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Experiment with this function. Notice that the first two lines of the function are repeated again inside the while loop. Why is that?</p>
 </section>
 <section id="accumulator-variables" class="level2">
 <h2 class="anchored" data-anchor-id="accumulator-variables">Accumulator variables</h2>
 <p>We can use accumulator variables with while loops just like we do with for loops. The accumulator is set to some initial value before the loop, and then updated each time through the loop. See the examples below.</p>
-<div id="5b87e9c5" class="cell" data-execution_count="8">
+<div id="4186f08f" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">def</span> sumToN(topNum):</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="co">"""Takes in a number and computes and returns the sum of the numbers</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">  from zero to the input number."""</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  currVal <span class="op">=</span> <span class="dv">0</span>   <span class="co"># the loop variable</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  total <span class="op">=</span> <span class="dv">0</span>     <span class="co"># the accumulator variable</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="cf">while</span> currVal <span class="op">&lt;</span> topNum:</span>
-<span id="cb8-7"><a href="#cb8-7"></a>    total <span class="op">=</span> total <span class="op">+</span> currVal <span class="co"># add next value to accumulator</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>    currVal <span class="op">=</span> currVal <span class="op">+</span> <span class="dv">1</span>  <span class="co"># update the loop variable</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a>  <span class="cf">return</span> total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="co">"""Takes in a number and computes and returns the sum of the numbers</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">    from zero to the input number."""</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>    currVal <span class="op">=</span> <span class="dv">0</span>   <span class="co"># the loop variable</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    total <span class="op">=</span> <span class="dv">0</span>     <span class="co"># the accumulator variable</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="cf">while</span> currVal <span class="op">&lt;</span> topNum:</span>
+<span id="cb8-7"><a href="#cb8-7"></a>        total <span class="op">=</span> total <span class="op">+</span> currVal <span class="co"># add next value to accumulator</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>        currVal <span class="op">=</span> currVal <span class="op">+</span> <span class="dv">1</span>  <span class="co"># update the loop variable</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="cf">return</span> total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Experiment with this function. Walk through what happens if you call this with some small value, like 4.</p>
 <ul>
@@ -259,19 +259,19 @@ Done!</code></pre>
 <h2 class="anchored" data-anchor-id="the-break-statement">The break Statement</h2>
 <p>Sometimes you want the option to stop looping if special circumstances occur, before the natural end of the loop. The break statement causes the current loop to stop immediately at the point where the break occurred. The program continues on with any Python statements that come after the loop.</p>
 <p>The program below loops over characters in a string, adding them to an accumulator variable. It breaks out of the <code>for</code> loop when the next character is a space, tab, or newline, and returns the string it has built so far.</p>
-<div id="8c28107c" class="cell" data-execution_count="9">
+<div id="21705c9a" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">def</span> nextWord(text):</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="co">"""Takes in a string of text and builds and returns a new string</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">  that is the next "word" in the text. In other words, the next</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">  sequence of characters up to a space, tab, or newline."""</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  wordStr <span class="op">=</span> <span class="st">""</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>  i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="cf">for</span> ch <span class="kw">in</span> text:</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    <span class="cf">if</span> ch <span class="kw">in</span> <span class="st">" </span><span class="ch">\t\n</span><span class="st">"</span>:  <span class="co"># if character is space, tab (\t), or newline (\n)</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>      <span class="cf">break</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>    <span class="cf">else</span>:</span>
-<span id="cb9-11"><a href="#cb9-11"></a>      wordStr <span class="op">=</span> wordStr <span class="op">+</span> ch</span>
-<span id="cb9-12"><a href="#cb9-12"></a>  <span class="cf">return</span> wordStr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="co">"""Takes in a string of text and builds and returns a new string</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">    that is the next "word" in the text. In other words, the next</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">    sequence of characters up to a space, tab, or newline."""</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    wordStr <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="cf">for</span> ch <span class="kw">in</span> text:</span>
+<span id="cb9-8"><a href="#cb9-8"></a>        <span class="cf">if</span> ch <span class="kw">in</span> <span class="st">" </span><span class="ch">\t\n</span><span class="st">"</span>:  <span class="co"># if character is space, tab (\t), or newline (\n)</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>            <span class="cf">break</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>        <span class="cf">else</span>:</span>
+<span id="cb9-11"><a href="#cb9-11"></a>            wordStr <span class="op">=</span> wordStr <span class="op">+</span> ch</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="cf">return</span> wordStr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Try this to hand in:</strong> We’re going to rewrite the <code>squareUserNums</code> function from earlier to avoid repeating the two lines that get the next number from the user. To do so, we will use a common: <code>while True</code> combined with <code>break</code>.</p>
 <p>Do this first:</p>
@@ -280,7 +280,7 @@ Done!</code></pre>
 <li>Remove the two lines before the <code>while</code> loop (the call to <code>input</code> and the call to <code>int</code>).</li>
 <li>Change the boolean expression test of the <code>while</code> statement to be just the boolean value <code>True</code>, as shown below:</li>
 </ul>
-<div id="d42c7cbe" class="cell" data-execution_count="10">
+<div id="3be14522" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> squareUserNums2():</span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb10-3"><a href="#cb10-3"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -329,7 +329,7 @@ Done!</code></pre>
 </table>
 <p>Start with the script below to get images from a built-in camera. <strong>If your computer does not have a built-in webcam, see Susan to get an external webcam!</strong></p>
 <p>You are going to improve this script.</p>
-<div id="4b89c442" class="cell" data-execution_count="11">
+<div id="8f38d02e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> cv2</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw">def</span> videoFeeder(camOrFile <span class="op">=</span> <span class="dv">0</span>):</span>
@@ -354,7 +354,7 @@ Done!</code></pre>
 </ul>
 <p>Now that you have a functioning video streaming program, let’s start making improvements.</p>
 <p>Try to hold something up in front of the camera while your program is running, and then move the object to the different corners of the video image. Did you find yourself moving the wrong way? We often have trouble with left and right movements on a video feed, because we are more used to seeing a mirror image of ourselves. We can use the OpenCv function <code>flip</code> to flip the image. This function will flip an image upside down, or left-to-right.</p>
-<div id="e838fdfc" class="cell" data-execution_count="12">
+<div id="bf25a1f6" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>flippedIm <span class="op">=</span> cv2.flip(img, flipCode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>flip</code> function takes in an image and a <em>flip code</em> which specifies whether to flip around the horizontal axis, or around the vertical one. It returns a new image. A flip code of 0 will flip a picture upside down (around the horizontal axis), and a flip code of 1 will flip a pictures left-to-right (around the vertical axis).</p>
@@ -373,7 +373,7 @@ Done!</code></pre>
 <li>Add to the <code>if</code> statement that checks the user’s input key, so that it checks if the user hits the s key</li>
 <li>When the user hits that, save the current image to a file, using the <code>cv2.imwrite</code> function. This function takes two inputs: (1) a string for the filename of the file to save to, including <code>.jpg</code> or <code>.png</code> as the filename extension, and (2) the image you want to save.</li>
 </ul>
-<div id="670bf1e9" class="cell" data-execution_count="13">
+<div id="c07f4b5d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>cv2.imwrite(<span class="st">"screenshot.jpg"</span>, frame)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For an extra, optional challenge, give each screenshot a unique filename, so that you can save any number you want. (Adding a counter to the loop, and attaching the counter to the filename is a great way to do this.)</p>
