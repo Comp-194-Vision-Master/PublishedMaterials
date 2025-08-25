@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-15">
+<meta name="dcterms.date" content="2025-08-25">
 
 <title>Homework 1</title>
 <style>
@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 15, 2025</p>
+        <p class="date">August 25, 2025</p>
       </div>
     </div>
     
@@ -178,9 +178,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Question 1: Understanding a mystery script</h1>
 <p>In the file <code>q1Mystery.py</code> there is a script. Your task is to determine what this script is doing. We would like you to annotate each line of code in the script with a description that describes what the line does, and its purpose in the overall script. Also write a descriptive summary of the overall purpose or goal of the script. What is it for?</p>
 <p>Below is an example script, annotated as we would like you to do.</p>
-<div id="80684f15" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">"""This script computes the total cost of purchasing some number of items, given the number</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co">of items and the cost for one individual item. It prints the result."""</span></span>
+<div id="c4dbdb11" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">"""This script computes the total cost of purchasing some number of items, given</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">the number of items and the cost for one individual item. It prints the result."""</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a>num <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"How many items? "</span>))       </span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="co">#      Asks user for the number of items, converts string to integer and assigns to num</span></span>
@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Correct the first bug</li>
 <li>Identify/mark a second bug</li>
 <li>Mark the second bug with a comment that accurately describes the bug and its correction</li>
-<li>Corrects the second bug</li>
+<li>Correct the second bug</li>
 <li>Identify/mark a third bug</li>
 <li>Mark the third bug with a comment that accurately describes the bug and its correction</li>
 <li>Correct the third bug</li>
@@ -286,7 +286,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="your-task-an-algorithm-to-draw-circles-on-an-image" class="level2">
 <h2 class="anchored" data-anchor-id="your-task-an-algorithm-to-draw-circles-on-an-image">Your task: an algorithm to draw circles on an image</h2>
 <p>Your goal is to plan out, in pseudocode, an algorithm that would take in an image and the number of circles, and it would draw that many circles on the image. Each circle should have a random location (its center point may be anywhere within the image), a random radius between 10 and 50, and a random color.</p>
-<p>There are two main ways for you to make random colors. One approach would be to make a <em>palette</em>, a list containing color tuples, where you have chosen the colors. Then your algorithm would choose one of the tuples from the list randomly, for each circle. The other approach is to generate random values for red, green, and blue, each one between 0 and 255. This would allow you to generate any possible color, but some of those colors might be very dark, very light, or just plain ugly. <strong>This is your choice. Decide on it, and write your pseudocode so it is clear which approach you chose.</strong></p>
+<p>There are two main ways for you to make random colors.</p>
+<ul>
+<li>One approach would be to make a <em>palette</em>, a list containing color tuples that you have selected. Then your algorithm would choose one of the tuples from the list randomly, for each circle.</li>
+<li>The other approach is to generate random values for red, green, and blue, each one between 0 and 255. This would allow you to generate any possible color, but some of those colors might be very dark, very light, or just plain ugly.</li>
+</ul>
+<p><strong>This is your choice. Decide on it, and write your pseudocode so it is clear which approach you chose.</strong></p>
 <p>Put your pseudocode for this question in the <code>q3Pseudocode.txt</code> file (note that it is <strong>not</strong> a Python file).</p>
 </section>
 <section id="specifications-for-question-3" class="level2">
@@ -346,6 +351,12 @@ Figure&nbsp;1: Result of calling <code>drawCircles(img, 20)</code> where <code>i
 <li>Generate radius random values as an integer in the correct range</li>
 <li>Generate random color values as tuples of integers in the correct range</li>
 <li>Draw filled in circles of random sizes, positions, and colors</li>
+<li>Program works correctly, as described above:
+<ul>
+<li>Reads in a background image</li>
+<li>Asks the user for how many circles</li>
+<li>Uses <code>drawCircles</code> to draw that many circles randomly (as defined above)</li>
+</ul></li>
 </ul>
 <p><strong>Extended specifications:</strong></p>
 <ul>
@@ -405,7 +416,7 @@ Figure&nbsp;3: The final image from the starter code
 <li><p>Next, examine the function <code>drawRainbow</code>.</p>
 <ul>
 <li>It takes in the image and the (x, y) position to center the rainbow on (this will be the center point of the full ellipse, so when we draw a half-ellipse this point will sit on the bottom of the half-ellipse)</li>
-<li>Notice the defined list <code>colors</code>: this defines colors for the seven ROY-G_BIV rainbow colors</li>
+<li>Notice the defined list <code>colors</code>: this defines colors for the seven ROY-G-BIV rainbow colors</li>
 <li>Notice the call that draws the red rectangle: do you understand why we pass the two points the way we do?</li>
 </ul></li>
 </ul>
@@ -446,6 +457,7 @@ Figure&nbsp;4: The resulting image from step 2
 <li>Ellipses are drawn as a half-circle, <code>currSize</code> by <code>currSize</code>, the top half of the circle, filled in</li>
 <li>Code includes a <code>for</code> loop that iterates over the colors in the <code>colors</code> list</li>
 <li>Colors of the ellipses are the rainbow colors in order, as given in the <code>colors</code> list</li>
+<li>The program works correctly, producing the goal image shown above</li>
 </ul>
 <p><strong>Extended specifications:</strong></p>
 <ul>
@@ -475,14 +487,14 @@ Figure&nbsp;4: The resulting image from step 2
 <li>Use at least three different drawing functions (circles, rectangles, ellipses, lines, etc.)</li>
 <li>The tree must have at least 5 elements (at least five calls to drawing functions)</li>
 <li>Use at least three distinct colors (use a color picker to pick attractive colors)</li>
+<li>The program must draw a recognizable tree (or part of a tree)</li>
 <li>Include a descriptive comment at the top like we used for earlier questions, that gives the file name, author, and a description of what your program will draw</li>
 </ul>
-<p><strong>Extended specifications:</strong></p>
+<p><strong>Ratings:</strong></p>
 <ul>
-<li><p><strong>Ratings:</strong></p></li>
-<li><p>To receive a gold rating, complete all base specifications.</p></li>
-<li><p>To receive a silver rating, complete at least 4 base specifications.</p></li>
-<li><p>To receive a bronze rating, complete at least 3 base specifications.</p></li>
+<li>To receive a gold rating, complete all base specifications.</li>
+<li>To receive a silver rating, complete at least 4 base specifications.</li>
+<li>To receive a bronze rating, complete at least 3 base specifications.</li>
 </ul>
 </section>
 </section>
