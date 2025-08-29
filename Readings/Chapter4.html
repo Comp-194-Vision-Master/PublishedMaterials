@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-08-29">
 
-<title>Chapter 4, Image Transformations</title>
+<title>Chapter 4, Masks and Thresholds</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,17 +75,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="Chapter4_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="Chapter4_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
 <body class="quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Chapter 4, Masks and Thresholds</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 29, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#masking-images" id="toc-masking-images" class="nav-link active" data-scroll-target="#masking-images"><span class="header-section-number">1</span> Masking images</a>
   <ul class="collapse">
   <li><a href="#three-channel-versus-one-channel-masks" id="toc-three-channel-versus-one-channel-masks" class="nav-link" data-scroll-target="#three-channel-versus-one-channel-masks"><span class="header-section-number">1.1</span> Three-channel versus one-channel masks</a></li>
@@ -101,50 +158,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pseudo-thresholds-with-histograms-and-backprojection" id="toc-pseudo-thresholds-with-histograms-and-backprojection" class="nav-link" data-scroll-target="#pseudo-thresholds-with-histograms-and-backprojection"><span class="header-section-number">5</span> Pseudo-thresholds with histograms and backprojection</a>
   <ul class="collapse">
   <li><a href="#making-a-reference-image-or-roi" id="toc-making-a-reference-image-or-roi" class="nav-link" data-scroll-target="#making-a-reference-image-or-roi"><span class="header-section-number">5.1</span> Making a reference image or ROI</a></li>
+  <li><a href="#building-a-histogram-of-hues-from-reference-image" id="toc-building-a-histogram-of-hues-from-reference-image" class="nav-link" data-scroll-target="#building-a-histogram-of-hues-from-reference-image"><span class="header-section-number">5.2</span> Building a histogram of hues from reference image</a></li>
+  <li><a href="#computing-the-backprojection" id="toc-computing-the-backprojection" class="nav-link" data-scroll-target="#computing-the-backprojection"><span class="header-section-number">5.3</span> Computing the backprojection</a></li>
   </ul></li>
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Chapter 4, Image Transformations</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Susan Eileen Fox </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 12, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<p>In this chapter, we will examine a variety of methods for <strong>transforming</strong> images: taking in an image, and producing a new, changed image. We will start with masks and threshold images, and then examine <strong>geometric transformations</strong> including resizing images, translating and rotating image contents, and warping, a more general way of twisting and stretching the contents of an image. We will also laearn about different kinds of <strong>filters</strong>, including blurring, morphological filters, and edge detection.</p>
+<p>In this chapter, we will examine a two basic approaches for <strong>transforming</strong> images: taking in an image, and producing a new, changed image. First we will examine the process of masking an image, using a black-and-white image to determine which pixels to keep in an image. And then we will look at several methods for building <strong>threshold</strong> images, which are typically grayscale or black-and-white, and which separate pixels with certain properties from pixels that lack those properties.</p>
 <section id="masking-images" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Masking images</h1>
 <p>When we <strong>mask</strong> an image, we cover over portions of the image, allowing only selected portions to be visible. To mask an image, we must first create a <em>mask image</em>: a special image that has only black and white pixels. The black portions of the mask image are where we will cover up the original image, and the white portions are where we will let the original image show through.</p>
 <p>One way to picture this process, is to imagine we have a printed photograph of some kind. If we take a black sheet of paper, and cut holes in it, and then lay it over the printed photograph, that is what masking does. The white parts of the mask image are the holes in the black paper.</p>
 <p>There are multiple ways of creating masks. The most simple is to just make a black image and then draw on it the regions we can to keep in the original image. The code example below does exactly this, using OpenCV’s drawing functions to create a black and white mask image.</p>
-<div id="5f6a7583" class="cell" data-execution_count="1">
+<div id="df18aa85" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> cv2</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
@@ -188,7 +220,7 @@ Figure&nbsp;1: Original image, and mask image with rectangle and circles on it
 </figure>
 </div>
 <p>To apply the mask to the original image, we will use the OpenCV function <code>bitwise_and</code>. This is an arithmetic function on images. It takes two images the same size and shape, and it combines them using the bitwise and operation. You don’t need to know all the details, just this: <strong>bitwise-and of a color and white returns the color, bitwise-and of a color and black returns black.</strong> This gives us the effect we want: the original colors where the mask was white, and black where the mask was black. Below is a continuation of the script above showing how to apply the mask, and <a href="#fig-maskresult" class="quarto-xref">Figure&nbsp;2</a> shows the result of this operation.</p>
-<div id="3a6c1cc1" class="cell" data-execution_count="2">
+<div id="e8e76ee5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># apply mask</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>maskedImage <span class="op">=</span> cv2.bitwise_and(origImg, maskImg)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>cv2.imshow(<span class="st">"Mask result"</span>, maskedImage)</span>
@@ -213,8 +245,8 @@ Figure&nbsp;2: Result of applying the mask above to the original image
 <li>How to apply a one-channel mask to a color image</li>
 <li>How to make a square bounce around a window</li>
 </ul>
-<p>We’ll discuss each of these ideas as they appear in the code below.</p>
-<div id="4a31db57" class="cell" data-execution_count="3">
+<p>We’ll discuss each of these ideas as they appear in the code below. Be sure to read the annotations on the lines of code before continuing.</p>
+<div id="f051a5b1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>vidCap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>sqrX <span class="op">=</span> <span class="dv">50</span></span>
@@ -292,13 +324,13 @@ Figure&nbsp;2: Result of applying the mask above to the original image
 </section>
 <section id="masks-built-from-image-features" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="masks-built-from-image-features"><span class="header-section-number">1.2</span> Masks built from image features</h2>
-<p>Besides building masks as we have done here, by drawing white shapes on a black image, we can also generate mask images using other image transformations. So that the pixels that are white fit some pattern or criteria. There are multiple ways to build masks like this, but we will look at one way in the next section: computing threshold images.</p>
+<p>Besides building masks as we have done here, by drawing white shapes on a black image, we can also generate mask images using other image transformations, so that the pixels that are white fit some pattern or criteria. Later in this chapter, we will look at a common way to create these masks: computing threshold images.</p>
 </section>
 </section>
 <section id="converting-images-from-bgr-to-other-color-representations" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Converting images from ‘BGR’ to other color representations</h1>
 <p>Some of our image manipulations will require us to change from the normal BGR representation of an image to other forms, including grayscale and HSV. OpenCV gives us one function that can convert between all the implemented color representations: <code>cvtColor</code>. This function takes in an image and a code that tells it which conversion we want, and it returns the converted image. The script below shows how to convert an image to grayscale and to HSV.</p>
-<div id="7bd32232" class="cell" data-execution_count="4">
+<div id="979ef8ab" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/mushrooms.jpg"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>grayImg <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span>
 <span id="cb3-3"><a href="#cb3-3"></a>hsvImg <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2HSV)</span>
@@ -335,7 +367,7 @@ Figure&nbsp;3: The original mushrooms picture, and its grayscale version
 </figcaption>
 </figure>
 </div>
-<p><strong>A warning about HSV:</strong> HSV images have three channels and use <code>np.uint8</code> as the data type, just like BGR ones. To the computer, these image representations look identical! A function that expects a BGR image and is given an HSV one will interpret the hue channels as a blue channel, the saturation channels as a green one, and the value channel as red. The <code>imshow</code> function assumes that an image with three channels is BGR, so if we try to display an HSV image, we get an odd result, as shown in <a href="#fig-HSV" class="quarto-xref">Figure&nbsp;4</a></p>
+<p><strong>A warning about HSV:</strong> HSV images have three channels and use <code>np.uint8</code> as the data type, just like BGR ones. To the computer, these image representations look identical! A function that expects a BGR image and is given an HSV one will interpret the hue channel as a blue channel, the saturation channel as a green one, and the value channel as red. The <code>imshow</code> function assumes that an image with three channels is BGR, so if we try to display an HSV image, we get an odd result, as shown in <a href="#fig-HSV" class="quarto-xref">Figure&nbsp;4</a></p>
 <div id="fig-HSV" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-HSV-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -349,18 +381,15 @@ Figure&nbsp;4: Attempt to display the HSV version of the mushrooms image with <c
 </section>
 <section id="thresholds-from-grayscale-images" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Thresholds from grayscale images</h1>
-<p>Threshold functions transform images based on the range of brightness or color values at each pixel. They often produce a black and white image, suitable for use as a mask. And often we can also use the threshold image to locate interesting objects in the image.</p>
+<p>Threshold functions transform images based on the range of grayscale brightness or color values at each pixel. They often produce a black and white image. Threshold images are suitable for use as a mask, but we can also use the threshold image to locate interesting objects in the image.</p>
 <section id="the-threshold-function" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="the-threshold-function"><span class="header-section-number">3.1</span> The <code>threshold</code> function</h2>
 <p>The simplest threshold function is called just <code>threshold</code>. It operates on grayscale images, and has multiple modes to choose from. It returns a new grayscale or black and white image.</p>
-<p>The <code>threshold</code> function takes in four inputs and returns two results. The four inputs include: a source image, a threshold value (between 0 and 255, a maximum value (also between 0 and 255), and a constant that defines which threshold variant to perform. <a href="#tbl-threshmodes" class="quarto-xref">Table&nbsp;1</a> shows the five main modes for this function.</p>
-<p>The binary threshold sets pixels over the threshold value to the maximum value you specify, and under the threshold to zero. The inverse-binary threshold does the opposite.</p>
-<p>The truncating threshold sets pixels over the threshold value to the threshold value, and leaves those under the threshold value alone</p>
-<p>The “to-zero” threshold sets values below the threshold to zero, while leaving those above the threshold alone, and its inverse sets values over the threshold to zero, leaving those below alone.</p>
+<p>The <code>threshold</code> function takes in four inputs and returns two results. The four inputs include: a source image, a threshold value (between 0 and 255), a maximum value (also between 0 and 255), and a constant that defines which threshold variant to perform. <a href="#tbl-threshmodes" class="quarto-xref">Table&nbsp;1</a> shows the five main variants for this function.</p>
 <div id="tbl-threshmodes" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-threshmodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Five threshold modes, which create different results, binary thresholding is most common
+Table&nbsp;1: Five main threshold modes, which create different results, binary thresholding is most common
 </figcaption>
 <div aria-describedby="tbl-threshmodes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -370,7 +399,7 @@ Table&nbsp;1: Five threshold modes, which create different results, binary thres
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Threshold operator</th>
+<th style="text-align: left;">Threshold mode</th>
 <th style="text-align: left;">Meaning</th>
 </tr>
 </thead>
@@ -400,9 +429,9 @@ Table&nbsp;1: Five threshold modes, which create different results, binary thres
 </div>
 </figure>
 </div>
-<p>The <code>threshold</code> function returns two values. The first returned value is the threshold value. This may seem odd, but the function has optional add-ons that use particularly algorithms to guess at the most useful threshold value, so in that case we do want the function to tell us the value the algorithm chose. The second returned value is the threshold image itself.</p>
-<p>The script below illustrates the <code>threshold</code> function, in all its main variants, on a picture of coins on a red background (found in the <code>Coins</code> folder inside <code>SampleImages</code>). <a href="#fig-threshVariants" class="quarto-xref">Figure&nbsp;9</a> shows the original image, its grayscale counterpart, and then all the five variants.</p>
-<div id="8c788998" class="cell" data-execution_count="5">
+<p>The <code>threshold</code> function returns two values. The first returned value is the threshold value. This may seem odd, but the function has optional add-ons that use particular algorithms to guess at the most useful threshold value. In those cases, we do want the function to tell us the value the algorithm chose. The second returned value is the threshold image itself.</p>
+<p>The script below illustrates the <code>threshold</code> function, in all its main variants, on a picture of coins on a red background (found in the <code>Coins</code> folder inside <code>SampleImages</code>). <a href="#fig-threshVariants" class="quarto-xref">Figure&nbsp;5</a> shows the original image, its grayscale counterpart, and then all the five variants.</p>
+<div id="1219cad7" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>coinImg <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/Coins/coins6.jpg"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a>grayCoin <span class="op">=</span> cv2.cvtColor(coinImg, cv2.COLOR_BGR2GRAY)</span>
 <span id="cb4-3"><a href="#cb4-3"></a></span>
@@ -413,9 +442,8 @@ Table&nbsp;1: Five threshold modes, which create different results, binary thres
 <span id="cb4-8"><a href="#cb4-8"></a>threshModes <span class="op">=</span> [cv2.THRESH_BINARY, cv2.THRESH_BINARY_INV, cv2.THRESH_TRUNC, cv2.THRESH_TOZERO, cv2.THRESH_TOZERO_INV]</span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="cf">for</span> threshMode <span class="kw">in</span> threshModes:</span>
 <span id="cb4-10"><a href="#cb4-10"></a>    res, threshIm <span class="op">=</span> cv2.threshold(grayCoin, <span class="dv">128</span>, <span class="dv">255</span>, threshMode)</span>
-<span id="cb4-11"><a href="#cb4-11"></a>    <span class="bu">print</span>(res)</span>
-<span id="cb4-12"><a href="#cb4-12"></a>    cv2.imshow(<span class="st">"Threshed"</span>, threshIm)</span>
-<span id="cb4-13"><a href="#cb4-13"></a>    cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-11"><a href="#cb4-11"></a>    cv2.imshow(<span class="st">"Threshed"</span>, threshIm)</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-threshVariants" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -492,7 +520,7 @@ Figure&nbsp;5: Showing the main variants of the <code>threshold</code> function,
 </div>
 <p>One issue with <code>threshold</code>is determining what the best threshold value is. Algorithms exist that can identify good threshold values for you, and two of them are integrated into the <code>threshold</code> function. The OTSU and Triangle algorithms both build a histogram of the brightness values in a grayscale image. The OTSU algorithm looks for a threshold value that minimizes the variance on each side of the threshold in the histogram. The Triangle algorithm draws a line between the maximum histogram and the minimum one, and finds the point along that line that is maximal distance from values in the histogram, and uses that as the threshold value. (For more information about both algorithms, see <a href="https://en.wikipedia.org/wiki/Otsu%27s_method">OTSU’s Wikipedia page</a>, or <a href="https://stackabuse.com/opencv-thresholding-in-python-with-cv2threshold/">David Landup’s blog on StackAbuse.com</a>).</p>
 <p>Below is a variation on the code above that shows how to use OTSU or Triangle, combining it with the binary threshold mode. <a href="#fig-adapt1" class="quarto-xref">Figure&nbsp;6</a> illustrates the results on the coins pictures of each of these algorithms. Note that when we use these algorithms, <code>threshold</code> ignores the input threshold value, and computes its own. It then returns the computed threshold value as its return value.</p>
-<div id="9407ff4e" class="cell" data-execution_count="6">
+<div id="227f7220" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>coinImg <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/Coins/coins6.jpg"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>grayCoin <span class="op">=</span> cv2.cvtColor(coinImg, cv2.COLOR_BGR2GRAY)</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
@@ -532,12 +560,13 @@ Figure&nbsp;6: Showing the two adaptive modes for the <code>threshold</code> fun
 </figcaption>
 </figure>
 </div>
-<p><strong>Think about this:</strong> Of all of these approaches, which work best on this picture. Experiment with this code, trying it on the other coin pictures in <code>SampleImages</code>. Does the same version or the same threshold, work for all pictures?</p>
+<p><strong>Think about this:</strong> Of all of these approaches, which work best on this picture? Experiment with this code, trying it on the other coin pictures in <code>SampleImages</code>. Does the same version or the same threshold, work for all pictures?</p>
 </section>
 <section id="adaptive-threshold" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="adaptive-threshold"><span class="header-section-number">3.2</span> Adaptive threshold</h2>
 <p>The <code>adaptiveThreshold</code> function takes things a step further. Rather than just determining one global threshold value, it throws out the idea of a global threshold value altogether. Instead, it computes an individual threshold value at each small patch in the image (this is really a form of <strong>filtering</strong>, which is the next main subject in this chapter!).</p>
-<p>The function does the same operation on every overlapping patch in the image. It computes either a plain average or a weighted average of the brightness values in the patch, and subtracts a constant <code>c</code> that we provide. This value is the threshold value for the center pixel of the patch. thus different parts of the image may have very different threshold values. An input constant selects whether to do a plain average or a <em>Gaussian</em> one. A Gaussian average is a weighted average where the weights form a Gaussian curve (also called a Normal curve, or a bell curve.). <a href="#fig-gauss" class="quarto-xref">Figure&nbsp;7</a> depicts a typical two-dimensional Gaussian curve. We would take</p>
+<p>The function does the same operation on every overlapping patch in the image. It computes either a plain average or a weighted average of the brightness values in the patch, and subtracts a constant <code>c</code> that we provide. This value is the threshold value for the center pixel of the patch. thus different parts of the image may have very different threshold values.</p>
+<p>An input constant selects whether to do a plain average or a <em>Gaussian</em> one. We typically describe an ordinary average as adding up the values in the patch and dividing by the number of values. But we can also think of it as multiplying every value in the patch by one over the number of values (if there are <span class="math inline">\(n\)</span> pixels in a patch, by <span class="math inline">\(1/n\)</span>, and then adding up the results. A Gaussian average is also computed by multiplying every value in the patch by a weight value and then adding the results. However, instead of using the same weight at every position, we choose weights so that they (1) add up to 1.0, and (2) form a Gaussian curve (also called a Normal curve, or a bell curve.). <a href="#fig-gauss" class="quarto-xref">Figure&nbsp;7</a> depicts a typical two-dimensional Gaussian curve. This weights values at the middle of the patch highest, and those at the edge of the patch lowest, in a systematic way.</p>
 <div id="fig-gauss" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gauss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -558,7 +587,7 @@ Figure&nbsp;7: Two-dimensional Gaussian curve
 <li>The value of <code>c</code>, a constant that will be subtracted from the average that is computed to produce the threshold value</li>
 </ul>
 <p>The code example below loops over different values for the patch size (called <code>bSize</code> because patches are called blocks), and different values for the <code>c</code> constant. We often have to experiment to find the right combination of these values to get the result we want.</p>
-<div id="c4988c9b" class="cell" data-execution_count="7">
+<div id="1859e918" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">for</span> bSize <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>]:</span>
 <span id="cb6-2"><a href="#cb6-2"></a>    <span class="cf">for</span> c <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>]:</span>
 <span id="cb6-3"><a href="#cb6-3"></a>        adaIm1 <span class="op">=</span> cv2.adaptiveThreshold(grayCoin, </span>
@@ -705,7 +734,7 @@ Figure&nbsp;8: Showing the varying results for <code>adaptiveThreshold</code> gi
 <li>OpenCV maps saturation and value numbers on to the full range from 0 to 255</li>
 </ul>
 <p>Below is a script that detects a green ball in an image using <code>inRange</code>. It also shows what happens if we try to isolate the ball in the image using <code>threshold</code>, even with the threshold adaptation OTSU in use. Color images just hold more information than grayscale ones.</p>
-<div id="bd038a34" class="cell" data-execution_count="8">
+<div id="62af580a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ballImg <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Green/Green1BG1Mid.jpg"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a>grayBall <span class="op">=</span> cv2.cvtColor(ballImg, cv2.COLOR_BGR2GRAY)</span>
 <span id="cb7-3"><a href="#cb7-3"></a>hsvBall <span class="op">=</span> cv2.cvtColor(ballImg, cv2.COLOR_BGR2HSV)</span>
@@ -716,10 +745,10 @@ Figure&nbsp;8: Showing the varying results for <code>adaptiveThreshold</code> gi
 <span id="cb7-8"><a href="#cb7-8"></a>cv2.imshow(<span class="st">"threshold"</span>, threshImg2)</span>
 <span id="cb7-9"><a href="#cb7-9"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>?@fig-inRangeExamp</strong> shows the original image, the grayscale version, and then the results of the calls to <code>inRange</code> and <code>threshold</code>.</p>
-<div id="fig-threshVariants" class="quarto-layout-panel">
+<p><a href="#fig-inRangeExamps" class="quarto-xref">Figure&nbsp;9</a> shows the original image, the grayscale version, and then the results of the calls to <code>inRange</code> and <code>threshold</code>.</p>
+<div id="fig-inRangeExamps" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-threshVariants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-inRangeExamps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
@@ -757,7 +786,7 @@ Figure&nbsp;8: Showing the varying results for <code>adaptiveThreshold</code> gi
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-threshVariants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inRangeExamps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9: Using <code>inRange</code> and <code>theshold</code> on an image, seeking to isolate the green ball from the rest of the image
 </figcaption>
 </figure>
@@ -778,7 +807,204 @@ Figure&nbsp;9: Using <code>inRange</code> and <code>theshold</code> on an image,
 <p>With grayscale threshold methods, we focused on the brightness of the pixels: keeping only the pixels brighter, or darker, than our threshold value. With the <code>inRange</code> color thresholding, we have to give ranges of each channel, and we keep only the pixels that fall inside all three ranges. With backprojection, we will collect the hue values from a region of interest, and use those to build a histogram of hue values. Then we will keep the pixels whose hue values match our histogram. Let’s break that process down into a series of steps.</p>
 <section id="making-a-reference-image-or-roi" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="making-a-reference-image-or-roi"><span class="header-section-number">5.1</span> Making a reference image or ROI</h2>
-<p>To build a histogram that represent the color(s) we want to match, we need a <em>reference image</em></p>
+<p>To build a histogram that represent the color(s) we want to match, we need a <em>reference image</em> that contains the colors of the object we want to detect, and <em>no other colors</em>. How can we make such a reference image?</p>
+<p>There are two main methods for making a simple reference image. One just uses your operating system’s tools, and the other works within Python and OpenCV.</p>
+<p><strong>Using the operating system:</strong></p>
+<ul>
+<li>Outside of OpenCV/Python, take a picture of the object in question (On the Mac, you could use Photobooth, on Windows, use the Camera app).</li>
+<li>Open the image in the system’s default image viewer (Preview on the Mac, Photos on Windows).</li>
+<li>Use the application’s tool to crop the image so all remaining pixels are part of the object (no background or extraneous objects)</li>
+<li>Save the resulting image, and place it where you can load it into your Python program with OpenCV</li>
+</ul>
+<p><strong>Using OpenCV:</strong></p>
+<ul>
+<li>Determine a region of interest that includes as much as possible of the object, and no background or extraneous pixels</li>
+<li>Slice the ROI from the original image</li>
+<li>Save the result to a file with <code>imwrite</code></li>
+</ul>
+<p>The first step is the tricky one. How do you determine the indices to use for the right ROI? You could use <em>guess and check</em>, but this is also an point where you could learn about the tools in OpenCV for responding to the mouse. The program shown below uses mouse clicks to select the upper left and then lower right corner of a rectangular region. It prints those points. The user can reset the rectangle selection by hitting the space bar.</p>
+<div id="0bf8b357" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> cv2</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>startPt <span class="op">=</span> <span class="va">None</span>                                  <span class="co">#1</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>endPt <span class="op">=</span> <span class="va">None</span>                                    <span class="co">#1</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>selected <span class="op">=</span> <span class="va">False</span>                                <span class="co">#1</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">def</span> selectROI(event, x, y, flags, param):</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="co">"""This is a mouse callback function. ..."""</span>      <span class="co">#2</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="kw">global</span> startPt, endPt, selected                   <span class="co">#3</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a>    <span class="cf">if</span> event <span class="op">==</span> cv2.EVENT_LBUTTONUP:</span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="co"># If user just clicked and released the left mouse button...</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>        <span class="cf">if</span> startPt <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb8-14"><a href="#cb8-14"></a>            startPt <span class="op">=</span> (x, y)</span>
+<span id="cb8-15"><a href="#cb8-15"></a>        <span class="cf">else</span>:</span>
+<span id="cb8-16"><a href="#cb8-16"></a>            endPt <span class="op">=</span> (x, y)</span>
+<span id="cb8-17"><a href="#cb8-17"></a>            selected <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="kw">def</span> runSelection(mainImg):</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    <span class="co">"""Takes in an image, and loops while user selects regions."""</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>    <span class="kw">global</span> startPt, endPt, selected</span>
+<span id="cb8-22"><a href="#cb8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23"></a>    cv2.namedWindow(<span class="st">'Image'</span>)</span>
+<span id="cb8-24"><a href="#cb8-24"></a>    cv2.setMouseCallback(<span class="st">'Image'</span>, selectROI)                 <span class="co">#4</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb8-26"><a href="#cb8-26"></a>        workingCopy <span class="op">=</span> mainImg.copy()                         <span class="co">#5</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>        <span class="cf">if</span> selected:                                         <span class="co">#6</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>            <span class="bu">print</span>(startPt, endPt)</span>
+<span id="cb8-29"><a href="#cb8-29"></a>            cv2.rectangle(workingCopy, startPt, endPt, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
+<span id="cb8-30"><a href="#cb8-30"></a>        cv2.imshow(<span class="st">"Image"</span>, workingCopy)</span>
+<span id="cb8-31"><a href="#cb8-31"></a>        x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
+<span id="cb8-32"><a href="#cb8-32"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb8-33"><a href="#cb8-33"></a>            <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="cb8-34"><a href="#cb8-34"></a>                <span class="cf">break</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a>            <span class="cf">elif</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">' '</span>:                             <span class="co">#7</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a>                selected <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a>                startPt <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a>                endPt <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a></span>
+<span id="cb8-40"><a href="#cb8-40"></a>img <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Pink/PinkBG1Mid.jpg"</span>)</span>
+<span id="cb8-41"><a href="#cb8-41"></a>runSelection(img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Sets up global variables to let the callback function communicate with the main program</li>
+<li>The callback function runs separately from the main program, every mouse event triggers this function to run</li>
+<li>When using global variables inside a function, it is good style to declare them explicitly this way</li>
+<li>This sets up the callback function to respond to mouse events</li>
+<li>We copy the image so that drawing doesn’t change the original</li>
+<li>Set to <code>True</code> only when both points have been selected</li>
+<li>If user hits space, then globals are reset</li>
+</ol>
+<p>You can also find this program in <a href="Ch4-Images/selectROI.py"><code>selectROI.py</code></a> with additional comments added.</p>
+<p><a href="#fig-pinkROI" class="quarto-xref">Figure&nbsp;10</a> shows the original pink ball picture from <code>BallFinding</code>, along with a good ROI selected using the <code>selectROI.py</code> program.</p>
+<div id="fig-pinkROI" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pinkROI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch4-Images/PinkBG1Mid.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="Original image"><img src="Ch4-Images/PinkBG1Mid.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Original image</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch4-Images/referencePic.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="ROI selected for this image"><img src="Ch4-Images/referencePic.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>ROI selected for this image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pinkROI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Original image, and reference image for pink ball selected from the original.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="building-a-histogram-of-hues-from-reference-image" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="building-a-histogram-of-hues-from-reference-image"><span class="header-section-number">5.2</span> Building a histogram of hues from reference image</h2>
+<p>The next step in the backprojection process is to build a histogram of hue values from the reference image. A <em>histogram</em> is used to count how frequently each range of hues occurs. Rather than having an entry for each possible value, we make <em>bins</em> that hold equal sized sequences of values. For instance, if we made 18 bins for the 180 hue values, then each bin would cover 10 hue values: bin 0 would count values between 0 and 9, bin 1 would count between 10 and 19, and so forth. (See <a href="https://en.wikipedia.org/wiki/Histogram">Wikipedia article on Histograms</a> if you don’t remember what a histogram is.)</p>
+<p>Below is a code example that shows how to take a reference image and construct a histogram from it. You don’t need to understand the <code>show_hist</code> function right now: it takes a histogram (represented as a one-dimensional Numpy array) and it displays the histogram as a bar chart.</p>
+<div id="741996a8" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> cv2</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">def</span> show_hist(hist):</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="co">"""Takes in the histogram, and displays it in the hist window."""</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    bin_count <span class="op">=</span> hist.shape[<span class="dv">0</span>]</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    bin_w <span class="op">=</span> <span class="dv">24</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    img <span class="op">=</span> np.zeros((<span class="dv">256</span>, bin_count <span class="op">*</span> bin_w, <span class="dv">3</span>), np.uint8)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(bin_count):</span>
+<span id="cb9-10"><a href="#cb9-10"></a>        h <span class="op">=</span> <span class="bu">int</span>(hist[i])</span>
+<span id="cb9-11"><a href="#cb9-11"></a>        cv2.rectangle(img, (i <span class="op">*</span> bin_w <span class="op">+</span> <span class="dv">2</span>, <span class="dv">255</span>), ((i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> bin_w <span class="op">-</span> <span class="dv">2</span>, <span class="dv">255</span> <span class="op">-</span> h), (<span class="bu">int</span>(<span class="fl">180.0</span> <span class="op">*</span> i <span class="op">/</span> bin_count), <span class="dv">255</span>, <span class="dv">255</span>),</span>
+<span id="cb9-12"><a href="#cb9-12"></a>                      <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    img <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_HSV2BGR)</span>
+<span id="cb9-14"><a href="#cb9-14"></a>    cv2.imshow(<span class="st">'hist'</span>, img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="c6327399" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1"></a>refImg <span class="op">=</span> cv2.imread(<span class="st">"referencePic.jpg"</span>)</span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2"></a>cv2.imshow(<span class="st">"Ref img"</span>, refImg)</span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4"></a>histImage <span class="op">=</span> cv2.cvtColor(refImg, cv2.COLOR_BGR2HSV)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-5" class="code-annotation-target"><a href="#annotated-cell-11-5"></a>hist <span class="op">=</span> cv2.calcHist([histImage], [<span class="dv">0</span>], <span class="va">None</span>, [<span class="dv">18</span>], [<span class="dv">0</span>, <span class="dv">180</span>])</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="3">3</button><span id="annotated-cell-11-6" class="code-annotation-target"><a href="#annotated-cell-11-6"></a>cv2.normalize(hist, hist, <span class="dv">0</span>, <span class="dv">255</span>, cv2.NORM_MINMAX)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="4">4</button><span id="annotated-cell-11-7" class="code-annotation-target"><a href="#annotated-cell-11-7"></a>hist <span class="op">=</span> hist.reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="5">5</button><span id="annotated-cell-11-8" class="code-annotation-target"><a href="#annotated-cell-11-8"></a>show_hist(hist)</span>
+<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9"></a></span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10"></a>cv2.waitKey()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="1">Convert the reference images into HSV format</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="5" data-code-annotation="2">Calculate the histogram on the HSV image, looking only at the 0 channel (hue), with no mask, 18 bins, and values that range between 0 and 180</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="6" data-code-annotation="3">Rescale the histogram so that the minimum value is 0 and the maximum is 255</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="7" data-code-annotation="4">Change from a column vector (18 rows and 1 column), to a row vector (1 row, 18 values)</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="8" data-code-annotation="5">Display the histogram as an image</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>The <code>calcHist</code> function is the most important, and complex, step in this code. It has five required inputs:</p>
+<ul>
+<li>First, it takes in a list of images, here we pass just one, but we have to pass it as a list containing one image.</li>
+<li>Second, we specify which channels of the image we want to build the histogram from (in this case just the 0, hue, channel).</li>
+<li>Third, we could pass in a mask, if we wanted to, but we pass in <code>None</code> to indicate we don’t want to apply a mask.</li>
+<li>Fourth, we specify the number of bins for the histogram (the function will divide the range of values as evenly as it can across the bins).</li>
+<li>Fifth, we specify the range of values, from 0 to 180 in this case.</li>
+</ul>
+<p><strong>Normalization</strong>, in computer vision, and in computer science more broadly, is the process of rescaling some collection of data so that the data values fall within a specified, canonical range. Here, we want to rescale height of the histogram data so that the maximum height of any bar is 255, and the minimum is 0. This will be needed for the next, and final, step, where we compute the backprojection.</p>
+<p><a href="#fig-pinkHist" class="quarto-xref">Figure&nbsp;11</a> shows the histogram we would get if we selected a reference image for the ball in the earlier example.</p>
+<div id="fig-pinkHist" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pinkHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch4-Images/pinkHist.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="Figure&nbsp;11: Histogram for pink reference image"><img src="Ch4-Images/pinkHist.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pinkHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Histogram for pink reference image
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="computing-the-backprojection" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="computing-the-backprojection"><span class="header-section-number">5.3</span> Computing the backprojection</h2>
+<p>The backprojection algorithm treats the histogram we calculated as a <em>probability distribution</em>: the height of a bar represents the probability that the hues in that range match the reference image.</p>
+<p>We apply this idea to our current image: for each pixel, we look at its hue and determine which bin of the histogram it falls into. We then use the value/height of that bin as the value in our backprojection image. The result is a threshold image, although often one with grayscale values as well as black and white. Pixels that match our reference hues are non-zero, with brighter pixels falling into the tallest bin.</p>
+<div id="b864c410" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>bpImg <span class="op">=</span> cv2.calcBackProject([hsvImage], [<span class="dv">0</span>], hist, [<span class="dv">0</span>, <span class="dv">180</span>], <span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>cv2.imshow(<span class="st">"Backproject"</span>, bpImg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>calcBackProject</code> function takes in a list of images (they must be in HSV since our histogram is in HSV), a list of the channels to apply the backprojection to (just the hue channel, here), the histogram itself, the range of hue values, and an optional scaling factor, to modify the size of the output image.</p>
+<p><a href="#fig-backproj" class="quarto-xref">Figure&nbsp;12</a> shows the result of computing the backprojection using the histogram from the previous step.</p>
+<div id="fig-backproj" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-backproj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch4-Images/backproject.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-36" title="Figure&nbsp;12: Backprojection for pink reference image applied to original"><img src="Ch4-Images/backproject.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-backproj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Backprojection for pink reference image applied to original
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 
