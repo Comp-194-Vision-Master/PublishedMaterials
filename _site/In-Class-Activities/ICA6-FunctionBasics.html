@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-09-26">
+
+<title>ICA: Function Basics – Vision Readings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ICA: Function Basics</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 26, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#function-definitions" id="toc-function-definitions" class="nav-link" data-scroll-target="#function-definitions">Function definitions</a></li>
+  <li><a href="#environments" id="toc-environments" class="nav-link" data-scroll-target="#environments">Environments</a></li>
+  </ul></li>
+  <li><a href="#tracing-functions-by-hand" id="toc-tracing-functions-by-hand" class="nav-link" data-scroll-target="#tracing-functions-by-hand">Tracing functions by hand</a></li>
+  <li><a href="#tracing-functions-using-print" id="toc-tracing-functions-using-print" class="nav-link" data-scroll-target="#tracing-functions-using-print">Tracing functions using print</a></li>
+  <li><a href="#tracing-functions-using-the-pycharm-debugger" id="toc-tracing-functions-using-the-pycharm-debugger" class="nav-link" data-scroll-target="#tracing-functions-using-the-pycharm-debugger">Tracing functions using the PyCharm debugger</a></li>
+  <li><a href="#practice-with-tracing-and-debugging" id="toc-practice-with-tracing-and-debugging" class="nav-link" data-scroll-target="#practice-with-tracing-and-debugging">Practice with tracing and debugging</a></li>
+  <li><a href="#defining-and-testing-new-functions" id="toc-defining-and-testing-new-functions" class="nav-link" data-scroll-target="#defining-and-testing-new-functions">Defining and testing new functions</a></li>
+  <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This activity starts by reviewing how function calls work, and then moves on to examine simple function definitions. Be sure to look at all readings and videos, including the class notes document. before jumping into this activity!</p>
+<p><strong>Key ideas:</strong></p>
+<p>Functions are names for a set of instructions that operate on provided data.</p>
+<p>A function has:</p>
+<ul>
+<li>A name</li>
+<li>A set of input parameters: to run, the function needs a value for each input parameter</li>
+<li>A body, which is the set of statements to perform when the function is called.</li>
+</ul>
+<section id="function-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="function-definitions">Function definitions</h2>
+<p>Remember the format for a function definition. A function definition needs to specify (1) the name of the function, (2) the inputs to the function, and (3) what should happen when the function is called including what value should be returned, if any. Below is an outline of what a function definition looks like–it’s not a real function, though.</p>
+<div id="a1b58090" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> functionName(var1, var2, …):</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    function body, indented statements that say what to do when the function <span class="kw">is</span> called</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A <strong>function definition</strong> has a <em>header</em> line that defines the function name and its input parameters. It then has an indented <em>body</em>, the statements to run. The function <strong>does not run</strong> when you make a definition. It <strong>only runs</strong> when you call the function.</p>
+<p>Think of this metaphor:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Functions</th>
+<th style="text-align: center;">Cooking</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">function definition</td>
+<td style="text-align: center;">recipe</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">function call</td>
+<td style="text-align: center;">cook makes the food!</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="environments" class="level2">
+<h2 class="anchored" data-anchor-id="environments">Environments</h2>
+<p>An <strong>environment</strong> is the set of variables and function names that are defined during the run of a program. * Environment is a table mapping variable/function names to their values</p>
+<ul>
+<li><strong>Global environment:</strong> All global variables, all functions defined at the global level, are stored here. It lasts throughout the run of the program</li>
+<li><strong>Local environment:</strong> A local environment is made when we call a function, holding the function’s variables. It is created at the start of the function call, and lasts until the function call ends.</li>
+</ul>
+</section>
+</section>
+<section id="tracing-functions-by-hand" class="level1">
+<h1>Tracing functions by hand</h1>
+<p>To gain a better understanding of how functions work, we will trace by hand what happens when a call is made to a function we have defined. We will also try other tools within Python and PyCharm and elsewhere such as the <a href="https://pythontutor.com/python-compiler.html#mode=edit">Online Compiler, Visual Debugger, and AI Tutor</a> to help us visualize what is happening.</p>
+<p><strong>Try this to hand in:</strong> Save your answer for this activity into a Python file called <code>tracing.py</code>.</p>
+<p>Consider the following function, which was used to show tracing by hand in videos/class notes, as well. The <code>smallestDiff</code> function takes in three numbers and returns the smallest difference between the three numbers.</p>
+<div id="4c9b1651" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> smallestDiff(x, y, z):</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    diff1 <span class="op">=</span> <span class="bu">abs</span>(x <span class="op">-</span> y)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    diff2 <span class="op">=</span> <span class="bu">abs</span>(y <span class="op">-</span> z)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    diff3 <span class="op">=</span> <span class="bu">abs</span>(x <span class="op">-</span> z)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    minDiff <span class="op">=</span> <span class="bu">min</span>(diff1, diff2, diff3)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="cf">return</span> minDiff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#fig-labeledFunction" class="quarto-xref">Figure&nbsp;1</a> labels the key elements of this function.</p>
+<div id="fig-labeledFunction" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-labeledFunction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ICA6-Images/minDiffFunctionParts.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Labeled function smallestDiff"><img src="ICA6-Images/minDiffFunctionParts.drawio.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-labeledFunction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Labeled function <code>smallestDiff</code>
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><code>x</code>, <code>y</code>, and <code>z</code> are the (formal) input parameters.</li>
+<li><code>diff1</code>, <code>diff2</code>, <code>diff3</code>, and <code>minDiff</code> are local variables, only existing within the function (as are <code>x</code>, <code>y</code> and <code>z</code>).</li>
+<li>This function calls other functions, built-in Python functions <code>abs</code> and <code>min</code>, to help do its job.</li>
+<li>The return values of <code>abs</code> and <code>min</code> are stored into variables to keep track of them.</li>
+<li>The return value of <code>smallestDiff</code> is the value of <code>minDiff</code>.</li>
+</ul>
+<p>When we trace a function by hand, we write out the local environment at the start of the function call, and update it whenever a variable is altered or a new variable is added. We showed this in the videos for today.</p>
+<p>Copy the definition of <code>smallestDiff</code> to the file you created. But before running it, trace the function call below by hand. Draw the local environment table (you can just put it in the Python file as a comment). Just draw the final state of the local environment, just before the functionr returns.</p>
+<div id="72d3cd79" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>smallestDiff(<span class="dv">32</span>, <span class="dv">43</span>, <span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once you are sure what the return value would be for this call, add this call to your file, printing the result. Were you right? If so, move on. If not, ask for help!</p>
+<p>Next add the function definition below to your file. This function takes in the price of an item at a store, and the sales tax rate, and it calculates what the total price to be paid is.</p>
+<div id="7b0faf5e" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> addTax(price, taxRate):</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    taxAmt <span class="op">=</span> price <span class="op">*</span> taxRate</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">return</span> price <span class="op">+</span> taxAmt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Trace this function with the call shown below, drawing the local environment table for this function. Notice that the returned value is not just a value stored in a variable, but an arithmetic expression. That’s okay, it doesn’t get added to the local environment table, just returned.</p>
+<div id="cc27f4fc" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>addTax(<span class="fl">26.0</span>, <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tracing-functions-using-print" class="level1">
+<h1>Tracing functions using print</h1>
+<p>Instead of walking through a function call by hand, you can have the computer print out the relevant pieces of information for you. The most helpful places you can add print statements include:</p>
+<ul>
+<li>At the start of the function (to print the values of input parameters)</li>
+<li>Inside <code>for</code> loops (to print loop variables and accuumulators)</li>
+<li>Inside <code>if</code> statements (to tell which case of the <code>if</code> actually ran)</li>
+<li>Just before a <code>return</code> statement (to print the return value)</li>
+</ul>
+<p><strong>Try this to hand in:</strong> Save your answer for this part into the same Python file as before.</p>
+<p>Add the following line to the definition of <code>smallestDiff</code>, by adding a line just below the function header (the <code>def</code> line), don’t forget to indent it in order to be a part of the function’s statements.</p>
+<div id="d29aea08" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">print</span>(<span class="st">'smallestDiff inputs:'</span>, x, y, z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This line will print the input parameter values, so we can check that they are what we expect.</p>
+<p>Then add the following line just before the <code>return</code> line, also indented to be a part of the function.</p>
+<div id="9bc6fba7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">print</span>(diff1, diff2, diff3, <span class="st">'return value:'</span>, minDiff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This will print the local variables, and especially the variable holding the return value, so we can check that each line did what we wanted it to.</p>
+<p>Finally, make sure there is a call to <code>smallestDiff</code> in the script part of the file, and run it. See what gets printed.</p>
+<p><strong>Try this to hand in:</strong> Come up with print calls to add to <code>addTax</code> to show the input parameters’ values and the local variable’s value. Also print the expression that is the return value.</p>
+<p><strong>Note:</strong> In the examples of print statements provided here, we have been careful to include explanatory text when printing data for testing, debugging, or tracing a function. This is generally good practice: it will make your life easier when reading outpu from your program!</p>
+</section>
+<section id="tracing-functions-using-the-pycharm-debugger" class="level1">
+<h1>Tracing functions using the PyCharm debugger</h1>
+<p>PyCharm provides a tool called a debugger which can be used to step through a program line by line, checking on the values of all the variables at that moment in time. To use the debugger, put a call to the function you want to debug into the file, after the function definition.</p>
+<p>When you run the debugger, it runs your file as normal, except that we can ask it to stop at any step of the program, so that we can examine what the program is doing and what the local and global environment looks like. A <strong>breakpoint</strong> is a place where the debugger will stop normal execution of the function, and will allow you to examine the state of every variable, and to continue running the program step-by-step if you wish.</p>
+<p>We will comment out the print statements from the previous section, and then see how the debugger can show us the same kind of information.</p>
+<ul>
+<li>Comment out any print statements inside <code>smallestDiff</code> and <code>addTax</code>.</li>
+<li>Make sure the script part of the code includes at least one call to <code>smallestDiff</code> at the bottom of the file.</li>
+<li>Add a breakpoint at the first line inside the body of the <code>smallestDiff</code> function. To add a breakpoint, click the mouse either on the line number or in the bar just to the right of the line number. A red dot will appear there.</li>
+<li>Run the debugger by clicking on the Debug, you click on the Debug button, rather than the Run button. It looks like a bug. The debugger should run the file up to the point where the breakpoint is, and then pause.</li>
+</ul>
+<p>A <em>Debug</em> tool window should appear at the bottom of your PyCharm Window. It should look similar to <a href="#fig-debugPanel" class="quarto-xref">Figure&nbsp;2</a>, which labels four important parts of the Debug panel. We will briefly go over this tool window here, but for more details, look at the <a href="https://www.jetbrains.com/help/pycharm/debug-tool-window.html">“Debug tool window” documentation</a>.</p>
+<div id="fig-debugPanel" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-debugPanel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ICA6-Images/ICA6-debugPanel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Debug tool window in PyCharm marking (1) debugger controls, (2) call stack, (3), current variables, and (4) console"><img src="ICA6-Images/ICA6-debugPanel.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-debugPanel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Debug tool window in PyCharm marking (1) debugger controls, (2) call stack, (3), current variables, and (4) console
+</figcaption>
+</figure>
+</div>
+<p><strong>Item 1:</strong> The number 1 highlights the debugger controls. If you hover over each icon, it will display its meaning. From left to right, the icons perform the following:</p>
+<ul>
+<li>Rerun the program, same as the Run panel</li>
+<li>Stop running the program, same as the Run panel</li>
+<li>Resume running the program, will stop at next breakpoint, if any</li>
+<li>Pause program</li>
+<li>Step Over, will perform just the next step, skipping over any function calls it contains</li>
+<li>Step Into, will perform just the next step, and will move into any function calls to step through them</li>
+<li>Step Into My Code, will perform just the next step, and will move into any of your function calls, stepping over any others</li>
+<li>Step Out, will move forward to the end of the current function, and stop at the next statement after the function call</li>
+</ul>
+<p><strong>Item 2:</strong> This section of the tool window shows the <strong>call stack</strong>. Remember that the call stack keeps track of the sequence of function calls that have been made and are currently active (look at the Happy Robot Metaphor). Each row of information here shows an active function call, and what line the call is on. Here, the top line shows that <code>smallestDiff</code> is the current function being executed, and we are stopped just before line 6. The line below shows where in the code we called <code>smallestDiff</code>: in this case, in the main script at line 13.</p>
+<p><strong>Item 3:</strong> This section shows the environment table for the current function call at the current step. Notice that if you click on the <em><module></module></em> line in the call stack, it will shift to showing the global environment table.</p>
+<p><strong>Item 4:</strong> This item is highlighting the <em>Console</em> tab, which allows you to see the typical program output, anything that the program may have printed. You can also interact with your program in the Console if it calls the <code>input</code> function.</p>
+<p>If we click the Step Over button several times, we will see the view shown in <a href="#fig-debugAfter" class="quarto-xref">Figure&nbsp;3</a>.</p>
+<div id="fig-debugAfter" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-debugAfter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ICA6-Images/ICA6-debugAfter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: PyCharm debugging after a few steps"><img src="ICA6-Images/ICA6-debugAfter.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-debugAfter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: PyCharm debugging after a few steps
+</figcaption>
+</figure>
+</div>
+<p>Notice that the <em>Threads &amp; Variables</em> section now has the full environment table for <code>smallestDiff(35, 42, 55)</code> up to the <code>return</code> line. And notice that PyCharm has <em>decorated</em> the source code in the editor panel with information from the debugger, including the values for each variable, and what the return value should be.</p>
+</section>
+<section id="practice-with-tracing-and-debugging" class="level1">
+<h1>Practice with tracing and debugging</h1>
+<p>You have been provided with a starter program in <code>barChart.py</code>. This program includes a function definition, and then a main script that sets up an image and data, and runs the <code>drawBarChart</code> function, displaying the result. The <code>drawBarChart</code> function is copied below.</p>
+<p>This program is supposed to draw a bar chart based on some number data stored as a list. One bar per number, and the height of the bar should be proportional to the value of the number, with the tallest bar close to the height of the image.</p>
+<div id="4052fbae" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a><span class="kw">def</span> drawBarChart(image, chartData):</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2"></a>    (wid, hgt, dep) <span class="op">=</span> image.shape</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3"></a>    numItems <span class="op">=</span> <span class="bu">len</span>(chartData)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4"></a>    maxValue <span class="op">=</span> <span class="bu">max</span>(chartData)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4">4</button><span id="annotated-cell-8-5" class="code-annotation-target"><a href="#annotated-cell-8-5"></a>    colWidth <span class="op">=</span> wid <span class="op">//</span> numItems</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a>    barWidth <span class="op">=</span> colWidth <span class="op">-</span> <span class="dv">16</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="5">5</button><span id="annotated-cell-8-7" class="code-annotation-target"><a href="#annotated-cell-8-7"></a>    currX <span class="op">=</span> <span class="dv">8</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="6">6</button><span id="annotated-cell-8-8" class="code-annotation-target"><a href="#annotated-cell-8-8"></a>    <span class="cf">for</span> datum <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(chartData)):</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="7">7</button><span id="annotated-cell-8-9" class="code-annotation-target"><a href="#annotated-cell-8-9"></a>        barHeight <span class="op">=</span> <span class="bu">int</span>((datum <span class="op">/</span> maxValue) <span class="op">*</span> hgt)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="8">8</button><span id="annotated-cell-8-10" class="code-annotation-target"><a href="#annotated-cell-8-10"></a>        p1x <span class="op">=</span> currX</span>
+<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11"></a>        p1y <span class="op">=</span> hgt <span class="op">-</span> barHeight</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="9">9</button><span id="annotated-cell-8-12" class="code-annotation-target"><a href="#annotated-cell-8-12"></a>        p2x <span class="op">=</span> currX <span class="op">+</span> colWidth</span>
+<span id="annotated-cell-8-13"><a href="#annotated-cell-8-13"></a>        p2y <span class="op">=</span> hgt</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="10">10</button><span id="annotated-cell-8-14" class="code-annotation-target"><a href="#annotated-cell-8-14"></a>        cv2.rectangle(image, (p1x, p1x), (p2x, p2y), (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>), <span class="op">-</span><span class="dv">1</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="11">11</button><span id="annotated-cell-8-15" class="code-annotation-target"><a href="#annotated-cell-8-15"></a>        currX <span class="op">+=</span> colWidth</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1">Determine the size of the image</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="2">How many bars must be drawn?</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="3">What is the largest value in the data (will be tallest bar)</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="5,6" data-code-annotation="4"><code>colWidth</code> is the width of the bar plus the gap, <code>barWidth</code> is the width of the bar alone</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="7" data-code-annotation="5">Start the first bar 8 pixels from the left edge</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="8" data-code-annotation="6">Iterate over the values in <code>chartData</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="9" data-code-annotation="7">Compute the height in pixels of the current bar</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="10,11" data-code-annotation="8">Compute the coordinates of the upper-left corner of the bar</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="12,13" data-code-annotation="9">Compute the coordinates of the lower-right corner of the bar</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="14" data-code-annotation="10">Draw the bar as a blue filled-in rectangle</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="15" data-code-annotation="11">Update <code>currX</code> to the next bar’s location</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>The correct result for this program is shown in <a href="#fig-barChart" class="quarto-xref">Figure&nbsp;4</a> below. However, this code has <strong>four bugs</strong> in it, all <strong>logical errors</strong>. That means the program runs, but produces the wrong result.</p>
+<div id="fig-barChart" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barChart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ICA6-Images/ICA6-barChart.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Correct output for the bar chart program"><img src="ICA6-Images/ICA6-barChart.png" class="img-fluid figure-img" style="width:10cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barChart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Correct output for the bar chart program
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>Use by-hand tracing, print statements, and/or the PyCharm debugger to determine the bugs in this program. Make notes in comments in the file about what you tried.</li>
+<li>When you find a bug, add a comment to that line of the code describing the bug</li>
+<li>Fix the bug if you can (or ask for help)</li>
+</ul>
+</section>
+<section id="defining-and-testing-new-functions" class="level1">
+<h1>Defining and testing new functions</h1>
+<p><strong>Try this to hand in:</strong> Create a single code file where you implement each function below. Organize the code file with import statements at the top, function definitions next, and then a single main script at the bottom that includes one or two demo calls to each function.</p>
+<ul>
+<li>Define a function called <code>ave3</code> that takes three numbers as inputs: <code>x</code>, <code>y</code>, <code>z</code>. It should compute the average of the three by adding them up and dividing by 3.0. It should return the resulting value.</li>
+</ul>
+<p>To test your program automatically when the file is run, put calls to the function in the main script at the bottom of your file as shown below. Make sure the calls are not indented.</p>
+<div id="ee237bec" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>res <span class="op">=</span> ave3(<span class="dv">2</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Test the function on multiple different inputs, verifying for each that it returns the correct value. Use one of the tracing methods described above to help debug your function, if needed.</p>
+<ul>
+<li><p>Define a function called <code>randomString</code> that takes in a list of strings and a number <code>n</code> as inputs. It should build <strong>and return</strong> a new string that contains <code>n</code> copies of strings from the input list, chosen at random. You will need:</p>
+<ul>
+<li>a <code>for</code> loop that repeats <code>n</code> times’</li>
+<li>an accumulator variable to hold the new string</li>
+<li>each time through the loop, to use the <code>random.choice</code> function to choose a random string from the list</li>
+</ul></li>
+<li><p>Define a function called <code>addBorder</code> that takes in an image, a number of pixels, and a color tuple. It should make <strong>and return</strong> a copy of the input image, with a border around the outside of the image, that is the number of pixels wide, and drawn in the given color. Hint: use four calls to the <code>rectangle</code> function to draw the borders, calculating the points for each rectangle.</p></li>
+<li><p>Define a function to print the first <span class="math inline">\(n\)</span> digits of your favorite sequence. It should take in one input, <code>n</code> and it does not need to return anything (because it is a printing function). You choose the sequence, some good candidates are listed here:</p>
+<ul>
+<li>1, 2, 3, … , <span class="math inline">\(n\)</span></li>
+<li>2, 4, 5, … , <span class="math inline">\(2n\)</span></li>
+<li>1, 4, 9, … , <span class="math inline">\(n^2\)</span></li>
+<li>Fibonnaci sequence: 1, 1, 2, 3, 5, 8, … , <span class="math inline">\(F_{n-1} + F_{n-2}\)</span> (this is a bit of a challenge)</li>
+</ul></li>
+<li><p>Define a function <code>drawTarget</code> that takes in an image to draw on, and an (x, y) tuple for the position where the target should be centered. Draw a version of the traditional archery target on the input image, with concentric circles: yellow in the middle, red, blue, black, and white going outwards (see <a href="#fig-targetImage" class="quarto-xref">Figure&nbsp;5</a> for an example).</p></li>
+</ul>
+<p>While archery targets like this one technically have two rings of each color, you do not need to draw those, just one circle for each color (unless you want the challenge).</p>
+<div id="fig-targetImage" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-targetImage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ICA6-Images/archeryTarget.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Archery target template"><img src="ICA6-Images/archeryTarget.drawio.png" class="img-fluid figure-img" style="width:10cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-targetImage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Archery target template
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="what-to-hand-in" class="level1">
+<h1>What to hand in</h1>
+<p>You should have multiple Python files for this activity. At the very least, you <strong>must</strong> have:</p>
+<ul>
+<li>A file containing your experiments with tracing, <code>tracing.py</code></li>
+<li>A file containing your updates and changes to <code>barChart.py</code></li>
+<li>A file containing your function definitions</li>
+</ul>
+<p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

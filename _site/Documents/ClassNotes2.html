@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-09-26">
+
+<title>Comp 194 Class Notes - Weeks 4-7 – Vision Readings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Comp 194 Class Notes - Weeks 4-7</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 26, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#week-4" id="toc-week-4" class="nav-link active" data-scroll-target="#week-4">Week 4</a>
+  <ul class="collapse">
+  <li><a href="#monday-september-22" id="toc-monday-september-22" class="nav-link" data-scroll-target="#monday-september-22">Monday, September 22</a>
+  <ul class="collapse">
+  <li><a href="#announcements" id="toc-announcements" class="nav-link" data-scroll-target="#announcements">Announcements</a></li>
+  </ul></li>
+  <li><a href="#wednesday-september-24" id="toc-wednesday-september-24" class="nav-link" data-scroll-target="#wednesday-september-24">Wednesday, September 24</a>
+  <ul class="collapse">
+  <li><a href="#announcements-1" id="toc-announcements-1" class="nav-link" data-scroll-target="#announcements-1">Announcements</a></li>
+  </ul></li>
+  <li><a href="#friday-september-26" id="toc-friday-september-26" class="nav-link" data-scroll-target="#friday-september-26">Friday, September 26</a>
+  <ul class="collapse">
+  <li><a href="#announcements-2" id="toc-announcements-2" class="nav-link" data-scroll-target="#announcements-2">Announcements</a></li>
+  <li><a href="#todays-topics" id="toc-todays-topics" class="nav-link" data-scroll-target="#todays-topics">Today’s topics</a></li>
+  <li><a href="#list-and-string-operations" id="toc-list-and-string-operations" class="nav-link" data-scroll-target="#list-and-string-operations">List and string operations</a></li>
+  <li><a href="#string-methods" id="toc-string-methods" class="nav-link" data-scroll-target="#string-methods">String methods</a></li>
+  <li><a href="#list-methods" id="toc-list-methods" class="nav-link" data-scroll-target="#list-methods">List methods</a></li>
+  <li><a href="#aliasing-and-references" id="toc-aliasing-and-references" class="nav-link" data-scroll-target="#aliasing-and-references">Aliasing and references</a></li>
+  <li><a href="#tuples" id="toc-tuples" class="nav-link" data-scroll-target="#tuples">Tuples</a></li>
+  <li><a href="#list-comprehensions" id="toc-list-comprehensions" class="nav-link" data-scroll-target="#list-comprehensions">List comprehensions</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#week-5" id="toc-week-5" class="nav-link" data-scroll-target="#week-5">Week 5</a>
+  <ul class="collapse">
+  <li><a href="#monday-september-29" id="toc-monday-september-29" class="nav-link" data-scroll-target="#monday-september-29">Monday, September 29</a>
+  <ul class="collapse">
+  <li><a href="#announcements-3" id="toc-announcements-3" class="nav-link" data-scroll-target="#announcements-3">Announcements</a></li>
+  <li><a href="#todays-topics-1" id="toc-todays-topics-1" class="nav-link" data-scroll-target="#todays-topics-1">Today’s topics</a></li>
+  <li><a href="#number-types" id="toc-number-types" class="nav-link" data-scroll-target="#number-types">Number types</a></li>
+  <li><a href="#arrays-in-numpy" id="toc-arrays-in-numpy" class="nav-link" data-scroll-target="#arrays-in-numpy">Arrays in Numpy</a></li>
+  <li><a href="#images-as-numpy-arrays" id="toc-images-as-numpy-arrays" class="nav-link" data-scroll-target="#images-as-numpy-arrays">Images as Numpy arrays</a></li>
+  <li><a href="#numpy-functions" id="toc-numpy-functions" class="nav-link" data-scroll-target="#numpy-functions">Numpy functions</a></li>
+  <li><a href="#no-nested-loops-on-arrays-if-we-can-help-it" id="toc-no-nested-loops-on-arrays-if-we-can-help-it" class="nav-link" data-scroll-target="#no-nested-loops-on-arrays-if-we-can-help-it">No nested loops on arrays (if we can help it)</a></li>
+  <li><a href="#slicing-on-arrays" id="toc-slicing-on-arrays" class="nav-link" data-scroll-target="#slicing-on-arrays">Slicing on arrays</a></li>
+  <li><a href="#boolean-arrays" id="toc-boolean-arrays" class="nav-link" data-scroll-target="#boolean-arrays">Boolean arrays</a></li>
+  <li><a href="#image-arithmetic" id="toc-image-arithmetic" class="nav-link" data-scroll-target="#image-arithmetic">Image arithmetic</a></li>
+  </ul></li>
+  <li><a href="#wednesday-october-1" id="toc-wednesday-october-1" class="nav-link" data-scroll-target="#wednesday-october-1">Wednesday, October 1</a>
+  <ul class="collapse">
+  <li><a href="#announcements-4" id="toc-announcements-4" class="nav-link" data-scroll-target="#announcements-4">Announcements</a></li>
+  <li><a href="#todays-topics-2" id="toc-todays-topics-2" class="nav-link" data-scroll-target="#todays-topics-2">Today’s topics</a></li>
+  <li><a href="#the-split-and-merge-functions" id="toc-the-split-and-merge-functions" class="nav-link" data-scroll-target="#the-split-and-merge-functions">The <code>split</code> and <code>merge</code> functions</a></li>
+  <li><a href="#regions-of-interest" id="toc-regions-of-interest" class="nav-link" data-scroll-target="#regions-of-interest">Regions of interest</a></li>
+  </ul></li>
+  <li><a href="#friday-october-3" id="toc-friday-october-3" class="nav-link" data-scroll-target="#friday-october-3">Friday, October 3</a>
+  <ul class="collapse">
+  <li><a href="#announcements-5" id="toc-announcements-5" class="nav-link" data-scroll-target="#announcements-5">Announcements</a></li>
+  <li><a href="#todays-topics-3" id="toc-todays-topics-3" class="nav-link" data-scroll-target="#todays-topics-3">Today’s topics</a></li>
+  <li><a href="#while-loops" id="toc-while-loops" class="nav-link" data-scroll-target="#while-loops">While loops</a></li>
+  <li><a href="#using-a-web-cam" id="toc-using-a-web-cam" class="nav-link" data-scroll-target="#using-a-web-cam">Using a web-cam</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#week-6" id="toc-week-6" class="nav-link" data-scroll-target="#week-6">Week 6</a>
+  <ul class="collapse">
+  <li><a href="#monday-october-6" id="toc-monday-october-6" class="nav-link" data-scroll-target="#monday-october-6">Monday, October 6</a>
+  <ul class="collapse">
+  <li><a href="#announcements-6" id="toc-announcements-6" class="nav-link" data-scroll-target="#announcements-6">Announcements</a></li>
+  <li><a href="#todays-topics-4" id="toc-todays-topics-4" class="nav-link" data-scroll-target="#todays-topics-4">Today’s topics</a></li>
+  </ul></li>
+  <li><a href="#wednesday-october-8" id="toc-wednesday-october-8" class="nav-link" data-scroll-target="#wednesday-october-8">Wednesday, October 8</a>
+  <ul class="collapse">
+  <li><a href="#announcements-7" id="toc-announcements-7" class="nav-link" data-scroll-target="#announcements-7">Announcements</a></li>
+  <li><a href="#todays-topics-5" id="toc-todays-topics-5" class="nav-link" data-scroll-target="#todays-topics-5">Today’s topics</a></li>
+  </ul></li>
+  <li><a href="#friday-october-10" id="toc-friday-october-10" class="nav-link" data-scroll-target="#friday-october-10">Friday, October 10</a>
+  <ul class="collapse">
+  <li><a href="#announcements-8" id="toc-announcements-8" class="nav-link" data-scroll-target="#announcements-8">Announcements</a></li>
+  <li><a href="#todays-topics-6" id="toc-todays-topics-6" class="nav-link" data-scroll-target="#todays-topics-6">Today’s topics</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7">Week 7</a>
+  <ul class="collapse">
+  <li><a href="#monday-october-13" id="toc-monday-october-13" class="nav-link" data-scroll-target="#monday-october-13">Monday, October 13</a>
+  <ul class="collapse">
+  <li><a href="#announcements-9" id="toc-announcements-9" class="nav-link" data-scroll-target="#announcements-9">Announcements</a></li>
+  <li><a href="#todays-topics-7" id="toc-todays-topics-7" class="nav-link" data-scroll-target="#todays-topics-7">Today’s topics</a></li>
+  </ul></li>
+  <li><a href="#wednesday-october-15" id="toc-wednesday-october-15" class="nav-link" data-scroll-target="#wednesday-october-15">Wednesday, October 15</a>
+  <ul class="collapse">
+  <li><a href="#announcements-10" id="toc-announcements-10" class="nav-link" data-scroll-target="#announcements-10">Announcements</a></li>
+  </ul></li>
+  <li><a href="#friday-october-17" id="toc-friday-october-17" class="nav-link" data-scroll-target="#friday-october-17">Friday, October 17</a></li>
+  </ul></li>
+  <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<hr>
+<section id="week-4" class="level1">
+<h1>Week 4</h1>
+<section id="monday-september-22" class="level2">
+<h2 class="anchored" data-anchor-id="monday-september-22">Monday, September 22</h2>
+<section id="announcements" class="level3">
+<h3 class="anchored" data-anchor-id="announcements">Announcements</h3>
+<ul>
+<li>Start preparing for Ethics and Sci-Fi 4 (for this Friday)</li>
+<li><strong>Coding quiz today!!</strong>
+<ul>
+<li>There will be four questions on the quiz today</li>
+<li>You will have opportunities to redo the topics of this quiz several more times this semester</li>
+<li>The quiz will be completed on paper, not on the computer: bring pens or pencils and an eraser</li>
+<li>You should prepare a handwritten, one page (one side of the paper), page of notes</li>
+<li>See the study guide for the topics and kinds of questions you might face</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="wednesday-september-24" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-september-24">Wednesday, September 24</h2>
+<section id="announcements-1" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-1">Announcements</h3>
+<ul>
+<li>Work on Ethics and Sci-Fi 4 for Friday</li>
+<li><strong>Library Information Fluency Session TODAY!</strong></li>
+</ul>
+<p><strong>Meet in the Library for this session (room TBA)</strong></p>
+</section>
+</section>
+<section id="friday-september-26" class="level2">
+<h2 class="anchored" data-anchor-id="friday-september-26">Friday, September 26</h2>
+<section id="announcements-2" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-2">Announcements</h3>
+<ul>
+<li>Start looking at Homework 2 this weekend… if I have it ready</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 4 <strong>today</strong></li>
+</ul>
+</section>
+<section id="todays-topics" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics">Today’s topics</h3>
+<ul>
+<li>List and string operations</li>
+<li>List and string methods</li>
+<li>Tuples</li>
+<li>List comprehensions</li>
+</ul>
+</section>
+<section id="list-and-string-operations" class="level3">
+<h3 class="anchored" data-anchor-id="list-and-string-operations">List and string operations</h3>
+<ul>
+<li>Functions: <code>len</code>, <code>list</code>, <code>str</code></li>
+<li>Accessing elements or substrings/lists: <code>lst[3]</code>, <code>myName[0:5]</code></li>
+<li>Concatenation with <code>+</code> or <code>*</code>: <code>"sun" + "flower"</code></li>
+<li>Looping over list or string contents</li>
+</ul>
+</section>
+<section id="string-methods" class="level3">
+<h3 class="anchored" data-anchor-id="string-methods">String methods</h3>
+<p><strong>Immutable, a key idea:</strong></p>
+<ul>
+<li>Strings are “immutable,” which means “unchangeable.” You can build strings, but you can’t modify them once they are built. You can just build new strings out of an existing string.</li>
+<li>Other data types that are immutable: numbers, tuples, (functions and modules, too, but then they’re weird data anyway)</li>
+<li>Think about string operators and functions we’ve already seen: + and * build new strings, len doesn’t produce a string, and accessing characters or slicing build new strings, too!</li>
+</ul>
+<p><strong>String methods</strong></p>
+<ul>
+<li>Remember what a method is: it is like a function, but it is attached to a piece of data.</li>
+<li>Keep handy the <a href="https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str">Python documentation on String Methods</a>.</li>
+<li>General categories of methods
+<ul>
+<li>Change capitalization</li>
+<li>Change/set spacing of string (left/right justify, etc.)</li>
+<li>Checking string contents for types of characters</li>
+<li>Searching and replacing in strings</li>
+<li>Breaking strings into pieces</li>
+</ul></li>
+</ul>
+</section>
+<section id="list-methods" class="level3">
+<h3 class="anchored" data-anchor-id="list-methods">List methods</h3>
+<p>Keep handy the <a href="https://docs.python.org/3/tutorial/datastructures.html">Python documentation on List Methods</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>ls = [5, 2, 4, 7, 1, 9, 6]</code></td>
+<td style="text-align: left;">Set up the initial list</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ls.append(23)</code></td>
+<td style="text-align: left;">Add a new value at the end</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ls.extend([5, 2, 1])</code></td>
+<td style="text-align: left;">Add new elements at the end</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ls.pop(0)</code></td>
+<td style="text-align: left;">Remove the value at given position</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ls.insert(2, 80)</code></td>
+<td style="text-align: left;">Insert at given position new value</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ls.remove(9)</code></td>
+<td style="text-align: left;">Remove the first occurrence from list</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ls.index(4)</code></td>
+<td style="text-align: left;">Return the index of first occurrence</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ls.count(1)</code></td>
+<td style="text-align: left;">Count the number of occurrences</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ls.sort()</code></td>
+<td style="text-align: left;">Modify list to be sorted</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ls.reverse()</code></td>
+<td style="text-align: left;">Modify list to be in reverse order</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ls.copy()</code></td>
+<td style="text-align: left;">Returns a shallow copy (sublists not copied)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aliasing-and-references" class="level3">
+<h3 class="anchored" data-anchor-id="aliasing-and-references">Aliasing and references</h3>
+<p>Aliasing refers to a situation when more than one variable name references the same actual data in the computer’s memory. When that happens, the data has its original name, plus an “alias”. Confusion can arise if we don’t realize when using the alias that we are also referring to the original variable. We care about these things because lists are mutable. If a list is shared across multiple variables, then changing the list through one variable makes the other variable ’s value change as well! This is an easy mistake to make when modifying lists. Here is an example:</p>
+<div id="fb377094" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>lstA <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>]</span>
+<span id="cb1-2"><a href="#cb1-2"></a>lstB <span class="op">=</span> lstA.copy()   <span class="co"># makes a copy of lstA</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>lstC <span class="op">=</span> lstA          <span class="co"># makes lstC be an alias of lstA</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="bu">print</span>(<span class="st">"A:"</span>, lstA)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="bu">print</span>(<span class="st">"B:"</span>, lstB)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="bu">print</span>(<span class="st">"C:"</span>, lstC)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>lstA[<span class="dv">2</span>] <span class="op">=</span> <span class="st">'zzzz'</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="bu">print</span>(<span class="st">"A:"</span>, lstA)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="bu">print</span>(<span class="st">"B:"</span>, lstB)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="bu">print</span>(<span class="st">"C:"</span>, lstC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A: ['a', 'b', 'c', 'd']
+B: ['a', 'b', 'c', 'd']
+C: ['a', 'b', 'c', 'd']
+A: ['a', 'b', 'zzzz', 'd']
+B: ['a', 'b', 'c', 'd']
+C: ['a', 'b', 'zzzz', 'd']</code></pre>
+</div>
+</div>
+</section>
+<section id="tuples" class="level3">
+<h3 class="anchored" data-anchor-id="tuples">Tuples</h3>
+<ul>
+<li>Basically, an immutable list</li>
+<li>Used when returning multiple values from a function</li>
+<li>More memory efficient than a list</li>
+<li>Has no methods!</li>
+</ul>
+</section>
+<section id="list-comprehensions" class="level3">
+<h3 class="anchored" data-anchor-id="list-comprehensions">List comprehensions</h3>
+<p>A shorthand notation for a for loop that builds one list from the contents of another. It does the same work Abbreviated notation, still does the same work. You can always do what a list comprehension does with loops and accumulator variables</p>
+<p><strong>First general form:</strong></p>
+<div id="93a93110" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>[<span class="op">&lt;</span>expr<span class="op">&gt;</span> <span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>is equivalent to</p>
+<div id="e9be5663" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>newList <span class="op">=</span> []</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>:</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    newVal <span class="op">=</span> <span class="op">&lt;</span>expr<span class="op">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    newList <span class="op">+=</span> [newVal]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Second general form:</strong></p>
+<div id="1a63f59c" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>[<span class="op">&lt;</span>expr<span class="op">&gt;</span> <span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span> <span class="cf">if</span> <span class="op">&lt;</span>boolExpr<span class="op">&gt;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>is equivalent to</p>
+<div id="1fe9a0c2" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>newList <span class="op">=</span> []</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>:</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="cf">if</span> <span class="op">&lt;</span>boolExpr<span class="op">&gt;</span>:</span>
+<span id="cb6-4"><a href="#cb6-4"></a>        newVal <span class="op">=</span> <span class="op">&lt;</span>expr<span class="op">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>        newList <span class="op">+=</span> [newVal]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Examples:</strong></p>
+<div id="402328d9" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ls <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">6</span>]       <span class="co"># set up the initial list</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>newls <span class="op">=</span> [<span class="dv">2</span><span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> ls]</span>
+<span id="cb7-3"><a href="#cb7-3"></a>ls3 <span class="op">=</span> [<span class="bu">int</span>(s) <span class="cf">for</span> s <span class="kw">in</span> [<span class="st">'35'</span>, <span class="st">'12'</span>, <span class="st">'103'</span>, <span class="st">'-3'</span>]]</span>
+<span id="cb7-4"><a href="#cb7-4"></a>ls4 <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> ls <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="week-5" class="level1">
+<h1>Week 5</h1>
+<section id="monday-september-29" class="level2">
+<h2 class="anchored" data-anchor-id="monday-september-29">Monday, September 29</h2>
+<section id="announcements-3" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-3">Announcements</h3>
+<ul>
+<li>Homework 2 is due by the end of this week</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 5 this Friday!</li>
+</ul>
+</section>
+<section id="todays-topics-1" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-1">Today’s topics</h3>
+<ul>
+<li>Numpy operations</li>
+<li>Image arithmetic</li>
+</ul>
+</section>
+<section id="number-types" class="level3">
+<h3 class="anchored" data-anchor-id="number-types">Number types</h3>
+<ul>
+<li>Python has one integer type, any size of integer is just called an <code>int</code>
+<ul>
+<li>Underneath, integers really have fixed size, but Python converts between representations for us</li>
+</ul></li>
+<li>Python has one floating-point type: <code>float</code>
+<ul>
+<li>Much like with integers, the representation underneath may change, but we don’t have to worry about it</li>
+</ul></li>
+</ul>
+<p><strong>Fixed-length numbers:</strong> The hardware of the computer implements integers of specific lengths, typically 8 bits, 16 bits, 32 bits, and 64 bits. Flaoting point numbers are either 32 or 64 bits long. It can also distinguish between <strong>unsigned</strong> integers and <strong>signed</strong> integers. Unsigned integers are either zero or positive only; signed integers include both positive and negative values.</p>
+<p>Numpy defines numeric types for all these fixed-size numbers. The table below lists the different numeric types in Numpy:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Signed</th>
+<th style="text-align: center;">Unsigned</th>
+<th style="text-align: center;">Float</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">8 bits</td>
+<td style="text-align: center;"><code>int8</code></td>
+<td style="text-align: center;"><code>uint8</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">16 bits</td>
+<td style="text-align: center;"><code>int16</code></td>
+<td style="text-align: center;"><code>uint16</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">32 bits</td>
+<td style="text-align: center;"><code>int32</code></td>
+<td style="text-align: center;"><code>uint32</code></td>
+<td style="text-align: center;"><code>float32</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">64 bits</td>
+<td style="text-align: center;"><code>int64</code></td>
+<td style="text-align: center;"><code>uint64</code></td>
+<td style="text-align: center;"><code>float64</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="arrays-in-numpy" class="level3">
+<h3 class="anchored" data-anchor-id="arrays-in-numpy">Arrays in Numpy</h3>
+<p>Numpy arrays: * Are similar to vectors and matrices in mathematics * Are implemented as <em>contiguous</em> blocks of memory, giving efficient, fast access and operations * Hold just one kind of data, its <code>dtype</code> (typically) * Have a fixed number of dimensions (any number) * Have a fixed size, called its <code>shape</code></p>
+</section>
+<section id="images-as-numpy-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="images-as-numpy-arrays">Images as Numpy arrays</h3>
+<ul>
+<li>Color images: Three dimensional arrays, with height, width, and depth, depth = channels</li>
+<li>Grayscaxle images: Two-dimensional arrays, height and width, brightness values in each pixel</li>
+<li>Normal images use <code>uint8</code> for each pixel/channel value</li>
+</ul>
+<p>Here are two images of very different sizes. One, we convert to grayscale as well, and print the sizes and data types for each array.</p>
+<div id="96c6cbc0" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> cv2</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/GoogleyEye.png"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>img2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/landscape1.jpg"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>img3 <span class="op">=</span> cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="bu">print</span>(<span class="st">"Image 1 shape:"</span>, img1.shape, <span class="st">"and dtype"</span>, img1.dtype) </span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="bu">print</span>(<span class="st">"Image 2 shape:"</span>, img2.shape, <span class="st">"and dtype"</span>, img2.dtype) </span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="bu">print</span>(<span class="st">"Image 3 shape:"</span>, img3.shape, <span class="st">"and dtype"</span>, img3.dtype) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="numpy-functions" class="level3">
+<h3 class="anchored" data-anchor-id="numpy-functions">Numpy functions</h3>
+<p><strong>Numpy has an incredible number of tools, we will use just a fraction of them.</strong></p>
+<p><a href="https://numpy.org/doc/stable/user/index.html">Numpy Documentation</a> is excellent: use it!</p>
+<p><strong>Functions:</strong> * <code>np.array</code> converts an input list, array, string, tuple into an array of the same dimensions * <code>np.asarray</code> similar, but doesn’t always copy the data * <code>array.astype</code> an array method, produces a view or copy with a new type * <code>np.zeros</code> creates an array of an input size and type, filled with zeros * <code>np.ones</code> similar, but fills with ones * <code>np.arange</code>, given a starting value, ending value, and step size, builds an array with those values (works on floats!) * <code>np.random.rand</code>, creates an array of a given size and data type, filled with random values in a specified range</p>
+</section>
+<section id="no-nested-loops-on-arrays-if-we-can-help-it" class="level3">
+<h3 class="anchored" data-anchor-id="no-nested-loops-on-arrays-if-we-can-help-it">No nested loops on arrays (if we can help it)</h3>
+<p>Rather than writing code that loops over rows and columns of a Numpy matrix, we usually try to perform matrix/vector arithmetic. We can add two arrays together, if they are the same shape. This adds corresponding values together and builds an array of the result. We can do subtraction, multiplication, and division similarly. We can also compute dot product and cross produce, if needed.</p>
+<p><strong>Examples:</strong></p>
+<div id="2e6974eb" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>a1 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]])</span>
+<span id="cb9-4"><a href="#cb9-4"></a>a2 <span class="op">=</span> np.array([[<span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>], [<span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">4</span>]])</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="bu">print</span>(<span class="st">"a1 + a2:"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="bu">print</span>(a1 <span class="op">+</span> a2)</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="bu">print</span>(<span class="st">"a1 - a2:"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="bu">print</span>(a1 <span class="op">-</span> a2)</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="bu">print</span>(<span class="st">"a1 * a2:"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="bu">print</span>(a1 <span class="op">*</span> a2)</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="bu">print</span>(<span class="st">"3 * a1"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="bu">print</span>(<span class="dv">3</span> <span class="op">*</span> a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a1 + a2:
+[[7 7 7 7]
+ [9 9 9 9]]
+a1 - a2:
+[[-5 -3 -1  1]
+ [-5 -3 -1  1]]
+a1 * a2:
+[[ 6 10 12 12]
+ [14 18 20 20]]
+3 * a1
+[[ 3  6  9 12]
+ [ 6  9 12 15]]</code></pre>
+</div>
+</div>
+</section>
+<section id="slicing-on-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="slicing-on-arrays">Slicing on arrays</h3>
+<p>Slicing on arrays works similarly to slicing on strings or lists. But we can specify multiple dimensions at one time. <strong>Slicing weirdness:</strong> if the bound on the slice goes beyond the limits of the list, string, or array, Python doesn’t given an error. It just treats that as a “go to the end” marker and returns up to the end of the current dimensions.</p>
+<div id="46e1e990" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">print</span>(a1[<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>:<span class="dv">3</span>])</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Weirdness we haven't discussed</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>lst <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>]</span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="bu">print</span>(a1[<span class="dv">1</span>:<span class="dv">200</span>, <span class="dv">1</span>:<span class="dv">50</span>], lst[<span class="dv">2</span>:<span class="dv">25</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[3 4]]
+[[3 4 5]] ['c', 'd', 'e']</code></pre>
+</div>
+</div>
+</section>
+<section id="boolean-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="boolean-arrays">Boolean arrays</h3>
+<p>We won’t really need these much, but they are very cool!</p>
+<div id="5beb6674" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>boolOne <span class="op">=</span> a2 <span class="op">&gt;</span> <span class="dv">3</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>boolTwo <span class="op">=</span> a1 <span class="op">&lt;=</span> <span class="dv">3</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="bu">print</span>(boolOne)</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="bu">print</span>(boolTwo)</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="bu">print</span>(np.logical_and(boolOne, boolTwo))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ True  True  True False]
+ [ True  True  True  True]]
+[[ True  True  True False]
+ [ True  True False False]]
+[[ True  True  True False]
+ [ True  True False False]]</code></pre>
+</div>
+</div>
+</section>
+<section id="image-arithmetic" class="level3">
+<h3 class="anchored" data-anchor-id="image-arithmetic">Image arithmetic</h3>
+<p><strong>Some typical uses for image arithmetic</strong></p>
+<ul>
+<li>Brighten or darken an image by adding to channel values</li>
+<li>Simple changes to specific channels</li>
+<li>Combining two image parts</li>
+<li>Blending images</li>
+</ul>
+<p><strong>Example 1:</strong> Boost the green</p>
+<pre><code>#| eval: false
+img = cv2.imread("SampleImages/grandTetons.jpg")
+boostIm = img.copy()
+boostIm[:, :, 1] = cv2.add(boostIm[:, :, 1], 25)</code></pre>
+<p><strong>Example 2:</strong> Blending images</p>
+<pre><code>#| eval: false
+img1 = cv2.imread("SampleImages/mightyMidway.jpg")
+img2 = cv2.imread("SampleImages/antiqueTractors.jpg")
+
+# Find the smallest dimensions across both images
+(h1, w1, d1) = img1.shape
+(h2, w2, d2) = img2.shape
+wid = min(w1, w2)
+hgt = min(h1, h2)
+
+# Crop the two images to the sizes they share
+newImg1 = img1[:hgt, :wid]
+newImg2 = img2[:hgt, :wid]
+
+# Blend the resulting images
+blendIm = cv2.addWeighted(newImg1, 0.5, newImg2, 0.5, 0)
+cv2.imshow("Blended", blendIm)
+cv2.waitKey()</code></pre>
+</section>
+</section>
+<section id="wednesday-october-1" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-october-1">Wednesday, October 1</h2>
+<section id="announcements-4" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-4">Announcements</h3>
+<ul>
+<li>Homework 2 is due by the end of this week</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 5 this Friday!</li>
+</ul>
+</section>
+<section id="todays-topics-2" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-2">Today’s topics</h3>
+<ul>
+<li>Splitting and merging channels</li>
+<li>Regions of interest</li>
+</ul>
+</section>
+<section id="the-split-and-merge-functions" class="level3">
+<h3 class="anchored" data-anchor-id="the-split-and-merge-functions">The <code>split</code> and <code>merge</code> functions</h3>
+<p>We can pull images apart using Numpy commands, but sometimes OpenCV’s are easier to remember.</p>
+<p>The <code>split</code> function takes in a color image, and returns a tuple of its channels as separate arrays The <code>merge</code> function takes in a tuple of channels, and combines them together.</p>
+<p>The code example below creates various <em>negative</em> versions of an image. In film cameras, the film stores a negative version of the image, where light parts are dark, and vice versa. This is turned into correct colors or brightness during film process.</p>
+<p>We can create negatives by reversing the values in one or all channels of an image. So if a pixel had the value 0 originally it will become 255, if it had the value 10, it will become 245, and if it had the value 200, it would become</p>
+<p>This might seem difficult to compute, but actually it is very simple. If we subtract the image array from 255, it gives us this negative effect.</p>
+<p>The code example below demonstrates both negative images, and the <code>split</code> and <code>merge</code> functions.</p>
+<ul>
+<li>First it reads in a colorful mountain picture</li>
+<li>It converts it to grayscale and produces the negative of the grayscale (understanding negatives is easier with grayscale images)</li>
+<li>It also converts all three channels to be a negative and displays it</li>
+<li>Finally, it splits the image into three channels, and shows the effect of converting just one channel at a time to a negative</li>
+</ul>
+<div id="8c0f24f1" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">import</span> cv2</span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># Read original image</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/landscape1MuchSmaller.jpg"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a>cv2.imshow(<span class="st">"orig"</span>, img)</span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Grayscale, and gray negative</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>gray <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb17-9"><a href="#cb17-9"></a>grayNeg <span class="op">=</span> <span class="dv">255</span> <span class="op">-</span> gray</span>
+<span id="cb17-10"><a href="#cb17-10"></a>cv2.imshow(<span class="st">"Gray original"</span>, gray)</span>
+<span id="cb17-11"><a href="#cb17-11"></a>cv2.imshow(<span class="st">"Negative gray"</span>, grayNeg)</span>
+<span id="cb17-12"><a href="#cb17-12"></a>cv2.waitKey()</span>
+<span id="cb17-13"><a href="#cb17-13"></a></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="co"># Overall negative</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>img2 <span class="op">=</span> <span class="dv">255</span> <span class="op">-</span> img</span>
+<span id="cb17-16"><a href="#cb17-16"></a>cv2.imshow(<span class="st">"OverallNegative"</span>, img2)</span>
+<span id="cb17-17"><a href="#cb17-17"></a>cv2.waitKey()</span>
+<span id="cb17-18"><a href="#cb17-18"></a></span>
+<span id="cb17-19"><a href="#cb17-19"></a>(bc, gc, rc) <span class="op">=</span> cv2.split(img)</span>
+<span id="cb17-20"><a href="#cb17-20"></a></span>
+<span id="cb17-21"><a href="#cb17-21"></a>negGC <span class="op">=</span> <span class="dv">255</span> <span class="op">-</span> gc</span>
+<span id="cb17-22"><a href="#cb17-22"></a>negBC <span class="op">=</span> <span class="dv">255</span> <span class="op">-</span> bc</span>
+<span id="cb17-23"><a href="#cb17-23"></a>negRC <span class="op">=</span> <span class="dv">255</span> <span class="op">-</span> rc</span>
+<span id="cb17-24"><a href="#cb17-24"></a></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="co"># Only blue channel negative</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a>newIm1 <span class="op">=</span> cv2.merge((negBC, gc, rc))</span>
+<span id="cb17-27"><a href="#cb17-27"></a>cv2.imshow(<span class="st">"newBlue"</span>, newIm1)</span>
+<span id="cb17-28"><a href="#cb17-28"></a>cv2.waitKey()</span>
+<span id="cb17-29"><a href="#cb17-29"></a></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="co"># Only green channel negative</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a>newIm2 <span class="op">=</span> cv2.merge((bc, negGC, rc))</span>
+<span id="cb17-32"><a href="#cb17-32"></a>cv2.imshow(<span class="st">"newGreen"</span>, newIm2)</span>
+<span id="cb17-33"><a href="#cb17-33"></a>cv2.waitKey()</span>
+<span id="cb17-34"><a href="#cb17-34"></a></span>
+<span id="cb17-35"><a href="#cb17-35"></a><span class="co"># Only red channel negative</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a>newIm3 <span class="op">=</span> cv2.merge((bc, gc, negRC))</span>
+<span id="cb17-37"><a href="#cb17-37"></a>cv2.imshow(<span class="st">"newRed"</span>, newIm3)</span>
+<span id="cb17-38"><a href="#cb17-38"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="regions-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="regions-of-interest">Regions of interest</h3>
+<p>A <strong>region of interest</strong> is just a rectangular section of an image that we want to isolate and work with.</p>
+<p>We can make regions of interest using Numpy’s slicing operator. But we must remember that by default we get a <em>view</em> to the original data, and not a copy of the data. Changes made to the ROI usually show in the original image.</p>
+<div id="0ff8e977" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>mushIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/mushrooms.jpg"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a>cv2.imshow(<span class="st">"Mushrooms"</span>, mushIm)</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co"># Two regions of interest centered on mushroom tops</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>roi1 <span class="op">=</span> mushIm[<span class="dv">135</span>:<span class="dv">230</span>, <span class="dv">50</span>:<span class="dv">170</span>]</span>
+<span id="cb18-7"><a href="#cb18-7"></a>roi2 <span class="op">=</span> mushIm[<span class="dv">120</span>:<span class="dv">215</span>, <span class="dv">255</span>:<span class="dv">390</span>]</span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a>cv2.imshow(<span class="st">"roi1"</span>, roi1)</span>
+<span id="cb18-10"><a href="#cb18-10"></a>cv2.imshow(<span class="st">"roi2"</span>, roi2)</span>
+<span id="cb18-11"><a href="#cb18-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that with slicing we put the row range first, and then the column range. If we wanted to draw a rectangle around the region on the image, we would swap the order of the indices to give the upper left and lower right points (as in the code below).</p>
+<div id="edba7725" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>cv2.rectangle(mushIm, (<span class="dv">50</span>, <span class="dv">135</span>), (<span class="dv">170</span>, <span class="dv">230</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>cv2.rectangle(mushIm, (<span class="dv">255</span>, <span class="dv">120</span>), (<span class="dv">390</span>, <span class="dv">215</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
+<span id="cb19-3"><a href="#cb19-3"></a>cv2.imshow(<span class="st">"Marked"</span>, mushIm)</span>
+<span id="cb19-4"><a href="#cb19-4"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="friday-october-3" class="level2">
+<h2 class="anchored" data-anchor-id="friday-october-3">Friday, October 3</h2>
+<section id="announcements-5" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-5">Announcements</h3>
+<ul>
+<li>Homework 2 is due today!</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 5 today!</li>
+</ul>
+</section>
+<section id="todays-topics-3" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-3">Today’s topics</h3>
+<ul>
+<li>While loops</li>
+<li>Working with the web-cam</li>
+</ul>
+</section>
+<section id="while-loops" class="level3">
+<h3 class="anchored" data-anchor-id="while-loops">While loops</h3>
+<p><strong>Indefinite looping</strong> is when the loop continues for an unknown number of repetitions. The number of repetitions depends on a boolean test: the loop continues until the test becomes <code>False</code>.</p>
+<p>While loops are a more “primitive” kind of loop, more simple, leaving more responsibility on the programmer. As the programmer, you are responsible for setting up and updating the <em>loop variable</em> as well as any ordinary accumulator variables.</p>
+<p>Below is a version of the Numpy <code>arange</code> function, but for lists. Given a starting value, and ending value, and a step size, all floating-point numbers, it produces a list containing the sequence of values starting with the starting value and increasing by step size each time, up to but not including the end point.</p>
+<div id="fc67fb3e" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">def</span> myARange(start, end, step):</span>
+<span id="cb20-2"><a href="#cb20-2"></a>    ansList <span class="op">=</span> []                         <span class="co"># accumulator initialize</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>    currValue <span class="op">=</span> start                    <span class="co"># loop variable initialize</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>    <span class="cf">while</span> (currValue <span class="op">&lt;</span> end):             <span class="co"># loop test</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>        ansList.append(currValue)        <span class="co"># update accumulator</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>        currValue <span class="op">=</span> currValue <span class="op">+</span> step     <span class="co"># update loop variable</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>    <span class="cf">return</span> ansList</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="using-a-web-cam" class="level3">
+<h3 class="anchored" data-anchor-id="using-a-web-cam">Using a web-cam</h3>
+<p>Processing frames from a live webcam works the same as processing saved video files (<code>.avi</code> or <code>.mp4</code> formats). Videos are just sequences of images, but we have to talk to the operating system for permission to connect with the camera or to get the frames from a saved video.</p>
+<p>OpenCV provides a <code>VideoCapture</code> object that knows how to connect to cameras or video files. We first create an instance of a <code>VideoCapture</code> object, and then use its <code>read</code> method to get the images from the video.</p>
+<ul>
+<li><code>VideoCapture</code> has one required input: either the number of the webcam on your system, or a string that gives the path to a saved video file. The built-in webcam is (usually) number zero.</li>
+</ul>
+<p>To see the frames of the video in real-time, we need to change how we use <code>waitKey</code> and use more of its capabilities.</p>
+<p>Notes about <code>waitkey</code>:</p>
+<ul>
+<li><code>waitKey</code> is responsible for actually displaying the windows with images</li>
+<li><code>waitKey</code> takes in a number, if 0, then it pauses indefinitely to wait for the user to hit a key, if the input is a positive integer, it pauses only for that many milliseconds and then returns and lets the program continue</li>
+<li><code>waitKey</code> returns a number that indicates the user’s input: -1 if they didn’t input anything, and the numeric code for the key the entered, otherwise.</li>
+</ul>
+<div id="5c01a75f" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>vidCap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    gotFrame, img <span class="op">=</span> vidCap.read()</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="cf">if</span> <span class="kw">not</span> gotFrame:</span>
+<span id="cb21-6"><a href="#cb21-6"></a>        <span class="bu">print</span>(<span class="st">"Got no frame"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7"></a>        <span class="cf">break</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>    cv2.imshow(<span class="st">"Webcam"</span>, img)</span>
+<span id="cb21-9"><a href="#cb21-9"></a>    x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
+<span id="cb21-10"><a href="#cb21-10"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb21-11"><a href="#cb21-11"></a>        <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="cb21-12"><a href="#cb21-12"></a>            <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="week-6" class="level1">
+<h1>Week 6</h1>
+<section id="monday-october-6" class="level2">
+<h2 class="anchored" data-anchor-id="monday-october-6">Monday, October 6</h2>
+<section id="announcements-6" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-6">Announcements</h3>
+<ul>
+<li>Start looking at Homework 3 by the end of this week, due <strong>Wednesday</strong> next week</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 6 <strong>this Friday</strong></li>
+<li>Health promotions session today</li>
+</ul>
+</section>
+<section id="todays-topics-4" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-4">Today’s topics</h3>
+<ul>
+<li>Making threshold images</li>
+<li>Masking images</li>
+<li>Threshold images as masks</li>
+</ul>
+</section>
+</section>
+<section id="wednesday-october-8" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-october-8">Wednesday, October 8</h2>
+<section id="announcements-7" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-7">Announcements</h3>
+<ul>
+<li>Start on Homework 3 very soon, due <strong>Wednesday</strong> next week</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 6 <strong>this Friday</strong></li>
+</ul>
+</section>
+<section id="todays-topics-5" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-5">Today’s topics</h3>
+<ul>
+<li>Geometric transformations in general</li>
+<li>Resizing</li>
+<li>Translation</li>
+<li>Rotation</li>
+<li>Warping</li>
+<li>Perspective warping</li>
+</ul>
+</section>
+</section>
+<section id="friday-october-10" class="level2">
+<h2 class="anchored" data-anchor-id="friday-october-10">Friday, October 10</h2>
+<section id="announcements-8" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-8">Announcements</h3>
+<ul>
+<li>Homework 3 by the end of this week, due <strong>Wednesday</strong> next week</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 6 <strong>today!</strong></li>
+</ul>
+</section>
+<section id="todays-topics-6" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-6">Today’s topics</h3>
+<ul>
+<li>Image filters</li>
+<li>Morphological filters
+<ul>
+<li>Erosion and dilation</li>
+<li>Opening and closing</li>
+<li>Black hat and top hat</li>
+<li>Gradient</li>
+</ul></li>
+<li>Convolutional filters
+<ul>
+<li>Blurring</li>
+<li>Edge detection</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="week-7" class="level1">
+<h1>Week 7</h1>
+<section id="monday-october-13" class="level2">
+<h2 class="anchored" data-anchor-id="monday-october-13">Monday, October 13</h2>
+<section id="announcements-9" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-9">Announcements</h3>
+<ul>
+<li>No Ethics and Sci-Fi this week (due to Fall Break)</li>
+<li><strong>Coding quiz Wednesday!!</strong></li>
+</ul>
+</section>
+<section id="todays-topics-7" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-7">Today’s topics</h3>
+<ul>
+<li>Finding Contours</li>
+<li>Manipulating contours</li>
+</ul>
+</section>
+</section>
+<section id="wednesday-october-15" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-october-15">Wednesday, October 15</h2>
+<section id="announcements-10" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-10">Announcements</h3>
+<ul>
+<li>No Ethics and Sci-Fi this week (due to Fall Break)</li>
+<li><strong>Coding quiz today!!</strong>
+<ul>
+<li>There will be four <strong>new</strong> questions on the quiz today, plus new questions on the four topics from quiz 1</li>
+<li>You will have opportunities to redo the topics of this quiz several more times this semester</li>
+<li>The quiz will be completed on paper, not on the computer: bring pens or pencils and an eraser</li>
+<li>You should prepare a handwritten, one page (one side of the paper), page of notes</li>
+<li>See the study guide for the topics and kinds of questions you might face</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="friday-october-17" class="level2">
+<h2 class="anchored" data-anchor-id="friday-october-17">Friday, October 17</h2>
+<p>FALL BREAK!!</p>
+<hr>
+</section>
+</section>
+<section id="additional-class-notes-documents" class="level1">
+<h1>Additional Class Notes documents</h1>
+<ul>
+<li><a href="ClassNotes1.html">Class notes for weeks 0-3</a></li>
+<li>Class notes for weeks 4-7 (This document)</li>
+<li><a href="ClassNotes3.html">Class notes for weeks 8-11</a></li>
+<li><a href="ClassNotes4.html">Class notes for weeks 12-15</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

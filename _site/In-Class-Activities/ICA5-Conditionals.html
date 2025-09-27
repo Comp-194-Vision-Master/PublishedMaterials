@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-09-26">
+
+<title>ICA: Booleans and Conditionals – Vision Readings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ICA: Booleans and Conditionals</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 26, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#boolean-data-type" id="toc-boolean-data-type" class="nav-link" data-scroll-target="#boolean-data-type">Boolean data type</a>
+  <ul class="collapse">
+  <li><a href="#boolean-expressions" id="toc-boolean-expressions" class="nav-link" data-scroll-target="#boolean-expressions">Boolean expressions</a></li>
+  <li><a href="#boolean-logical-operators" id="toc-boolean-logical-operators" class="nav-link" data-scroll-target="#boolean-logical-operators">Boolean logical operators</a></li>
+  </ul></li>
+  <li><a href="#conditional-statements" id="toc-conditional-statements" class="nav-link" data-scroll-target="#conditional-statements">Conditional statements</a></li>
+  <li><a href="#conditionals-and-images" id="toc-conditionals-and-images" class="nav-link" data-scroll-target="#conditionals-and-images">Conditionals and images</a>
+  <ul class="collapse">
+  <li><a href="#user-selecting-images-to-show" id="toc-user-selecting-images-to-show" class="nav-link" data-scroll-target="#user-selecting-images-to-show">User selecting images to show</a></li>
+  <li><a href="#slideshow" id="toc-slideshow" class="nav-link" data-scroll-target="#slideshow">Slideshow</a></li>
+  <li><a href="#user-control-of-shape-on-image" id="toc-user-control-of-shape-on-image" class="nav-link" data-scroll-target="#user-control-of-shape-on-image">User-control of shape on image</a></li>
+  <li><a href="#optional-challenge-bouncing-ball-animation" id="toc-optional-challenge-bouncing-ball-animation" class="nav-link" data-scroll-target="#optional-challenge-bouncing-ball-animation">Optional challenge: Bouncing-ball animation</a></li>
+  </ul></li>
+  <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>In this activity, we will practice with the Boolean data type, which allows us to reason about statements as true or false, and we will explore how to effectively use the <code>if</code> statement. An <code>if</code> statement is called <strong>conditionals</strong> because the actions taken are “conditional” on the value of the boolean expression in it. The conditional asks a question, or a series of questions, and it performs the set of actions associate with the first question that is true. The <code>if</code> statement syntax is more complex than the <code>for</code> loop:</p>
+<div id="3ec6ebc6" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> <span class="op">&lt;</span>test1<span class="op">&gt;</span>:</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="op">&lt;</span>statements to do (once) <span class="cf">if</span> test1 <span class="kw">is</span> true<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="cf">elif</span> <span class="op">&lt;</span>test2<span class="op">&gt;</span>:</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="op">&lt;</span>statements to do (once) <span class="cf">if</span> test1 <span class="kw">is</span> false <span class="kw">and</span> test2 <span class="kw">is</span> true<span class="op">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>...</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="cf">else</span>:</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="op">&lt;</span>statements to do (once) <span class="cf">if</span> <span class="bu">all</span> tests are false<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Note:</strong> Complex statements in Python, like these, always have a first line that starts with the keyword that defines the statement (<code>if</code>) and the first line always ends with a colon (<code>:</code>).</p>
+<p>A key distinction to remember: <code>if</code> statements <em>select</em> indented code to be executed one time, they do not <em>loop</em>.</p>
+</section>
+<section id="boolean-data-type" class="level1">
+<h1>Boolean data type</h1>
+<p>The boolean data type is a special one in most programming languages. A boolean value is either <code>True</code> or <code>False</code>:<br>
+these are constants in Python. Try typing them into the Python shell, without any quotation marks. Capitalization counts!</p>
+<p>We use booleans to ask questions about data in a program, and to write programs that can choose among alternative actions.</p>
+<section id="boolean-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="boolean-expressions">Boolean expressions</h2>
+<p>We can ask questions using functions that return true/false answers, or with a set of boolean comparison operators. These form boolean expressions that evaluate to True or False. The most common boolean operators are shown in the table below.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A <code>==</code> B</td>
+<td style="text-align: left;"><em>Is equal to</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A is equal to the value of B</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A <code>!=</code> B</td>
+<td style="text-align: left;"><em>Is not equal to</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A is not equal to the value of B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A <code>&lt;=</code> B</td>
+<td style="text-align: left;"><em>Is less than or equal to</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A is less than or equal to the value of B</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A <code>&lt;</code> B</td>
+<td style="text-align: left;"><em>Is less than</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A is strictly less than the value of B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A <code>&gt;=</code> B</td>
+<td style="text-align: left;"><em>Is greater than or equal to</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A is greater than or equal to the value of B</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A <code>&gt;</code> B</td>
+<td style="text-align: left;"><em>Is greater than</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A is greater than the value of B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A <code>in</code> B</td>
+<td style="text-align: left;"><em>Is in</em> or <em>Is an element of</em> takes two expressions, A and B, and evaluates to <code>True</code> if the value of A occurs in the value of B * For strings this asks if A is a substring of B * For lists, this asks if A is an element of B</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A <code>is</code> B</td>
+<td style="text-align: left;"><p><em>Is</em> takes two expressions, A and B, and evaluates to <code>True</code> if both are references to the same exact data object. Some examples:</p>
+<ul>
+<li><code>25 is 25</code> is <code>True</code> (two identical <code>int</code>s are always the same)</li>
+<li><code>25 is 25.0</code> is <code>False</code> (<code>int</code> and <code>float</code> are always different)</li>
+<li><code>"Frog" is "Frog"</code> is <code>True</code> (identical <code>str</code>s are the same)</li>
+<li><code>[5, 2] is [5, 2]</code> is <code>False</code> (lists are complicated!)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p>For each boolean expression, below, examine it and see if you can describe what question is being asked, and what the answer should be. Type each of the statements or expressions below in the Python console, or make a script file, where you print the value of each expression. Where you are wrong about the outcome, discuss with a neighbor, and ask for help!</p>
+<div id="c94ead4d" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># first we’ll assign three variables to values</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>x <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>y <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>s <span class="op">=</span> <span class="st">'boolean'</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>nums <span class="op">=</span> [<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>]</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># now we’ll ask questions about them</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="bu">print</span>(<span class="st">"x &lt;=y is"</span>, x <span class="op">&lt;=</span> y)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="bu">print</span>(<span class="st">"y - 10 &gt; nums[1] is"</span>, y <span class="op">-</span> <span class="dv">10</span> <span class="op">&gt;</span> nums[<span class="dv">1</span>])</span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="bu">print</span>(<span class="st">"x % 2 == 0 is"</span>, x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>, <span class="st">"(is x even)"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="bu">print</span>(<span class="st">"s &gt; 'bodwaddle' is"</span>, s <span class="op">&gt;</span> <span class="st">'bodwaddle'</span>)</span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="bu">print</span>(<span class="st">"len(s) == 7 is"</span>, <span class="bu">len</span>(s) <span class="op">==</span> <span class="dv">7</span>)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="bu">print</span>(<span class="st">"'e' in s is"</span>, <span class="st">'e'</span> <span class="kw">in</span> s)</span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="bu">print</span>(<span class="st">"'c' in s is"</span>, <span class="st">'c'</span> <span class="kw">in</span> s)</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="bu">print</span>(<span class="st">"'boo' in s is"</span>, <span class="st">'boo'</span> <span class="kw">in</span> s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;=y is True
+y - 10 &gt; nums[1] is False
+x % 2 == 0 is False (is x even)
+s &gt; 'bodwaddle' is True
+len(s) == 7 is True
+'e' in s is True
+'c' in s is False
+'boo' in s is True</code></pre>
+</div>
+</div>
+<p><strong>Try this to hand in:</strong> Copy the script above into a Python file, and add to it with this part. Write the following boolean expressions, using <code>print</code> to output the result (along with explanatory text):</p>
+<ul>
+<li>Ask if the difference between x and y is less than 10</li>
+<li>Ask if <code>"apple"</code> is less than the variable <code>s</code></li>
+<li>Ask if the variable <code>x</code> is in the list <code>[35, 20, -15, -25, 30]</code></li>
+<li>Ask if the variable <code>y</code> is less than 0</li>
+<li>Ask if the variable <code>y</code> is greater than 100</li>
+</ul>
+</section>
+<section id="boolean-logical-operators" class="level2">
+<h2 class="anchored" data-anchor-id="boolean-logical-operators">Boolean logical operators</h2>
+<p>We can also put boolean expressions like the ones above together using the boolean logical operators: <code>and</code>, <code>or</code>, and <code>not</code>. The table below describes how these operators work.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A <code>and</code> B</td>
+<td style="text-align: left;">Evaluates to <code>True</code> if both the value of A and the value of B are <code>True</code>, otherwise it evaluates to <code>False</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A <code>or</code> B</td>
+<td style="text-align: left;">Evaluates to <code>True</code> if at least one of A or B evaluates to <code>True</code>, otherwise it evaluates to <code>False</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>not</code> A</td>
+<td style="text-align: left;">Evaluates to <code>True</code> if the value of A is <code>False</code>, and to <code>False</code> if the value of A is <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<p>Add the lines below to the script you started for the previous section. These depend on the variables defined earlier. Which of the following are <code>True</code>, and which <code>False</code>? Can you explain why each one produces the value it does? Discuss with a teammate, and ask if you are unsure.</p>
+<p>Recall that the percent sign means to take the remainder of the first operand divided by the second operand. Also recall that the square bracket notation extracts single characters from a string based on position, where the first character is at position zero.</p>
+<div id="0c50a139" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">print</span>(<span class="st">"Are x and y multiples of 5?   "</span>, (x <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>) <span class="kw">and</span> (y <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(<span class="st">"Does s start with b, or is it more than 10 long?   "</span>, (s[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'b'</span>) <span class="kw">or</span> (<span class="bu">len</span>(s) <span class="op">&gt;=</span> <span class="dv">10</span>))</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="bu">print</span>(<span class="st">"Does s not contain the character i?   "</span>, <span class="st">'i'</span> <span class="kw">not</span> <span class="kw">in</span> s)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="bu">print</span>(<span class="st">"Is the 2nd character in s not an a?   "</span>, <span class="kw">not</span> (s[<span class="dv">1</span>] <span class="op">==</span> <span class="st">'a'</span>))</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="bu">print</span>(<span class="st">"Is x in nums, and y not?   "</span>, (x <span class="kw">in</span> nums) <span class="kw">and</span> <span class="kw">not</span> (y <span class="kw">in</span> nums))</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">print</span>(<span class="st">"Is x between 15 and 50, inclusive  "</span>, (x <span class="op">&gt;=</span> <span class="dv">15</span>) <span class="kw">and</span> (x <span class="op">&lt;=</span> <span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Are x and y multiples of 5?    True
+Does s start with b, or is it more than 10 long?    True
+Does s not contain the character i?    True
+Is the 2nd character in s not an a?    True
+Is x in nums, and y not?    False
+Is x between 15 and 50, inclusive   True</code></pre>
+</div>
+</div>
+<p><strong>Try this to hand in:</strong> Save your answer for this activity into a new Python file. Practice with boolean expressions that have boolean operators here:</p>
+<ul>
+<li>Check if <code>x</code> is less than 0 or greater than 100</li>
+<li>Check if either <code>'a'</code> or <code>'e'</code> are in <code>s</code></li>
+<li>Check if both <code>x</code> and <code>y</code> are less than 50</li>
+<li>Check if <code>nums</code> has a length greater than 1, and (if so) if its zero-index element is less than its one-index element</li>
+</ul>
+</section>
+</section>
+<section id="conditional-statements" class="level1">
+<h1>Conditional statements</h1>
+<p>We often use boolean expressions in conditional statements, if statements, to cause the computer to choose one or another in a set of actions. The general form of an if statement is shown below. An if must have at least the first part, and has elif parts and an else optionally. Note that all the indented code options must be indented exactly the same amount.</p>
+<div id="ff05dc35" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span> <span class="op">&lt;</span>boolean<span class="op">-</span>expression<span class="op">&gt;</span>:</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="op">&lt;</span>code<span class="op">-</span>to<span class="op">-</span>perform<span class="op">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">elif</span> <span class="op">&lt;</span>boolean<span class="op">-</span>expression<span class="op">&gt;</span>:</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="op">&lt;</span>code<span class="op">-</span>to<span class="op">-</span>perform<span class="op">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>...</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="cf">else</span>:  <span class="co"># note, no booleans expression with else</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="op">&lt;</span>code<span class="op">-</span>to<span class="op">-</span>perform<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Python evaluates each boolean expression in an if statement in order, stopping when it finds an expression that evaluates to <code>True</code>. It then performs the code associated with the true test, and then skips the rest of the conditional statement.</p>
+<p>Look at the example below. Before typing it into an editor, try to figure out what it might print, given different values for <code>x</code> and <code>y</code>. Then put it in your Python file, and run it. Choose different values for <code>x</code> and <code>y</code> to cause different parts of the <code>if</code> statement to run. Explain your choices.</p>
+<div id="7f73820c" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter a value for x: "</span>))</span>
+<span id="cb7-2"><a href="#cb7-2"></a>y <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter a value for y: "</span>))</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="cf">if</span> x <span class="op">&gt;</span> y:</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="bu">print</span>(x, y)</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="cf">elif</span> y <span class="op">&gt;</span> x:</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="bu">print</span>(y, x)</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="cf">else</span>:</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conditionals-and-images" class="level1">
+<h1>Conditionals and images</h1>
+<p>To practice with the conditional form, we are going to apply it to several tasks involving images, both displaying images and drawing on them.</p>
+<section id="user-selecting-images-to-show" class="level2">
+<h2 class="anchored" data-anchor-id="user-selecting-images-to-show">User selecting images to show</h2>
+<p><strong>Try this to hand in:</strong> By now you have probably had a typo in the name or path for an image you wanted to read in and display. OpenCV does not generate an error when it fails to read in an image, though it does print a warning, and the <code>imread</code> function returns the special Python value <code>None</code>. If a script has a <em>hard-coded</em> path to a file, we programmers can debug the program until we fix the path. But what if we want the user to select the image to read? Then we need to be more clever, and an <code>if</code> statement that checks what <code>imread</code> has returned is what we need. Do the following:</p>
+<ul>
+<li>Make a new script file, and at the top import <code>cv2</code></li>
+<li>Use the <code>input</code> function to ask the user to enter the name of a file in <code>SampleImages</code> (save their result to a variable)</li>
+<li>Using string operations, add <code>SampleImages/</code> to the front of the user’s string (be sure to save it to a variable)</li>
+<li>Read in the image given by the string you have built, saving it to a variable <code>img</code></li>
+<li>Use an <code>if</code> statement to check whether <code>img</code> is an image or not: <code>if img is None:</code></li>
+<li>If this is true, in the indented section, print a message that the program couldn’t find the file, and then call the special <code>exit(0)</code> function, which causes the program to end immediately</li>
+<li>If the <code>if</code> test is false, then use <code>imshow</code> and <code>waitKey</code> to display the image the user entered.</li>
+</ul>
+</section>
+<section id="slideshow" class="level2">
+<h2 class="anchored" data-anchor-id="slideshow">Slideshow</h2>
+<p><strong>Try this to hand in:</strong> If we combine an <code>if</code> statement and a <code>for</code> loop, we can write a program that displays a slideshow of all the images in a folder, in an efficient way. We will create a program that displays all the images in <code>SampleImages</code>, one by one. The user should type a key in the image window to move from one picture to the next.</p>
+<p>We will use a function, <code>listdir</code>, from the <code>os</code> module to get a list of all the files and folders that are a part of the <code>SampleImages</code> folder. The function returns a list of strings. We will then loop over that list, and for each string, check if it has a filename extension of <code>jpg</code> or <code>png</code>. If so, we will read the image and display it, and it not, we will just go on to the next item in the list. Below are the steps to complete, in more detail.</p>
+<p>Make a new Python file, and do the following:</p>
+<ul>
+<li>Start by importing <code>cv2</code> and the <code>os</code> module</li>
+<li>Use <code>os.listdir("SampleImages")</code> to get a list of the files and folders in <code>SampleImages</code>. Save the returned value into a variable called <code>allFiles</code>.
+<ul>
+<li>Before moving on, temporarily add a <code>print</code> statement, and print the value of <code>allFiles</code>. Examine it, make sense of what the list contains, and make sure it is doing the right thing (ask for help if it isn’t)</li>
+</ul></li>
+<li>Next, write a <code>for</code> loop that loops over the strings in <code>allFiles</code>: call the loop variable <code>name</code>.
+<ul>
+<li>Again, before moving on, temporarily add a print statement and print the loop variable. It should be a file or folder name from <code>SampleImages</code></li>
+</ul></li>
+<li>Inside the loop, add an <code>if</code> statement to check if the current <code>name</code> is an image file:
+<ul>
+<li>Use this string slicing to extract the last three characters: <code>name[-3:]</code></li>
+<li>Use <code>or</code> to perform two comparisons: Compare the sliced substring to <code>jpg</code>, and separately compare it to <code>png</code></li>
+</ul></li>
+<li>If the test of the <code>if</code> is <code>True</code>, then:
+<ul>
+<li>Attach the folder name to the file name like this: <code>"SampleImages/" + name</code></li>
+<li>Read in the image using the path string you created</li>
+<li>Display the image in the <code>"Slideshow"</code> window</li>
+<li>Wait for the user to type a key</li>
+</ul></li>
+</ul>
+<p>Make sure that the <code>if</code> statement and all of its parts are indented inside the <code>for</code> loop.</p>
+<p>Be sure to test your program all the way through to make sure it works for every image</p>
+<p><strong>Does the structure of this program make sense to you?</strong> If so, great! If not, ask for help!</p>
+</section>
+<section id="user-control-of-shape-on-image" class="level2">
+<h2 class="anchored" data-anchor-id="user-control-of-shape-on-image">User-control of shape on image</h2>
+<p><strong>Try this to hand in:</strong> Next we will write a program that will allow the user to control the position of a shape on a background image. This will teach you how to use more information from the <code>waitKey</code> function, setting us up to work with video camera feeds very soon!</p>
+<ul>
+<li>Make a copy of your solution to the flying saucer program from the previous activity (if you didn’t finish that part, ask your teammates or work on it first).</li>
+<li>We are going to change the <code>x</code> and <code>y</code> variables so that they are accumulator variables:
+<ul>
+<li>Define <code>x</code> to be 10 before the <code>for</code> loop</li>
+<li>Define <code>y</code> to be 10 before the <code>for</code> loop</li>
+<li>Remove the two lines inside the <code>for</code> loop that set the values of <code>x</code> and <code>y</code> according to the value of <code>i</code></li>
+<li>Change the <code>waitKey</code> call by removing the time input, and assign a variable to hold the value returned by <code>waitKey</code></li>
+<li>Print the value of that new variable so that you can see what <code>waitKey</code> returns</li>
+</ul></li>
+</ul>
+<p>Every typical keyboard character, including control characters that are typically not printable, is represented inside the computer by a one-byte integer value as defined by the ASCII table (Python uses the much larger Unicode representation, but ASCII is a subset of that, and it’s all we will focus on). Open a copy of <a href="https://www.rapidtables.com/code/text/ascii-table.html">the ASCII table.</a>. Focus on the <em>Dec</em> and <em>Char</em> columns in this table. The <em>Dec</em> column shows the decimal value from 0 to 127, and the <em>Char</em> column shows the character that corresponds to that integer value. The ones shown in all-caps are non-printable characters, like control characters. ASCII only uses half of the byte, a <strong>nibble</strong>, to represent typical characters, the values from 128 to 255 are special “extended” characters that we won’t need for now. Look for the values of alphabetic characters, upper and lower case, and the digits.</p>
+<p>Once you have looked at the ASCII table, run the program you’ve created above, and try typing different keys: the value returned from <code>waitKey</code> is the integer that corresponds to the key you typed.</p>
+<p>We can convert between a character and its integer counterpart using the <code>ord</code> and <code>chr</code> functions: <code>ord</code> takes a character and returns its integer value, <code>chr</code> takes an integer and returns its character value:</p>
+<div id="9351aee3" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>a1 <span class="op">=</span> <span class="dv">67</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>a2 <span class="op">=</span> <span class="dv">111</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>n3 <span class="op">=</span> <span class="st">'o'</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>n4 <span class="op">=</span> <span class="st">'L'</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="bu">print</span>(a1, <span class="bu">chr</span>(a1))</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="bu">print</span>(a2, <span class="bu">chr</span>(a2))</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="bu">print</span>(n3, <span class="bu">ord</span>(n3))</span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="bu">print</span>(n4, <span class="bu">ord</span>(n4))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>67 C
+111 o
+o 111
+L 76</code></pre>
+</div>
+</div>
+<ul>
+<li>Add a line after the <code>waitKey</code> and assign a variable <code>c</code> to hold the result of calling <code>chr</code> on the returned value from <code>waitKey</code></li>
+<li>Add an <code>if</code> statement to respond to the key the user pressed. We will respond to w-a-s-d.&nbsp;
+<ul>
+<li>Create an <code>if</code>-<code>elif</code> statement with four separate tests: comparing <code>c</code> to <code>'w'</code>, comparing it to <code>'a'</code>, comparing it to <code>'s'</code>, and comparing it to <code>'d'</code></li>
+<li>In the <code>'w'</code> case, we will want the saucer to move up on the screen</li>
+<li>In the <code>'s'</code> case, we will want the saucer to move down on the screen</li>
+<li>In the <code>'a'</code> case, we will want the saucer to move left on the screen</li>
+<li>In the <code>'d'</code> case, we will want the saucer to move right on the screen</li>
+<li>You can leave out the <code>else</code> clause, or include one and print a message that the program didn’t understand what the user typed</li>
+<li>As a first step, just put a print statement in each indented block of the <code>if</code> statement that prints which direction we want to move the saucer, given the key the user pressed</li>
+</ul></li>
+<li>Finally, in each of the four cases of our <code>if</code> statement, you will change either the <code>x</code> or the <code>y</code> variable, updating it to complete the accumulator patterns
+<ul>
+<li>In the up case, subtract a fixed amount from <code>y</code></li>
+<li>In the down case, add to <code>y</code> that fixed amount</li>
+<li>In the left case, subtracts a fixed amount from <code>x</code></li>
+<li>In the right case, add the fixed amount to <code>x</code></li>
+</ul></li>
+</ul>
+<p>Now your program should be complete.</p>
+</section>
+<section id="optional-challenge-bouncing-ball-animation" class="level2">
+<h2 class="anchored" data-anchor-id="optional-challenge-bouncing-ball-animation">Optional challenge: Bouncing-ball animation</h2>
+<p>For this optional challenge, you will create a program to draw a moving circle on the screen, and have it bounce off the edges of the screen. We do this by keeping accumulator variables for the x and y center position of the ball, and separately keeping accumulator variables, <code>deltaX</code> and <code>deltaY</code>, for the changes in position in x and y directions (how much the x value should change from one frame to the next, and similarly how much the y direction should change). When the ball reaches one of the edges of the background image, we will change <code>deltaX</code> or <code>deltaY</code> or both, so that the ball moves in a different direction.</p>
+<p><em>Hint:</em> For this to work, you will need to know the width and height of the background image. You can either look this up yourself by clicking on the image in PyCharm, and then hard-coding the values into your program. <strong>Or</strong>, you can access the size of the image (if it were in variable <code>img</code>) like this: <code>(height, width, depth) = img.shape</code>.</p>
+<p>Start, as before with the flying saucer program from last time: * As in the previous program, initialize <code>x</code> and <code>y</code> to be 10 before the <code>for</code> loop, and remove the lines inside the loop that compute <code>x</code> and <code>y</code> in terms of <code>i</code>. * Add a definition of <code>deltaX</code> to be 5 and <code>deltaY</code> to be 3 before the <code>for</code> loop as well * Change what is drawn each time from an ellipse to a circle to simplify matters * Increase the number of iterations of the <code>for</code> loop so that the program will run longer * Make sure that the <code>waitKey</code> call is passed a number for the millisecond delay, we want this program to run without user input * On the lines below the call to <code>waitKey</code>, add two lines to update <code>x</code> and <code>y</code> by adding <code>deltaX</code> and <code>deltaY</code> to them, respectively * Below that, add four <code>if</code> statements (not an <code>if</code>-<code>elif</code>, but separate statements) * In the first <code>if</code> statement, check to see if <code>x</code> plus the circle’s radius is <code>&gt;=</code> the image width * If it is, then set <code>deltaX</code> to be -5 * No <code>else</code> needed for this conditional * In the second <code>if</code> statement, check to see if <code>x</code> minus the circle’s radius is <code>&lt;=</code> 0 * If it is, then set <code>deltaX</code> to be 5 (this can only happen if the circle is moving left in the x direction, so <code>deltaX</code> must currently be -5). * No <code>else</code> needed for this conditional * Implement the other two <code>if</code> statements similarly for the <code>y</code> variable, using -3 and 3 as the values for <code>deltaY</code></p>
+<p>A link to a video showing what this should look like will be available through Moodle.</p>
+</section>
+</section>
+<section id="what-to-hand-in" class="level1">
+<h1>What to hand in</h1>
+<p>You should have multiple Python files for this activity. At the very least, you <strong>must</strong> have:</p>
+<ul>
+<li>A file containing your boolean expression practice (two parts above)</li>
+<li>A file containing your script that asks the user what image to load and display</li>
+<li>A file containing your slideshow script</li>
+<li>A file containing your script where the user controls the movement of the shape on the image</li>
+<li>(Optional) a file containing the bouncing ball program</li>
+</ul>
+<p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
