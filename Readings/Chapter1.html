@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-14">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>Chapter 1, Getting Started with OpenCV</title>
+<title>Chapter 1, Getting Started with OpenCV – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,20 +60,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Chapter1_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Chapter1_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="Chapter1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="Chapter1_files/libs/quarto-html/popper.min.js"></script>
-<script src="Chapter1_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Chapter1_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Chapter1_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Chapter1_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Chapter1_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Chapter1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Chapter1_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="Chapter1_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="Chapter1_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="Chapter1_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -105,10 +138,42 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -129,7 +194,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 14, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -137,10 +202,12 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#getting-started-with-opencv" id="toc-getting-started-with-opencv" class="nav-link active" data-scroll-target="#getting-started-with-opencv"><span class="header-section-number">1</span> Getting started with OpenCV</a>
@@ -161,7 +228,8 @@ window.Quarto = {
   </ul></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -171,7 +239,7 @@ window.Quarto = {
 <section id="getting-started-with-opencv" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Getting started with OpenCV</h1>
 <p>OpenCV is an add-on <strong>module</strong> in Python. Modules contain constants and functions that have a special purpose. They are not automatically loaded and available when we start up the Python interpreter. We have to explicitly ask for them to be loaded using the <code>import</code> command. For instance, the command below will load the OpenCV tools.</p>
-<div id="344f5c26" class="cell" data-execution_count="1">
+<div id="3fe3ddbd" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> cv2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can type the <code>import</code> command into the Python shell, or you can put it in a script file.</p>
@@ -183,7 +251,7 @@ window.Quarto = {
 <p><strong>Try examples!</strong> Throughout this and future sections, you are encouraged to try the code examples along with the reading. To prepare for that, set up a project in PyCharm using the version of Python that has OpenCV installed in it, and move a copy of the <code>SampleImages</code> folder into the project. Put your code files in the top level of the project, alongside the <code>SampleImages</code> folder.</p>
 <section id="reading-and-displaying-images" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="reading-and-displaying-images"><span class="header-section-number">1.1</span> Reading and displaying images</h2>
-<div id="c2ddc6f0" class="cell" data-execution_count="2">
+<div id="3644fcd2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/snowLeo1.jpg"</span>)</span>
@@ -479,28 +547,28 @@ Figure&nbsp;8: Grayscale and color image matrix structures
 </ul>
 <p><strong>Note:</strong> Drawing or making other changes to an image does <strong>not</strong> automatically update the image displayed previously by a call to <code>imshow</code>. You must call <code>imshow</code> again to see the changes.</p>
 <p><strong>Drawing lines</strong></p>
-<div id="ebb1866f" class="cell" data-execution_count="3">
+<div id="43078cbb" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>cv2.line(img, pt1, pt2, color, thickness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>line</code> function takes in an image to draw on, two (x, y) coordinate points, input as tuples, and a color (given as a BGR tuple). The <code>thickness</code> input is optional, but is often used to tell how many pixels wide the line should be. If you do not specify thickness the line is drawn as one pixel wide. The function draws a line as specified between the two coordinate points.</p>
 <p><strong>Drawing rectangles</strong></p>
-<div id="a2acdc17" class="cell" data-execution_count="4">
+<div id="8af5d6e5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>cv2.rectangle(img, pt1, pt2, color, thickness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>rectangle</code> function takes in an image to draw on, and two (x, y) coordinate points, as tuples. Typically, we also specify the color tuple and line thickness. The two points specify two opposite corner pixels of the rectangle to draw (for instance, upper-left and lower-right corners). If the line thickness is 1 or greater, then a line rectangle is drawn with the given corner points, line color, and line thickness. If the line thickness is negative then a filled in rectangle with the given corners and color is drawn.</p>
 <p><strong>Drawing circles</strong></p>
-<div id="bad360db" class="cell" data-execution_count="5">
+<div id="df294bbc" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>cv2.circle(img, pt, radius, color, thickness) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>circle</code> function takes in the image to draw on, the center point of the circle (a pixel location as an (x, y) tuple), an integer radius for the circle, and a color tuple. Line thickness is optional, and works the same as for rectangles: positive specifies line thickness, negative draws a filled-in circle.</p>
 <p><strong>Drawing ellipses</strong></p>
-<div id="a0d95aaf" class="cell" data-execution_count="6">
+<div id="74034774" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>cv2.ellipse(img, pt, axes, angle, startAngle, endAngle, color, thickness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Drawing ellipses (ovals) is the most complicated of the functions we will look at, because the function not only draws ellipses but also arcs and partial ellipses, both line and filled. Therefore, we will go into more details about what each input parameter does.</p>
 <p>To take the easy ones first, <code>img</code> is the image to draw on, <code>pt</code> is the center point as (x, y) coordinates (if you like mathy details, <code>pt</code> is the center point of the circle that circumscribes this ellipse, as ellipses are usually defined by two points). The <code>color</code> and <code>thickness</code> inputs work just as for the other drawing commands.</p>
 <p>For the remaining inputs, we will illustrate them with a specific example, shown below.</p>
-<div id="ee1f9b9d" class="cell" data-execution_count="7">
+<div id="1047f670" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-7-2"><a href="#annotated-cell-7-2"></a></span>
 <span id="annotated-cell-7-3"><a href="#annotated-cell-7-3"></a>beachIm <span class="op">=</span> cv2.imread(<span class="st">'SampleImages/beachBahamas.jpg'</span>)</span>
@@ -689,7 +757,7 @@ Figure&nbsp;13: Partial ellipses with varying start and end values
 </div>
 <p>Be prepared to experiment any time you want to use the <code>ellipse</code> function.</p>
 <p><strong>Adding text to images</strong></p>
-<div id="6a3a4c64" class="cell" data-execution_count="8">
+<div id="50cbe36c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>cv2.putText(img, text, pt, font, fontScale, color, thickness)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>OpenCV can draw text on images, though the tools, and fonts, are rather bare-bones. The inputs include the image to draw on, the text to draw, and a point tuple specifying where to draw the text, plus the font, scale of font, text color, and line thickness for the text.</p>
@@ -747,7 +815,7 @@ Figure&nbsp;13: Partial ellipses with varying start and end values
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="writing-images-to-files"><span class="header-section-number">1.4.2</span> Writing images to files</h3>
 <p>When we modify images in Python, the changes are only to the copy of the data that we have loaded into our Python program. They are not saved to the original file we read in. This is probably wise!</p>
 <p>That said, you might create a beautiful picture and want to save it to a file. You can do that using the <code>imwrite</code> function. Always use a new filename when saving an image to file. <strong>Beware! if you use an existing filename in <code>imwrite</code>, you will overwrite the previous contents of that file</strong></p>
-<div id="a102931b" class="cell" data-execution_count="9">
+<div id="3bbeaaa4" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>cv2.imwrite(filename, image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You call <code>imwrite</code> and first give it a path and filename where you want the new image to be saved. Be sure to include the extension, otherwise OpenCV does not know how to format the image data correctly in the file. The second input to <code>imwrite</code> is the image array itself.</p>
@@ -755,7 +823,7 @@ Figure&nbsp;13: Partial ellipses with varying start and end values
 <section id="simple-drawing-example" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="simple-drawing-example"><span class="header-section-number">1.4.3</span> Simple Drawing Example</h3>
 <p>The script below creates three images, and then illustrates each of the new images from scratch and then illustrates each of the drawing functions; it saves the resulting pictures to two files. It uses two numpy commands: zeros and ones. The zeros function makes an n-dimensional matrix filled entirely with zeros. In this case, we give the dimensions we want (300 rows, 500 columns, 3 channels) and tell it to make the numbers be uint8, the special type we need for 0 to 255 values. The ones function makes a matrix filled with ones. This call has 500 rows, 300 columns, and 3 channels, all filled with uint8. Copy these commands into a script and run it. Note that the imwrite function saves an image to a file. The type of the file is given by the extension on the filename.</p>
-<div id="fc4a5643" class="cell" data-execution_count="10">
+<div id="4f36aac5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1"></a><span class="im">import</span> cv2</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="annotated-cell-10-3"><a href="#annotated-cell-10-3"></a></span>
@@ -822,12 +890,13 @@ Figure&nbsp;13: Partial ellipses with varying start and end values
 </div>
 <p>The <code>zeros</code> function in Numpy creates an array and fills it with all zeros. We just specify the dimensions of the array (rows, columns, depth), and the type of data to store in the array. Since images use <strong>8-bit unsigned integers</strong> to represent color channel values, the special Numpy data type <code>uint8</code> is what we want. The <code>ones</code> function is similar, except that it creates an array filled with all ones. We can convert the pixels to white by multiplying by 255.</p>
 <p>After reading this script, try it out for yourself. Try modifying parts of each command, or add additional commands, until you understand how each function works. Make sure you can draw lines, filled and unfilled rectangles, filled and unfilled circles, filled and unfilled ellipses and arcs, and text, all in different colors.</p>
+
+
 </section>
 </section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

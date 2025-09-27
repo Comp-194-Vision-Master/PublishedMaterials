@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>ICA: Basic Python Data Types</title>
+<title>ICA: Basic Python Data Types – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,23 +60,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="ICA2-PythonDataTypes_files/libs/clipboard/clipboard.min.js"></script>
-<script src="ICA2-PythonDataTypes_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="ICA2-PythonDataTypes_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="ICA2-PythonDataTypes_files/libs/quarto-html/popper.min.js"></script>
-<script src="ICA2-PythonDataTypes_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="ICA2-PythonDataTypes_files/libs/quarto-html/anchor.min.js"></script>
-<link href="ICA2-PythonDataTypes_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="ICA2-PythonDataTypes_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="ICA2-PythonDataTypes_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="ICA2-PythonDataTypes_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ICA2-PythonDataTypes_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -97,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -105,10 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
@@ -119,7 +186,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -214,7 +282,7 @@ Table&nbsp;1: Basic built-in arithmetic operations, and functions on numbers
 <p>In general, arithmetic operators follow this rule: <strong>If both operands are integers, then the result is an integer. If at least one operand is a floating-point number, then the result is a float, too.</strong> The single-slash, decimal division operator is an exception: it always returns a float.</p>
 <p>There are three division-related operators: decimal division (<code>/</code>), quotient division (<code>//</code>), and remainder (`%). Decimal division gives the normal calculator result for dividing two numbers. Quotient division returns only the integer part, the <em>quotient</em> of the division. It cuts off any part after the decimal point (another way of thinking about it is that it takes the <em>floor</em>, it rounds down to the nearest integer less than the value). The <em>remainder</em> operator gives the remainder of the division of its two operands.</p>
 <p>Examine the code below, which runs each of the examples above and prints their results, along with explanatory text. Can you correctly predict each result?</p>
-<div id="f764bca5" class="cell" data-execution_count="1">
+<div id="105fc11c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">"3 + 12 ="</span>, <span class="dv">3</span> <span class="op">+</span> <span class="dv">12</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="bu">print</span>(<span class="st">"45 - 19 ="</span>, <span class="dv">45</span> <span class="op">-</span> <span class="dv">19</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(<span class="st">"5 * 100 ="</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">100</span>)</span>
@@ -252,7 +320,7 @@ float(2) = 2.0</code></pre>
 <p>Strings are collections of characters, and characters are keyboard symbols; each character represents a single keyboard key. Strings allow us to incorporate text into our programs, making them more readable. Programs can also perform text processing, though we will get to that later on.</p>
 <p>Strings and characters are written the same in Python. A character is just a string of length 1. Strings are written with quotes before and after them. You can either use double-quotes (<code>"</code>) or single-quotes (<code>'</code>), as the examples below show. You can also make triple-quoted strings that use three single-quotes or three double-quotes. Triple-quoted strings are the only ones that can be written over multiple lines, and we use them for program documentation as well.</p>
 <p>Below is a script that demonstrates various ways of writing strings, and printing their values.</p>
-<div id="374329fa" class="cell" data-execution_count="2">
+<div id="b350f7b0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">print</span>(<span class="st">'Hi there'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="bu">print</span>(<span class="st">"Hi there"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="bu">print</span>(<span class="st">"I contain an apostrophe, don't I?"</span>)</span>
@@ -330,7 +398,7 @@ Table&nbsp;2: Indices to reference individual characters in the string <code>"AB
 </figure>
 </div>
 <p>Add the script below to the script from earlier. You need the variable definitions for this to work.</p>
-<div id="f3665ecb" class="cell" data-execution_count="3">
+<div id="002c4b7f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1"></a><span class="bu">print</span>(<span class="bu">len</span>(<span class="st">'foo'</span>), <span class="bu">len</span>(s1), <span class="bu">len</span>(longStr))</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a><span class="bu">print</span>(s1 <span class="op">+</span> <span class="st">"fish"</span>, <span class="st">'a'</span> <span class="op">+</span> <span class="st">'b'</span> <span class="op">+</span> <span class="st">'c'</span>)</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a><span class="bu">print</span>(<span class="st">'X'</span> <span class="op">*</span> <span class="dv">10</span>, <span class="dv">3</span> <span class="op">*</span> s2)</span>
@@ -377,7 +445,7 @@ at do mo man</code></pre>
 <p>Experiment with this script, changing which strings, positions, substrings are included. Ask questions if any result or operation does not make sense to you.</p>
 <p><strong>Try this to hand in:</strong> Make a new Python file, and write a program as described below to automate the writing of a thank-you note.</p>
 <p>First, define a variable with the name of the person who has given you a gift.</p>
-<div id="3f9adc32" class="cell" data-execution_count="4">
+<div id="75f9c0c0" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>kindPerson <span class="op">=</span> <span class="st">'Aunt Judi'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Build a second variable that holds your thank-you note, using the <code>+</code> operator so that instead of including a specific gift-giver’s name, you insert the variable <code>kindPerson</code>. Print the final string, which should look like:</p>
@@ -390,7 +458,7 @@ Love, Mittens</code></pre>
 <h1>Lists</h1>
 <p>A list is a <strong>linear collection</strong> of data. That means that it is a container that holds multiple pieces of data, lining them up in some kind of order. In Python, lists can hold any type of data, including other lists, with varying data types even within a single list.</p>
 <p>You write a list by surrounding the data with square brackets. Both lists and strings share some of the same operations; see the examples below.</p>
-<div id="eadb1045" class="cell" data-execution_count="5">
+<div id="7b84de9d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1"></a>lst1 <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">16</span>, <span class="dv">2</span>]</span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2"></a>lst2 <span class="op">=</span> [<span class="st">'Nauru'</span>, <span class="st">'Kiribati'</span>, <span class="st">'Vanuatu'</span>]</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3"></a><span class="bu">print</span>(lst1, lst2)</span>
@@ -473,10 +541,11 @@ Pennies: 2</code></pre>
 <li>(Optional: the script for the change-making challenge question</li>
 </ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

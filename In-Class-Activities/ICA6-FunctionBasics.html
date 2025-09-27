@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-18">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>ICA: Function Basics</title>
+<title>ICA: Function Basics – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,20 +60,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="ICA6-FunctionBasics_files/libs/clipboard/clipboard.min.js"></script>
-<script src="ICA6-FunctionBasics_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="ICA6-FunctionBasics_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="ICA6-FunctionBasics_files/libs/quarto-html/popper.min.js"></script>
-<script src="ICA6-FunctionBasics_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="ICA6-FunctionBasics_files/libs/quarto-html/anchor.min.js"></script>
-<link href="ICA6-FunctionBasics_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="ICA6-FunctionBasics_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="ICA6-FunctionBasics_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="ICA6-FunctionBasics_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ICA6-FunctionBasics_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="ICA6-FunctionBasics_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="ICA6-FunctionBasics_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="ICA6-FunctionBasics_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -105,10 +138,42 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -129,7 +194,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 18, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -137,10 +202,12 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
@@ -156,7 +223,8 @@ window.Quarto = {
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -177,7 +245,7 @@ window.Quarto = {
 <section id="function-definitions" class="level2">
 <h2 class="anchored" data-anchor-id="function-definitions">Function definitions</h2>
 <p>Remember the format for a function definition. A function definition needs to specify (1) the name of the function, (2) the inputs to the function, and (3) what should happen when the function is called including what value should be returned, if any. Below is an outline of what a function definition looks like–it’s not a real function, though.</p>
-<div id="db52f090" class="cell" data-execution_count="1">
+<div id="a1b58090" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> functionName(var1, var2, …):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    function body, indented statements that say what to do when the function <span class="kw">is</span> called</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -216,7 +284,7 @@ window.Quarto = {
 <p>To gain a better understanding of how functions work, we will trace by hand what happens when a call is made to a function we have defined. We will also try other tools within Python and PyCharm and elsewhere such as the <a href="https://pythontutor.com/python-compiler.html#mode=edit">Online Compiler, Visual Debugger, and AI Tutor</a> to help us visualize what is happening.</p>
 <p><strong>Try this to hand in:</strong> Save your answer for this activity into a Python file called <code>tracing.py</code>.</p>
 <p>Consider the following function, which was used to show tracing by hand in videos/class notes, as well. The <code>smallestDiff</code> function takes in three numbers and returns the smallest difference between the three numbers.</p>
-<div id="d31a8136" class="cell" data-execution_count="2">
+<div id="4c9b1651" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">def</span> smallestDiff(x, y, z):</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    diff1 <span class="op">=</span> <span class="bu">abs</span>(x <span class="op">-</span> y)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    diff2 <span class="op">=</span> <span class="bu">abs</span>(y <span class="op">-</span> z)</span>
@@ -244,18 +312,18 @@ Figure&nbsp;1: Labeled function <code>smallestDiff</code>
 </ul>
 <p>When we trace a function by hand, we write out the local environment at the start of the function call, and update it whenever a variable is altered or a new variable is added. We showed this in the videos for today.</p>
 <p>Copy the definition of <code>smallestDiff</code> to the file you created. But before running it, trace the function call below by hand. Draw the local environment table (you can just put it in the Python file as a comment). Just draw the final state of the local environment, just before the functionr returns.</p>
-<div id="719744c1" class="cell" data-execution_count="3">
+<div id="72d3cd79" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>smallestDiff(<span class="dv">32</span>, <span class="dv">43</span>, <span class="dv">90</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once you are sure what the return value would be for this call, add this call to your file, printing the result. Were you right? If so, move on. If not, ask for help!</p>
 <p>Next add the function definition below to your file. This function takes in the price of an item at a store, and the sales tax rate, and it calculates what the total price to be paid is.</p>
-<div id="03527f64" class="cell" data-execution_count="4">
+<div id="7b0faf5e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> addTax(price, taxRate):</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    taxAmt <span class="op">=</span> price <span class="op">*</span> taxRate</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">return</span> price <span class="op">+</span> taxAmt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Trace this function with the call shown below, drawing the local environment table for this function. Notice that the returned value is not just a value stored in a variable, but an arithmetic expression. That’s okay, it doesn’t get added to the local environment table, just returned.</p>
-<div id="ab5a8e08" class="cell" data-execution_count="5">
+<div id="cc27f4fc" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>addTax(<span class="fl">26.0</span>, <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -270,12 +338,12 @@ Figure&nbsp;1: Labeled function <code>smallestDiff</code>
 </ul>
 <p><strong>Try this to hand in:</strong> Save your answer for this part into the same Python file as before.</p>
 <p>Add the following line to the definition of <code>smallestDiff</code>, by adding a line just below the function header (the <code>def</code> line), don’t forget to indent it in order to be a part of the function’s statements.</p>
-<div id="9b44462f" class="cell" data-execution_count="6">
+<div id="d29aea08" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">print</span>(<span class="st">'smallestDiff inputs:'</span>, x, y, z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This line will print the input parameter values, so we can check that they are what we expect.</p>
 <p>Then add the following line just before the <code>return</code> line, also indented to be a part of the function.</p>
-<div id="def7773f" class="cell" data-execution_count="7">
+<div id="9bc6fba7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">print</span>(diff1, diff2, diff3, <span class="st">'return value:'</span>, minDiff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will print the local variables, and especially the variable holding the return value, so we can check that each line did what we wanted it to.</p>
@@ -336,7 +404,7 @@ Figure&nbsp;3: PyCharm debugging after a few steps
 <h1>Practice with tracing and debugging</h1>
 <p>You have been provided with a starter program in <code>barChart.py</code>. This program includes a function definition, and then a main script that sets up an image and data, and runs the <code>drawBarChart</code> function, displaying the result. The <code>drawBarChart</code> function is copied below.</p>
 <p>This program is supposed to draw a bar chart based on some number data stored as a list. One bar per number, and the height of the bar should be proportional to the value of the number, with the tallest bar close to the height of the image.</p>
-<div id="cba57eac" class="cell" data-execution_count="8">
+<div id="4052fbae" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a><span class="kw">def</span> drawBarChart(image, chartData):</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2"></a>    (wid, hgt, dep) <span class="op">=</span> image.shape</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3"></a>    numItems <span class="op">=</span> <span class="bu">len</span>(chartData)</span>
@@ -425,7 +493,7 @@ Figure&nbsp;4: Correct output for the bar chart program
 <li>Define a function called <code>ave3</code> that takes three numbers as inputs: <code>x</code>, <code>y</code>, <code>z</code>. It should compute the average of the three by adding them up and dividing by 3.0. It should return the resulting value.</li>
 </ul>
 <p>To test your program automatically when the file is run, put calls to the function in the main script at the bottom of your file as shown below. Make sure the calls are not indented.</p>
-<div id="c7478d44" class="cell" data-execution_count="9">
+<div id="ee237bec" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>res <span class="op">=</span> ave3(<span class="dv">2</span>, <span class="fl">3.0</span>, <span class="fl">4.0</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="bu">print</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -468,10 +536,11 @@ Figure&nbsp;5: Archery target template
 <li>A file containing your function definitions</li>
 </ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

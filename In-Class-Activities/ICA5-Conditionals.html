@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-16">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>ICA: Booleans and Conditionals</title>
+<title>ICA: Booleans and Conditionals – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,23 +60,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="ICA5-Conditionals_files/libs/clipboard/clipboard.min.js"></script>
-<script src="ICA5-Conditionals_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="ICA5-Conditionals_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="ICA5-Conditionals_files/libs/quarto-html/popper.min.js"></script>
-<script src="ICA5-Conditionals_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="ICA5-Conditionals_files/libs/quarto-html/anchor.min.js"></script>
-<link href="ICA5-Conditionals_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="ICA5-Conditionals_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="ICA5-Conditionals_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="ICA5-Conditionals_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ICA5-Conditionals_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -97,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 16, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -105,10 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
@@ -128,7 +195,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -138,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level1">
 <h1>Overview</h1>
 <p>In this activity, we will practice with the Boolean data type, which allows us to reason about statements as true or false, and we will explore how to effectively use the <code>if</code> statement. An <code>if</code> statement is called <strong>conditionals</strong> because the actions taken are “conditional” on the value of the boolean expression in it. The conditional asks a question, or a series of questions, and it performs the set of actions associate with the first question that is true. The <code>if</code> statement syntax is more complex than the <code>for</code> loop:</p>
-<div id="150cbf4e" class="cell" data-execution_count="1">
+<div id="3ec6ebc6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span> <span class="op">&lt;</span>test1<span class="op">&gt;</span>:</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    <span class="op">&lt;</span>statements to do (once) <span class="cf">if</span> test1 <span class="kw">is</span> true<span class="op">&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="cf">elif</span> <span class="op">&lt;</span>test2<span class="op">&gt;</span>:</span>
@@ -205,7 +273,7 @@ these are constants in Python. Try typing them into the Python shell, without an
 </tbody>
 </table>
 <p>For each boolean expression, below, examine it and see if you can describe what question is being asked, and what the answer should be. Type each of the statements or expressions below in the Python console, or make a script file, where you print the value of each expression. Where you are wrong about the outcome, discuss with a neighbor, and ask for help!</p>
-<div id="ac92b914" class="cell" data-execution_count="2">
+<div id="c94ead4d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># first we’ll assign three variables to values</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>x <span class="op">=</span> <span class="dv">25</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>y <span class="op">=</span> <span class="dv">30</span></span>
@@ -265,7 +333,7 @@ len(s) == 7 is True
 </table>
 <p>Add the lines below to the script you started for the previous section. These depend on the variables defined earlier. Which of the following are <code>True</code>, and which <code>False</code>? Can you explain why each one produces the value it does? Discuss with a teammate, and ask if you are unsure.</p>
 <p>Recall that the percent sign means to take the remainder of the first operand divided by the second operand. Also recall that the square bracket notation extracts single characters from a string based on position, where the first character is at position zero.</p>
-<div id="d9d979a0" class="cell" data-execution_count="3">
+<div id="0c50a139" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">print</span>(<span class="st">"Are x and y multiples of 5?   "</span>, (x <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>) <span class="kw">and</span> (y <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>))</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(<span class="st">"Does s start with b, or is it more than 10 long?   "</span>, (s[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'b'</span>) <span class="kw">or</span> (<span class="bu">len</span>(s) <span class="op">&gt;=</span> <span class="dv">10</span>))</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="bu">print</span>(<span class="st">"Does s not contain the character i?   "</span>, <span class="st">'i'</span> <span class="kw">not</span> <span class="kw">in</span> s)</span>
@@ -293,7 +361,7 @@ Is x between 15 and 50, inclusive   True</code></pre>
 <section id="conditional-statements" class="level1">
 <h1>Conditional statements</h1>
 <p>We often use boolean expressions in conditional statements, if statements, to cause the computer to choose one or another in a set of actions. The general form of an if statement is shown below. An if must have at least the first part, and has elif parts and an else optionally. Note that all the indented code options must be indented exactly the same amount.</p>
-<div id="e184a36e" class="cell" data-execution_count="4">
+<div id="ff05dc35" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span> <span class="op">&lt;</span>boolean<span class="op">-</span>expression<span class="op">&gt;</span>:</span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="op">&lt;</span>code<span class="op">-</span>to<span class="op">-</span>perform<span class="op">&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="cf">elif</span> <span class="op">&lt;</span>boolean<span class="op">-</span>expression<span class="op">&gt;</span>:</span>
@@ -304,7 +372,7 @@ Is x between 15 and 50, inclusive   True</code></pre>
 </div>
 <p>Python evaluates each boolean expression in an if statement in order, stopping when it finds an expression that evaluates to <code>True</code>. It then performs the code associated with the true test, and then skips the rest of the conditional statement.</p>
 <p>Look at the example below. Before typing it into an editor, try to figure out what it might print, given different values for <code>x</code> and <code>y</code>. Then put it in your Python file, and run it. Choose different values for <code>x</code> and <code>y</code> to cause different parts of the <code>if</code> statement to run. Explain your choices.</p>
-<div id="78edc840" class="cell" data-execution_count="5">
+<div id="7f73820c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter a value for x: "</span>))</span>
 <span id="cb7-2"><a href="#cb7-2"></a>y <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">"Enter a value for y: "</span>))</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="cf">if</span> x <span class="op">&gt;</span> y:</span>
@@ -380,7 +448,7 @@ Is x between 15 and 50, inclusive   True</code></pre>
 <p>Every typical keyboard character, including control characters that are typically not printable, is represented inside the computer by a one-byte integer value as defined by the ASCII table (Python uses the much larger Unicode representation, but ASCII is a subset of that, and it’s all we will focus on). Open a copy of <a href="https://www.rapidtables.com/code/text/ascii-table.html">the ASCII table.</a>. Focus on the <em>Dec</em> and <em>Char</em> columns in this table. The <em>Dec</em> column shows the decimal value from 0 to 127, and the <em>Char</em> column shows the character that corresponds to that integer value. The ones shown in all-caps are non-printable characters, like control characters. ASCII only uses half of the byte, a <strong>nibble</strong>, to represent typical characters, the values from 128 to 255 are special “extended” characters that we won’t need for now. Look for the values of alphabetic characters, upper and lower case, and the digits.</p>
 <p>Once you have looked at the ASCII table, run the program you’ve created above, and try typing different keys: the value returned from <code>waitKey</code> is the integer that corresponds to the key you typed.</p>
 <p>We can convert between a character and its integer counterpart using the <code>ord</code> and <code>chr</code> functions: <code>ord</code> takes a character and returns its integer value, <code>chr</code> takes an integer and returns its character value:</p>
-<div id="500a34e2" class="cell" data-execution_count="6">
+<div id="9351aee3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>a1 <span class="op">=</span> <span class="dv">67</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>a2 <span class="op">=</span> <span class="dv">111</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>n3 <span class="op">=</span> <span class="st">'o'</span></span>
@@ -437,10 +505,11 @@ L 76</code></pre>
 <li>(Optional) a file containing the bouncing ball program</li>
 </ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

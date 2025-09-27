@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-09-05">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>Chapter 5, Image Transformations</title>
+<title>Chapter 5, Image Transformations – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,20 +60,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Chapter5_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Chapter5_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="Chapter5_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="Chapter5_files/libs/quarto-html/popper.min.js"></script>
-<script src="Chapter5_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Chapter5_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Chapter5_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Chapter5_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Chapter5_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Chapter5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Chapter5_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="Chapter5_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="Chapter5_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="Chapter5_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -105,10 +138,42 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -129,7 +194,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 5, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -137,10 +202,12 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#resizing-images" id="toc-resizing-images" class="nav-link active" data-scroll-target="#resizing-images"><span class="header-section-number">1</span> Resizing images</a></li>
@@ -151,7 +218,8 @@ window.Quarto = {
   </ul></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -192,7 +260,7 @@ window.Quarto = {
 <p><em>Interpolation</em> is the process used to make the resized image look better. When we reduce the size of the image, one new pixel might have to cover a part of the image that original had multiple pixels. When we increase the size of the image, we want to smooth the colors where we are adding pixels that weren’t there before, so that the image does not look pixelated. Interpolation determines the colors of the pixels to preserve as much information from the image as possible, while smoothing adjacent pixel values.</p>
 <p>According to the OpenCV documentation, The <code>cv2.INTER_AREA</code> interpolation method is best when reducing the size of the image, but <code>cv2.INTER_CUBIC</code> or <code>cv2.INTER_LINEAR</code> (the default method) work best when scaling an image up to a larger size.</p>
 <p>Below is a code example that illustrates some changes made to a typical image, followed by the results in <a href="#fig-resize" class="quarto-xref">Figure&nbsp;1</a>.</p>
-<div id="91534df8" class="cell" data-execution_count="1">
+<div id="de8dae93" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> cv2</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/mushrooms.jpg"</span>)</span>
@@ -287,7 +355,7 @@ y_{old} \\
 <p><span class="math display">\[x_{new} = x_{old} + t_x\]</span> <span class="math display">\[y_{new} = y_{old} + t_y\]</span></p>
 <p>Compare this formula to the affine warping formula above, and you can see how we can choose values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(d\)</span> to make these formulas out of the original (Let <span class="math inline">\(a= 1\)</span>, <span class="math inline">\(b = 0\)</span>, <span class="math inline">\(c = 0\)</span>, and <span class="math inline">\(d = 1\)</span>). Because the matrix for translation will always have this simple form, when we program it, we will have to make the matrix ourselves. Look at the 3x3 matrix shown above; since the bottom row is always fixed in value, we only have to specify the top two rows when doing an affine warp in OpenCV.</p>
 <p>In the code below, we use the <code>warpAffine</code> function to translate the contents of the image 100 pixels to the right, and 50 pixels down. This function takes in an image, and a 2x3 matrix of floating-point values that specify the six values from the affine warping formulas/matrix. We also tell the function how large to make the output image: it is common to keep it the same size, but we can choose any size we want.</p>
-<div id="e275411a" class="cell" data-execution_count="2">
+<div id="b3ed7c55" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a></span>
@@ -339,7 +407,7 @@ Figure&nbsp;3: Rotation using <code>getRotationMatrix2d</code> with center of ro
 </figure>
 </div>
 <p>The code example below rotates the image three different amounts, and #fig-rotExamples shows the resulting images.</p>
-<div id="0608be73" class="cell" data-execution_count="3">
+<div id="cd4a7ad9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>origIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/canyonlands.jpg"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>(hgt, wid, dep) <span class="op">=</span> origIm.shape</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -397,11 +465,12 @@ Figure&nbsp;4: Three different rotations of an image, demonstrating variations o
 </figcaption>
 </figure>
 </div>
+
+
 </section>
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-12">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>ICA: Numpy Arrays and Image Arithmetic</title>
+<title>ICA: Numpy Arrays and Image Arithmetic – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,17 +60,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="ICA9-NumpyAndImageArith_files/libs/clipboard/clipboard.min.js"></script>
-<script src="ICA9-NumpyAndImageArith_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="ICA9-NumpyAndImageArith_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="ICA9-NumpyAndImageArith_files/libs/quarto-html/popper.min.js"></script>
-<script src="ICA9-NumpyAndImageArith_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="ICA9-NumpyAndImageArith_files/libs/quarto-html/anchor.min.js"></script>
-<link href="ICA9-NumpyAndImageArith_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="ICA9-NumpyAndImageArith_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="ICA9-NumpyAndImageArith_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="ICA9-NumpyAndImageArith_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ICA9-NumpyAndImageArith_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -102,10 +135,42 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -126,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 12, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -134,10 +199,12 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
@@ -155,7 +222,8 @@ window.Quarto = {
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -224,7 +292,7 @@ window.Quarto = {
 <p>We can use image arithmetic to blend two images together, using the <code>addWeighted</code> function from OpenCV. To blend two images, we want to look at corresponding pixels, and average their two red values to make a new red value, and do similarly with green and blue channel values. <em>(It is kind of amazing that this works, actually!)</em></p>
 <p><strong>Resizing images</strong></p>
 <p>In order to blend two images, we need to make them the same size and shape. We could do that using the Numpy slicing operators, but here we will take a look at a function that lets you resize an image either by scaling it to a specific size, or by scaling it by given factors in the x and y directions.</p>
-<div id="dec60dfe" class="cell" data-execution_count="2">
+<div id="8dd0eaf4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>cv2.resize(<span class="op">&lt;</span>img<span class="op">&gt;</span>, (<span class="op">&lt;</span>wid<span class="op">&gt;</span>, <span class="op">&lt;</span>hgt<span class="op">&gt;</span>), fx<span class="op">=</span>?, fy<span class="op">=</span>?)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>resize</code> function takes in the image to be resized, and a tuple giving the new size as width followed by depth, and it returns a new image of the new size. However, if we set the width and height in the tuple to be zero, then we can provide optional inputs that give the new size as a factor of the original. The optional input <code>fx</code> specifies the factor in the x dimension, and <code>fy</code> in the y dimension. If we set <code>fx</code> to 0.5, for example, then the new image will have a width one half the size of the original’s width.</p>
@@ -258,13 +326,13 @@ window.Quarto = {
 <p><strong>Try this to hand in:</strong> In the script section of the activity code file, read in three images from <code>SampleImages</code> (any ones you choose). Use the <code>resize</code> command to change the second and third images to match the size of the first. Be sure to <code>imshow</code> the images so that you can check your work. <strong>Call these images <code>img1</code>, <code>img2</code>, and <code>img3</code>.</strong></p>
 <p><strong>Blending with arithmetic</strong></p>
 <p>Examine the code fragment below (also reproduced in your activity code file).</p>
-<div id="bd586b98" class="cell" data-execution_count="3">
+<div id="28854ff4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>blendImg1 <span class="op">=</span> cv2.add(img1, img2)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>cv2.imshow(<span class="st">"Blend by adding"</span>, blendImg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Try this fragment on the resized images you created in the previous section, and observe the results. If we just add the two images, the result is too bright, and would have tons of overflow artifacts if we used Numpy addition. We want to <em>average</em> the two image values, not just add them. But consider this: if we first add the images, and then divide by 2 (the way we typically think about computing an average) the result will be distorted. Even OpenCV’s addition operator avoids overflow by capping the values at 255 when they would have added up to more than 255. That means that adding and then dividing by 2 will produce a different result than dividing each original image by 2 and then adding.</p>
 <p>Try the code below on the images you resized, and compare <code>blend1</code> and <code>blend2</code>.</p>
-<div id="838c69f8" class="cell" data-execution_count="4">
+<div id="3a7fe299" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>sumImg <span class="op">=</span> cv2.add(img1, img2)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>blend1 <span class="op">=</span> cv2.divide(sumImg, <span class="dv">2</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a></span>
@@ -273,7 +341,7 @@ window.Quarto = {
 <span id="cb3-6"><a href="#cb3-6"></a>blend2 <span class="op">=</span> cv2.add(divImg1, divImg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also use Numpy commands to compute the average more easily, so long as we remember to divide first, and then add, to avoid overflow artifacts. Try this:</p>
-<div id="78eebdd7" class="cell" data-execution_count="5">
+<div id="f2368c70" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>avgImg <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> img1 <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> img2</span>
 <span id="cb4-2"><a href="#cb4-2"></a>blend3 <span class="op">=</span> avgImg.astype(np.uint8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -283,7 +351,7 @@ window.Quarto = {
 <p>Try varying the weights for the example above, and examining the resulting blend.</p>
 <p><strong>The <code>addWeighted</code> function</strong></p>
 <p>OpenCV actually provides a function, <code>addWeighted</code>, to perform a weighted average of two images.</p>
-<div id="2fa78991" class="cell" data-execution_count="6">
+<div id="d3368b98" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>blend4 <span class="op">=</span> cv2.addWeighted(img1, <span class="fl">0.5</span>, img2, <span class="fl">0.5</span>, <span class="dv">0</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>addWeighted</code> function has 5 required inputs: the first image to blend, the weight to multiply the first image by, the second image to blend, the weight for the second image, and a constant to add the result. In other words, the function computes this mathematical formula:</p>
@@ -304,7 +372,7 @@ window.Quarto = {
 <h1>Accessing channels</h1>
 <p>The <code>split</code> and <code>merge</code> functions allow us to pull apart an image’s channels, and put them back together again.</p>
 <p><strong>Try this to hand in:</strong> Examine the code below, also found in your starter file.</p>
-<div id="4efc2923" class="cell" data-execution_count="7">
+<div id="f1a8a072" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>flowerIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/wildcolumbine.jpg"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a>(blueChan, greenChan, redChan) <span class="op">=</span> cv2.split(flowerIm)</span>
 <span id="cb6-3"><a href="#cb6-3"></a>cv2.imshow(<span class="st">"Original"</span>, flowerIm)</span>
@@ -338,7 +406,7 @@ window.Quarto = {
 <p>At its core, we make a region of interest using Numpy’s array slicing operator. We will practice the slicing operator here, on small arrays and on images.</p>
 <p><em>Key idea:</em> Remember that Numpy often avoids copying the data in an array, both when we use slicing to access portions of it, and when we use the <code>astype</code> method to change the type of data. Instead, it provides a <strong>view</strong> of the original data, either limiting the indices we can see, or mapping the values to a new type as we access them. When this happens, changes to the original array show up in the view array, and vice versa.</p>
 <p>Consider the small 2d array shown in the code below.</p>
-<div id="3f032af8" class="cell" data-execution_count="8">
+<div id="7c77072c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>arr1 <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>], [<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>], [<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">16</span>]])</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="bu">print</span>(arr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -348,7 +416,7 @@ window.Quarto = {
 </div>
 </div>
 <p>If we want to access and individual element of the array, we can put its row and column indices inside square brackets, separated by commas:</p>
-<div id="b0f1404a" class="cell" data-execution_count="9">
+<div id="cb12beee" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">print</span>(<span class="st">"last of second row:"</span>, arr1[<span class="dv">1</span>, <span class="dv">3</span>])</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="bu">print</span>(<span class="st">"second of last row:"</span>, arr1[<span class="dv">2</span>, <span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -357,7 +425,7 @@ second of last row: 8</code></pre>
 </div>
 </div>
 <p>If we want a subarray, we extend this notation to use slicing operators for the row or column we are selecting from. Here are a few examples:</p>
-<div id="a30d8321" class="cell" data-execution_count="10">
+<div id="6c8fe868" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">print</span>(<span class="st">"middle values:"</span>, arr1[<span class="dv">1</span>, <span class="dv">1</span>:<span class="dv">3</span>])</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="bu">print</span>(<span class="st">"third and fourth columns:"</span>)</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="bu">print</span>(arr1[:, <span class="dv">2</span>:<span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -377,7 +445,7 @@ third and fourth columns:
 <li>Select values from every other row, and every other column, starting with the 2 at [0, 0]</li>
 </ul>
 <p>When working with images, we typically use slicing in two ways: to select the color at a specific pixel, or to select a rectangular region of the picture. The code sample below illustrates two ways to select the color channels from a specific pixel location. It also draws a tiny circle at that location on the image and displays it.</p>
-<div id="be276630" class="cell" data-execution_count="11">
+<div id="46126b11" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/antiqueTractors.jpg"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>col1 <span class="op">=</span> img[<span class="dv">150</span>, <span class="dv">325</span>, :]</span>
 <span id="cb13-3"><a href="#cb13-3"></a>col2 <span class="op">=</span> img[<span class="dv">150</span>, <span class="dv">325</span>]</span>
@@ -388,7 +456,7 @@ third and fourth columns:
 </div>
 <p>Notice that this is one of the places where Numpy and OpenCV’s different ordering of rows and columns comes into play: Numpy orders the location as (row, column), but when we specify the location for drawing the circle, we give it as (x, y).</p>
 <p>To access a region of an image, we select the range of rows, then the range of columns, and then place a colon (<code>:</code>) for the channel dimension, to indicate we want all three channels.</p>
-<div id="59a2591b" class="cell" data-execution_count="12">
+<div id="276fc0b7" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>steer <span class="op">=</span> img[<span class="dv">150</span>:<span class="dv">225</span>, <span class="dv">410</span>:<span class="dv">460</span>, :]</span>
 <span id="cb14-2"><a href="#cb14-2"></a>cv2.rectangle(img, (<span class="dv">410</span>, <span class="dv">150</span>), (<span class="dv">460</span>, <span class="dv">225</span>), (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>))</span>
 <span id="cb14-3"><a href="#cb14-3"></a>cv2.imshow(<span class="st">"Image"</span>, img)</span>
@@ -431,10 +499,11 @@ third and fourth columns:
 <li>All calls to all functions should be in a script at the bottom of the file, ideally inside an <code>if __name__ ...</code> block</li>
 </ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

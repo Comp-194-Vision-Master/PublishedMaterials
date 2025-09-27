@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-16">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>ICA: Modules and OpenCV basics</title>
+<title>ICA: Modules and OpenCV basics – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,23 +60,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="ICA3-Modules-OpenCVBasics_files/libs/clipboard/clipboard.min.js"></script>
-<script src="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/popper.min.js"></script>
-<script src="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/anchor.min.js"></script>
-<link href="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="ICA3-Modules-OpenCVBasics_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="ICA3-Modules-OpenCVBasics_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="ICA3-Modules-OpenCVBasics_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ICA3-Modules-OpenCVBasics_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -97,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 16, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -105,10 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
@@ -122,7 +189,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -138,16 +206,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Modules</h1>
 <p>In our readings, videos, and class notes, we discussed how to go about importing a <strong>module</strong>, which contains constants, functions, and other tools that we can load and use when we need them.</p>
 <p>The code below imports the <code>math</code> module and the <code>random</code> module.</p>
-<div id="34bf9e89" class="cell" data-execution_count="1">
+<div id="87de7091" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> math</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you aren’t sure what tools are in a module, you can look up the documentation online. You can also get help with a module in Python, by using the <code>help</code> function. Try adding a call to <code>help</code> to your script above, and see what it produces.</p>
-<div id="bca8457b" class="cell" data-execution_count="2">
+<div id="efd69156" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="bu">help</span>(math)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Create a new Python file in your project for this activity, and try copying this code and the previous into it. When you run it, read what the <code>help</code> function prints. You can also ask about specific functions or constants in a module. Add this example to your test script.</p>
-<div id="fac1475e" class="cell" data-execution_count="3">
+<div id="289555d7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">help</span>(random.randint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After reading through the description of the <code>randint</code> function, and experiment with how it works. Call it over and over until you completely understand what it produces.</p>
@@ -156,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="reading-and-displaying-images" class="level1">
 <h1>Reading and displaying images</h1>
 <p>The script below reads in and displays a single image. Review Chapter 1 from your Vision readings if you need help understanding what each step does. Read the script carefully, and predict for yourself and your teammate what you think the program will do.</p>
-<div id="0f9776b8" class="cell" data-execution_count="4">
+<div id="1c5e189d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> cv2</span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a>image <span class="op">=</span> cv2.imread(<span class="st">'SampleImages/mushrooms.jpg'</span>)</span>
@@ -171,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="experimenting-with-colors" class="level1">
 <h1>Experimenting with colors</h1>
 <p>The program below, included in your Github repo as, <code>colorBackground.py</code>, uses Numpy tools to construct a new image built from scratch. The <code>zeros</code> function creates an array of the size and data type we specify, so we can make a new image array without reading from a file! This program, as written, sets every pixel in the array to be a dark red color.</p>
-<div id="48fddb4d" class="cell" data-execution_count="5">
+<div id="4d9a870a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3"></a></span>
@@ -229,10 +297,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>(Optional) a file or files containing any of the optional challenges</li>
 </ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-08-18">
+<meta name="dcterms.date" content="2025-09-26">
 
-<title>ICA: While Loops and Webcams/Video</title>
+<title>ICA: While Loops and Webcams/Video – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,23 +60,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="ICA10-WhileAndVideo_files/libs/clipboard/clipboard.min.js"></script>
-<script src="ICA10-WhileAndVideo_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="ICA10-WhileAndVideo_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="ICA10-WhileAndVideo_files/libs/quarto-html/popper.min.js"></script>
-<script src="ICA10-WhileAndVideo_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="ICA10-WhileAndVideo_files/libs/quarto-html/anchor.min.js"></script>
-<link href="ICA10-WhileAndVideo_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="ICA10-WhileAndVideo_files/libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="ICA10-WhileAndVideo_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="ICA10-WhileAndVideo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ICA10-WhileAndVideo_files/libs/bootstrap/bootstrap-c9dc05ccd9e6568c662515419180efc4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
@@ -97,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 18, 2025</p>
+        <p class="date">September 26, 2025</p>
       </div>
     </div>
     
@@ -105,10 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
     
   
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
@@ -126,7 +193,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
-</div>
+    </div>
+<!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
@@ -141,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="while-loops" class="level1">
 <h1><code>while</code> loops</h1>
 <p>A while loop starts with a Boolean test expression, and then has a block of indented Python statements in its body. As long as the test expression evaluates to True, the program keeps repeating the statements in the loop body, and then re-checking the test expression. It stops only when the test evaluates to False.</p>
-<div id="8c15915f" class="cell" data-execution_count="2">
+<div id="d1770f07" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">while</span> boolean<span class="op">-</span>expression:</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    loop<span class="op">-</span>body</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -153,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A statement inside the loop that modifies the value of the loop variable</li>
 </ul>
 <p>In the example below, the loop variable is <code>count</code>. It is initialized to 1 in the first line, it is compared to <code>total</code> in the boolean test of the <code>while</code> loop, and it is incremented in the last line inside the <code>while</code> loop.</p>
-<div id="a4638597" class="cell" data-execution_count="3">
+<div id="63c1ff5e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>count <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="cf">while</span> count <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="bu">print</span>(count)</span>
@@ -177,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="first-example" class="level2">
 <h2 class="anchored" data-anchor-id="first-example">First example</h2>
 <p>This function takes in an integer input, and it prints every other number from that input value down to zero. Then it prints Done!.</p>
-<div id="988cc8c2" class="cell" data-execution_count="4">
+<div id="11ab0197" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> printEveryOther(x):</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    <span class="cf">while</span> x <span class="op">&gt;=</span> <span class="dv">0</span>:  <span class="co"># x is the loop variable</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>        <span class="bu">print</span>(x)</span>
@@ -192,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Work through a call to this function by hand, figuring out the effect of each and every line and repetition; consider a call like <code>printEveryOther(7)</code>.</p>
 <p><strong>Try this to hand in:</strong> Make a copy of <code>printEveryOther</code> function, called <code>printEveryFifth</code>, that prints every fifth value from x down to zero. Below are a couple of sample calls to show how this function should work:</p>
-<div id="a7eccb32" class="cell" data-execution_count="6">
+<div id="b07ad32a" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>printEveryFifth(<span class="dv">20</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>printEveryFifth(<span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -212,7 +280,7 @@ Done!</code></pre>
 <section id="second-example" class="level2">
 <h2 class="anchored" data-anchor-id="second-example">Second example</h2>
 <p>The next example shows the indeterminate nature of a while loop. In this case, the loop repeats until the user enters a negative number, printing the square of each number the user enters.</p>
-<div id="c3836c28" class="cell" data-execution_count="7">
+<div id="2e50aa32" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">def</span> squareUserNums():</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    <span class="co"># Initialize loop variable </span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>    userInp <span class="op">=</span> <span class="bu">input</span>(<span class="st">"Enter the next number (negative to quit): "</span>)</span>
@@ -227,7 +295,7 @@ Done!</code></pre>
 <section id="accumulator-variables" class="level2">
 <h2 class="anchored" data-anchor-id="accumulator-variables">Accumulator variables</h2>
 <p>We can use accumulator variables with while loops just like we do with for loops. The accumulator is set to some initial value before the loop, and then updated each time through the loop. See the examples below.</p>
-<div id="4186f08f" class="cell" data-execution_count="8">
+<div id="db6a7ae4" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">def</span> sumToN(topNum):</span>
 <span id="cb8-2"><a href="#cb8-2"></a>    <span class="co">"""Takes in a number and computes and returns the sum of the numbers</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co">    from zero to the input number."""</span></span>
@@ -259,7 +327,7 @@ Done!</code></pre>
 <h2 class="anchored" data-anchor-id="the-break-statement">The break Statement</h2>
 <p>Sometimes you want the option to stop looping if special circumstances occur, before the natural end of the loop. The break statement causes the current loop to stop immediately at the point where the break occurred. The program continues on with any Python statements that come after the loop.</p>
 <p>The program below loops over characters in a string, adding them to an accumulator variable. It breaks out of the <code>for</code> loop when the next character is a space, tab, or newline, and returns the string it has built so far.</p>
-<div id="21705c9a" class="cell" data-execution_count="9">
+<div id="6a3cf320" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">def</span> nextWord(text):</span>
 <span id="cb9-2"><a href="#cb9-2"></a>    <span class="co">"""Takes in a string of text and builds and returns a new string</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co">    that is the next "word" in the text. In other words, the next</span></span>
@@ -280,7 +348,7 @@ Done!</code></pre>
 <li>Remove the two lines before the <code>while</code> loop (the call to <code>input</code> and the call to <code>int</code>).</li>
 <li>Change the boolean expression test of the <code>while</code> statement to be just the boolean value <code>True</code>, as shown below:</li>
 </ul>
-<div id="3be14522" class="cell" data-execution_count="10">
+<div id="3b83cd36" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">def</span> squareUserNums2():</span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb10-3"><a href="#cb10-3"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -329,7 +397,7 @@ Done!</code></pre>
 </table>
 <p>Start with the script below to get images from a built-in camera. <strong>If your computer does not have a built-in webcam, see Susan to get an external webcam!</strong></p>
 <p>You are going to improve this script.</p>
-<div id="8f38d02e" class="cell" data-execution_count="11">
+<div id="3e510118" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="im">import</span> cv2</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw">def</span> videoFeeder(camOrFile <span class="op">=</span> <span class="dv">0</span>):</span>
@@ -354,7 +422,7 @@ Done!</code></pre>
 </ul>
 <p>Now that you have a functioning video streaming program, let’s start making improvements.</p>
 <p>Try to hold something up in front of the camera while your program is running, and then move the object to the different corners of the video image. Did you find yourself moving the wrong way? We often have trouble with left and right movements on a video feed, because we are more used to seeing a mirror image of ourselves. We can use the OpenCv function <code>flip</code> to flip the image. This function will flip an image upside down, or left-to-right.</p>
-<div id="bf25a1f6" class="cell" data-execution_count="12">
+<div id="80a672f8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>flippedIm <span class="op">=</span> cv2.flip(img, flipCode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>flip</code> function takes in an image and a <em>flip code</em> which specifies whether to flip around the horizontal axis, or around the vertical one. It returns a new image. A flip code of 0 will flip a picture upside down (around the horizontal axis), and a flip code of 1 will flip a pictures left-to-right (around the vertical axis).</p>
@@ -373,7 +441,7 @@ Done!</code></pre>
 <li>Add to the <code>if</code> statement that checks the user’s input key, so that it checks if the user hits the s key</li>
 <li>When the user hits that, save the current image to a file, using the <code>cv2.imwrite</code> function. This function takes two inputs: (1) a string for the filename of the file to save to, including <code>.jpg</code> or <code>.png</code> as the filename extension, and (2) the image you want to save.</li>
 </ul>
-<div id="c07f4b5d" class="cell" data-execution_count="13">
+<div id="95eb306a" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>cv2.imwrite(<span class="st">"screenshot.jpg"</span>, frame)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For an extra, optional challenge, give each screenshot a unique filename, so that you can save any number you want. (Adding a counter to the loop, and attaching the counter to the filename is a great way to do this.)</p>
@@ -411,10 +479,11 @@ Done!</code></pre>
 <li>All calls to all functions should be in a script at the bottom of the file, ideally inside an <code>if __name__ ...</code> block</li>
 </ul>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
