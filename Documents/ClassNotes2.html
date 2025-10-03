@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="aliasing-and-references" class="level3">
 <h3 class="anchored" data-anchor-id="aliasing-and-references">Aliasing and references</h3>
 <p>Aliasing refers to a situation when more than one variable name references the same actual data in the computer’s memory. When that happens, the data has its original name, plus an “alias”. Confusion can arise if we don’t realize when using the alias that we are also referring to the original variable. We care about these things because lists are mutable. If a list is shared across multiple variables, then changing the list through one variable makes the other variable ’s value change as well! This is an easy mistake to make when modifying lists. Here is an example:</p>
-<div id="ba35615e" class="cell" data-execution_count="1">
+<div id="7b724fd7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>lstA <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>]</span>
 <span id="cb1-2"><a href="#cb1-2"></a>lstB <span class="op">=</span> lstA.copy()   <span class="co"># makes a copy of lstA</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>lstC <span class="op">=</span> lstA          <span class="co"># makes lstC be an alias of lstA</span></span>
@@ -459,22 +459,22 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <h3 class="anchored" data-anchor-id="list-comprehensions">List comprehensions</h3>
 <p>A shorthand notation for a for loop that builds one list from the contents of another. It does the same work Abbreviated notation, still does the same work. You can always do what a list comprehension does with loops and accumulator variables</p>
 <p><strong>First general form:</strong></p>
-<div id="c03d834d" class="cell" data-execution_count="2">
+<div id="115f69ef" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>[<span class="op">&lt;</span>expr<span class="op">&gt;</span> <span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>is equivalent to</p>
-<div id="b22a68aa" class="cell" data-execution_count="3">
+<div id="b438d340" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>newList <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>:</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    newVal <span class="op">=</span> <span class="op">&lt;</span>expr<span class="op">&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a>    newList <span class="op">+=</span> [newVal]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Second general form:</strong></p>
-<div id="4d2c57bd" class="cell" data-execution_count="4">
+<div id="6a52bc4f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>[<span class="op">&lt;</span>expr<span class="op">&gt;</span> <span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span> <span class="cf">if</span> <span class="op">&lt;</span>boolExpr<span class="op">&gt;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>is equivalent to</p>
-<div id="3a388fa5" class="cell" data-execution_count="5">
+<div id="3d978f24" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>newList <span class="op">=</span> []</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>:</span>
 <span id="cb6-3"><a href="#cb6-3"></a>    <span class="cf">if</span> <span class="op">&lt;</span>boolExpr<span class="op">&gt;</span>:</span>
@@ -482,7 +482,7 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <span id="cb6-5"><a href="#cb6-5"></a>        newList <span class="op">+=</span> [newVal]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Examples:</strong></p>
-<div id="d0d018d1" class="cell" data-execution_count="6">
+<div id="bfee4d57" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ls <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">6</span>]       <span class="co"># set up the initial list</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>newls <span class="op">=</span> [<span class="dv">2</span><span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> ls]</span>
 <span id="cb7-3"><a href="#cb7-3"></a>ls3 <span class="op">=</span> [<span class="bu">int</span>(s) <span class="cf">for</span> s <span class="kw">in</span> [<span class="st">'35'</span>, <span class="st">'12'</span>, <span class="st">'103'</span>, <span class="st">'-3'</span>]]</span>
@@ -596,7 +596,7 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <li>Normal images use <code>uint8</code> for each pixel/channel value</li>
 </ul>
 <p>Here are two images of very different sizes. One, we convert to grayscale as well, and print the sizes and data types for each array.</p>
-<div id="44e1590b" class="cell" data-execution_count="7">
+<div id="445fd93e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> cv2</span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/GoogleyEye.png"</span>)</span>
@@ -627,7 +627,7 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <h3 class="anchored" data-anchor-id="no-nested-loops-on-arrays-if-we-can-help-it">No nested loops on arrays (if we can help it)</h3>
 <p>Rather than writing code that loops over rows and columns of a Numpy matrix, we usually try to perform matrix/vector arithmetic. We can add two arrays together, if they are the same shape. This adds corresponding values together and builds an array of the result. We can do subtraction, multiplication, and division similarly. We can also compute dot product and cross produce, if needed.</p>
 <p><strong>Examples:</strong></p>
-<div id="f613ccb2" class="cell" data-execution_count="8">
+<div id="018adcb2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a>a1 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]])</span>
@@ -659,7 +659,7 @@ a1 * a2:
 <section id="slicing-on-arrays" class="level3">
 <h3 class="anchored" data-anchor-id="slicing-on-arrays">Slicing on arrays</h3>
 <p>Slicing on arrays works similarly to slicing on strings or lists. But we can specify multiple dimensions at one time. <strong>Slicing weirdness:</strong> if the bound on the slice goes beyond the limits of the list, string, or array, Python doesn’t given an error. It just treats that as a “go to the end” marker and returns up to the end of the current dimensions.</p>
-<div id="5d1034ad" class="cell" data-execution_count="9">
+<div id="de395c89" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">print</span>(a1[<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>:<span class="dv">3</span>])</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Weirdness we haven't discussed</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>lst <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>]</span>
@@ -673,7 +673,7 @@ a1 * a2:
 <section id="boolean-arrays" class="level3">
 <h3 class="anchored" data-anchor-id="boolean-arrays">Boolean arrays</h3>
 <p>We won’t really need these much, but they are very cool!</p>
-<div id="037e2937" class="cell" data-execution_count="10">
+<div id="ae91d79a" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>boolOne <span class="op">=</span> a2 <span class="op">&gt;</span> <span class="dv">3</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>boolTwo <span class="op">=</span> a1 <span class="op">&lt;=</span> <span class="dv">3</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="bu">print</span>(boolOne)</span>
@@ -777,7 +777,7 @@ cv2.waitKey()</code></pre>
 <li>It also converts all three channels to be a negative and displays it</li>
 <li>Finally, it splits the image into three channels, and shows the effect of converting just one channel at a time to a negative</li>
 </ul>
-<div id="af3fa0ba" class="cell" data-execution_count="11">
+<div id="3f6a689d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">import</span> cv2</span>
 <span id="cb17-2"><a href="#cb17-2"></a></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="co"># Read original image</span></span>
@@ -829,6 +829,15 @@ cv2.waitKey()</code></pre>
 </ul>
 <p><strong>Class announcements:</strong></p>
 <ul>
+<li>Homework 1: Feedback comments are in Github
+<ul>
+<li>Go to the assignment repository</li>
+<li>Select “Pull Requests”
+<ul>
+<li>Check the Changed Files section and look for comments on lines of code</li>
+<li>Check the “Conversation” option</li>
+</ul></li>
+</ul></li>
 <li>Most of you have not yet submitted Activiy 8, the String/List activity. <strong>I recommend you submit what you have and move on to Activity 9 today</strong>. Remember:
 <ul>
 <li>You can submit ICAs late, at any point</li>
@@ -843,7 +852,7 @@ cv2.waitKey()</code></pre>
 <h3 class="anchored" data-anchor-id="regions-of-interest">Regions of interest</h3>
 <p>A <strong>region of interest</strong> is just a rectangular section of an image that we want to isolate and work with.</p>
 <p>We can make regions of interest using Numpy’s slicing operator. But we must remember that by default we get a <em>view</em> to the original data, and not a copy of the data. Changes made to the ROI usually show in the original image.</p>
-<div id="5cf79fb1" class="cell" data-execution_count="12">
+<div id="0cc93898" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>mushIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/mushrooms.jpg"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2"></a></span>
 <span id="cb18-3"><a href="#cb18-3"></a>cv2.imshow(<span class="st">"Mushrooms"</span>, mushIm)</span>
@@ -857,7 +866,7 @@ cv2.waitKey()</code></pre>
 <span id="cb18-11"><a href="#cb18-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that with slicing we put the row range first, and then the column range. If we wanted to draw a rectangle around the region on the image, we would swap the order of the indices to give the upper left and lower right points (as in the code below).</p>
-<div id="c3976af4" class="cell" data-execution_count="13">
+<div id="d0c129e3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>cv2.rectangle(mushIm, (<span class="dv">50</span>, <span class="dv">135</span>), (<span class="dv">170</span>, <span class="dv">230</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a>cv2.rectangle(mushIm, (<span class="dv">255</span>, <span class="dv">120</span>), (<span class="dv">390</span>, <span class="dv">215</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
 <span id="cb19-3"><a href="#cb19-3"></a>cv2.imshow(<span class="st">"Marked"</span>, mushIm)</span>
@@ -907,7 +916,7 @@ cv2.waitKey()</code></pre>
 <p><strong>Indefinite looping</strong> is when the loop continues for an unknown number of repetitions. The number of repetitions depends on a boolean test: the loop continues until the test becomes <code>False</code>.</p>
 <p>While loops are a more “primitive” kind of loop, more simple, leaving more responsibility on the programmer. As the programmer, you are responsible for setting up and updating the <em>loop variable</em> as well as any ordinary accumulator variables.</p>
 <p>Below is a version of the Numpy <code>arange</code> function, but for lists. Given a starting value, and ending value, and a step size, all floating-point numbers, it produces a list containing the sequence of values starting with the starting value and increasing by step size each time, up to but not including the end point.</p>
-<div id="0a83f1f5" class="cell" data-execution_count="14">
+<div id="55de4135" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">def</span> myARange(start, end, step):</span>
 <span id="cb20-2"><a href="#cb20-2"></a>    ansList <span class="op">=</span> []                         <span class="co"># accumulator initialize</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a>    currValue <span class="op">=</span> start                    <span class="co"># loop variable initialize</span></span>
@@ -931,7 +940,7 @@ cv2.waitKey()</code></pre>
 <li><code>waitKey</code> takes in a number, if 0, then it pauses indefinitely to wait for the user to hit a key, if the input is a positive integer, it pauses only for that many milliseconds and then returns and lets the program continue</li>
 <li><code>waitKey</code> returns a number that indicates the user’s input: -1 if they didn’t input anything, and the numeric code for the key the entered, otherwise.</li>
 </ul>
-<div id="108d6758" class="cell" data-execution_count="15">
+<div id="95b9bd1a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>vidCap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb21-2"><a href="#cb21-2"></a></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="cf">while</span> <span class="va">True</span>:</span>
