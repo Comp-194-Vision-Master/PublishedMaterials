@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-03">
+<meta name="dcterms.date" content="2025-10-06">
 
 <title>Comp 194 Class Notes - Weeks 4-7 – Vision Readings</title>
 <style>
@@ -105,6 +105,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -162,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 3, 2025</p>
+        <p class="date">October 6, 2025</p>
       </div>
     </div>
     
@@ -229,6 +258,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#regions-of-interest" id="toc-regions-of-interest" class="nav-link" data-scroll-target="#regions-of-interest">Regions of interest</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#algorithms-and-pseudocode-interlude" id="toc-algorithms-and-pseudocode-interlude" class="nav-link" data-scroll-target="#algorithms-and-pseudocode-interlude">Algorithms and pseudocode interlude</a>
+  <ul class="collapse">
+  <li><a href="#goals" id="toc-goals" class="nav-link" data-scroll-target="#goals">Goals</a></li>
+  <li><a href="#what-is-an-algorithm" id="toc-what-is-an-algorithm" class="nav-link" data-scroll-target="#what-is-an-algorithm">What is an algorithm?</a></li>
+  <li><a href="#what-is-pseudocode" id="toc-what-is-pseudocode" class="nav-link" data-scroll-target="#what-is-pseudocode">What is pseudocode?</a></li>
+  <li><a href="#why-is-pseudocode-useful" id="toc-why-is-pseudocode-useful" class="nav-link" data-scroll-target="#why-is-pseudocode-useful">Why is pseudocode useful?</a></li>
+  <li><a href="#examples-of-pseudocode-youve-seen-already" id="toc-examples-of-pseudocode-youve-seen-already" class="nav-link" data-scroll-target="#examples-of-pseudocode-youve-seen-already">Examples of pseudocode you’ve seen already</a></li>
+  <li><a href="#how-to-write-an-algorithm-in-pseudocode-examples" id="toc-how-to-write-an-algorithm-in-pseudocode-examples" class="nav-link" data-scroll-target="#how-to-write-an-algorithm-in-pseudocode-examples">How to write an algorithm in pseudocode… examples</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#week-6" id="toc-week-6" class="nav-link" data-scroll-target="#week-6">Week 6</a>
   <ul class="collapse">
   <li><a href="#monday-october-6" id="toc-monday-october-6" class="nav-link" data-scroll-target="#monday-october-6">Monday, October 6</a>
@@ -247,6 +289,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#announcements-8" id="toc-announcements-8" class="nav-link" data-scroll-target="#announcements-8">Announcements</a></li>
   <li><a href="#todays-topics-5" id="toc-todays-topics-5" class="nav-link" data-scroll-target="#todays-topics-5">Today’s topics</a></li>
+  <li><a href="#overall-context" id="toc-overall-context" class="nav-link" data-scroll-target="#overall-context">Overall context</a></li>
+  <li><a href="#what-is-a-mask-and-how-can-we-make-them" id="toc-what-is-a-mask-and-how-can-we-make-them" class="nav-link" data-scroll-target="#what-is-a-mask-and-how-can-we-make-them">What is a mask, and how can we make them?</a></li>
+  <li><a href="#converting-images-from-one-color-representation-to-another" id="toc-converting-images-from-one-color-representation-to-another" class="nav-link" data-scroll-target="#converting-images-from-one-color-representation-to-another">Converting images from one color representation to another</a></li>
+  <li><a href="#what-is-thresholding-an-image" id="toc-what-is-thresholding-an-image" class="nav-link" data-scroll-target="#what-is-thresholding-an-image">What is <em>thresholding</em> an image?</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7">Week 7</a>
@@ -425,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="aliasing-and-references" class="level3">
 <h3 class="anchored" data-anchor-id="aliasing-and-references">Aliasing and references</h3>
 <p>Aliasing refers to a situation when more than one variable name references the same actual data in the computer’s memory. When that happens, the data has its original name, plus an “alias”. Confusion can arise if we don’t realize when using the alias that we are also referring to the original variable. We care about these things because lists are mutable. If a list is shared across multiple variables, then changing the list through one variable makes the other variable ’s value change as well! This is an easy mistake to make when modifying lists. Here is an example:</p>
-<div id="7b724fd7" class="cell" data-execution_count="1">
+<div id="046c868c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>lstA <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>]</span>
 <span id="cb1-2"><a href="#cb1-2"></a>lstB <span class="op">=</span> lstA.copy()   <span class="co"># makes a copy of lstA</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a>lstC <span class="op">=</span> lstA          <span class="co"># makes lstC be an alias of lstA</span></span>
@@ -459,22 +505,22 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <h3 class="anchored" data-anchor-id="list-comprehensions">List comprehensions</h3>
 <p>A shorthand notation for a for loop that builds one list from the contents of another. It does the same work Abbreviated notation, still does the same work. You can always do what a list comprehension does with loops and accumulator variables</p>
 <p><strong>First general form:</strong></p>
-<div id="115f69ef" class="cell" data-execution_count="2">
+<div id="c4f09135" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>[<span class="op">&lt;</span>expr<span class="op">&gt;</span> <span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>is equivalent to</p>
-<div id="b438d340" class="cell" data-execution_count="3">
+<div id="288b87dc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>newList <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>:</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    newVal <span class="op">=</span> <span class="op">&lt;</span>expr<span class="op">&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a>    newList <span class="op">+=</span> [newVal]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Second general form:</strong></p>
-<div id="6a52bc4f" class="cell" data-execution_count="4">
+<div id="40fa9c7c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>[<span class="op">&lt;</span>expr<span class="op">&gt;</span> <span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span> <span class="cf">if</span> <span class="op">&lt;</span>boolExpr<span class="op">&gt;</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>is equivalent to</p>
-<div id="3d978f24" class="cell" data-execution_count="5">
+<div id="683510e9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>newList <span class="op">=</span> []</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="cf">for</span> <span class="op">&lt;</span>var<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>seq<span class="op">&gt;</span>:</span>
 <span id="cb6-3"><a href="#cb6-3"></a>    <span class="cf">if</span> <span class="op">&lt;</span>boolExpr<span class="op">&gt;</span>:</span>
@@ -482,7 +528,7 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <span id="cb6-5"><a href="#cb6-5"></a>        newList <span class="op">+=</span> [newVal]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Examples:</strong></p>
-<div id="bfee4d57" class="cell" data-execution_count="6">
+<div id="ade01933" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ls <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">6</span>]       <span class="co"># set up the initial list</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>newls <span class="op">=</span> [<span class="dv">2</span><span class="op">*</span>x <span class="cf">for</span> x <span class="kw">in</span> ls]</span>
 <span id="cb7-3"><a href="#cb7-3"></a>ls3 <span class="op">=</span> [<span class="bu">int</span>(s) <span class="cf">for</span> s <span class="kw">in</span> [<span class="st">'35'</span>, <span class="st">'12'</span>, <span class="st">'103'</span>, <span class="st">'-3'</span>]]</span>
@@ -596,7 +642,7 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <li>Normal images use <code>uint8</code> for each pixel/channel value</li>
 </ul>
 <p>Here are two images of very different sizes. One, we convert to grayscale as well, and print the sizes and data types for each array.</p>
-<div id="445fd93e" class="cell" data-execution_count="7">
+<div id="ac114d86" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> cv2</span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/GoogleyEye.png"</span>)</span>
@@ -627,7 +673,7 @@ C: ['a', 'b', 'zzzz', 'd']</code></pre>
 <h3 class="anchored" data-anchor-id="no-nested-loops-on-arrays-if-we-can-help-it">No nested loops on arrays (if we can help it)</h3>
 <p>Rather than writing code that loops over rows and columns of a Numpy matrix, we usually try to perform matrix/vector arithmetic. We can add two arrays together, if they are the same shape. This adds corresponding values together and builds an array of the result. We can do subtraction, multiplication, and division similarly. We can also compute dot product and cross produce, if needed.</p>
 <p><strong>Examples:</strong></p>
-<div id="018adcb2" class="cell" data-execution_count="8">
+<div id="1ebb4233" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a>a1 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]])</span>
@@ -659,7 +705,7 @@ a1 * a2:
 <section id="slicing-on-arrays" class="level3">
 <h3 class="anchored" data-anchor-id="slicing-on-arrays">Slicing on arrays</h3>
 <p>Slicing on arrays works similarly to slicing on strings or lists. But we can specify multiple dimensions at one time. <strong>Slicing weirdness:</strong> if the bound on the slice goes beyond the limits of the list, string, or array, Python doesn’t given an error. It just treats that as a “go to the end” marker and returns up to the end of the current dimensions.</p>
-<div id="de395c89" class="cell" data-execution_count="9">
+<div id="40ade825" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">print</span>(a1[<span class="dv">1</span>:<span class="dv">2</span>, <span class="dv">1</span>:<span class="dv">3</span>])</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Weirdness we haven't discussed</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>lst <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>]</span>
@@ -673,7 +719,7 @@ a1 * a2:
 <section id="boolean-arrays" class="level3">
 <h3 class="anchored" data-anchor-id="boolean-arrays">Boolean arrays</h3>
 <p>We won’t really need these much, but they are very cool!</p>
-<div id="ae91d79a" class="cell" data-execution_count="10">
+<div id="166010a3" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>boolOne <span class="op">=</span> a2 <span class="op">&gt;</span> <span class="dv">3</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>boolTwo <span class="op">=</span> a1 <span class="op">&lt;=</span> <span class="dv">3</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="bu">print</span>(boolOne)</span>
@@ -777,7 +823,7 @@ cv2.waitKey()</code></pre>
 <li>It also converts all three channels to be a negative and displays it</li>
 <li>Finally, it splits the image into three channels, and shows the effect of converting just one channel at a time to a negative</li>
 </ul>
-<div id="3f6a689d" class="cell" data-execution_count="11">
+<div id="790e4bb8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">import</span> cv2</span>
 <span id="cb17-2"><a href="#cb17-2"></a></span>
 <span id="cb17-3"><a href="#cb17-3"></a><span class="co"># Read original image</span></span>
@@ -852,7 +898,7 @@ cv2.waitKey()</code></pre>
 <h3 class="anchored" data-anchor-id="regions-of-interest">Regions of interest</h3>
 <p>A <strong>region of interest</strong> is just a rectangular section of an image that we want to isolate and work with.</p>
 <p>We can make regions of interest using Numpy’s slicing operator. But we must remember that by default we get a <em>view</em> to the original data, and not a copy of the data. Changes made to the ROI usually show in the original image.</p>
-<div id="0cc93898" class="cell" data-execution_count="12">
+<div id="760e0470" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>mushIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/mushrooms.jpg"</span>)</span>
 <span id="cb18-2"><a href="#cb18-2"></a></span>
 <span id="cb18-3"><a href="#cb18-3"></a>cv2.imshow(<span class="st">"Mushrooms"</span>, mushIm)</span>
@@ -866,12 +912,250 @@ cv2.waitKey()</code></pre>
 <span id="cb18-11"><a href="#cb18-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that with slicing we put the row range first, and then the column range. If we wanted to draw a rectangle around the region on the image, we would swap the order of the indices to give the upper left and lower right points (as in the code below).</p>
-<div id="d0c129e3" class="cell" data-execution_count="13">
+<div id="306215c1" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>cv2.rectangle(mushIm, (<span class="dv">50</span>, <span class="dv">135</span>), (<span class="dv">170</span>, <span class="dv">230</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a>cv2.rectangle(mushIm, (<span class="dv">255</span>, <span class="dv">120</span>), (<span class="dv">390</span>, <span class="dv">215</span>), (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
 <span id="cb19-3"><a href="#cb19-3"></a>cv2.imshow(<span class="st">"Marked"</span>, mushIm)</span>
 <span id="cb19-4"><a href="#cb19-4"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+</section>
+<section id="algorithms-and-pseudocode-interlude" class="level1">
+<h1>Algorithms and pseudocode interlude</h1>
+<section id="goals" class="level2">
+<h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<ul>
+<li>Remind you of what an <strong>algorithm</strong> is</li>
+<li>Describe what pseudocode is</li>
+<li>Discuss why we use pseudocode</li>
+<li>Explain some examples of pseudocode that you have already seen</li>
+<li>Work through examples showing how to write pseudocode</li>
+</ul>
+</section>
+<section id="what-is-an-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-an-algorithm">What is an algorithm?</h2>
+<p>An <strong>algorithm</strong> is an idea, a concept. It is a description, in any form, of a <em>process</em> for solving a problem. Remember examples of daily-life algorithms we discussed at the beginning of the semester:</p>
+<ul>
+<li>Cooking recipes</li>
+<li>Assembly instructions</li>
+<li>Driving directions</li>
+<li>Arithmetic operations (how to add two multi-digit numbers, for instance)</li>
+</ul>
+<p>In Computer Science, we have whole courses that study algorithms.</p>
+<ul>
+<li>We want to think about algorithms separately from the peculiar specifics of any particular programming language</li>
+<li>We would like to be able to translate an algorithm into any programming language</li>
+<li>Programming languages are designed to be understandable by computers</li>
+<li>We’d like to be able to describe algorithms in a way easier for humans to understand</li>
+<li>Thus, the invention of pseudocode!</li>
+</ul>
+</section>
+<section id="what-is-pseudocode" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-pseudocode">What is pseudocode?</h2>
+<p>Pseudocode is a step-by-step description of an algorithm, written for human use, not machine use.</p>
+<p><strong>What does that mean, exactly?</strong></p>
+<ul>
+<li>Pseudocode describes an algorithm, typically thought of like a function</li>
+<li>Pseudocode uses a combination of:
+<ul>
+<li>Numbered steps</li>
+<li>English and math notation for what to do</li>
+<li>Code-like control structures like conditionals and loops</li>
+<li>Indentation or begin/end statements to help clarify the parts of control structures</li>
+</ul></li>
+<li>Pseudocode focuses on the logic and meaning of each step, not how it is done in any particular language</li>
+<li>Each step in pseudocode should be something a program could do, realistically</li>
+<li>We avoid writing pseudocode using the notation of any particular programming language</li>
+<li><strong>There are no fixed rules for what pseudocode should look like (ignore online sources that suggest otherwise)</strong></li>
+</ul>
+</section>
+<section id="why-is-pseudocode-useful" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-pseudocode-useful">Why is pseudocode useful?</h2>
+<p><strong>Reason one:</strong> It is easier to read and write pseudocode as people than to read and write code, especially if you are not fluent in the specific language the code is written in.</p>
+<p><strong>Reason two:</strong> Coding works better if we take time to <strong>design</strong> our code before we start writing it in our programming language.</p>
+<ul>
+<li>It’s easier to describe something in English than to write accurate, syntactically correct Python code</li>
+<li>We can work out our thinking about how to solve the problem on paper, or a whiteboard, and talk about it with other people</li>
+<li>Once we have a good design, the task becomes translating that design into code, which is easier than coding from scratch.</li>
+</ul>
+<p><strong>An analogy:</strong> Imagine you needed to express something complicated in a language you know a little bit, but are not completely fluent in. Writing down what you want to say in your native language, and then translating it into the new language, might be a sensible way to proceed. That’s what we are doing when we write out what we want the computer to do in English, as pseudocode, first.</p>
+</section>
+<section id="examples-of-pseudocode-youve-seen-already" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-pseudocode-youve-seen-already">Examples of pseudocode you’ve seen already</h2>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+From Homework 1:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1"></a>Algorithm drawCenteredSquares(image, color)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>--- This takes an image and a color, and draws 3 squares with sizes 50, 100, 150,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>--- centered in the image</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a>1. Find out the width and height of the image</span>
+<span id="cb20-6"><a href="#cb20-6"></a></span>
+<span id="cb20-7"><a href="#cb20-7"></a>--- Calculate the midpoint of the image</span>
+<span id="cb20-8"><a href="#cb20-8"></a>2. Let midX = width / 2</span>
+<span id="cb20-9"><a href="#cb20-9"></a>3. Let midY = height / 2</span>
+<span id="cb20-10"><a href="#cb20-10"></a>4. Repeat for size = [50, 100, 150]</span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a>    --- Compute the upper-left and lower-right corners of the square</span>
+<span id="cb20-13"><a href="#cb20-13"></a>5.     Let ulx = midX - (size / 2)</span>
+<span id="cb20-14"><a href="#cb20-14"></a>6.     Let uly = midY - (size / 2)</span>
+<span id="cb20-15"><a href="#cb20-15"></a>7.     Let lrx = midX + (size / 2)</span>
+<span id="cb20-16"><a href="#cb20-16"></a>8.     Let lry = midY + (size / 2)</span>
+<span id="cb20-17"><a href="#cb20-17"></a></span>
+<span id="cb20-18"><a href="#cb20-18"></a>    --- Draw the square</span>
+<span id="cb20-19"><a href="#cb20-19"></a>9.     Draw the square on the image using OpenCV, with </span>
+<span id="cb20-20"><a href="#cb20-20"></a>             tuples (ulx, uly), (lrx, lry), color, and thickness of 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+From ICA 4:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You should replace the <em>TODO</em> comment with a <code>for</code> loop that repeats six time with <code>i</code> as its loop variable. Inside the loop:</p>
+<ul>
+<li>Define a variable to hold the ith color in the <code>colors</code> list</li>
+<li>Calculate the center x value according to this formula: <span class="math inline">\(x = 100 \cdot (i + 1)\)</span></li>
+<li>Draw a filled-in circle on the <code>image</code> with the calculated x value, and a y value of 150, a radius of 50, and the selected color</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Also from ICA 4:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Import the <code>cv2</code> module</li>
+<li>Read in the <code>grandTeton.jpg</code> image and save it in a variable</li>
+<li>Repeat the following 50 times
+<ul>
+<li>Assign a new variable to hold a copy of the original image</li>
+<li>Calculate the (x, y) coordinates for the center of the ellipse as: <span class="math inline">\(x = 10i+10\)</span> and <span class="math inline">\(y=5i+10\)</span></li>
+<li>Draw an ellipse on the new copy, with (x, y) for the centerpoint, and with axes of size 50 and 15, and color (245, 245, 175) (determine the other input values based on the example output below)</li>
+<li>Display the copy</li>
+<li>Wait for 30-50 milliseconds</li>
+</ul></li>
+<li>(After the loop) Display the image again</li>
+<li>Wait, as normal, for the user to hit a key</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+From ICA 5:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Start by importing <code>cv2</code> and the <code>os</code> module</li>
+<li>Use <code>os.listdir("SampleImages")</code> to get a list of the files and folders in <code>SampleImages</code>. Save the returned value into a variable called <code>allFiles</code>.
+<ul>
+<li>Before moving on, temporarily add a <code>print</code> statement, and print the value of <code>allFiles</code>. Examine it, make sense of what the list contains, and make sure it is doing the right thing (ask for help if it isn’t)</li>
+</ul></li>
+<li>Next, write a <code>for</code> loop that loops over the strings in <code>allFiles</code>: call the loop variable <code>name</code>.
+<ul>
+<li>Again, before moving on, temporarily add a print statement and print the loop variable. It should be a file or folder name from <code>SampleImages</code></li>
+</ul></li>
+<li>Inside the loop, add an <code>if</code> statement to check if the current <code>name</code> is an image file:
+<ul>
+<li>Use this string slicing to extract the last three characters: <code>name[-3:]</code></li>
+<li>Use <code>or</code> to perform two comparisons: Compare the sliced substring to <code>jpg</code>, and separately compare it to <code>png</code></li>
+</ul></li>
+<li>If the test of the <code>if</code> is <code>True</code>, then:
+<ul>
+<li>Attach the folder name to the file name like this: <code>"SampleImages/" + name</code></li>
+<li>Read in the image using the path string you created</li>
+<li>Display the image in the <code>"Slideshow"</code> window</li>
+<li>Wait for the user to type a key</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="how-to-write-an-algorithm-in-pseudocode-examples" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-write-an-algorithm-in-pseudocode-examples">How to write an algorithm in pseudocode… examples</h2>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example 1</h3>
+<p>Suppose I have a list of names, and I want to make a new list that has all the names that start with a certain letter.</p>
+<ul>
+<li>Thinking of it as an algorithm, the data I want the algorithm to operate on is the letter, and a list of names</li>
+<li>So I will make those <strong>inputs</strong> to the algorithm, and write the starting line:</li>
+</ul>
+<pre><code>Algorithm selectNames(letter, nameList)</code></pre>
+<p>Will do the rest live in the video and post the result here:</p>
+<pre><code>Algorithm selectNames(letter, nameList)
+1. Set up answerList as an empty list
+2. Loop over names in nameList, let name be the next name each time
+3.     If the first letter in name equals letter (from above) then
+4.        Add name to answerList
+5. Return/output answerList</code></pre>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example 2</h3>
+<p>Suppose I am taking a road trip, and I want to calculate how many hours I spend driving on a given day, excluding the time I might spend off the road: at a rest stop, eating, getting gas/charging my car, visiting roadside attractions. So I write down all the times when I started or stopped driving.</p>
+<ul>
+<li>For simplicity, all times will be given in 24-hour time (so 1:00pm will be written as 13:00)</li>
+<li>I won’t ever drive past 11:00pm (23:00 in 24-hour time), so we only have to worry about one day at a time</li>
+</ul>
+<p>For example, this might be my record for one day of my trip:</p>
+<ul>
+<li>Started driving at 8:10</li>
+<li>Stopped for gas at 10:45</li>
+<li>Started driving again at 11:05</li>
+<li>Stopped for lunch at 13:20</li>
+<li>Started driving again at 14:00</li>
+<li>Stopped driving to see giant fish statue at 16:50</li>
+<li>Started driving again at 18:00</li>
+<li>Stopped driving for the evening at 20:35</li>
+</ul>
+<p>We want to compute how many hours I actually spent on the road.</p>
+<p><strong>Step one:</strong> Representing the data (this will often be given to you). I want to represent the start and stop times in Python.</p>
+<ul>
+<li>Each time has an hour of the day, and a number of minutes. These are different units, so we can’t combine them easily</li>
+<li>I will use a list that has exactly 2 items in it (could also be a tuple). So 10:45 would be <code>[10, 45]</code></li>
+<li>For the whole day’s record, I would make a list holding the times:</li>
+</ul>
+<div id="77cc184d" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>[[<span class="dv">8</span>, <span class="dv">10</span>], [<span class="dv">10</span>, <span class="dv">45</span>], [<span class="dv">11</span>, <span class="dv">5</span>], [<span class="dv">13</span>, <span class="dv">20</span>], [<span class="dv">14</span>, <span class="dv">0</span>], [<span class="dv">16</span>, <span class="dv">50</span>], [<span class="dv">18</span>, <span class="dv">0</span>], [<span class="dv">20</span>, <span class="dv">35</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>[[8, 10], [10, 45], [11, 5], [13, 20], [14, 0], [16, 50], [18, 0], [20, 35]]</code></pre>
+</div>
+</div>
+<p>Now we have refined the problem to something we can tackle: I want to write an algorithm that takes in this list of sublists, pairs up adjacent times that represent starting and stopping times, and for each calculates the time difference, and then adds them all up.</p>
+<p>(I’ll do the rest of this live in the video, and will add the final product here)</p>
+<pre><code>Algorithm computeDriveTime(startStopList)
+totalMins = 0
+Repeat over pairs from startStopList, looking at 1st and 2nd, then 3rd and 4th, etc.
+    Let start be the first time of the current pair
+    Let stop be the second time of the current pair
+    Convert start to be in minutes   (  start[0] * 60 + start[1]   )
+    Convert stop to be in minutes    (   stop[0] * 60 + stop[1]   )
+    Compute elapsedMins as stop - start
+    Add elapsedMins to totalMins
+Return totalMins / 60</code></pre>
 </section>
 </section>
 </section>
@@ -882,9 +1166,10 @@ cv2.waitKey()</code></pre>
 <section id="announcements-6" class="level3">
 <h3 class="anchored" data-anchor-id="announcements-6">Announcements</h3>
 <ul>
-<li>Homework 2 due date moved to Friday, October 10</li>
+<li>Homework 2 due date moved to Wednesday, October 15</li>
 <li>See notes above about the change in topics…</li>
-<li>Be prepared to discuss Ethics and Sci-Fi 5 today!</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 6 on Friday!</li>
+<li><strong>Starting today you will pick your own partners for working in class!</strong></li>
 </ul>
 </section>
 <section id="todays-topics-3" class="level3">
@@ -916,14 +1201,14 @@ cv2.waitKey()</code></pre>
 <p><strong>Indefinite looping</strong> is when the loop continues for an unknown number of repetitions. The number of repetitions depends on a boolean test: the loop continues until the test becomes <code>False</code>.</p>
 <p>While loops are a more “primitive” kind of loop, more simple, leaving more responsibility on the programmer. As the programmer, you are responsible for setting up and updating the <em>loop variable</em> as well as any ordinary accumulator variables.</p>
 <p>Below is a version of the Numpy <code>arange</code> function, but for lists. Given a starting value, and ending value, and a step size, all floating-point numbers, it produces a list containing the sequence of values starting with the starting value and increasing by step size each time, up to but not including the end point.</p>
-<div id="55de4135" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">def</span> myARange(start, end, step):</span>
-<span id="cb20-2"><a href="#cb20-2"></a>    ansList <span class="op">=</span> []                         <span class="co"># accumulator initialize</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>    currValue <span class="op">=</span> start                    <span class="co"># loop variable initialize</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a>    <span class="cf">while</span> (currValue <span class="op">&lt;</span> end):             <span class="co"># loop test</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>        ansList.append(currValue)        <span class="co"># update accumulator</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>        currValue <span class="op">=</span> currValue <span class="op">+</span> step     <span class="co"># update loop variable</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a>    <span class="cf">return</span> ansList</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7278f807" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">def</span> myARange(start, end, step):</span>
+<span id="cb26-2"><a href="#cb26-2"></a>    ansList <span class="op">=</span> []                         <span class="co"># accumulator initialize</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>    currValue <span class="op">=</span> start                    <span class="co"># loop variable initialize</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>    <span class="cf">while</span> (currValue <span class="op">&lt;</span> end):             <span class="co"># loop test</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>        ansList.append(currValue)        <span class="co"># update accumulator</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>        currValue <span class="op">=</span> currValue <span class="op">+</span> step     <span class="co"># update loop variable</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>    <span class="cf">return</span> ansList</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="using-a-web-cam" class="level3">
@@ -940,19 +1225,19 @@ cv2.waitKey()</code></pre>
 <li><code>waitKey</code> takes in a number, if 0, then it pauses indefinitely to wait for the user to hit a key, if the input is a positive integer, it pauses only for that many milliseconds and then returns and lets the program continue</li>
 <li><code>waitKey</code> returns a number that indicates the user’s input: -1 if they didn’t input anything, and the numeric code for the key the entered, otherwise.</li>
 </ul>
-<div id="95b9bd1a" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>vidCap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    gotFrame, img <span class="op">=</span> vidCap.read()</span>
-<span id="cb21-5"><a href="#cb21-5"></a>    <span class="cf">if</span> <span class="kw">not</span> gotFrame:</span>
-<span id="cb21-6"><a href="#cb21-6"></a>        <span class="bu">print</span>(<span class="st">"Got no frame"</span>)</span>
-<span id="cb21-7"><a href="#cb21-7"></a>        <span class="cf">break</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>    cv2.imshow(<span class="st">"Webcam"</span>, img)</span>
-<span id="cb21-9"><a href="#cb21-9"></a>    x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
-<span id="cb21-10"><a href="#cb21-10"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb21-11"><a href="#cb21-11"></a>        <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
-<span id="cb21-12"><a href="#cb21-12"></a>            <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3126eba6" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>vidCap <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb27-4"><a href="#cb27-4"></a>    gotFrame, img <span class="op">=</span> vidCap.read()</span>
+<span id="cb27-5"><a href="#cb27-5"></a>    <span class="cf">if</span> <span class="kw">not</span> gotFrame:</span>
+<span id="cb27-6"><a href="#cb27-6"></a>        <span class="bu">print</span>(<span class="st">"Got no frame"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7"></a>        <span class="cf">break</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>    cv2.imshow(<span class="st">"Webcam"</span>, img)</span>
+<span id="cb27-9"><a href="#cb27-9"></a>    x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
+<span id="cb27-10"><a href="#cb27-10"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb27-11"><a href="#cb27-11"></a>        <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="cb27-12"><a href="#cb27-12"></a>            <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -961,17 +1246,114 @@ cv2.waitKey()</code></pre>
 <section id="announcements-8" class="level3">
 <h3 class="anchored" data-anchor-id="announcements-8">Announcements</h3>
 <ul>
-<li>Homework 2 due <strong>Today</strong></li>
-<li>Homework 3 is due October 31</li>
+<li></li>
 <li>Discuss Ethics and Sci-Fi 6 <strong>today</strong></li>
 </ul>
 </section>
 <section id="todays-topics-5" class="level3">
 <h3 class="anchored" data-anchor-id="todays-topics-5">Today’s topics</h3>
 <ul>
-<li>Making threshold images</li>
 <li>Masking images</li>
+<li>Making threshold images</li>
 <li>Threshold images as masks</li>
+</ul>
+</section>
+<section id="overall-context" class="level3">
+<h3 class="anchored" data-anchor-id="overall-context">Overall context</h3>
+<p>We started with image arithmetic and ROIs learning about how we can manipulate images. We can brighten, darken, and blend images together. We can separate an image into separate channels and manipulate those, and we can crop out regions of an image using Numpy array slicing.</p>
+<p>Starting today, we are going to explore more image processing methods, ones that <strong>transform</strong> the image to simplify it in one way or another. We need to simplify images in order for the computer to be able to extract information from them.</p>
+<p>Extracting information from images is the foundational goal of computer vision. By that we mean:</p>
+<ul>
+<li>Separating objects in an image from each other (which pixels belong to a person, to a chair, to a tree)</li>
+<li>Identifying a specific object in an image</li>
+<li>Being able to recreate a 3d approximation of a 2d image</li>
+<li>Recognizing when two images are of the same location</li>
+<li>And so on…</li>
+</ul>
+</section>
+<section id="what-is-a-mask-and-how-can-we-make-them" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-mask-and-how-can-we-make-them">What is a mask, and how can we make them?</h3>
+<p>A <strong>mask</strong> is a black and white image (every pixel is either black or white) that we use to block out part of an image and let other parts show through.</p>
+<ul>
+<li>Mask image pixels are almost always either full black or full white</li>
+<li>A mask image is the same size and shape as the image it is meant to apply to</li>
+<li>When we <em>apply</em> the mask to the image, we get a new image where each pixel’s color is determined by:
+<ul>
+<li>if a mask pixel is black, then the same pixel in the new image is black</li>
+<li>if a mask pixel is white, then the same pixel in the new image has the color from the same pixel in the original</li>
+</ul></li>
+</ul>
+<p><strong>A metaphor:</strong></p>
+<ul>
+<li>Consider a printed photograph</li>
+<li>A mask for that photograph would be a black piece of paper the same size as the photograph, with holes cut in it</li>
+<li>We apply the mask by placing the black paper over the photo paper</li>
+<li>The new image is what we see as a result</li>
+</ul>
+<p><strong>Making a mask:</strong></p>
+<p>There are two main ways to make a mask:</p>
+<ul>
+<li>By hand: we create a black image of the right size and shape, and then we use drawing functions to draw white shapes on it</li>
+<li>By programming: we use a program to generate a black and white image from the original, then use it as a mask</li>
+</ul>
+<p>The second method is what we do with thresholding: generate black and white images</p>
+</section>
+<section id="converting-images-from-one-color-representation-to-another" class="level3">
+<h3 class="anchored" data-anchor-id="converting-images-from-one-color-representation-to-another">Converting images from one color representation to another</h3>
+<p>OpenCV provides a function, <code>cvtColor</code>, for converting from one color representation to another. The table below shows three examples of uses of this function, and when we might want to use it.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 48%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><code>cvtColor</code> Example</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.cvtColor(img, cv2.COLOR_BGR2GRAY</code>)</td>
+<td style="text-align: left;">Converts <code>img</code> from color to grayscale</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cv2.cvtColor(img, cv2.COLOR_BGR2HSV')</code></td>
+<td style="text-align: left;">Converts <code>img</code> from BGR color to HSV color</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.cvtColor(img, cv2.COLOR_GRAY2BGR')</code></td>
+<td style="text-align: left;">Converts <code>img</code> from grayscale to BGR</td>
+</tr>
+</tbody>
+</table>
+<p>In particular, we will need to convert color images to grayscale for some of the thresholding functions we will be using in the next sections. We also could create a mask with just width and height, and then turn it into a color shape using <code>cvtColor</code>, as well.</p>
+</section>
+<section id="what-is-thresholding-an-image" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-thresholding-an-image">What is <em>thresholding</em> an image?</h3>
+<p>When we threshold an image, we separate the pixels in the image according to whether their values are above or below some threshold, or within some range. Most often, the result is a black and white image, although some threshold functions can be used in other ways.</p>
+<p><strong>The <code>threshold</code> function</strong></p>
+<div id="c83b63af" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>cv2.threshold(img, threshVal, maxVal, mode) <span class="op">==&gt;</span> threshImage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><code>img</code> is the image to be thresholded</li>
+<li><code>threshVal</code> is the threshold value, between 0 and 255</li>
+<li><code>maxVal</code> is the value to set pixel who are over <code>threshVal</code> to (usually set to 255)</li>
+<li><code>mode</code> specifies which of many modes to run, <code>cv2.THRESH_BINARY</code> is the most common</li>
+<li><code>threshImage</code> is the returned value, a new thresholded image</li>
+</ul>
+<p><strong>The <code>adaptiveThreshold</code> function</strong></p>
+<p>Performs similar thresholding as <code>threshold</code>, but it chooses a patch around each pixel and dynamically chooses the threshold value for you.</p>
+<p><strong>The <code>inRange</code> function</strong></p>
+<p>Works on color images, finds all pixels that lie within an input range, and marks them as white in the threshold image.</p>
+<p><strong>The <code>backproject</code> function</strong></p>
+<p>This one is optional at this point. We won’t need to use it, but it can be interesting to play with if you want to.</p>
+<p>Here is the process for computing the backprojection:</p>
+<ul>
+<li>First, make a reference image that contains only the color or colors you want to track</li>
+<li>From that reference image, build a <em>histogram</em> of hue values (first channel of HSV) to capture the hues in the reference image</li>
+<li>Call <code>backproject</code> on a new HSV image, and it will mark the pixels that match the hues from the reference image</li>
 </ul>
 </section>
 </section>
