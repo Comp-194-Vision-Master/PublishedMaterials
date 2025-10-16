@@ -9,7 +9,7 @@
 <meta name="author" content="Susan Eileen Fox">
 <meta name="dcterms.date" content="2025-10-16">
 
-<title>Chapter 5, Image Transformations – Vision Readings</title>
+<title>Chapter 5, Geometric Transformations – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -177,7 +177,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Chapter 5, Image Transformations</h1>
+      <h1 class="title">Chapter 5, Geometric Transformations</h1>
                       </div>
   </div>
     
@@ -215,16 +215,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#translation" id="toc-translation" class="nav-link" data-scroll-target="#translation"><span class="header-section-number">2.1</span> Translation</a></li>
   <li><a href="#rotation" id="toc-rotation" class="nav-link" data-scroll-target="#rotation"><span class="header-section-number">2.2</span> Rotation</a></li>
-  <li><a href="#general-affine-warping" id="toc-general-affine-warping" class="nav-link" data-scroll-target="#general-affine-warping"><span class="header-section-number">2.3</span> General affine warping</a>
-  <ul class="collapse">
-  <li><a href="#a-note-about-the-perspective-transform" id="toc-a-note-about-the-perspective-transform" class="nav-link" data-scroll-target="#a-note-about-the-perspective-transform"><span class="header-section-number">2.3.1</span> A note about the <em>perspective transform</em></a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#image-filters" id="toc-image-filters" class="nav-link" data-scroll-target="#image-filters"><span class="header-section-number">3</span> Image filters</a>
-  <ul class="collapse">
-  <li><a href="#convolutional-filters" id="toc-convolutional-filters" class="nav-link" data-scroll-target="#convolutional-filters"><span class="header-section-number">3.1</span> Convolutional filters</a></li>
-  <li><a href="#blur-filters" id="toc-blur-filters" class="nav-link" data-scroll-target="#blur-filters"><span class="header-section-number">3.2</span> Blur filters</a></li>
-  <li><a href="#morphological-filters" id="toc-morphological-filters" class="nav-link" data-scroll-target="#morphological-filters"><span class="header-section-number">3.3</span> Morphological filters</a></li>
+  <li><a href="#general-affine-warping" id="toc-general-affine-warping" class="nav-link" data-scroll-target="#general-affine-warping"><span class="header-section-number">2.3</span> General affine warping</a></li>
+  <li><a href="#a-note-about-the-perspective-transform" id="toc-a-note-about-the-perspective-transform" class="nav-link" data-scroll-target="#a-note-about-the-perspective-transform"><span class="header-section-number">2.4</span> A note about the <em>perspective transform</em></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -236,8 +228,7 @@ window.Quarto = {
 
 
 
-<p>In this chapter, we will continue our examination of image transformations, starting with <strong>geometric transformations</strong> and then exploring several different kinds of <strong>filters</strong>. Geometric transformations are used to resize images, but also to translate, rotate, or warp image contents within the frame of an image. Filters take in an image and produce a <em>feature map</em> that looks like an image of the same, or similar size. Each pixel in the feature map is determined by some mathematical calculations done on the neighborhood surrounding the corresponding pixel in the original image.</p>
-<p>Filter tasks include blurring, morphological filters, and edge detection. These filters allow us to simplify images, drawing out interesting features while reducing the complexity of the data. Some of these filters use <strong>convolution</strong>: convolutional filters are central to modern deep learning networks that work on image data.</p>
+<p>In this chapter, we will continue our examination of image transformations with <strong>geometric transformations.</strong> Geometric transformations are used to resize images, but also to translate, rotate, or warp image contents within the frame of an image.</p>
 <section id="resizing-images" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Resizing images</h1>
 <p>The most basic transformation is resizing an image. The <code>resize</code> function will scale a picture up or down, and can also be used to stretch an image by changing its <em>aspect ratio</em>, the ratio of an image’s width to its height. You must give the <code>resize</code> function a source image and an input for the dimensions of the new image. It has three optional inputs, as well. Two of these let you specify the width and/or height of the new image as a factor of the original, and the last optional input lets you select the <em>interpolation</em> algorithm to be used. Below are some examples of ways to use <code>resize</code>:</p>
@@ -270,7 +261,7 @@ window.Quarto = {
 <p><em>Interpolation</em> is the process used to make the resized image look better. When we reduce the size of the image, one new pixel might have to cover a part of the image that original had multiple pixels. When we increase the size of the image, we want to smooth the colors where we are adding pixels that weren’t there before, so that the image does not look pixelated. Interpolation determines the colors of the pixels to preserve as much information from the image as possible, while smoothing adjacent pixel values.</p>
 <p>According to the OpenCV documentation, The <code>cv2.INTER_AREA</code> interpolation method is best when reducing the size of the image, but <code>cv2.INTER_CUBIC</code> or <code>cv2.INTER_LINEAR</code> (the default method) work best when scaling an image up to a larger size.</p>
 <p>Below is a code example that illustrates some changes made to a typical image, followed by the results in <a href="#fig-resize" class="quarto-xref">Figure&nbsp;1</a>.</p>
-<div id="9262cc87" class="cell" data-execution_count="1">
+<div id="1b5ceec4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> cv2</span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/mushrooms.jpg"</span>)</span>
@@ -366,7 +357,7 @@ y_{old} \\
 <p><span class="math display">\[x_{new} = x_{old} + t_x\]</span> <span class="math display">\[y_{new} = y_{old} + t_y\]</span></p>
 <p>Compare this formula to the affine warping formula above, and you can see how we can choose values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(d\)</span> to make these formulas out of the original (Let <span class="math inline">\(a= 1\)</span>, <span class="math inline">\(b = 0\)</span>, <span class="math inline">\(c = 0\)</span>, and <span class="math inline">\(d = 1\)</span>). Because the matrix for translation will always have this simple form, when we program it, we will have to make the matrix ourselves. Look at the 3x3 matrix shown above; since the bottom row is always fixed in value, we only have to specify the top two rows when doing an affine warp in OpenCV.</p>
 <p>In the code below, we use the <code>warpAffine</code> function to translate the contents of the image 100 pixels to the right, and 50 pixels down. This function takes in an image, and a 2x3 matrix of floating-point values that specify the six values from the affine warping formulas/matrix. We also tell the function how large to make the output image: it is common to keep it the same size, but we can choose any size we want.</p>
-<div id="6709e23f" class="cell" data-execution_count="2">
+<div id="a9533e03" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a></span>
@@ -418,7 +409,7 @@ Figure&nbsp;3: Rotation using <code>getRotationMatrix2d</code> with center of ro
 </figure>
 </div>
 <p>The code example below rotates the image three different amounts, and #fig-rotExamples shows the resulting images.</p>
-<div id="bed8ddd2" class="cell" data-execution_count="3">
+<div id="314f77ac" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>origIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/canyonlands.jpg"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>(hgt, wid, dep) <span class="op">=</span> origIm.shape</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
@@ -509,7 +500,7 @@ newPts = \begin{bmatrix}
 \end{array}
 \]</span></p>
 <p>Here is an example of how to create the point matrices, get the affine matrix, and apply it to an image.</p>
-<div id="7b6a02a3" class="cell" data-execution_count="4">
+<div id="5999d2c8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a></span>
@@ -566,105 +557,11 @@ Figure&nbsp;6: The original image and the result of affine warping from the exam
 </figcaption>
 </figure>
 </div>
-<section id="a-note-about-the-perspective-transform" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="a-note-about-the-perspective-transform"><span class="header-section-number">2.3.1</span> A note about the <em>perspective transform</em></h3>
+</section>
+<section id="a-note-about-the-perspective-transform" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="a-note-about-the-perspective-transform"><span class="header-section-number">2.4</span> A note about the <em>perspective transform</em></h2>
 <p>In addition to affine warping, OpenCV provides another type of warping, the perspective transform. This is based on somewhat more sophisticated, and expensive, math. It simulates the kind of view you would have if the image was printed out on rigid paper, and you looked at it from different perspectives. And it matches the kind of vanishing-point perspective used in art to show realistic depth. When you transform an imate that contains a pair of parallel lines using affine warping, the lines will remain parallel to each other, but they may turn into curved lines. By contrast, if you transform the same image with the perspective transform, the lines will remain straight, but they won’t remain parallel to each other.</p>
 <p>Using the perspective transformation is very similar to the affine transformation. You are encouraged to look up the details in <a href="https://docs.opencv.org/4.x/d2/de8/group__core__array.html#gad327659ac03e5fd6894b90025e6900a7">the OpenCV documentation</a>.</p>
-</section>
-</section>
-</section>
-<section id="image-filters" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Image filters</h1>
-<p>A <strong>filter</strong> is an image transformation that converts the original image into a new image, usually called a <strong>feature map</strong>. The value at each location in the feature map is based on the pixel values in a small region surrounding that location in the original image. In other words, a filter looks at the values of pixels in a specified region around some center pixel, and it uses those values to determine the new center value in the feature map.</p>
-<p>You can think of this as passing the neighborhood of values through a function that produces a single output value. <a href="#fig-filters" class="quarto-xref">Figure&nbsp;7</a> illustrates this process.</p>
-<div id="fig-filters" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-filters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="Ch5-Images/filter.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;7: A filter takes a neighborhood around a central pixel, runs it through some transforming function, to produce a single value at the central pixel location in the feature map."><img src="Ch5-Images/filter.png" class="img-fluid figure-img" style="width:18cm"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-filters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: A filter takes a neighborhood around a central pixel, runs it through some transforming function, to produce a single value at the central pixel location in the feature map.
-</figcaption>
-</figure>
-</div>
-<p>A simple example of a filter is blurring. The blurred image is typically created by averaging the color values of a neighborhood around a pixel. For example, if the neighborhood was defined to be a square 3x3 region, then we would examine every 3x3 region in the image and for each:</p>
-<ul>
-<li>add up all the blue channel values and divide by 9 to get the new blue channel value</li>
-<li>add up all the green channel values and divide by 9 to get the new blue channel value</li>
-<li>add up all the red channel values and divide by 9 to get the new blue channel value</li>
-<li>store the new color at the center location in the new feature map</li>
-</ul>
-<p>Blurring is an example of a <strong>convolutional filter.</strong> These filters have proven to be extremely important in modern deep learning models that operate on images. So we will look more closely at how they work and how they can simplify images and highlight important features in the sections below.</p>
-<section id="convolutional-filters" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="convolutional-filters"><span class="header-section-number">3.1</span> Convolutional filters</h2>
-<p><strong>Convolutional filters</strong> are a special kind of filter, where the operation we perform on the neighborhood of pixel values is a weighted sum. We define a <em>kernel</em>: a matrix the size and shape of our neighborhood, where the values in it are weights. For every neighborhood in the image, we multiply pixel values by the corresponding weights in the kernel, and add up the results. The sum is then stored in the corresponding location in the new image/feature map.</p>
-<p><a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;8</a> shows the general convolutional process. The grid on the left represents a tiny image array (one channel, at least). The small 3x3 grid in the middle is the kernel of weights. Each weight is multiplied by the corresponding value in the highlighted neighborhood, and the results are added:</p>
-<p><span class="math display">\[
-\begin{array}{l}
-\hspace{5mm} 41 \cdot 0.05 + 56 \cdot 0.15 + 71 \cdot 0.05 \\
-+ 33 \cdot 0.15 + 44 \cdot 0.2 + 81 \cdot 0.15 \\
-+ 27 \cdot 0.05 + 18 \cdot 0.15 + 62 \cdot 0.05
-\end{array} = 47.05
-\]</span></p>
-<div id="fig-convProcess" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-convProcess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="Ch5-Images/convolutionalfilter.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;8: An example of the convolutional weighted sum at a specific location in an image"><img src="Ch5-Images/convolutionalfilter.drawio.png" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convProcess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: An example of the convolutional weighted sum at a specific location in an image
-</figcaption>
-</figure>
-</div>
-<p>In the figure above, I left out the border pixels from the original image. The border pixels are a special case, because they don’t have a full neighborhood around them. We have to handle them as a special case. Typical options include:</p>
-<ul>
-<li>Making the feature map smaller than the starting image by leaving out the edge pixels (what <a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;8</a> shows)</li>
-<li>Computing the convolution based only on the neighbors that the edge pixels do have</li>
-<li>Imagining that values continue on past the edges of the array to create full neighborhoods for edge pixels
-<ul>
-<li>Using interpolation/extrapolation to continue the edge colors outward as far as is needed</li>
-<li>Reflecting the contents of the array outward as if it was surrounded by mirrors</li>
-</ul></li>
-</ul>
-<p>Filtering can be used to create a number of interesting effects, but is often used to manipulate an image that is then sent to a more complex computer vision algorithm. The main purposes of filtering are:</p>
-<ul>
-<li>Simplifying the image by reducing color variation and/or detail</li>
-<li>Highlighting small-scale patterns in the image, such as <strong>edges</strong> (defined to be places where the brightness changes</li>
-<li>across neighboring pixels)</li>
-</ul>
-<p>In the next few sections, we will first focus on filters, both convolutional and otherwise, that simplify the image. Then examine convolutional filters that perform edge detection.</p>
-</section>
-<section id="blur-filters" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="blur-filters"><span class="header-section-number">3.2</span> Blur filters</h2>
-<p>Blurring is probably the most basic kind of filter we can do. <strong>Why would we want to blur an image?</strong> As humans, we typically don’t like blurred images, unless they are blurred for some effect. However, image data to the computer is just a big box of numbers. Tiny color variations that we are barely aware of can confuse a computer vision program. When we blur an image, those tiny variations smooth out so that colors are more even, and it is easier for a computer vision system to make sense of the image data.</p>
-<p>The basic blur function takes a rectangular neighborhood centered around the target pixel, and it performs the mean of the color values, channel-by-channel (all the red values are averaged, all the green values are averaged, and all the blue values are averaged). The resulting color is placed in the new image at the target pixel location. The process is repeated for every pixel in the image (with edge pixels handled specially, as described above)</p>
-<p>With blurring we talk about averaging, with convolution we talk about computing a weighted sum. Averaging values <em>can</em> be thought of as a weighted sum. Below I show formulas for averaging a 3x3 region, then I convert those to the weighted-sum form:</p>
-<p><span class="math display">\[
-\begin{array}{l}
-(v_{11} + v_{12} + v_{13} + v_{21} + v_{22} + v_{23} + v_{31} + v_{32} + v_{33}) / 9 \\
-\hspace{1cm} = v_{11} / 9 + v_{12} / 9 + v_{13} / 9 + v_{21} / 9 + v_{22} / 9 + v_{23} / 9 + v_{31} / 9 + v_{32} / 9 + v_{33} / 9 \\
-\hspace{1cm} = 0.11 v_{11} + 0.11 v_{12} + 0.11 v_{13} + 0.11 v_{21} + 0.11 v_{22} + 0.11 v_{23} + 0.11 v_{31} + 0.11 v_{32} + 0.11 v_{33} \\
-\end{array}
-\]</span></p>
-<p>The kernel for simple blurring has the same value in every cell: <span class="math inline">\(1/n\)</span>, where <span class="math inline">\(n\)</span> is the number of cells in the neighborhood.</p>
-<p>OpenCV provides a function that will blur images for us: It</p>
-<p>The second blur function is called GaussianBlur, and it performs a weighted average of the pixels in the neighborhood, with more weight given to pixels closer to the center. Gaussian, here, refers to Gaussian functions, more commonly called normal curves or bell curves. The diagram above approximates a Gaussian blur 3x3 kernel.</p>
-<p>Experiment with how the plain blur compares to the Gaussian blur by switching between them: typing 1 will switch to the plain blur, and typing 2 will switch to Gaussian blur.</p>
-</section>
-<section id="morphological-filters" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="morphological-filters"><span class="header-section-number">3.3</span> Morphological filters</h2>
-<p>There are a set of “morphological” filters to experiment with. The program simpleMorph.py demonstrates how to select from the different morphological filters (described below), and how to build the neighborhood object, and call the morphologyEx function. Try the different filters with different neighborhood sizes and shapes, and note the effect.</p>
-<p>Dilation and Erosion Much like blurring, dilation and erosion determine the value for a pixel based on a neighborhood of pixels from the original image. Unlike the default in blurring, we can select the shape of the neighborhood, as well as its size, to be either rectangular, elliptical, or cross shaped. With dilation, the value of each channel of a pixel is the maximum value of that channel in any pixel in its neighborhood. Erosion is the opposite: the value of each channel of a pixel is the minimum value of that channel in any pixel in its neighborhood.</p>
-<p>These can be used to emphasize and thicken edges or regions of color in a particular part of an image.</p>
-<p>Opening and Closing Sometimes we want to preserve both dark and light features of an image. Opening and closing combine dilation and erosion. Opening an image means first performing an erosion of the image, then a dilation, using the same size and shape of neighborhood. Closing first dilates the image, then erodes it.</p>
-<p>Both these operations are good at removing noise and small details from images.</p>
-<p>White and Black Top-Hat The Top-Hat filters do the opposite of opening and closing. Instead of removing the fine details, these filters keep just the fine details. The white top-hat takes the difference between the original image and the opening of the image. The black top-hat takes the difference between the closing and the original image.</p>
-<p>These filters may be used for feature extraction tasks, or image enhancement.</p>
-<p>Morphological Gradient The morphological gradient takes the difference between the dilation and erosion of an image. This emphasizes the places where there is a change in color, and can be useful to enhance edges.</p>
-<p>Milestone 3: Blurring and morphing video</p>
-<p>Start with a program that just displays the frames from the webcam. Once again, you may pick just one of these options to complete.</p>
-<p>Blurring the video gradually: Use the Gaussian blur function to blur the image to be displayed. Define a variable blurDir to be 2. This will be how much we will change the neighborhood size each time through the loop Set up a variable kSize to hold the current neighborhood size, initially set to 1 or 3 Use Gaussian blur to blur the image with the current size kSize (and display its results) Update the current size by adding blurDir to it. If the resulting kSize is greater than some maximum size (try 50 or 100) then change blurDir to -2 If the resulting kSize is less than 3, then set blurDir to 2</p>
-<p>Morphing the video, instead: Look at the simpleMorph.py sample program for how to use the morphological filters. Choose at least 1 of the morphological filters described above and demonstrated in morph.py. Modify the blurring program so that it operates with a changing neighborhood size but applies the chosen morphological filter instead of blurring. Try changing the neighborhood shape to see what effect it has.</p>
 
 
 </section>
