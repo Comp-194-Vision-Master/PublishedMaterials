@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Resizing images</h1>
 <p>The most basic transformation is resizing an image. The <code>resize</code> function will scale a picture up or down, and can also be used to stretch an image. You must give the <code>resize</code> function a source image and an input for the dimensions of the new picture. If you want to scale images by multiplying the image dimensions by a factor, you can do that, by putting in a “nonsense” size of <code>(0, 0)</code> and then specifying the <code>fx</code> or <code>fy</code> optional inputs.</p>
 <p>The <code>matchSize</code> function below takes in two images. It resizes the second image to match the dimensions of the first image, and returns the resized image.</p>
-<div id="d3ed67f7" class="cell" data-execution_count="2">
+<div id="1204798b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> matchSize(img1, img2):</span>
 <span id="cb1-2"><a href="#cb1-2"></a>    (hgt, wid, d) <span class="op">=</span> img1.shape</span>
 <span id="cb1-3"><a href="#cb1-3"></a>    newImg2 <span class="op">=</span> cv2.resize(img2, (wid, hgt))</span>
@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>Try this:</strong> Run the sample calls to this function in <code>activ12.py</code>. Add more calls, including some extreme resizing using some of the large and tiny images.</p>
 <p>Next is a partial program that you will complete. This program scales an image up and down, displaying it in the same window so that it seems to pulse larger and then smaller. The only piece missing is the actual resizing of the image.</p>
-<div id="adde914a" class="cell" data-execution_count="3">
+<div id="4d5e5388" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="kw">def</span> pulseSize(img):</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2"></a>    deltaSize <span class="op">=</span> <span class="fl">0.05</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>    currScale <span class="op">=</span> <span class="fl">1.0</span></span>
@@ -286,7 +286,7 @@ Below is a picture of the data in the matrix, and what each part means.</p>
 <div id="fig-transMatrix" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-transMatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="ICA12-Images/translateMatrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translation"><img src="ICA12-Images/translateMatrix.png" class="img-fluid figure-img"></a>
+<a href="ICA12-Images/translateMatrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translation"><img src="ICA12-Images/translateMatrix.png" class="img-fluid figure-img" style="width:10cm"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-transMatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translation
@@ -294,7 +294,7 @@ Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translatio
 </figure>
 </div>
 <p>The script below shows how to create a matrix to perform image translation, using the <code>warpAffine</code> function. A copy of this script is in your <code>activ12.py</code> file. Try this script, and try changing the 30 and 50 to different values, including negative numbers.</p>
-<div id="97a3194b" class="cell" data-execution_count="4">
+<div id="377ffe9f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/snowLeo2.jpg"</span>)</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>(rows, cols, dep) <span class="op">=</span> img.shape</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>transMatrix <span class="op">=</span> np.float32([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">30</span>], [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">50</span>]]) <span class="co"># change 30 and 50</span></span>
@@ -367,7 +367,7 @@ Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translatio
 <li>A scaling factor, that scales the image to preserve its aspect ratio: a value of 1 causes no change in size</li>
 </ol>
 <p>The script below rotates a picture by different amounts, writing the amount in white in the lower right corner of the new window. Examine the code to understand how the call to <code>getRotationMatrix2D</code> works, in conjunction with <code>warpAffine</code>.</p>
-<div id="feff7a0c" class="cell" data-execution_count="5">
+<div id="60711786" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/californiaCondor.jpg"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>(rows, cols, depth) <span class="op">=</span> img.shape</span>
