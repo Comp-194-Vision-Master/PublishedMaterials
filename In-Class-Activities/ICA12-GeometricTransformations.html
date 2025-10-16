@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-10-16">
+
+<title>ICA: Geometric Transformations – Vision Readings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ICA: Geometric Transformations</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 16, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#resizing-images" id="toc-resizing-images" class="nav-link" data-scroll-target="#resizing-images">Resizing images</a></li>
+  <li><a href="#translation" id="toc-translation" class="nav-link" data-scroll-target="#translation">Translation</a></li>
+  <li><a href="#rotation" id="toc-rotation" class="nav-link" data-scroll-target="#rotation">Rotation</a></li>
+  <li><a href="#general-warping-optional" id="toc-general-warping-optional" class="nav-link" data-scroll-target="#general-warping-optional">General warping (Optional)</a></li>
+  <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>In this activity, we will explore how to use the <code>resize</code> function in OpenCV to change the size and dimensions of an image, and we will explore the strange but powerful <strong>affine warping</strong> method for doing other geometric transformations (including translation and rotation of image contents).</p>
+<p>The Github repository for this assignment will contain a starter code file, <code>activ12.py</code>. Put your code in this file, and create others, as directed below and according to the <code>TODO</code> comments in the file.</p>
+</section>
+<section id="resizing-images" class="level1">
+<h1>Resizing images</h1>
+<p>The most basic transformation is resizing an image. The <code>resize</code> function will scale a picture up or down, and can also be used to stretch an image. You must give the <code>resize</code> function a source image and an input for the dimensions of the new picture. If you want to scale images by multiplying the image dimensions by a factor, you can do that, by putting in a “nonsense” size of <code>(0, 0)</code> and then specifying the <code>fx</code> or <code>fy</code> optional inputs.</p>
+<p>The <code>matchSize</code> function below takes in two images. It resizes the second image to match the dimensions of the first image, and returns the resized image.</p>
+<div id="d3ed67f7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">def</span> matchSize(img1, img2):</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    (hgt, wid, d) <span class="op">=</span> img1.shape</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    newImg2 <span class="op">=</span> cv2.resize(img2, (wid, hgt))</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="cf">return</span> newImg2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Try this:</strong> Run the sample calls to this function in <code>activ12.py</code>. Add more calls, including some extreme resizing using some of the large and tiny images.</p>
+<p>Next is a partial program that you will complete. This program scales an image up and down, displaying it in the same window so that it seems to pulse larger and then smaller. The only piece missing is the actual resizing of the image.</p>
+<div id="adde914a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="kw">def</span> pulseSize(img):</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2"></a>    deltaSize <span class="op">=</span> <span class="fl">0.05</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>    currScale <span class="op">=</span> <span class="fl">1.0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a>        cv2.imshow(<span class="st">"Pulse"</span>, img)</span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6"></a>        x <span class="op">=</span> cv2.waitKey(<span class="dv">30</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7"></a>        <span class="cf">if</span> x <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a>            <span class="cf">break</span></span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-10" class="code-annotation-target"><a href="#annotated-cell-2-10"></a>        <span class="cf">if</span> (currScale <span class="op">&gt;</span> <span class="fl">3.0</span>) <span class="kw">or</span> (currScale <span class="op">&lt;=</span> <span class="fl">0.2</span>):</span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11"></a>            deltaSize <span class="op">=</span> <span class="op">-</span>deltaSize</span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6">6</button><span id="annotated-cell-2-13" class="code-annotation-target"><a href="#annotated-cell-2-13"></a>        currScale <span class="op">+=</span> deltaSize</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Each pass of the loop, the scaling factor will change by this amount</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">This is the scaling factor for resizing the image</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="3">This uses a while loop like we do when displaying video: a similar structure!</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="4">Just like with video, pressing the q key will end the loop</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="10" data-code-annotation="5">If the scaling factor gets too large, or too small, change the direction it is changing</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="13" data-code-annotation="6">Update the scaling factor here before the next pass of the loop</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+An aside about checking the bounds on <code>currScale</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In writing this function, I had to be very careful about checking the bounds on <code>currScale</code>. In particular, I had to set the lower bound higher than I wanted to avoid a failure by the <code>resize</code> function.</p>
+<p>We defined <code>currScale</code> to be a floating-point value. All floating-point values are approximations of real numbers, and so <strong>roundoff error</strong> can accumulate, leading to values that are not precise. In <code>activ12.py</code> this function has a print statement included that will print out the values of <code>currScale</code>. Try uncommenting that print statement and look at the values it has. Notice how their least significant digits are off from what we would expect!</p>
+<p>When working with floating-point numbers, you should <strong>always</strong> use inequalities to compare values, because the roundoff error makes direct equality difficult. When we do need something like direct equality, we often use an alternate method: compute the difference between the two floating point values we want to be equal, and consider them equal if the difference is below some threshold: <code>abs(currScale - 0.1) &lt;= 0.01</code> would approximate checking if <code>currScale</code> is equal to 0.1, allowing for an error of up to 0.01.</p>
+</div>
+</div>
+<p><strong>Try this to hand in:</strong> We want to add steps to resize the input image, just inside the <code>while</code> loop, and then we want to display the resized image.</p>
+<ul>
+<li>Add a call to <code>resize</code> just above the <code>cv2.imshow</code> line inside the <code>while</code> loop. Pass it the input image, and set the image dimensions to <code>(0, 0)</code>. Set the <code>fx</code> and <code>fy</code> optional inputs to be <code>currScale</code>.</li>
+<li>Be sure to save the image returned by <code>resize</code> into a new variable</li>
+<li>Change the <code>imshow</code> line to show your new resized image</li>
+</ul>
+</section>
+<section id="translation" class="level1">
+<h1>Translation</h1>
+<p>The example in <a href="#fig-transMatrix" class="quarto-xref">Figure&nbsp;1</a> below illustrates how to create a translation matrix and make a new image with the old image moved to a new location. The first row of the translation matrix selects the column dimension, and moves the colors 30 pixels to the right. The second row of the matrix selects the row dimension, and moves the colors 50 pixels down.<br>
+Below is a picture of the data in the matrix, and what each part means.</p>
+<div id="fig-transMatrix" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-transMatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="ICA12-Images/translateMatrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translation"><img src="ICA12-Images/translateMatrix.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-transMatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: An example of the 2x3 affine warping matrix to perform translation
+</figcaption>
+</figure>
+</div>
+<p>The script below shows how to create a matrix to perform image translation, using the <code>warpAffine</code> function. A copy of this script is in your <code>activ12.py</code> file. Try this script, and try changing the 30 and 50 to different values, including negative numbers.</p>
+<div id="97a3194b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/snowLeo2.jpg"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>(rows, cols, dep) <span class="op">=</span> img.shape</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3"></a>transMatrix <span class="op">=</span> np.float32([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">30</span>], [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">50</span>]]) <span class="co"># change 30 and 50</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-4" class="code-annotation-target"><a href="#annotated-cell-3-4"></a>transImag <span class="op">=</span> cv2.warpAffine(img, transMatrix, (cols, rows))</span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a></span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a>cv2.imshow(<span class="st">"Translated"</span>, transImag)</span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a>cv2.waitKey(<span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">We need the size of the original image, as <code>warpAffine</code> needs to know how big a “canvas” to show the result on</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="2"><code>warpAffine</code> expects a 2 by 3 Numpy array holding 32-bit floating-point numbers. <code>np.float32</code> is like <code>np.array</code> but it creates an array where the data are 32-bit floats.</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="4" data-code-annotation="3">The <code>warpAffine</code> function takes the original image, the 2x3 matrix, and the size for the new image it creates</span>
+</dd>
+</dl>
+</div>
+</div>
+<p><strong>Try this:</strong> Experiment with this script in your <code>activ12.py</code> file, until you understand how to specify the change in x or y positions (only change the 3rd value in each row of the matrix).</p>
+<p><strong>CHOOSE ONE OF THE TWO TASKS BELOW TO COMPLETE</strong></p>
+<p><strong>Try this to hand in:</strong> In the <code>activ12.py</code> file, make a copy of the <code>videoProcess</code> and <code>processImage</code> functions, and rename them <code>jitterVideo</code> and <code>jitterImage</code>. Then do the steps below: take them one at a time and test each before moving forward.</p>
+<p>Modify the <code>jitterImage</code> function to:</p>
+<ul>
+<li>Generate a random integer in the range from -100 to +100 for how far to translate the image in the x direction</li>
+<li>Do the same for the y direction</li>
+<li>Create the 2x3 translation matrix, as shown above, using your two new variables for the translation distances</li>
+<li>Change the call to <code>image.copy()</code> so that it calls <code>warpAffine</code> instead, using the translation matrix you just defined</li>
+</ul>
+<p>Modify the <code>jitterVideo</code> function to:</p>
+<ul>
+<li>Call <code>jitterImage</code> instead of <code>processImage</code></li>
+</ul>
+<p><strong>Test your program:</strong> how does it look? You could modify the range for your random offsets to get a nice “jittery” effect, or you could add in a delay where it only generates a new offset very k frames, instead of each frame.</p>
+<p><strong>Try this to hand in:</strong> In the <code>activ12.py</code> file, make a copy of the <code>videoProcess</code> and <code>processImage</code> functions, and rename them <code>bounceVideo</code> and <code>bounceImage</code>. Then do the steps below.</p>
+<p>Modify the <code>bounceImage</code> function to:</p>
+<ul>
+<li>Take in two extra inputs, <code>tx</code> and <code>ty</code></li>
+<li>Create the 2x3 translation matrix, as shown above, using <code>tx</code> and <code>ty</code> for the translation values in the matrix</li>
+<li>Change the call to <code>image.copy()</code> so that it calls <code>warpAffine</code> instead, using the translation matrix you just defined</li>
+<li>Make the new image size 2 times the width and 2 times the height of the original image size</li>
+</ul>
+<p>Modify the <code>bounceVideo</code> function to:</p>
+<ul>
+<li>Set up four variables before the <code>while</code> loop: <code>tx</code>, <code>ty</code>, <code>deltaX</code>, and <code>deltaY</code>. Initialize <code>tx</code> and <code>ty</code> to be zero, and set <code>deltaX</code> and <code>deltaY</code> to be 3.</li>
+<li>Change the call to <code>processImage</code> to call <code>bounceImage</code> instead, and pass <code>tx</code> and <code>ty</code> to it as well as the frame</li>
+<li>At the bottom of the <code>while</code> loop, add steps to update <code>tx</code> and <code>ty</code> by adding <code>deltaX</code> and <code>deltaY</code> to them</li>
+<li>Add steps to check whether it is time to bounce (this will be similar to the <code>maskVideo</code> program from ICA 11)
+<ul>
+<li>If <code>tx</code> is less than or equal to zero, then negate <code>deltaX</code></li>
+<li>If <code>ty</code> is less than or equal to zero, then negate <code>deltaY</code></li>
+<li>If <code>tx</code> plus the image width is greater than or equal to 2 times the image width, then negate <code>deltaX</code></li>
+<li>If <code>ty</code> plus the image height is greater than or equal to 2 times the image height, then negate <code>deltaY</code></li>
+</ul></li>
+</ul>
+<p><strong>Test your program:</strong> Does the video feed bounce the way you expected it to?</p>
+</section>
+<section id="rotation" class="level1">
+<h1>Rotation</h1>
+<p>If we want to rotate an image, we can use <code>warpAffine</code>, but we need to create a form of the rotation matix to tell it what to do. Fortunately, OpenCV provides a helper function, <code>getRotationMatrix2D</code> that will do the calcululations for us. It takes three inputs:</p>
+<ol type="1">
+<li>The (x, y) coordinates of the pixel we want the rotation to rotate around. Imagine sticking a pin into the picture at that location and then rotating the image around the pin.</li>
+<li>The angle (in degrees) that we want to rotate the image; positive angles rotate counter-clockwise, negative angles rotate clockwise</li>
+<li>A scaling factor, that scales the image to preserve its aspect ratio: a value of 1 causes no change in size</li>
+</ol>
+<p>The script below rotates a picture by different amounts, writing the amount in white in the lower right corner of the new window. Examine the code to understand how the call to <code>getRotationMatrix2D</code> works, in conjunction with <code>warpAffine</code>.</p>
+<div id="feff7a0c" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/californiaCondor.jpg"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>(rows, cols, depth) <span class="op">=</span> img.shape</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="cf">for</span> angle <span class="kw">in</span> [<span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="dv">135</span>, <span class="dv">150</span>, <span class="dv">180</span>, <span class="op">-</span><span class="dv">45</span>, <span class="op">-</span><span class="dv">90</span>, <span class="op">-</span><span class="dv">180</span>]:</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    rotMat <span class="op">=</span> cv2.getRotationMatrix2D( (cols <span class="op">/</span> <span class="dv">2</span>, rows <span class="op">/</span> <span class="dv">2</span>), angle, <span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    rotImg <span class="op">=</span> cv2.warpAffine(img, rotMat, (<span class="fl">1.5</span> <span class="op">*</span> cols, <span class="fl">1.5</span> <span class="op">*</span> rows))</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    cv2.imshow(<span class="st">"Rotated"</span>, rotImg)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    cv2.waitKey(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This shows a series of different angles, all with the same center point.</p>
+<p><strong>Try this:</strong> Try varying the center point, which here is set to be the center of the picture. Maybe try rotating around (100, 100) then (200, 200), then (400, 400), etc. How does the result change?</p>
+<p><strong>Try this to hand in:</strong> In the <code>activ12.py</code> file, make a copy of the <code>videoProcess</code> and <code>processImage</code> functions, and rename them <code>spinVideo</code> and <code>spinImage</code>. Then do the steps below.</p>
+<p>Modify the <code>spinImage</code> function to:</p>
+<ul>
+<li>Take in one extra inputs, an angle</li>
+<li>Call <code>getRotationMatrix2D</code> for the rotation around the center point, with the input angle (and scaling factor = 1)</li>
+<li>Change the call to <code>image.copy()</code> so that it calls <code>warpAffine</code> instead, using the rotation matrix returned by <code>getRotationMatrix2D</code></li>
+<li>Make the new image size either the same size or twice the size, depending on which look you like</li>
+</ul>
+<p>Modify the <code>spinVideo</code> function to:</p>
+<ul>
+<li>Set up an <code>angle</code> variable before the loop, and set it to 0 initially</li>
+<li>Inside the loop, change the call from <code>processVideo</code> to <code>spinVideo</code>, and pass <code>angle</code> to it</li>
+<li>Add an update step that adds some fixed amount to the <code>angle</code> (try small values like 1, 2, 5, or larger ones like 10 or 20)</li>
+</ul>
+<p><strong>Test your program:</strong> How does it work? For which changes to the angle does the result look smooth versus jumpy?</p>
+</section>
+<section id="general-warping-optional" class="level1">
+<h1>General warping (Optional)</h1>
+<p>The end of the reading also showed how to use the helper function <code>getAffineTransform</code> to specify a general warping process.</p>
+<p>If you want the challenge, try using general warping to twist or stretch the video feed.</p>
+<p>Make another copy of the <code>videoProcess</code> function and its helper, and modify them to do this:</p>
+<ul>
+<li>Choose 3 reference points in the original image</li>
+<li>Initially, set the new points to the same (x, y) locations</li>
+<li>Each new frame, move the new points a small amount, causing the image to warp</li>
+<li>Display the warped image</li>
+<li>At some point, reverse the change in direction for the new points, gradually returning toward the original image</li>
+</ul>
+</section>
+<section id="what-to-hand-in" class="level1">
+<h1>What to hand in</h1>
+<p>Put all of your function definitions for this activity into the <code>activ12.py</code> file to be submitted. Make sure you format your code appropriately:</p>
+<ul>
+<li>At the top of the file is a triple-quoted string describing the file</li>
+<li>Next you include all import statements</li>
+<li>Next you have your function definitions, visually separated by blank lines, and maybe comments with dashed or other visual horizontal lines</li>
+<li>Each function should have a triple-quoted descriptive comment right after the <code>def</code> line</li>
+<li>All calls to all functions should be in a script at the bottom of the file, ideally inside an <code>if __name__ ...</code> block</li>
+</ul>
+<p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
