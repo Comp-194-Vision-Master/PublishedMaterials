@@ -210,15 +210,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-are-image-filters" id="toc-what-are-image-filters" class="nav-link active" data-scroll-target="#what-are-image-filters"><span class="header-section-number">1</span> What are image filters?</a></li>
-  <li><a href="#convolutional-filters" id="toc-convolutional-filters" class="nav-link" data-scroll-target="#convolutional-filters"><span class="header-section-number">2</span> Convolutional filters</a>
+  <li><a href="#what-are-image-filters" id="toc-what-are-image-filters" class="nav-link active" data-scroll-target="#what-are-image-filters"><span class="header-section-number">1</span> What are image filters?</a>
   <ul class="collapse">
-  <li><a href="#a-closer-look-at-the-math-of-convolution" id="toc-a-closer-look-at-the-math-of-convolution" class="nav-link" data-scroll-target="#a-closer-look-at-the-math-of-convolution"><span class="header-section-number">2.1</span> A closer look at the math of convolution</a></li>
-  <li><a href="#what-about-borders" id="toc-what-about-borders" class="nav-link" data-scroll-target="#what-about-borders"><span class="header-section-number">2.2</span> What about borders!</a></li>
+  <li><a href="#what-about-boundaries" id="toc-what-about-boundaries" class="nav-link" data-scroll-target="#what-about-boundaries"><span class="header-section-number">1.1</span> What about boundaries!</a></li>
   </ul></li>
-  <li><a href="#blurring-filters" id="toc-blurring-filters" class="nav-link" data-scroll-target="#blurring-filters"><span class="header-section-number">3</span> Blurring filters</a></li>
-  <li><a href="#morphological-filters" id="toc-morphological-filters" class="nav-link" data-scroll-target="#morphological-filters"><span class="header-section-number">4</span> Morphological filters</a></li>
-  <li><a href="#edge-detection" id="toc-edge-detection" class="nav-link" data-scroll-target="#edge-detection"><span class="header-section-number">5</span> Edge Detection</a></li>
+  <li><a href="#morphological-filters" id="toc-morphological-filters" class="nav-link" data-scroll-target="#morphological-filters"><span class="header-section-number">2</span> Morphological filters</a></li>
+  <li><a href="#convolutional-filters" id="toc-convolutional-filters" class="nav-link" data-scroll-target="#convolutional-filters"><span class="header-section-number">3</span> Convolutional filters</a>
+  <ul class="collapse">
+  <li><a href="#a-closer-look-at-the-math-of-convolution" id="toc-a-closer-look-at-the-math-of-convolution" class="nav-link" data-scroll-target="#a-closer-look-at-the-math-of-convolution"><span class="header-section-number">3.1</span> A closer look at the math of convolution</a></li>
+  </ul></li>
+  <li><a href="#blurring-filters" id="toc-blurring-filters" class="nav-link" data-scroll-target="#blurring-filters"><span class="header-section-number">4</span> Blurring filters</a></li>
+  <li><a href="#edge-detection" id="toc-edge-detection" class="nav-link" data-scroll-target="#edge-detection"><span class="header-section-number">5</span> Edge Detection</a>
+  <ul class="collapse">
+  <li><a href="#sobel-gradient-finding" id="toc-sobel-gradient-finding" class="nav-link" data-scroll-target="#sobel-gradient-finding"><span class="header-section-number">5.1</span> Sobel Gradient-Finding</a></li>
+  <li><a href="#canny-edge-detection" id="toc-canny-edge-detection" class="nav-link" data-scroll-target="#canny-edge-detection"><span class="header-section-number">5.2</span> Canny Edge Detection</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -245,6 +251,7 @@ Figure&nbsp;1: A filter takes a neighborhood around a central pixel, runs it thr
 </figcaption>
 </figure>
 </div>
+<p><strong>A simple example:</strong></p>
 <p>A simple example of a filter is blurring. The blurred image is typically created by averaging the color values of a neighborhood around a pixel. For example, if the neighborhood was defined to be a square 3x3 region, then we would examine every 3x3 region in the image and for each:</p>
 <ul>
 <li>add up all the blue channel values and divide by 9 to get the new blue channel value</li>
@@ -253,11 +260,384 @@ Figure&nbsp;1: A filter takes a neighborhood around a central pixel, runs it thr
 <li>store the new color at the center location in the new feature map</li>
 </ul>
 <p>Blurring is an example of a <strong>convolutional filter.</strong> These filters have proven to be extremely important in modern deep learning models that operate on images. So we will look more closely at how they work and how they can simplify images and highlight important features in the sections below.</p>
+<p>Filtering, generally, can be used to create a number of interesting effects, but is often used to manipulate an image that is then sent to a more complex computer vision algorithm. The main purposes of filtering are:</p>
+<ul>
+<li>Simplifying the image by reducing color variation and/or detail</li>
+<li>Highlighting small-scale patterns in the image, such as <strong>edges</strong> (places where the brightness changes across neighboring pixels), stripes, color patches, etc.</li>
+</ul>
+<section id="what-about-boundaries" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-about-boundaries"><span class="header-section-number">1.1</span> What about boundaries!</h2>
+<p>A neighborhood typically is some geometric shape with a center pixel, and the corresponding pixel in the feature map holds the result of the neighborhood calculation. You might wonder what happens to pixels near the boundaries of the image, where they don’t have room for a full neighborhood of pixels around them. The boundary pixels have to be treated as a special case, and wee must define special rules to manage them. Typical rules include:</p>
+<ul>
+<li>Making the feature map smaller than the starting image by leaving out the edge pixels (what <a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;7</a> below shows)</li>
+<li>Computing the convolution based only on the neighbors that the edge pixels do have</li>
+<li>Imagining that values continue on past the edges of the array and <strong>padding</strong> the boundary region to create full neighborhoods for edge pixels</li>
+</ul>
+<p><a href="#fig-boundaryPadding" class="quarto-xref">Figure&nbsp;2</a> illustrates five common ways to “pad” the boundary of an image for filtering. The 4x4 squares at the center of each diagram represent the image itself. Then we show two layers of padding pixels, each assigned values based on a different rule. With this, we could apply a 5x5 neighborhood right up to the edge of the image.</p>
+<div id="fig-boundaryPadding" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boundaryPadding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/boundarypaddingzero.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Zero padding: assume all non-image pixels are black"><img src="Ch6-Images/boundarypaddingzero.drawio.png" class="img-fluid figure-img" style="width:8cm"></a></p>
+<figcaption>Zero padding: assume all non-image pixels are black</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/boundarypaddingconst.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Constant padding: assume all non-image pixels are some constant value"><img src="Ch6-Images/boundarypaddingconst.drawio.png" class="img-fluid figure-img" style="width:8cm"></a></p>
+<figcaption>Constant padding: assume all non-image pixels are some constant value</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/boundarypaddingrepl.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Replication padding: set each non-image pixel to replicate the color of the nearest pixel from the image"><img src="Ch6-Images/boundarypaddingrepl.drawio.png" class="img-fluid figure-img" style="width:8cm"></a></p>
+<figcaption>Replication padding: set each non-image pixel to replicate the color of the nearest pixel from the image</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/boundarypaddingsymm.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Symmetric padding: reflect the image pixel values onto the non-image pixels, with lines of symmetry along each edge of the image and out the corner diagonals"><img src="Ch6-Images/boundarypaddingsymm.drawio.png" class="img-fluid figure-img" style="width:8cm"></a></p>
+<figcaption>Symmetric padding: reflect the image pixel values onto the non-image pixels, with lines of symmetry along each edge of the image and out the corner diagonals</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/boundarypaddingcirc.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Circular padding: set non-image pixel to image values as if the image tiles the plane in all directions"><img src="Ch6-Images/boundarypaddingcirc.drawio.png" class="img-fluid figure-img" style="width:8cm"></a></p>
+<figcaption>Circular padding: set non-image pixel to image values as if the image tiles the plane in all directions</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boundaryPadding-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Five methods of extending neighborhood beyond the bounds of the image so that we can apply filtering right up to the borderline pixels. Each might be used in different contexts.
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="convolutional-filters" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Convolutional filters</h1>
+</section>
+<section id="morphological-filters" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Morphological filters</h1>
+<p>The first filters we will examine are <strong>not</strong> convolutional in nature. Rather than computing a weighted sum of the values in a neighborhood, <strong>morphological filters</strong> instead build upon taking the <em>maximum</em> or <em>minimum</em> value in a neighborhood.</p>
+<p>All morphological filters operate separately on each color channel (taking the max or min only within the blue channel, or within the green channel, or within the red channel).</p>
+<p>The two basic building blocks for morphological filters are dilation and erosion. With dilation, the filter function looks at the values in a neighborhood and keeps the maximum for the corresponding feature map pixel. Erosion is similar, but it keeps the minimum value from the neighborhood.</p>
+<p>Below is a list of the morphological filters provided by OpenCV, All of them can be accessed with a single function, <code>morphologyEx</code>, which has many options.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operation</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dilate</td>
+<td style="text-align: left;">Keeps the maximum value from each neighborhood</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Erode</td>
+<td style="text-align: left;">Keeps the minimum value from each neighborhood</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Open</td>
+<td style="text-align: left;">First erodes the original, then dilates the result</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Close</td>
+<td style="text-align: left;">First dilates the original, then erodes the result</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Top-hat</td>
+<td style="text-align: left;">First opens the original, then subtracts that from the original: Original - Opened</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black-hat</td>
+<td style="text-align: left;">First closes the original, then subtracts the original from that: Closed - Original</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gradient</td>
+<td style="text-align: left;">Subtracts the eroded image from the dilated one: Dilated - Eroded</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dilation</strong> and <strong>erosion</strong> are often used to clean up noisy parts of an image, removing dark specks in a light region, for instance, and to even out colors or brightness. They can also thicken or emphasize edges between objects.</p>
+<p><strong>Opening</strong> and <strong>closing</strong> are used for similar purposes as dilation and erosion. But they are both more balanced in their effect: because they perform both dilation and erosion, bright and dark regions tend to stay the same size as they were originally.</p>
+<p><strong>Top-hat</strong> and <strong>black-hat</strong> are less commonly used, but because they take a difference with either opened or closed images, they keep the fine details that opening and closing are designed to remove. Therefore, they can be used to find textures or to enhance images.</p>
+<p><strong>Gradient</strong> emphasizes the edges of objects, where dilation and erosion are making the biggest difference.</p>
+<p>OpenCV’s <code>morphologyEx</code> function can perform all of these operations. To call it, we pass the image to be filtered a code to tell which operation we want to perform, and a *structuring element, an object that defines the size and shape of the neighborhood.</p>
+<div id="5d126176" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>filteredIm <span class="op">=</span> cv2.morphologyEx(img, morphType, shapeType)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Unlike most other filters, <code>morphologyEx</code> allows us to have non-rectangular neighborhood shapes. Four default shapes are provided: rectangular, ellipse, diamond, and cross. But you can also define your own shapes if you wish.</p>
+<p>The first code example below loops over the four shapes, and uses them with a dilation operation. <a href="#fig-flowerdilshapes" class="quarto-xref">Figure&nbsp;3</a> shows closeups of the images that result from the same operation, but different neighborhood shapes. It uses a fairly large neighborhood size of 13 by 13 to ensure that the effects are clearly visible.</p>
+<div id="2e3c029c" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/wildColumbine.jpg"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="cf">for</span> shape <span class="kw">in</span> [cv2.MORPH_RECT, cv2.MORPH_DIAMOND, cv2.MORPH_ELLIPSE, cv2.MORPH_CROSS]:</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    structElem <span class="op">=</span> cv2.getStructuringElement(shape, (<span class="dv">13</span>, <span class="dv">13</span>))</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    newImg <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_DILATE, structElem)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    cv2.imshow(<span class="st">"Morphed"</span>, newImg)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-flowerdilshapes" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-flowerdilshapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/flowerMorphdilaterectangle.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Dilate operation with 13x13 square neighborhood"><img src="Ch6-Images/flowerMorphdilaterectangle.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Dilate operation with 13x13 square neighborhood</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/flowermorphdilatediamond.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Dilate operation with 13x13 diamond neighborhood"><img src="Ch6-Images/flowermorphdilatediamond.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Dilate operation with 13x13 diamond neighborhood</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/flowerMorphdilateellipse.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Dilate operation with 13x13 circle neighborhood"><img src="Ch6-Images/flowerMorphdilateellipse.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Dilate operation with 13x13 circle neighborhood</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/flowerMorphdilatecross.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Dilate operation with 13x13 cross neighborhood"><img src="Ch6-Images/flowerMorphdilatecross.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Dilate operation with 13x13 cross neighborhood</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flowerdilshapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Four different dilations of the flower picture, with different neighborhood shapes.
+</figcaption>
+</figure>
+</div>
+<p>We choose the neighborhood shape depending on the details we want to find in a particular image.</p>
+<p>The next example runs each morphological operation on a picture of an ancient bristlecone pine tree. The black-hat and top-hat images use rectangular neighborhoods, the others use the cross shape. <a href="#fig-bristle" class="quarto-xref">Figure&nbsp;4</a> shows the original image, and <a href="#fig-morphDemo" class="quarto-xref">Figure&nbsp;5</a> shows the results from the calls in the example below.</p>
+<div id="48a51dd1" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bristleconePine.jpg"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>squareElem <span class="op">=</span> cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb3-5"><a href="#cb3-5"></a>crossElem <span class="op">=</span> cv2.getStructuringElement(cv2.MORPH_CROSS, (<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Erosion and dilation</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>erodeIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_ERODE, crossElem)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>dilateIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_DILATE, crossElem)</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># Opening and closing</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>openIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_OPEN, crossElem)</span>
+<span id="cb3-13"><a href="#cb3-13"></a>closeIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_CLOSE, crossElem)</span>
+<span id="cb3-14"><a href="#cb3-14"></a></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co"># Top-hat and Black-hat</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>topHatIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_TOPHAT, squareElem)</span>
+<span id="cb3-17"><a href="#cb3-17"></a>blackHatIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, squareElem)</span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co"># Gradient</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a>gradientIm <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_GRADIENT, crossElem)</span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a>cv2.imshow(<span class="st">"Erosion"</span>, erodeIm)</span>
+<span id="cb3-23"><a href="#cb3-23"></a>cv2.imshow(<span class="st">"Dilation"</span>, dilateIm)</span>
+<span id="cb3-24"><a href="#cb3-24"></a>cv2.imshow(<span class="st">"Opening"</span>, openIm)</span>
+<span id="cb3-25"><a href="#cb3-25"></a>cv2.imshow(<span class="st">"Closing"</span>, closeIm)</span>
+<span id="cb3-26"><a href="#cb3-26"></a>cv2.imshow(<span class="st">"Top-hat"</span>, topHatIm)</span>
+<span id="cb3-27"><a href="#cb3-27"></a>cv2.imshow(<span class="st">"Black-hat"</span>, blackHatIm)</span>
+<span id="cb3-28"><a href="#cb3-28"></a>cv2.imshow(<span class="st">"Gradient"</span>, gradientIm)</span>
+<span id="cb3-29"><a href="#cb3-29"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-bristle" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bristle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch6-Images/bristleconePine.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;4: Original bristlecone pine image"><img src="Ch6-Images/bristleconePine.jpg" class="img-fluid figure-img" style="width:14cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bristle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Original bristlecone pine image
+</figcaption>
+</figure>
+</div>
+<div id="fig-morphDemo" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-morphDemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morpherodecross.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Erosion operation with 5x5 cross neighborhood"><img src="Ch6-Images/morpherodecross.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Erosion operation with 5x5 cross neighborhood</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morphdilatecross.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Dilation operation with 5x5 cross neighborhood"><img src="Ch6-Images/morphdilatecross.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Dilation operation with 5x5 cross neighborhood</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morphopencross.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Opening operation with 5x5 cross neighborhood"><img src="Ch6-Images/morphopencross.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Opening operation with 5x5 cross neighborhood</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morphclosecross.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Closing operation with 5x5 cross neighborhood"><img src="Ch6-Images/morphclosecross.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Closing operation with 5x5 cross neighborhood</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morphtophatrectangle.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Top-hat operation with 5x5 square neighborhood"><img src="Ch6-Images/morphtophatrectangle.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Top-hat operation with 5x5 square neighborhood</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morphblackhatrectangle.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Black-hat operation with 5x5 square neighborhood"><img src="Ch6-Images/morphblackhatrectangle.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Black-hat operation with 5x5 square neighborhood</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/morphgradientcross.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Gradient operation with 5x5 cross neighborhood"><img src="Ch6-Images/morphgradientcross.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Gradient operation with 5x5 cross neighborhood</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-morphDemo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: All seven different morphological filters, applied to the same picture, with the same neighborhood size and two different neighborhood shapes.
+</figcaption>
+</figure>
+</div>
+<p><strong>Repeated iterations:</strong> There is one last feature of the <code>morphologyEx</code> function to mention to you. As an optional input, you can specify the number of <em>iterations</em> of each operation. If you set <code>iterations</code> to 3, for instance, and then perform an erosion, it will erode the image, then erode the result again, and then erode the result again.</p>
+<p>If you perform an operation like opening or closing, that combine erosions and dilations, then increasing the iterations applies to each separate operation. If <code>iterations</code> is set to 2, then opening will first do two erosions in sequence, and then two dilations.</p>
+<p>#fig-iterations below shows how increasing the iterations affects the result, given the general form of the code below.</p>
+<div id="aff5f490" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bristleconePine.jpg"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>morphType <span class="op">=</span> cv2.MORPH_OPEN</span>
+<span id="cb4-5"><a href="#cb4-5"></a>morphShape <span class="op">=</span> cv2.MORPH_RECT</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="cf">for</span> iters <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]:</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    structElem <span class="op">=</span> cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    newImg <span class="op">=</span> cv2.morphologyEx(img, cv2.MORPH_OPEN, structElem, iterations<span class="op">=</span>iters)</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    cv2.imshow(<span class="st">"Morphed"</span>, newImg)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-iterations" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iterations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/iterMorphopenrectangle1.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Opening with 5x5 rectangle neighborhood – one iteration"><img src="Ch6-Images/iterMorphopenrectangle1.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Opening with 5x5 rectangle neighborhood – one iteration</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/iterMorphopenrectangle2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Opening with 5x5 rectangle neighborhood – two iterations"><img src="Ch6-Images/iterMorphopenrectangle2.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Opening with 5x5 rectangle neighborhood – two iterations</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/iterMorphopenrectangle3.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Opening with 5x5 rectangle neighborhood – three iterations"><img src="Ch6-Images/iterMorphopenrectangle3.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Opening with 5x5 rectangle neighborhood – three iterations</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/iterMorphopenrectangle4.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Opening with 5x5 rectangle neighborhood – four iterations"><img src="Ch6-Images/iterMorphopenrectangle4.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Opening with 5x5 rectangle neighborhood – four iterations</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iterations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Repeated iterations of opening, one through four iterations
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="convolutional-filters" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Convolutional filters</h1>
 <p><strong>Convolutional filters</strong> are a special kind of filter, where the operation we perform on the neighborhood of pixel values is a weighted sum. We define a <em>kernel</em>: a matrix the size and shape of our neighborhood, where the values in it are weights. For every neighborhood in the image, we multiply pixel values by the corresponding weights in the kernel, and add up the results. The sum is then stored in the corresponding location in the new image/feature map.</p>
-<p><a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;2</a> shows the general convolutional process. The grid on the left represents a tiny image array (one channel, at least). The small 3x3 grid in the middle is the kernel of weights. Each weight is multiplied by the corresponding value in the highlighted neighborhood, and the results are added:</p>
+<p><a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;7</a> shows the general convolutional process. The grid on the left represents one channel of a tiny image array. The small 3x3 grid in the middle is the kernel of weights. Each weight is multiplied by the corresponding value in the highlighted neighborhood, and the results are added.</p>
+<div id="fig-convProcess" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-convProcess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch6-Images/convolutionalfilter.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Figure&nbsp;7: An example of the convolutional weighted sum at a specific location in an image"><img src="Ch6-Images/convolutionalfilter.drawio.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convProcess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: An example of the convolutional weighted sum at a specific location in an image
+</figcaption>
+</figure>
+</div>
+<p>Here is the full sum:</p>
 <p><span class="math display">\[
 \begin{array}{l}
 \hspace{5mm} 41 \cdot 0.05 + 56 \cdot 0.15 + 71 \cdot 0.05 \\
@@ -265,18 +645,8 @@ Figure&nbsp;1: A filter takes a neighborhood around a central pixel, runs it thr
 + 27 \cdot 0.05 + 18 \cdot 0.15 + 62 \cdot 0.05
 \end{array} = 47.05
 \]</span></p>
-<div id="fig-convProcess" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-convProcess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="Ch6-Images/convolutionalfilter.drawio.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: An example of the convolutional weighted sum at a specific location in an image"><img src="Ch6-Images/convolutionalfilter.drawio.png" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convProcess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: An example of the convolutional weighted sum at a specific location in an image
-</figcaption>
-</figure>
-</div>
-<section id="a-closer-look-at-the-math-of-convolution" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="a-closer-look-at-the-math-of-convolution"><span class="header-section-number">2.1</span> A closer look at the math of convolution</h2>
+<section id="a-closer-look-at-the-math-of-convolution" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="a-closer-look-at-the-math-of-convolution"><span class="header-section-number">3.1</span> A closer look at the math of convolution</h2>
 <p>Let’s look at the math for a weighted average with a 3x3 neighborhood size.</p>
 <p>In convolutional terms, the weights are in the kernel. To simplify the mathematical formula that shows how convolution works, I’m going to label the positions in the kernel in a very non-standard way (I’ll credit <a href="https://opencv.org/blog/image-filtering-using-convolution-in-opencv/">OpenCV’s blog on image filtering</a>, and other resources, for using this method to express the convolution formula):</p>
 <p><span class="math display">\[
@@ -304,28 +674,9 @@ K &amp; = \begin{bmatrix}
 <p><span class="math display">\[G[x, y] = \sum_{i=-\frac{n}{2}}^{\frac{n}{2}} \sum_{j=-\frac{m}{2}}^{+\frac{m}{2}} K[i, j] \cdot I[x - i, y - j]\]</span></p>
 <p>where <span class="math inline">\(I\)</span> is the original image, and <span class="math inline">\(G\)</span> is the resulting image.</p>
 </section>
-<section id="what-about-borders" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="what-about-borders"><span class="header-section-number">2.2</span> What about borders!</h2>
-<p>In the figure above, I left out the border pixels from the original image. The border pixels are a special case, because they don’t have a full neighborhood around them. Because they are special, we need a special rule to manage them. Typical rules include:</p>
-<ul>
-<li>Making the feature map smaller than the starting image by leaving out the edge pixels (what <a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;2</a> shows)</li>
-<li>Computing the convolution based only on the neighbors that the edge pixels do have</li>
-<li>Imagining that values continue on past the edges of the array to create full neighborhoods for edge pixels
-<ul>
-<li>Using interpolation/extrapolation to continue the edge colors outward as far as is needed</li>
-<li>Reflecting the contents of the array outward as if it was surrounded by mirrors</li>
-</ul></li>
-</ul>
-<p>Filtering can be used to create a number of interesting effects, but is often used to manipulate an image that is then sent to a more complex computer vision algorithm. The main purposes of filtering are:</p>
-<ul>
-<li>Simplifying the image by reducing color variation and/or detail</li>
-<li>Highlighting small-scale patterns in the image, such as <strong>edges</strong> (places where the brightness changes across neighboring pixels), stripes, color patches, etc.</li>
-</ul>
-<p>In the next few sections, we will first focus on filters, both convolutional and otherwise, that simplify the image. Then examine convolutional filters that perform edge detection.</p>
 </section>
-</section>
-<section id="blurring-filters" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Blurring filters</h1>
+<section id="blurring-filters" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Blurring filters</h1>
 <p>Blurring is probably the most basic kind of filter we can do, so we will start by considering it.</p>
 <p><strong>Why would we want to blur an image?</strong> As humans, we typically don’t like blurred images, unless they are blurred for some effect. However, image data to the computer is just a big box of numbers. Tiny color variations that we are barely aware of can confuse a computer vision program. When we blur an image, those tiny variations smooth out so that colors are more even, and it is easier for a computer vision system to make sense of the image data.</p>
 <p>The basic blur function takes a rectangular neighborhood centered around the target pixel, and it performs the mean of the color values, channel-by-channel (all the red values are averaged, all the green values are averaged, and all the blue values are averaged). The resulting color is placed in the new image at the target pixel location. The process is repeated for every pixel in the image (with edge pixels handled specially, as described above)</p>
@@ -341,19 +692,19 @@ K &amp; = \begin{bmatrix}
 \]</span></p>
 <p>The kernel for simple blurring has the same value in every cell: <span class="math inline">\(1/n\)</span>, where <span class="math inline">\(n\)</span> is the number of cells in the neighborhood.</p>
 <p>OpenCV provides the <code>blur</code> function, which will perform the simple mean/averaging blur described above. We specify the image to be blurred, and a tuple describing the neighborhood size, it returns a blurred image.</p>
-<p>The code block below are some example of how to call the <code>blur</code> function. <a href="#fig-blurResults" class="quarto-xref">Figure&nbsp;5</a> shows the original and resulting images.</p>
-<div id="57c315ab" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>image <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/butterfly.jpg"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>blur1 <span class="op">=</span> cv2.blur(image, (<span class="dv">7</span>, <span class="dv">7</span>))</span>
-<span id="cb1-4"><a href="#cb1-4"></a>blur2 <span class="op">=</span> cv2.blur(image, (<span class="dv">21</span>, <span class="dv">21</span>))</span>
-<span id="cb1-5"><a href="#cb1-5"></a>blur3 <span class="op">=</span> cv2.blur(image, (<span class="dv">3</span>, <span class="dv">41</span>))</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>cv2.imshow(<span class="st">"Original"</span>, image)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>cv2.imshow(<span class="st">"Blur1 feature map"</span>, blur1)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>cv2.imshow(<span class="st">"Blur2 feature map"</span>, blur2)</span>
-<span id="cb1-10"><a href="#cb1-10"></a>cv2.imshow(<span class="st">"Blur3 feature map"</span>, blur3)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code block below are some example of how to call the <code>blur</code> function. <a href="#fig-blurResults" class="quarto-xref">Figure&nbsp;8</a> shows the original and resulting images.</p>
+<div id="60ed03b5" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>image <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/butterfly.jpg"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>blur1 <span class="op">=</span> cv2.blur(image, (<span class="dv">7</span>, <span class="dv">7</span>))</span>
+<span id="cb5-4"><a href="#cb5-4"></a>blur2 <span class="op">=</span> cv2.blur(image, (<span class="dv">21</span>, <span class="dv">21</span>))</span>
+<span id="cb5-5"><a href="#cb5-5"></a>blur3 <span class="op">=</span> cv2.blur(image, (<span class="dv">3</span>, <span class="dv">41</span>))</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>cv2.imshow(<span class="st">"Original"</span>, image)</span>
+<span id="cb5-8"><a href="#cb5-8"></a>cv2.imshow(<span class="st">"Blur1 feature map"</span>, blur1)</span>
+<span id="cb5-9"><a href="#cb5-9"></a>cv2.imshow(<span class="st">"Blur2 feature map"</span>, blur2)</span>
+<span id="cb5-10"><a href="#cb5-10"></a>cv2.imshow(<span class="st">"Blur3 feature map"</span>, blur3)</span>
+<span id="cb5-11"><a href="#cb5-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-blurResults" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -362,7 +713,7 @@ K &amp; = \begin{bmatrix}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch5-Images/butterfly.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Original image"><img src="Ch5-Images/butterfly.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch5-Images/butterfly.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Original image"><img src="Ch5-Images/butterfly.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Original image</figcaption>
 </figure>
 </div>
@@ -370,7 +721,7 @@ K &amp; = \begin{bmatrix}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/blurRes7x7.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Blur image (simple mean) with neighborhood of (7, 7)"><img src="Ch6-Images/blurRes7x7.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/blurRes7x7.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="Blur image (simple mean) with neighborhood of (7, 7)"><img src="Ch6-Images/blurRes7x7.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Blur image (simple mean) with neighborhood of (7, 7)</figcaption>
 </figure>
 </div>
@@ -380,7 +731,7 @@ K &amp; = \begin{bmatrix}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/blurRes21x21.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Blur image (simple mean) with neighborhood of (21, 21)"><img src="Ch6-Images/blurRes21x21.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/blurRes21x21.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Blur image (simple mean) with neighborhood of (21, 21)"><img src="Ch6-Images/blurRes21x21.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Blur image (simple mean) with neighborhood of (21, 21)</figcaption>
 </figure>
 </div>
@@ -388,7 +739,7 @@ K &amp; = \begin{bmatrix}
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/blurRes3x41.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Blur image (simple mean) with neighborhood of (3, 41) (tall but narrow neighborhood)"><img src="Ch6-Images/blurRes3x41.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/blurRes3x41.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Blur image (simple mean) with neighborhood of (3, 41) (tall but narrow neighborhood)"><img src="Ch6-Images/blurRes3x41.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Blur image (simple mean) with neighborhood of (3, 41) (tall but narrow neighborhood)</figcaption>
 </figure>
 </div>
@@ -396,47 +747,47 @@ K &amp; = \begin{bmatrix}
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blurResults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Three different blurs of an image, demonstrating different neighborhood sizes: a small-ish one, a fairly large one, and a non-square one that is very narrow but very tall, leading to a vertical smearing effect
+Figure&nbsp;8: Three different blurs of an image, demonstrating different neighborhood sizes: a small-ish one, a fairly large one, and a non-square one that is very narrow but very tall, leading to a vertical smearing effect
 </figcaption>
 </figure>
 </div>
 <p>Besides taking a straight average of the color channel values, we can get a blur effect by taking a <strong>weighted</strong> average of the values in the neighborhood. To do a weighted average with convolution without altering the brightness of the image, we add a constraint that says that the values in the kernel must add up to 1.0:</p>
 <p><span class="math display">\[\sum_{i=-\frac{n}{2}}^{\frac{n}{2}} \sum_{j=-\frac{m}{2}}^{+\frac{m}{2}} K[i, j] = 1.0\]</span></p>
-<p>OpenCV provides a weighted blur function called <code>GaussianBlur</code>. This function does a weighted average where the weights are chosen according to a two-dimensional Gaussian function with its peak centered on the center pixel of the neighborhood. Gaussian functions, or curves, are often called <em>normal curves</em> or <em>bell curves</em>. In Chapter 4 we briefly talked about 2d Gaussian curves in the context of the <code>adaptiveThreshold</code> function. <a href="#fig-gauss" class="quarto-xref">Figure&nbsp;4</a> illustrates the shape.</p>
+<p>OpenCV provides a weighted blur function called <code>GaussianBlur</code>. This function does a weighted average where the weights are chosen according to a two-dimensional Gaussian function with its peak centered on the center pixel of the neighborhood. Gaussian functions, or curves, are often called <em>normal curves</em> or <em>bell curves</em>. In Chapter 4 we briefly talked about 2d Gaussian curves in the context of the <code>adaptiveThreshold</code> function. <a href="#fig-gauss" class="quarto-xref">Figure&nbsp;9</a> illustrates the shape.</p>
 <div id="fig-gauss" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gauss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="Ch4-Images/2dGaussPlot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;4: Two-dimensional Gaussian curve"><img src="Ch4-Images/2dGaussPlot.png" class="img-fluid figure-img" style="width:14cm"></a>
+<a href="Ch4-Images/2dGaussPlot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Figure&nbsp;9: Two-dimensional Gaussian curve"><img src="Ch4-Images/2dGaussPlot.png" class="img-fluid figure-img" style="width:14cm"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gauss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Two-dimensional Gaussian curve
+Figure&nbsp;9: Two-dimensional Gaussian curve
 </figcaption>
 </figure>
 </div>
-<p>We scale the Gaussian curve to fit our neighborhood size, and so that its values at discrete points add up to one, and those values become our kernel values. <strong>Note:</strong> <a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;2</a> uses a kernel that approximates the gaussian blur kernel for a 3x3 neighborhood. The shape of the Gaussian curve is defined by its standard deviation in the x and y directions.</p>
+<p>We scale the Gaussian curve to fit our neighborhood size, and so that its values at discrete points add up to one, and those values become our kernel values. <strong>Note:</strong> <a href="#fig-convProcess" class="quarto-xref">Figure&nbsp;7</a> uses a kernel that approximates the gaussian blur kernel for a 3x3 neighborhood. The shape of the Gaussian curve is defined by its standard deviation in the x and y directions.</p>
 <p>OpenCV provides the <code>GaussianBlur</code> function, which will perform the Gaussian weighted average blur described above. We specify the image to be blurred, a tuple describing the neighborhood size (dimensions must be odd!) and a value for the standard deviation in the x direction. If we pass in zero, then the function determines the best standard deviation values based on the width and height of the neighborhood.</p>
-<p>The code block below are some example of how to call the <code>Gaussian</code> function. <strong>?@fig-gaussBlurResults</strong> shows the original and resulting images.</p>
-<div id="1551d17e" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>image <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/butterfly.jpg"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>gblur1 <span class="op">=</span> cv2.GaussianBlur(image, (<span class="dv">7</span>, <span class="dv">7</span>), <span class="dv">0</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>gblur2 <span class="op">=</span> cv2.GaussianBlur(image, (<span class="dv">21</span>, <span class="dv">21</span>), <span class="dv">0</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a>gblur3 <span class="op">=</span> cv2.GaussianBlur(image, (<span class="dv">3</span>, <span class="dv">41</span>), <span class="dv">0</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a>cv2.imshow(<span class="st">"Original"</span>, image)</span>
-<span id="cb2-8"><a href="#cb2-8"></a>cv2.imshow(<span class="st">"GBlur1 feature map"</span>, gblur1)</span>
-<span id="cb2-9"><a href="#cb2-9"></a>cv2.imshow(<span class="st">"GBlur2 feature map"</span>, gblur2)</span>
-<span id="cb2-10"><a href="#cb2-10"></a>cv2.imshow(<span class="st">"GBlur3 feature map"</span>, gblur3)</span>
-<span id="cb2-11"><a href="#cb2-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code block below are some example of how to call the <code>Gaussian</code> function. <a href="#fig-gaussBlurResults" class="quarto-xref">Figure&nbsp;10</a> shows the original and resulting images.</p>
+<div id="2a90c250" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>image <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/butterfly.jpg"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>gblur1 <span class="op">=</span> cv2.GaussianBlur(image, (<span class="dv">7</span>, <span class="dv">7</span>), <span class="dv">0</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>gblur2 <span class="op">=</span> cv2.GaussianBlur(image, (<span class="dv">21</span>, <span class="dv">21</span>), <span class="dv">0</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>gblur3 <span class="op">=</span> cv2.GaussianBlur(image, (<span class="dv">3</span>, <span class="dv">41</span>), <span class="dv">0</span>)</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>cv2.imshow(<span class="st">"Original"</span>, image)</span>
+<span id="cb6-8"><a href="#cb6-8"></a>cv2.imshow(<span class="st">"GBlur1 feature map"</span>, gblur1)</span>
+<span id="cb6-9"><a href="#cb6-9"></a>cv2.imshow(<span class="st">"GBlur2 feature map"</span>, gblur2)</span>
+<span id="cb6-10"><a href="#cb6-10"></a>cv2.imshow(<span class="st">"GBlur3 feature map"</span>, gblur3)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-blurResults" class="quarto-layout-panel">
+<div id="fig-gaussBlurResults" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-blurResults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-gaussBlurResults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/butterfly.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Original image"><img src="Ch6-Images/butterfly.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/butterfly.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Original image"><img src="Ch6-Images/butterfly.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Original image</figcaption>
 </figure>
 </div>
@@ -444,7 +795,7 @@ Figure&nbsp;4: Two-dimensional Gaussian curve
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/gaussBlurRes7x7.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Gaussian Blur image with neighborhood of (7, 7)"><img src="Ch6-Images/gaussBlurRes7x7.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/gaussBlurRes7x7.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Gaussian Blur image with neighborhood of (7, 7)"><img src="Ch6-Images/gaussBlurRes7x7.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Gaussian Blur image with neighborhood of (7, 7)</figcaption>
 </figure>
 </div>
@@ -454,7 +805,7 @@ Figure&nbsp;4: Two-dimensional Gaussian curve
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/gaussBlurRes21x21.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Gaussian Blur image with neighborhood of (21, 21)"><img src="Ch6-Images/gaussBlurRes21x21.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/gaussBlurRes21x21.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Gaussian Blur image with neighborhood of (21, 21)"><img src="Ch6-Images/gaussBlurRes21x21.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Gaussian Blur image with neighborhood of (21, 21)</figcaption>
 </figure>
 </div>
@@ -462,15 +813,15 @@ Figure&nbsp;4: Two-dimensional Gaussian curve
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="Ch6-Images/gaussBlurRes3x41.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Gaussian Blur image with neighborhood of (3, 41) (tall but narrow neighborhood)"><img src="Ch6-Images/gaussBlurRes3x41.jpg" class="img-fluid figure-img"></a></p>
+<p><a href="Ch6-Images/gaussBlurRes3x41.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Gaussian Blur image with neighborhood of (3, 41) (tall but narrow neighborhood)"><img src="Ch6-Images/gaussBlurRes3x41.jpg" class="img-fluid figure-img"></a></p>
 <figcaption>Gaussian Blur image with neighborhood of (3, 41) (tall but narrow neighborhood)</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blurResults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Three different Gaussian blurs of an image, demonstrating different neighborhood sizes: a small-ish one, a fairly large one, and a non-square one that is very narrow but very tall, leading to a vertical smearing effect
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gaussBlurResults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Three different Gaussian blurs of an image, demonstrating different neighborhood sizes: a small-ish one, a fairly large one, and a non-square one that is very narrow but very tall, leading to a vertical smearing effect
 </figcaption>
 </figure>
 </div>
@@ -486,74 +837,238 @@ Figure&nbsp;5: Three different Gaussian blurs of an image, demonstrating differe
 <li>q: quits the program</li>
 </ul>
 </section>
-<section id="morphological-filters" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Morphological filters</h1>
-<p>There are a set of “morphological” filters to experiment with. The program simpleMorph.py demonstrates how to select from the different morphological filters (described below), and how to build the neighborhood object, and call the morphologyEx function. Try the different filters with different neighborhood sizes and shapes, and note the effect.</p>
-<p>Dilation and Erosion Much like blurring, dilation and erosion determine the value for a pixel based on a neighborhood of pixels from the original image. Unlike the default in blurring, we can select the shape of the neighborhood, as well as its size, to be either rectangular, elliptical, or cross shaped. With dilation, the value of each channel of a pixel is the maximum value of that channel in any pixel in its neighborhood. Erosion is the opposite: the value of each channel of a pixel is the minimum value of that channel in any pixel in its neighborhood.</p>
-<p>These can be used to emphasize and thicken edges or regions of color in a particular part of an image.</p>
-<p>Opening and Closing Sometimes we want to preserve both dark and light features of an image. Opening and closing combine dilation and erosion. Opening an image means first performing an erosion of the image, then a dilation, using the same size and shape of neighborhood. Closing first dilates the image, then erodes it.</p>
-<p>Both these operations are good at removing noise and small details from images.</p>
-<p>White and Black Top-Hat The Top-Hat filters do the opposite of opening and closing. Instead of removing the fine details, these filters keep just the fine details. The white top-hat takes the difference between the original image and the opening of the image. The black top-hat takes the difference between the closing and the original image.</p>
-<p>These filters may be used for feature extraction tasks, or image enhancement.</p>
-<p>Morphological Gradient The morphological gradient takes the difference between the dilation and erosion of an image. This emphasizes the places where there is a change in color, and can be useful to enhance edges.</p>
-<p>Milestone 3: Blurring and morphing video</p>
-<p>Start with a program that just displays the frames from the webcam. Once again, you may pick just one of these options to complete.</p>
-<p>Blurring the video gradually: Use the Gaussian blur function to blur the image to be displayed. Define a variable blurDir to be 2. This will be how much we will change the neighborhood size each time through the loop Set up a variable kSize to hold the current neighborhood size, initially set to 1 or 3 Use Gaussian blur to blur the image with the current size kSize (and display its results) Update the current size by adding blurDir to it. If the resulting kSize is greater than some maximum size (try 50 or 100) then change blurDir to -2 If the resulting kSize is less than 3, then set blurDir to 2</p>
-<p>Morphing the video, instead: Look at the simpleMorph.py sample program for how to use the morphological filters. Choose at least 1 of the morphological filters described above and demonstrated in morph.py. Modify the blurring program so that it operates with a changing neighborhood size but applies the chosen morphological filter instead of blurring. Try changing the neighborhood shape to see what effect it has.</p>
-</section>
 <section id="edge-detection" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Edge Detection</h1>
-<p>Edge Detection</p>
 <p>Finding edges and lines in images is one of the classic computer vision tasks. Edges are defined to be locations in an image where the color or brightness changes dramatically. There are different tools for determining these edges; we’ll look at the Sobel gradient operation, and the Canny edge detection algorithm.</p>
-<p>For several of these tools, we treat the brightness across the pixels of the image as a surface, a two-dimensional function and apply some calculus tools to it. Fortunately, you don’t have to know multivariate calculus to understand what the methods are doing.</p>
-<p>Sobel Gradient-Finding</p>
-<p>Sobel first uses Gaussian blurring on an image to smooth the surfaces in the image, and then it looks for peaks and valleys in the result. In mathematical terms, it computes the first derivative of the function represented by the smoothed image at each pixel location. Thus the result of Sobel is a floating-point number, which we must convert into a grayscale value for displaying it.</p>
-<p>Sobel is an example of a convolutional filter, much like blurring. Its kernel produces floating-point values with a large magnitude (large positive or very small negative) when there is a change in brightness. Sobel must be computed in horizontal and vertical directions differently. Below is an example of a 3x3 kernels for Sobel:</p>
-<p>Finds vertical edges 1 0 -1 2 0 -2 1 0 -1</p>
-<p>Finds horizontal edges 1 2 1 0 0 0 -1 -2 -1</p>
-<p>It works better to compute the Sobel values in two directions separately, and then to combine the two. Note that, for precision, the type of data in the gradients is 32-bit floating-point numbers, which are then scaled into unsigned 8-bit numbers for display.</p>
-<div id="c7805220" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">import</span> cv2</span>
-<span id="cb3-2"><a href="#cb3-2"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/chicago.jpg"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>gray <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Compute gradient in horizontal direction (detects vertical edges)</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>sobelValsHorz <span class="op">=</span> cv2.Sobel(gray, cv2.CV_32F, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>horzImg <span class="op">=</span> cv2.convertScaleAbs(sobelValsHorz)</span>
-<span id="cb3-8"><a href="#cb3-8"></a>cv2.imshow(<span class="st">"horizontal gradient"</span>, horzImg)</span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co"># Compute gradient in vertical direction (Detects horizontal edges)</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>sobelValsVerts <span class="op">=</span> cv2.Sobel(gray, cv2.CV_32F, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-12"><a href="#cb3-12"></a>vertImg <span class="op">=</span> cv2.convertScaleAbs(sobelValsVerts)</span>
-<span id="cb3-13"><a href="#cb3-13"></a>cv2.imshow(<span class="st">"vertical gradient"</span>, vertImg)</span>
-<span id="cb3-14"><a href="#cb3-14"></a></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co"># Combine the two gradients</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a>sobelComb <span class="op">=</span> cv2.addWeighted(sobelValsHorz, <span class="fl">0.5</span>, sobelValsVerts, <span class="fl">0.5</span>, <span class="dv">0</span>)</span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co"># Convert back to uint8</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>sobelImg <span class="op">=</span> cv2.convertScaleAbs(sobelComb)</span>
-<span id="cb3-19"><a href="#cb3-19"></a>cv2.imshow(<span class="st">"Sobel"</span>, sobelImg)</span>
-<span id="cb3-20"><a href="#cb3-20"></a>cv2.waitKey(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Edge detection is usually performed on grayscale images. Thus, we focus on brightness of each pixel. We treat the brightness across the pixels of the image as a three-dimensional surface. The image is thought of as a function of two inputs: <span class="math inline">\(I(x, y)\)</span> and the value of the function is would be drawn in the third dimension (brighter values are higher on the z axis). When we picture the image this way, <strong>edges</strong> are places where the image function changes most rapidly from bright to dark (or dark to bright). In other words, <strong>edges</strong> are the places where the <em>slope</em> of the surface is greatest.</p>
+<p>We can use some calculus tools to find where those places are: the derivative of a function gives us the slope, and we just look for the largest and smallest values to see where the edges are.</p>
+<p>Fortunately, even if you haven’t studied multivariate calculus, you can still make sense of what these algorithms are doing!</p>
+<section id="sobel-gradient-finding" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sobel-gradient-finding"><span class="header-section-number">5.1</span> Sobel Gradient-Finding</h2>
+<p>Sobel first uses Gaussian blurring on an image to smooth the surfaces in the image, and then it looks for peaks and valleys in the result. In mathematical terms, it computes the first derivative of the function represented by the smoothed image at each pixel location, in either the x direction or the y direction. Thus, the result of Sobel is a floating-point number: large positive or large negative values indicate edges. In order to visualize the results of Sobel, we will have to carefully convert it from floating-point back to 8-bit unsigned integers.</p>
+<p>Sobel is an example of a convolutional filter, much like blurring. Its kernel produces floating-point values with a large magnitude when there is a change in brightness. Sobel must be computed in horizontal and vertical directions separately. Below is an example of a 3x3 kernels for Sobel:</p>
+<p><strong>Finds vertical edges:</strong></p>
+<p><span class="math display">\[\begin{bmatrix}
+1 &amp; 0 &amp; -1 \\
+2 &amp; 0 &amp; -2 \\
+1 &amp; 0 &amp; -1 \\
+\end{bmatrix}
+\]</span></p>
+<p><strong>Finds horizontal edges:</strong></p>
+<p><span class="math display">\[\begin{bmatrix}
+1 &amp; 2 &amp; 1 \\
+0 &amp; 0 &amp; 0 \\
+-1 &amp; -2 &amp; -1 \\
+\end{bmatrix}
+\]</span></p>
+<p>Let’s work through a few examples showing how the Sobel kernels work.</p>
+<p>Suppose that we have a 3x3 patch of an image with these values in it:</p>
+<p><span class="math display">\[\begin{bmatrix}
+250 &amp; 100 &amp; 50 \\
+230 &amp; 155 &amp; 20 \\
+200 &amp; 107 &amp; 25 \\
+\end{bmatrix}
+\]</span></p>
+<p>Applying the first Sobel kernel to this, we would get:</p>
+<p><span class="math display">\[
+\begin{array}{l}
+1\cdot 250 + 0\cdot 100 + -1 \cdot 50 + 2\cdot 230 + 0 \cdot 155 + -2 \cdot 20 + 1 \cdot 200 + 0 \cdot 107 + -1 \cdot 25 \\
+\hspace{5mm} = 250 + 460 + 200 - 50 - 40 - 25 \\
+\hspace{5mm} = 910 - 115 = 795 \\
+\end{array}
+\]</span></p>
+<p>The large positive value tells us that there is a strong edge going from bright to dark left to right (if it was going from dark to bright left to right then the large value would be negative).</p>
+<p>Suppose we apply the second Sobel kernel to this example:</p>
+<p><span class="math display">\[
+\begin{array}{l}
+1\cdot 250 + 2\cdot 100 + 1 \cdot 50 + 0\cdot 230 + 0 \cdot 155 + 0 \cdot 20 + -1 \cdot 200 + -2 \cdot 107 + -1 \cdot 25 \\
+\hspace{5mm} = 250 + 200 + 50 - 200 - 214 - 25 \\
+\hspace{5mm} = 61 \\
+\end{array}
+\]</span></p>
+<p>The small positive values indicates that there is a weak change from top to bottom, but nowhere near as strong as in the other direction.</p>
+<p>Finally, suppose we had a patch of our image that looked like this:</p>
+<p><span class="math display">\[\begin{bmatrix}
+119 &amp; 117 &amp; 118 \\
+116 &amp; 119 &amp; 116 \\
+119 &amp; 118 &amp; 117 \\
+\end{bmatrix}
+\]</span></p>
+<p>Applying the first Sobel kernel to this:</p>
+<p><span class="math display">\[
+\begin{array}{l}
+1\cdot 119 + 0\cdot 117 + -1 \cdot 118 + 2\cdot 116 + 0 \cdot 119 + -2 \cdot 120 + 1 \cdot 119 + 0 \cdot 118 + -1 \cdot 117 \\
+\hspace{5mm} = 119 + 232 + 119 - 118 - 232 - 117 \\
+\hspace{5mm} = 470 - 467 =  3\\
+\end{array}
+\]</span></p>
+<p>A very small value indicates that there is no meaningful edge here. We would get a similar result with the second Sobel kernel: the result is -1.</p>
+<p>When we call Sobel, we tell it which direction to perform the filter (which kernel to use) and what type of data to return. The <code>cv2.CV_32F</code> is a code that the function understand to mean to return the array holding <code>np.float32</code>. The final two numbers tell the function which derivative to take: 1, 0 indicates the derivative in the x direction, and 0, 1 indicates the derivative in the y direction.</p>
+<div id="8f71c57f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1"></a>cv2.Sobel(grayIm, cv2.CV_32F, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2"></a>cv2.Sobel(grayIm, cv2.CV_32F, <span class="dv">0</span>, <span class="dv">1</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1">derivative in x direction: find vertical edges where the change in brightness is from left to right</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="2">derivative in y direction: find horizontal edges where the change in brightness is from top to bottom</span>
+</dd>
+</dl>
 </div>
-<p>Try the example above. Then try modifying things. What happens if you put -1 in for the cv2.CV_32F, which causes the resulting gradients to use the same type as the images themselves, unsigned 8-bit numbers? What if you change the weighting in the addWeighted function? What if you don’t convert back to unsigned 8-bit values? What if you use the color image? Or the hue channel from an HSV image?</p>
-<p>Canny Edge Detection</p>
-<p>The Canny algorithm goes beyond what Sobel does. It performs a Sobel transformation in both horizontal and vertical directions as its first step. It then removes points that have a change in brightness, but that are not “local maxima” (whose neighbors in the direction of the change are not all smaller than it). Finally, it has two threshold values (supplied as inputs). Any edge value below the min threshold is discarded. Any edge value above the max threshold is kept. In between the two thresholds, edges are kept only if they are connected to some edge above the threshold.</p>
-<p>The Canny algorithm takes a grayscale picture as input, and the two thresholds.</p>
-<div id="64a4ed96" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="im">import</span> cv2</span>
-<span id="cb4-2"><a href="#cb4-2"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/chicago.jpg"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>gray <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a>cannyImg <span class="op">=</span> cv2.Canny(gray, <span class="dv">100</span>, <span class="dv">200</span>)</span>
-<span id="cb4-6"><a href="#cb4-6"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>cv2.waitKey(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>One of the difficulties with Canny edge detection is determining the proper threshold values. Write a program that loops through possible threshold values in increments of 5 or 10 (the threshold value must be between 0 and 255, and one value must be larger than the other), and displays the edges that are found. Decide what produced the “best” value. Be sure to try a variety of pictures in the SampleImages folder, to see how results vary across different kinds of images.</p>
-<p>Create your own program to show the video image from your computer’s camera, displaying the result of Canny edge detection.</p>
-<p>There are line detection algorithms, Hough (pronounced “huff”) lines and circles, which you may experiment with. We are going to skip them and focus on corners instead of edges.</p>
-<p>Milestone 5: Finding edges</p>
-<p>Experiment with edge detection, both Sobel and Canny, applied to the images and videos of the balls. Be sure to convert the images to grayscale before passing them to Sobel or Canny. Try adjusting the parameters for Canny: can you get it to produce useful edges? What if you use preprocessing (thresholding, masking, morphological filters) prior to calling Canny? How well would it work as a tool to find the interesting objects in each scene?</p>
+<p>The code example below applies the Sobel filters separately: first to find changes in the x direction, and second to find changes in the y direction. For purposes of precision, the resulting data are 32-bit floating-point numbers. We use the <code>convertScaleAbs</code> OpenCV function to convert negative values to positive, scale them down to 8-bit integers, and then convert them to the correct <code>np.uint8</code> type.</p>
+<div id="ec62099c" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/chicago.jpg"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>gray <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Compute gradient in horizontal direction (detects vertical edges)</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>sobelValsHorz <span class="op">=</span> cv2.Sobel(gray, cv2.CV_32F, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>horzImg <span class="op">=</span> cv2.convertScaleAbs(sobelValsHorz)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>cv2.imshow(<span class="st">"horizontal gradient"</span>, horzImg)</span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co"># Compute gradient in vertical direction (Detects horizontal edges)</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>sobelValsVerts <span class="op">=</span> cv2.Sobel(gray, cv2.CV_32F, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>vertImg <span class="op">=</span> cv2.convertScaleAbs(sobelValsVerts)</span>
+<span id="cb7-12"><a href="#cb7-12"></a>cv2.imshow(<span class="st">"vertical gradient"</span>, vertImg)</span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co"># Combine the two gradients</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>sobelComb <span class="op">=</span> cv2.addWeighted(sobelValsHorz, <span class="fl">0.5</span>, sobelValsVerts, <span class="fl">0.5</span>, <span class="dv">0</span>)</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co"># Convert combined back to uint8</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>sobelImg <span class="op">=</span> cv2.convertScaleAbs(sobelComb)</span>
+<span id="cb7-18"><a href="#cb7-18"></a>cv2.imshow(<span class="st">"Sobel"</span>, sobelImg)</span>
+<span id="cb7-19"><a href="#cb7-19"></a>cv2.waitKey(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#fig-sobel" class="quarto-xref">Figure&nbsp;11</a> displays the three results from this sample program. The first detects only vertical edges, and the second only horizontal. But we can blend the two together to get edges in any direction.</p>
+<div id="fig-sobel" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sobel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/SobelX.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="Sobel detection of vertical edges (changes in the x direction)"><img src="Ch6-Images/SobelX.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Sobel detection of vertical edges (changes in the x direction)</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/SobelY.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="Sobel detection of horizontal edges (changes in the y direction)"><img src="Ch6-Images/SobelY.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Sobel detection of horizontal edges (changes in the y direction)</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/SobelBoth.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="A blending of the previous two"><img src="Ch6-Images/SobelBoth.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>A blending of the previous two</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sobel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: The results of running Sobel separately in both directions, and then blending the results.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="canny-edge-detection" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="canny-edge-detection"><span class="header-section-number">5.2</span> Canny Edge Detection</h2>
+<p>The Canny algorithm is more elaborate than Sobel: it produces a black and white image where the edges are all one pixel wide. It performs the following steps:</p>
+<ol type="1">
+<li>Apply a gaussian blur to reduce noise in the image</li>
+<li>Perform Sobel in x and y directions, separately</li>
+<li>Perform non-max suppression to reduce edges to one pixel in width</li>
+<li>Perform hysteresis thresholding to keep only strong, connected edges</li>
+</ol>
+<p>We’ve already learned about blurring and Sobel.</p>
+<p><strong>What is Non-max Suppression?</strong> For this, Canny looks at small neighborhoods that are just one row tall, and a few pixels long. If the center point is not the largest in its little neighborhood, then the center point is set to zero. It does the same thing with one-column wide neighborhoods in the vertical direction. This reduces a clump of edge values to just the strongest one.</p>
+<p><strong>What is hysteresis thresholding?</strong></p>
+<p>This kind of thresholding has two threshold values, the minval and the maxval, passed in when we call <code>Canny</code>. The first threshold should be smaller than the second threshold. Between them, they divide the space of brightness values into three parts: those less than the minval threshold, those in between minval and maxval, and those over maxval. The thresholding works this way:</p>
+<ul>
+<li>Any value under minval is automatically discarded (set to zero)</li>
+<li>Any value over maxval is automatically kept (set to one)</li>
+<li>Values between minval and maxval are only kept if they are adjacent to a pixel that has been set to one. Otherwise, they are discarded</li>
+</ul>
+<p><a href="#fig-hysteresisThresh" class="quarto-xref">Figure&nbsp;12</a> illustrates this process. The curved lines represent edges that have been found in the image, and pixels in the lines are adjacent if drawn that way. The vertical value of each point on the line represents its brightness. And we’ve drawn the minval and maxval thresholds on the figure.</p>
+<div id="fig-hysteresisThresh" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hysteresisThresh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch6-Images/hysteresis.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36" title="Figure&nbsp;12: An illustration of hysteresis thresholding"><img src="Ch6-Images/hysteresis.png" class="img-fluid figure-img" style="width:12cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hysteresisThresh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: An illustration of hysteresis thresholding
+</figcaption>
+</figure>
+</div>
+<ul>
+<li>The bottom line has no pixels above minval. Thus, it is a very weak edge, and all its pixels are discarded and set to zero.</li>
+<li>The middle line lies between minval and maxval. However, at no point does it connect to any pixels that lie above the maxval line, so all of its pixels are discarded</li>
+<li>The top line has ends that are above maxval. Thus initially, those are the only points that would be marked to be kept. However, there are points between minval and maxval that are adjacent to the ones above maxval, so those would be marked to keep, and then their neighbors would be marked, and so on until the entire line is marked to be kept.</li>
+</ul>
+<p>Below is a code example showing the result of running <code>Canny</code> on the same picture as above. Notice that Canny works well when given a color image.</p>
+<div id="fa96f4e0" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">import</span> cv2</span>
+<span id="cb8-2"><a href="#cb8-2"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/chicago.jpg"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>cannyImg1 <span class="op">=</span> cv2.Canny(img, <span class="dv">120</span>, <span class="dv">200</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg1)</span>
+<span id="cb8-6"><a href="#cb8-6"></a>cannyImg2 <span class="op">=</span> cv2.Canny(img, <span class="dv">50</span>, <span class="dv">150</span>)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg2)</span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a>cannyImg3 <span class="op">=</span> cv2.Canny(img, <span class="dv">20</span>, <span class="dv">150</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg3)</span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a>cv2.waitKey(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="#fig-canny" class="quarto-xref">Figure&nbsp;13</a> shows the results of this sample program. Notice how changes to each threshold affect the result. Determining the right threshold values can be a matter of art, rather than science (guess at the values and then tweak them until they work for your task). This can make it hard to work with.</p>
+<div id="fig-canny" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-canny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/canny1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37" title="Canny detection with minval = 120 and maxval = 200"><img src="Ch6-Images/canny1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Canny detection with minval = 120 and maxval = 200</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/canny2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38" title="Canny detection with minval = 50 and maxval = 150"><img src="Ch6-Images/canny2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Canny detection with minval = 50 and maxval = 150</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch6-Images/canny3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="Canny detection with minval = 20 and maxval = 150"><img src="Ch6-Images/canny3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Canny detection with minval = 20 and maxval = 150</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-canny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: The results of running Canny with three different threshold values.
+</figcaption>
+</figure>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
