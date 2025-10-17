@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-09-27">
+<meta name="dcterms.date" content="2025-10-17">
 
 <title>Homework 2 – Vision Readings</title>
 <style>
@@ -194,7 +194,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 27, 2025</p>
+        <p class="date">October 17, 2025</p>
       </div>
     </div>
     
@@ -276,7 +276,7 @@ window.Quarto = {
 <h1>Question 1: Implementing a simple function</h1>
 <p>Create a function called <code>divisBy</code> that has two input parameters, both numbers, <code>a</code> and <code>b</code>. Your function should determine if <code>a</code> is divisible by <code>b</code> evenly, and it should return <code>True</code> if it is, and <code>False</code> if it is not. (Hint: use the remainder operator (<code>%</code>) to help you: if <code>a</code> is divisible by <code>b</code> then the remainder of <code>a</code> and <code>b</code> is zero.)</p>
 <p>Below are a few sample calls to show how to call <code>divisBy</code>. There are more sample calls in <code>hw2Code.py</code> and even more in <code>hw2Checker.py</code>.</p>
-<div id="9b82a734" class="cell" data-execution_count="1">
+<div id="6adc8330" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">print</span>(<span class="st">"Is 15 divisible by 3:"</span>, divisBy(<span class="dv">15</span>, <span class="dv">3</span>))</span>
 <span id="cb1-2"><a href="#cb1-2"></a>result <span class="op">=</span> divisBy(<span class="dv">102</span>, <span class="dv">4</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="bu">print</span>(<span class="st">"Is 102 divisible by 4:"</span>, result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -287,7 +287,7 @@ window.Quarto = {
 <ul>
 <li>Solution defines a function called <code>divisBy</code></li>
 <li>Function header correctly specifies the name and inputs for this function</li>
-<li>Function always returns either a Boolean value (<code>True</code> or <code>False</code>) for any numeric input</li>
+<li>Function always returns a Boolean value (either <code>True</code> or <code>False</code>) for any numeric input</li>
 <li>Function returns the correct answer for any valid inputs</li>
 <li>Code includes a triple-quoted <em>docstring</em> that describes the function’s input, purpose, and results</li>
 </ul>
@@ -315,7 +315,7 @@ window.Quarto = {
 <p>We often use pseudocode as the first step when we need to solve a programming problem. Writing our ideas in pseudocode lets us work out ideas without having to write proper Python (or any other language) at the same time.</p>
 <p>Below is the specification of a complicated task. Without worrying about how to do each step in python, write out an algorithm in pseudocode that can solve this problem.</p>
 <p><strong>The problem:</strong> Suppose we have a long list of data that represents hourly temperature data from a particular temperature sensor. We might have weeks worth of data, one reading per hour. We want to find the temperature <em>peaks</em>, readings that are greater than or equal to both previous and following readings. For example, suppose the list below is a portion of our data. We would want to report the peaks at position 3, 8, and 15.</p>
-<div id="c9822bef" class="cell" data-execution_count="3">
+<div id="399cc469" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>temps <span class="op">=</span> [<span class="dv">43</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">48</span>, <span class="dv">46</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">47</span>, <span class="dv">50</span>, <span class="dv">49</span>, <span class="dv">48</span>, <span class="dv">48</span>, <span class="dv">49</span>, <span class="dv">50</span>, <span class="dv">52</span>, <span class="dv">55</span>, <span class="dv">51</span>, <span class="dv">48</span>]</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="bu">print</span>(findPeaks(temps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -326,7 +326,7 @@ window.Quarto = {
 <ul>
 <li>The first and last positions in the list have only one neighboring reading. We will consider the first position (position 0) to be a peak if its value is greater than or equal to the value at position 1, and similarly the last position in the list is a peak if its value is greater than or equal to the value to its left. See this example:</li>
 </ul>
-<div id="adeb6fbf" class="cell" data-execution_count="4">
+<div id="4ee4fc80" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>specTemps <span class="op">=</span> [<span class="dv">98</span>, <span class="dv">95</span>, <span class="dv">94</span>, <span class="dv">92</span>, <span class="dv">92</span>, <span class="dv">93</span>, <span class="dv">94</span>, <span class="dv">96</span>, <span class="dv">99</span>, <span class="dv">102</span>]</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="bu">print</span>(findPeaks(specTemps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -336,7 +336,7 @@ window.Quarto = {
 <ul>
 <li>Temperatures could plateau: we will consider all positions where previous and following are equal to the current temperature as peaks:</li>
 </ul>
-<div id="54e8b17b" class="cell" data-execution_count="5">
+<div id="e82567bf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>specTemps2 <span class="op">=</span> [<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">8</span>, <span class="op">-</span><span class="dv">15</span>]</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="bu">print</span>(findPeaks(specTemps2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -384,7 +384,7 @@ window.Quarto = {
 <p>Most programs involve writing multiple functions that work together to solve a problem. Typically, a function should have a single purpose, and if a part of its purpose is complex enough, then we might break it into a separate function to make it easier to code, debug, and maintain.</p>
 <p>Under Question 3 in the <code>hw2Code.py</code> file, there is a partially-completed program made up of two functions. The main function, <code>cropAndBlend</code> is defined. Its purpose is to read in two images, randomly crop two portions of the images that are the same size, and then blend them together. It returns the resulting image.</p>
 <p>Below is a sample call to this function, and, in <a href="#fig-cropBlend" class="quarto-xref">Figure&nbsp;1</a>, several different outputs for that call (because of the random crop, the image generated may differ).</p>
-<div id="0262b0bc" class="cell" data-execution_count="6">
+<div id="abe5e9f4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>im1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/landscape1.jpg"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>im2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/chicago.jpg"</span>)</span>
 <span id="cb8-3"><a href="#cb8-3"></a>blendIm <span class="op">=</span> cropAndBlend(im1, im2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -428,7 +428,7 @@ Figure&nbsp;1: Blending <code>landscape.jpg</code> with <code>chicago.jpg</code>
 <h2 class="anchored" data-anchor-id="your-job-write-randomcrop">Your job: write <code>randomCrop</code></h2>
 <p>Your task is to add the helper function, <code>randomCrop</code>, to this program. The <code>randomCrop</code> function has a much easier task. It takes in three input arguments: an image to crop, and the width and height that the resulting image should have. It should choose a valid region of interest (ROI) of the given size, and then it should return the ROI image.</p>
 <p>Below is a code sample showing how we might call <code>randomCrop</code> separately to test it, and in <a href="#fig-randcrop" class="quarto-xref">Figure&nbsp;2</a> are four random results from this call.</p>
-<div id="915bca17" class="cell" data-execution_count="7">
+<div id="ee8c9742" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>cropIm <span class="op">=</span> randomCrop(im1, <span class="dv">250</span>, <span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-randcrop" class="quarto-layout-panel">
@@ -545,7 +545,7 @@ Figure&nbsp;2: Random crops of the <code>landscape1.jpg</code> image, returning 
 <h1>Question 4: Extending an existing function</h1>
 <p>For this question you will take an incomplete function and will add to it. Specifically, you will convert a function called <code>findMinMax</code>, which finds the smallest and largest values in a list of numbers, to be a function <code>findMedian</code> that finds the <em>median</em> of the list.</p>
 <p>The median of a list of numbers is defined to be the middle value, if the length of the list is odd. If the length is even, then we find the two numbers closest to the middle, and average them. Below are some examples showing lists of numbers and the median value, as calculated by the <code>findMedian</code> function.</p>
-<div id="6d4c603a" class="cell" data-execution_count="9">
+<div id="5008792c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>nums1 <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>]</span>
 <span id="cb10-2"><a href="#cb10-2"></a>med1 <span class="op">=</span> findMedian(nums1)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="bu">print</span>(<span class="st">"Median 1 ="</span>, med1)</span>
@@ -640,7 +640,7 @@ Figure&nbsp;4: Examples of even-length lists and their middle positions
 <h1>Question 5: Debugging a program</h1>
 <p>In the <code>hw2Code.py</code> file is a program called <code>colorBlink</code>. It is made up of the <code>colorBlink</code> function, plus the <code>halfColorShuffle</code> function and the <code>colorShuffle</code> function (from an ICA). This program is supposed to take in an image as its input argument. It should change just the right half of the image to have randomly shuffled color channels. It displays the shuffle for half a second, and then repeats the process until the user types the <code>'q'</code> key to quit.</p>
 <p>Here is a sample call to <code>colorBlink</code> like the one in the main script:</p>
-<div id="9fe7d2a1" class="cell" data-execution_count="10">
+<div id="0f8ffb69" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/grandTetons.jpg"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2"></a>colorBlink(img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -717,7 +717,7 @@ Figure&nbsp;5: Examples from the <code>colorBlink</code> program, with the right
 <li>Find, correct, and label first bug in <code>halfColorShuffle</code> function</li>
 <li>Find, correct, and label second bug in <code>halfColorShuffle</code> function</li>
 <li>Find, correct, and label first bug in <code>colorShuffle</code> function</li>
-<li>Find, correct, and label second bug in <code>colorShuffle function</code></li>
+<li>Find, correct, and label second bug in <code>colorShuffle</code> function</li>
 </ul>
 <p><strong>Extended specifications:</strong></p>
 <ul>
@@ -744,7 +744,7 @@ Figure&nbsp;5: Examples from the <code>colorBlink</code> program, with the right
 <p>This algorithm converts a color image into <em>sepia-tone</em>, which is a variation on grayscale that tends toward a brown-golden range of colors, rather than true grays. Sepia was a photographic technique from the 19th century, and early “black and white” films. It used a pigment from cuttlefish skin to stabilize and preserve photographs, and it tinted the images warm shades of brown, because of the brown color of the cuttlefish skin. A great example of sepia-tone in movies are the Kansas sequences in The Wizard of Oz (the start and end of the film).</p>
 <p>The algorithm you implement converts a color image represented as a numpy array into a new array that represents a (simulated) sepia image. It will use array/image arithmetic to simplify the task.</p>
 <p>Below are a set of sample calls to the <code>sepia</code> function, and <a href="#fig-sepia" class="quarto-xref">Figure&nbsp;6</a> contains the correct output for those calls.</p>
-<div id="5e8b9b45" class="cell" data-execution_count="11">
+<div id="53c3e515" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>im1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/landscape1.jpg"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>im2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/chicago.jpg"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3"></a>im3 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/wildColumbine.jpg"</span>)</span>
@@ -825,8 +825,8 @@ blue_{new} = 0.272 \cdot red_{old} + 0.534 \cdot green_{old} + 0.131 \cdot blue_
 <li>Function header correctly specifies the name and inputs for this function</li>
 <li>Function correctly separates the channels of the color image into three separate variables</li>
 <li>Function correctly implements the first formula to calculate red values on the whole red channel at once</li>
-<li>Function correctly implements the second formula to calculate green values on the whole red channel at once</li>
-<li>Function correctly implements the third formula to calculate blue values on the whole red channel at once</li>
+<li>Function correctly implements the second formula to calculate green values on the whole green channel at once</li>
+<li>Function correctly implements the third formula to calculate blue values on the whole blue channel at once</li>
 <li>Function correctly <em>clips</em> each channel and converts it back to <code>np.uint8</code></li>
 <li>Function returns the final image</li>
 <li>Code includes a triple-quoted <em>docstring</em> that describes the function’s input, purpose, and results</li>
