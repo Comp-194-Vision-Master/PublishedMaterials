@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-13">
+<meta name="dcterms.date" content="2025-10-20">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 13, 2025</p>
+        <p class="date">October 20, 2025</p>
       </div>
     </div>
     
@@ -245,8 +245,25 @@ window.Quarto = {
 <section id="announcements" class="level3">
 <h3 class="anchored" data-anchor-id="announcements">Announcements</h3>
 <ul>
-<li>Homework 3 posted, due November 7</li>
-<li>Be prepared to discuss Ethics and Sci-Fi 7 <strong>Friday</strong></li>
+<li>Homework 3 posted later today, start on it soon! Due November 7
+<ul>
+<li>Focused on computer vision applications, particularly thresholds, masks, geometric transformations, filters, etc.</li>
+</ul></li>
+<li>Be prepared to discuss Ethics and Sci-Fi 7 <strong>Friday</strong>
+<ul>
+<li>This is a story only in print, not online… There is a copy on reserve at the library and also on my office door</li>
+</ul></li>
+<li>Midterm grades
+<ul>
+<li>I updated your Alternative Grading Record spreadsheets with the 4-homework revisions</li>
+<li>Also added an estimate for what you are on track for at this point</li>
+<li>I will figure out some grade to report</li>
+<li>I will also send you an email detailing where you are and what you might need to improve on during the second half</li>
+</ul></li>
+<li>Focus for the next week or two is on OpenCV, image transformations and getting information out of images (without ML)
+<ul>
+<li>Don’t expect to memorize the OpenCV functions and their inputs, but <strong>do</strong> focus on remembering where to look them up!</li>
+</ul></li>
 </ul>
 </section>
 <section id="todays-topics" class="level3">
@@ -257,7 +274,6 @@ window.Quarto = {
 <li>Translation</li>
 <li>Rotation</li>
 <li>Warping</li>
-<li>Perspective warping</li>
 </ul>
 </section>
 <section id="resizing" class="level3">
@@ -280,7 +296,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="2a723502" class="cell" data-execution_count="1">
+<div id="7820566b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -358,9 +374,29 @@ y_{old} \\
 \end{bmatrix}
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
+<p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
+<div id="fcee87b8" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function takes in three inputs:</p>
+<ul>
+<li><code>oldImage</code>, the old image we want to transform</li>
+<li><code>matrix</code>, a 2x3 matrix of 32-bit floating-point numbers, it gives the six values from the formulas above <span class="math display">\[
+\begin{bmatrix}
+a &amp; b &amp; t_x \\
+c &amp; d &amp; t_y \\
+\end{bmatrix}
+\]</span></li>
+<li><code>size</code>, a tuple of width and height for the new image</li>
+</ul>
 </section>
 <section id="translation" class="level3">
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
+<p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
+<p><strong>A simple example:</strong></p>
+<div id="fa454323" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="wednesday-october-22" class="level2">
