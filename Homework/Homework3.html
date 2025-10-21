@@ -395,7 +395,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <h2 class="anchored" data-anchor-id="add-the-two-images-together">Add the two images together</h2>
 <p>The last step is to add the two images together, and to <strong>return the result!</strong></p>
 <p>Below is a sample call to the function, and the final result.</p>
-<div id="cf8ab287" class="cell" data-execution_count="1">
+<div id="76414ddb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/winterRobin.jpg"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>img2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/selbyWinter.jpg"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>finalPic1 <span class="op">=</span> bubbleMix(img2, img1)</span>
@@ -493,7 +493,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <h1>Question 3: Completing a multi-function program, using pseudocode</h1>
 <p>Under Question 3 in the <code>hw3Code.py</code> file, there is a partially-completed program. We have provided the main function, <code>findBall</code>, and a helper, <code>applyBounds</code>. You will be implementing three helper functions (all three are very similar to each other).</p>
 <p>You learned about using lower and upper bounds on an HSV image with the <code>inRange</code> function, to identify the location of a colorful object in an image. You may remember that figuring out the best bounds can be very tricky.</p>
-<p>The purpose of this program is to help the user to select the right hue, saturation, and value ranges to isolate the ball from everything else. The main function cycles through the channels of an HSV image (hue, saturation, and value), allowing the user to try different bounds for each channel in turn, and displaying the result.</p>
+<p>The purpose of this program is to help the user to select the right hue, saturation, and value ranges to isolate the ball from everything else. The main function cycles through the channels of an HSV image (hue, saturation, and value), allowing the user to try different bounds for each channel in turn, and displaying the result. In the end, it returns the new bounds, as well as the center position and radius of the final circle that was discovered, marking the location of the ball.</p>
 <p>The <code>applyBounds</code> function does most of the work of processing and displaying the images. It does these steps:</p>
 <ul>
 <li>It uses <code>inRange</code> to make a threshold image based on the current values for the lower and upper bounds</li>
@@ -501,7 +501,8 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <li>It searches the contours to find the largest contour that was found</li>
 <li>It draws that contour on a copy of the original image</li>
 <li>It finds the smallest enclosing circle for the contourl and draws that as well</li>
-<li>It also displays some text on the image to show the user what is happening</li>
+<li>It displays some text on the image to show the user what is happening</li>
+<li>Finally, it returns the image, along with the center position and radius of the circle it has drawn</li>
 </ul>
 <p><strong>Your task</strong> will be to implement the three helper functions that help the user to adjust the hue thresholds, the saturation thresholds, and the value thresholds. I will provide you with pseudocode for all three functions just below, and a few sample calls to show what results the user should be able to construct.</p>
 <p><strong>Hints:</strong></p>
@@ -510,7 +511,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <li>Remember that you can’t modify tuples, you will need to rebuild them each time you make a change</li>
 <li>There is a cryptic but clever programming “hack” for times when you need a value to stay above (or below) a certain value. Suppose I am adding one to a variable <code>x</code>, and I want to make sure that <code>x</code> never goes over 100. I could write the following statement by itself to do this:</li>
 </ul>
-<div id="0b1fdd7f" class="cell" data-execution_count="2">
+<div id="434acd33" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="op">=</span> <span class="bu">min</span>(<span class="dv">100</span>, x <span class="op">+</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="pseudocode-for-adjusthue" class="level2">
@@ -534,7 +535,8 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 13.         Subtract 5 from currHue, but make sure it doesn't go below 10
 14.         Create a new set of lower bounds, updating its low hue value to currHue - 10
 15.         Create a new set of upper bounds, update its high hue value to currHue + 10
-16. After the loop ends, return the final lower bounds and upper bounds</code></pre>
+16. After the loop ends, return the final lower bounds and upper bounds, and the center point and radius of the circle
+from applyBounds</code></pre>
 </section>
 <section id="pseudocode-for-adjustsat" class="level2">
 <h2 class="anchored" data-anchor-id="pseudocode-for-adjustsat">Pseudocode for <code>adjustSat</code></h2>
@@ -562,7 +564,8 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 19.    If the user hit the 'd' key then:
 20          Subtract 5 from uppSat, but make sure it doesn't go below lowSat
 21.         Create a new set of upper bounds, updating its upper saturation value to uppSat
-22. After the loop ends, return the final lower bounds and upper bounds</code></pre>
+22. After the loop ends, return the final lower bounds and upper bounds, and the center point and radius of the circle
+from applyBounds</code></pre>
 </section>
 <section id="pseudocode-for-adjustval" class="level2">
 <h2 class="anchored" data-anchor-id="pseudocode-for-adjustval">Pseudocode for <code>adjustVal</code></h2>
@@ -578,7 +581,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <li>Examine the visual results carefully and experiment until you can isolate the ball in each of the pictures.</li>
 </ul>
 <p>Below is a series of sample calls to this function, duplicated in the <code>hw3Checker.py</code> program. In <a href="#fig-q3results" class="quarto-xref">Figure&nbsp;4</a> you can see the kind of results you should be able to reach by adjusting hue, saturation, and value bounds.</p>
-<div id="064b2ad9" class="cell" data-execution_count="3">
+<div id="791fdd41" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>pic1 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Blue/Blue1BG1Mid.jpg"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>pic2 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Blue/Blue1BG3.jpg"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a>pic3 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Green/Green1BG1Mid.jpg"</span>)</span>
@@ -850,6 +853,7 @@ Figure&nbsp;4: Seven examples, showing good, perhaps best possible, results from
 <p>Feel free to use helper functions where it makes sense.</p>
 <p>Use good style, and comment your code!</p>
 <p>In the code file, include a triple-quoted string above your <code>videoVibe</code> function where you write a paragraph or two about what vibe you were going for, and how you feel the transformations you did contribute to that vibe.</p>
+<p><strong>A note about testing:</strong> The <code>check_videoVibe</code> function in <code>hw3Checker.py</code> uses several stored videos from our <code>SampleVideos</code> folder. These videos are too large to be stored in Github. Just copy them to the <code>SampleImages</code> folder before testing with them.</p>
 <section id="specifications-for-question-6" class="level2">
 <h2 class="anchored" data-anchor-id="specifications-for-question-6">Specifications for Question 6</h2>
 <p><strong>Base specifications:</strong></p>
