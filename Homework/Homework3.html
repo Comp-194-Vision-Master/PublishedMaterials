@@ -395,7 +395,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <h2 class="anchored" data-anchor-id="add-the-two-images-together">Add the two images together</h2>
 <p>The last step is to add the two images together, and to <strong>return the result!</strong></p>
 <p>Below is a sample call to the function, and the final result.</p>
-<div id="76414ddb" class="cell" data-execution_count="1">
+<div id="d6901eab" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/winterRobin.jpg"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>img2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/selbyWinter.jpg"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>finalPic1 <span class="op">=</span> bubbleMix(img2, img1)</span>
@@ -511,7 +511,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <li>Remember that you can’t modify tuples, you will need to rebuild them each time you make a change</li>
 <li>There is a cryptic but clever programming “hack” for times when you need a value to stay above (or below) a certain value. Suppose I am adding one to a variable <code>x</code>, and I want to make sure that <code>x</code> never goes over 100. I could write the following statement by itself to do this:</li>
 </ul>
-<div id="434acd33" class="cell" data-execution_count="2">
+<div id="35b878ea" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="op">=</span> <span class="bu">min</span>(<span class="dv">100</span>, x <span class="op">+</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="pseudocode-for-adjusthue" class="level2">
@@ -581,17 +581,17 @@ from applyBounds</code></pre>
 <li>Examine the visual results carefully and experiment until you can isolate the ball in each of the pictures.</li>
 </ul>
 <p>Below is a series of sample calls to this function, duplicated in the <code>hw3Checker.py</code> program. In <a href="#fig-q3results" class="quarto-xref">Figure&nbsp;4</a> you can see the kind of results you should be able to reach by adjusting hue, saturation, and value bounds.</p>
-<div id="791fdd41" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>pic1 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Blue/Blue1BG1Mid.jpg"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>pic2 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Blue/Blue1BG3.jpg"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>pic3 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Green/Green1BG1Mid.jpg"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4"></a>pic4 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Green/Green1BG3.jpg"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a>pic5 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Orange/OrangeBG1Near.jpg"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a>pic6 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Pink/PinkBG1Mid.jpg"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a>pic7 <span class="op">=</span> cv2.imread(<span class="st">"BallFinding/Yellow/YellowBG1Mid.jpg"</span>)</span>
+<div id="e8cc7aa2" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>pic1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Blue1BG1Mid.jpg"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>pic2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Blue1BG3.jpg"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>pic3 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Green1BG1Mid.jpg"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>pic4 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Green1BG3.jpg"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a>pic5 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/OrangeBG1Near.jpg"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>pic6 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/PinkBG1Mid.jpg"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>pic7 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/YellowBG1Mid.jpg"</span>)</span>
 <span id="cb5-8"><a href="#cb5-8"></a></span>
 <span id="cb5-9"><a href="#cb5-9"></a><span class="cf">for</span> pic <span class="kw">in</span> [pic1, pic2, pic3, pic4, pic5, pic6, pic7]:</span>
-<span id="cb5-10"><a href="#cb5-10"></a>    im, lb, ub <span class="op">=</span> hw3.findBall(pic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10"></a>    im, lb, ub, cnt, rad <span class="op">=</span> hw3.findBall(pic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-q3results" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
@@ -679,7 +679,7 @@ Figure&nbsp;4: Seven examples, showing good, perhaps best possible, results from
 <li>Correctly calls <code>applyBounds</code> and displays the result</li>
 <li>Updates <code>currHue</code> correctly when the user presses the w or s key</li>
 <li>Correctly limits <code>currHue</code> to be between 10 and 170</li>
-<li>Returns the updated lower and upper bounds</li>
+<li>Returns the updated lower and upper bounds, and the position and size of the circle</li>
 </ul></li>
 <li>The <code>adjustSat</code> function:
 <ul>
@@ -688,7 +688,7 @@ Figure&nbsp;4: Seven examples, showing good, perhaps best possible, results from
 <li>Changes the lower saturation bound correctly in response to user pressing w or s</li>
 <li>Changes the upper saturation bound correctly in response to user pressing e or d</li>
 <li>Correctly limits the lower and upper saturation bounds so that the lower bound does not go below zero, or above the upper bound, and the upper bound does not go above 255 or below the lower bound</li>
-<li>Returns the updated lower and upper bounds</li>
+<li>Returns the updated lower and upper bounds, and the position and size of the circle</li>
 </ul></li>
 <li>The <code>adjustVal</code> function:
 <ul>
@@ -697,7 +697,7 @@ Figure&nbsp;4: Seven examples, showing good, perhaps best possible, results from
 <li>Changes the lower value bound correctly in response to user pressing w or s</li>
 <li>Changes the upper value bound correctly in response to user pressing e or d</li>
 <li>Correctly limits the lower and upper value bounds so that the lower bound does not go below zero, or above the upper bound, and the upper bound does not go above 255 or below the lower bound</li>
-<li>Returns the updated lower and upper bounds</li>
+<li>Returns the updated lower and upper bounds, and the position and size of the circle</li>
 </ul></li>
 </ul>
 <p><strong>Extended specifications:</strong></p>
