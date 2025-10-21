@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-16">
+<meta name="dcterms.date" content="2025-10-21">
 
 <title>ICA: Image Filters – Vision Readings</title>
 <style>
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -127,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 16, 2025</p>
+        <p class="date">October 21, 2025</p>
       </div>
     </div>
     
@@ -144,6 +179,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#morphological-filters" id="toc-morphological-filters" class="nav-link" data-scroll-target="#morphological-filters">Morphological filters</a></li>
+  <li><a href="#blurring-an-image" id="toc-blurring-an-image" class="nav-link" data-scroll-target="#blurring-an-image">Blurring an image</a></li>
+  <li><a href="#edge-detection" id="toc-edge-detection" class="nav-link" data-scroll-target="#edge-detection">Edge Detection</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
@@ -157,8 +196,145 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>???</p>
+<p>In this activity you will experiment with morphological filters, blurring, and edge detection. You’ll look at how we might use these filters to simplify images so that we can find the things in them better. We’ll look at finding coins and balls, as we did with thresholds, and we’ll also just try using these activities on frames of a video.</p>
 <p>The Github repository for this assignment will contain a starter code file, <code>activ13.py</code>. Put your code in this file, and create others, as directed below and according to the <code>TODO</code> comments in the file.</p>
+</section>
+<section id="morphological-filters" class="level1">
+<h1>Morphological filters</h1>
+<p>First we’ll briefly summarize the different morphological filters. They are discussed in much more detail in the readings, so bringing that up while you work on this activity is a good idea.</p>
+<p><strong>Dilation and Erosion:</strong> Much like blurring, dilation and erosion determine the value for a pixel based on a neighborhood of pixels from the original image. Unlike the default in blurring, we can select the shape of the neighborhood, as well as its size, to be either rectangular, elliptical, or cross shaped. With dilation, the value of each channel of a pixel is the maximum value of that channel in any pixel in its neighborhood. Erosion is the opposite: the value of each channel of a pixel is the minimum value of that channel in any pixel in its neighborhood.</p>
+<p>These can be used to emphasize and thicken edges or regions of color in a particular part of an image.</p>
+<p><strong>Opening and Closing:</strong> Sometimes we want to preserve both dark and light features of an image. Opening and closing combine dilation and erosion. Opening an image means first performing an erosion of the image, then a dilation, using the same size and shape of neighborhood. Closing first dilates the image, then erodes it.</p>
+<p>Both these operations are good at removing noise and small details from images.</p>
+<p><strong>Top-hat and Black-hat:</strong> The Top-Hat filters do the opposite of opening and closing. Instead of removing the fine details, these filters keep just the fine details. The white top-hat takes the difference between the original image and the opening of the image. The black top-hat takes the difference between the closing and the original image.</p>
+<p>These filters may be used for feature extraction tasks, or image enhancement.</p>
+<p><strong>Morphological Gradient:</strong> The morphological gradient takes the difference between the dilation and erosion of an image. This emphasizes the places where there is a change in color, and can be useful to enhance edges.</p>
+<p>In the <code>SampleCode</code> folder provided to you is a demo program for how to use the morphological filters: <code>simpleMorph.py</code>. I have copied the code below.</p>
+<div id="67414bd3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>img <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bristleconePine.jpg"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Filter types: MORPH_DILATE, MORPH_ERODE, MORPH_OPEN, MORPH_CLOSE, MORPH_TOPHAT, MORPH_BLACKHAT, MORPH_GRADIENT</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>morphType <span class="op">=</span> cv2.MORPH_DILATE</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Filter shapes: MORPH_RECT, MORPH_ELLIPSE, MORPH_CROSS, plus you can define your own</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>morphShape <span class="op">=</span> cv2.MORPH_RECT</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>kernelObj <span class="op">=</span> cv2.getStructuringElement(morphShape, (<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb1-10"><a href="#cb1-10"></a>newImg <span class="op">=</span> cv2.morphologyEx(img, morphType, kernelObj)</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>cv2.imshow(<span class="st">"Original"</span>, img)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>cv2.imshow(<span class="st">"Morphed"</span>, newImg)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Change the image loaded to any one of your choice. Then experiment with choosing different filter types (the <code>morphType</code> variable), different neighborhood shapes (the <code>morphShape</code> variable), and different neighborhood sizes (defined in the call to <code>getStructuringElemeng</code>).</p>
+<p><strong>CHOOSE ONE OF THE FOLLOWING TO COMPLETE:</strong></p>
+<p><strong>Try this to hand in:</strong> Here we can practice with smoothing images to make thresholding work better, or cleaning up the result of thresholding.</p>
+<p>In the earlier activity on masks and thresholds, you worked on isolating coins and balls using color and grayscale thresholding. <strong>If you didn’t do that, skip this activity and go on to the next one.</strong> Otherwise, go find your code, and choose the best examples you have of thresholding separating the ball or the coins from the background.</p>
+<p>Copy your code to this project, and experiment with modifying it in various ways:</p>
+<ul>
+<li>Apply a morph filter like opening or close (or erosion/dilation) to the original image, before you use thresholding on it.
+<ul>
+<li>Analyze the results: does make the overall program work better, worse, or about the same?</li>
+<li>Try varying the neighborhood shape and size</li>
+<li>Try different morphological filters: do any of them improve your results?</li>
+</ul></li>
+<li>Apply a morph filter like opening or closing to the threshold image (to clear up some of the noise, fill in partially detected shapes, etc.)
+<ul>
+<li>Analyze the results: does make the overall program work better, worse, or about the same?</li>
+<li>Try varying the neighborhood shape and size</li>
+<li>Try different morphological filters: do any of them improve your results?</li>
+</ul></li>
+</ul>
+<p><strong>Try this to hand in:</strong> Here we will just practice with using the <code>morphologyEx</code> program in a fun way (could be helpful for the open-ended homework question). The goal is to have the morphing fluctuate over time between small effects (small neighborhood sizes) to large effects, and back again. Start by copying one of the video-reading programs, ideally one with the <code>processImage</code> helper.</p>
+<ul>
+<li>Choose one of the morphological filters described above</li>
+<li>Before the <code>while</code> loop, set up a variable <code>kSize</code> to be used as the neighborhood size</li>
+<li>Also set up a variable <code>deltak</code> to hold the value 2, this is how much <code>kSize</code> will change from one frame to the next</li>
+<li>In the <code>processImage</code> function (or in the middle of the loop, if you don’t have it), set up a neighborhood “structuring element” object with <code>(kSize, kSize)</code> as its size</li>
+<li>Apply <code>morphologyEx</code> to the current frame, using the filter you chose and the structuring element you just created</li>
+<li>Display the morphed image instead of the original</li>
+<li>At the end of the <code>while</code> loop, add an <code>if</code> statement that checks if the neighborhood size is too large or too small (too large might be 21 or 25, too small would be 3). If true, do: <code>deltak = -deltak</code>. This will change how <code>kSize</code> is changing from frame to frame</li>
+<li>After the <code>if</code> statements (and still inside the loop), update <code>kSize</code> by adding <code>deltak</code> to it</li>
+</ul>
+</section>
+<section id="blurring-an-image" class="level1">
+<h1>Blurring an image</h1>
+<p>Blurring is used to remove noise and variation from an image, making other operations work better. Look at the code samples in the reading to remind yourself how to use <code>blur</code> and <code>GaussianBlur</code>.</p>
+<p><strong>CHOOSE ONE OF THE FOLLOWING TO COMPLETE:</strong></p>
+<p><strong>Try this to hand in:</strong> This task is similar to the first task for morphological filters. Here we can practice with smoothing images to make thresholding work better, or cleaning up the result of thresholding.</p>
+<p>In the earlier activity on masks and thresholds, you worked on isolating coins and balls using color and grayscale thresholding. <strong>If you didn’t do that, skip this activity and go on to the next one.</strong> Otherwise, go find your code, and choose the best examples you have of thresholding separating the ball or the coins from the background.</p>
+<p>Copy your code to this project, and experiment with modifying it in various ways:</p>
+<ul>
+<li>Apply either the basic blur or Gaussian blur to the original image, before you use thresholding on it.
+<ul>
+<li>Analyze the results: does make the overall program work better, worse, or about the same?</li>
+<li>Try varying the neighborhood size</li>
+<li>Try switching between basic and Gaussian blur: does either work better at improving the results?</li>
+</ul></li>
+<li>Apply blurring to the threshold image (to clear up some of the noise)
+<ul>
+<li>Analyze the results: does make the overall program work better, worse, or about the same?</li>
+<li>Try varying the neighborhood shape and size</li>
+<li>Try both simple and Gaussian blur: do either of them improve your results?</li>
+</ul></li>
+</ul>
+<p><strong>Try this to hand in:</strong> Here we will just practice with using blurring on frames from a video. The goal is to have the blurring fluctuate over time between small effects (small neighborhood sizes) to large effects, and back again. Start by copying one of the video-reading programs, ideally one with the <code>processImage</code> helper.</p>
+<ul>
+<li>Choose basic or Gaussian blurring</li>
+<li>Before the <code>while</code> loop, set up a variable <code>kSize</code> to be used as the neighborhood size</li>
+<li>Also set up a variable <code>deltak</code> to hold the value 2, this is how much <code>kSize</code> will change from one frame to the next</li>
+<li>In the <code>processImage</code> function (or in the middle of the loop, if you don’t have it), set up a neighborhood “structuring element” object with <code>(kSize, kSize)</code> as its size</li>
+<li>Apply the blur you’ve chosen to the current frame, using the filter you chose and the structuring element you just created</li>
+<li>Display the blurred image instead of the original</li>
+<li>At the end of the <code>while</code> loop, add an <code>if</code> statement that checks if the neighborhood size is too large or too small (too large might be 21 or 25, too small would be 3). If true, do: <code>deltak = -deltak</code>. This will change how <code>kSize</code> is changing from frame to frame</li>
+<li>After the <code>if</code> statements (and still inside the loop), update <code>kSize</code> by adding <code>deltak</code> to it</li>
+</ul>
+</section>
+<section id="edge-detection" class="level1">
+<h1>Edge Detection</h1>
+<p>Edges, in computer vision, are just patches where the brightness in an image changes dramatically from one side of the patch to another. Your readings looked at two edge detection methods, the very basic Sobel filter and the more complex Canny algorithm (review that section if you need to).</p>
+<p>We will focus on implementing these two filters on a video feed. Looking at the edge detection on a video feed, and being able to change the view, put objects in front of the camera, hold up items with words on them, all these things help to strengthen your intuitions about what edges are, and what these functions can do for you.</p>
+<p><strong>Try this to hand in:</strong> Just like the previous sections, start with a basic video program. Then, either copy the code example for Soble from the readings (also found in <code>EdgesAndLines.py</code> in <code>SampleCode</code>), or use the stripped-down version here:</p>
+<div id="f9568f81" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>gray <span class="op">=</span> cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>sobelValsHorz <span class="op">=</span> cv2.Sobel(gray, cv2.CV_32F, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>sobelValsVerts <span class="op">=</span> cv2.Sobel(gray, cv2.CV_32F, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>sobelComb <span class="op">=</span> cv2.addWeighted(sobelValsHorz, <span class="fl">0.5</span>, sobelValsVerts, <span class="fl">0.5</span>, <span class="dv">0</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>sobelImg <span class="op">=</span> cv2.convertScaleAbs(sobelComb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Apply this code to the frames of the video. No need to vary anything here, just run the filter steps on the frame and display the result.</p>
+<p><strong>Try this to hand in:</strong> Do the same thing as the previous example, except run the Canny algorithm on the frame instead. Below are some examples of Canny run with different input parameters (notice that Canny can take in a color image).</p>
+<div id="7793331f" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>cannyImg1 <span class="op">=</span> cv2.Canny(img, <span class="dv">120</span>, <span class="dv">200</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg1)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>cannyImg2 <span class="op">=</span> cv2.Canny(img, <span class="dv">50</span>, <span class="dv">150</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg2)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>cannyImg3 <span class="op">=</span> cv2.Canny(img, <span class="dv">20</span>, <span class="dv">150</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>cv2.imshow(<span class="st">"Canny"</span>, cannyImg3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Recall that the two numbers input to Canny are threshold values: a lower threshold and an upper threshold.</p>
+<ul>
+<li>All pixels with brightness below the lower threshold are set to zero: their edges are discarded</li>
+<li>All pixels with brightness above the upper threshold are set to 255</li>
+<li>Pixels with brightness between the two thresholds are set to 255 if they have an adjacent pixel that is 255, otherwise they are set to zero</li>
+</ul>
+<p>One of the issues with Canny is figuring out the best set of threshold values for any given situation.</p>
+<p><strong>Add to your Canny video program:</strong> Let’s add a method to the Canny video program for the user to change the threshold values.</p>
+<ul>
+<li>Before the <code>while</code> loop, set up two variables: <code>lowThresh</code> and <code>uppThresh</code>, and initialize them to some reasonable initial values (maybe 100 and 200, for instance)</li>
+<li>Pass <code>lowThresh</code> and <code>uppThresh</code> to <code>Canny</code> instead of hard-coding numbers into the call</li>
+<li>Add more cases to the <code>if</code> statement that checks what key the user pressed from <code>waitKey</code>
+<ul>
+<li>If the user presses the w key, then add a small amount (between 1 and 5) to <code>lowThresh</code></li>
+<li>If the user presses the s key, then subtract a small amount from <code>lowThresh</code> (be sure not to go below 0 or aboe 255)</li>
+<li>If the user presses the e key, then add a small amount to <code>uppThresh</code></li>
+<li>If the user presses the d key, then subtract a small amount from <code>lowThresh</code></li>
+</ul></li>
+</ul>
+<p>Look at how different threshold values change what Canny shows you. Try holding up books or other items with writing on them. Hold up a ball to see whether you can get a clean edge around the ball.</p>
+</section>
+<section id="section" class="level1">
+<h1></h1>
 </section>
 <section id="what-to-hand-in" class="level1">
 <h1>What to hand in</h1>
