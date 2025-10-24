@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-20">
+<meta name="dcterms.date" content="2025-10-24">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 20, 2025</p>
+        <p class="date">October 24, 2025</p>
       </div>
     </div>
     
@@ -220,10 +220,11 @@ window.Quarto = {
   <li><a href="#wednesday-october-22" id="toc-wednesday-october-22" class="nav-link" data-scroll-target="#wednesday-october-22">Wednesday, October 22</a>
   <ul class="collapse">
   <li><a href="#announcements-1" id="toc-announcements-1" class="nav-link" data-scroll-target="#announcements-1">Announcements</a></li>
+  <li><a href="#todays-topis" id="toc-todays-topis" class="nav-link" data-scroll-target="#todays-topis">Today’s Topis</a></li>
   </ul></li>
   <li><a href="#friday-october-24" id="toc-friday-october-24" class="nav-link" data-scroll-target="#friday-october-24">Friday, October 24</a>
   <ul class="collapse">
-  <li><a href="#todays-topics-1" id="toc-todays-topics-1" class="nav-link" data-scroll-target="#todays-topics-1">Today’s topics</a></li>
+  <li><a href="#todays-topis-1" id="toc-todays-topis-1" class="nav-link" data-scroll-target="#todays-topis-1">Today’s Topis</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
@@ -297,7 +298,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="64a27213" class="cell" data-execution_count="1">
+<div id="3f32d728" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -376,7 +377,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="3855524a" class="cell" data-execution_count="2">
+<div id="76c6b7a0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -395,7 +396,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="c9b50021" class="cell" data-execution_count="3">
+<div id="0715bf84" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -405,32 +406,73 @@ c &amp; d &amp; t_y \\
 <section id="announcements-1" class="level3">
 <h3 class="anchored" data-anchor-id="announcements-1">Announcements</h3>
 <ul>
-<li><p>Homework 3 by the end of this week, due <strong>Wednesday</strong> next week</p></li>
-<li><p>Be prepared to discuss Ethics and Sci-Fi 7 <strong>Friday!</strong></p></li>
-<li><p>Image filters</p></li>
-<li><p>Morphological filters</p>
+<li>Homework 3, due November 7!</li>
+<li>Coding quiz redos: through the end of next week</li>
+<li>Office hours changing</li>
+<li>Be prepared to discuss Ethics and Sci-Fi 7 <strong>Friday!</strong></li>
+<li><strong>Midterm Grades:</strong>*</li>
+</ul>
+</section>
+<section id="todays-topis" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topis">Today’s Topis</h3>
+<ul>
+<li>Image filters</li>
+<li>Morphological filters
 <ul>
 <li>Erosion and dilation</li>
 <li>Opening and closing</li>
 <li>Black hat and top hat</li>
 <li>Gradient</li>
 </ul></li>
-<li><p>Convolutional filters</p>
+<li>Convolutional filters
 <ul>
 <li>Blurring</li>
 <li>Edge detection</li>
 </ul></li>
 </ul>
+<p>See Readings document for details…</p>
 </section>
 </section>
 <section id="friday-october-24" class="level2">
 <h2 class="anchored" data-anchor-id="friday-october-24">Friday, October 24</h2>
-<section id="todays-topics-1" class="level3">
-<h3 class="anchored" data-anchor-id="todays-topics-1">Today’s topics</h3>
+<p><strong>Advising:</strong> * Midterm grades are out now * Come talk to me if you have concerns about this class, or your others * Go talk to your professors if you are surprised or unsure about your midterm grade * Upcoming dates: * November 7: Last Day to Withdraw from a Class * November 10: First Day to Designate Grading Option * November 10:Registration for Spring 2026 courses begins * Nov 10-11, Seniors * Nov 12-13, Juniors * Nov 14-17, Sophomores * Nov 18-19, First-years * Nov 20-21, Wrap up days</p>
+<p><strong>MSCS:</strong></p>
 <ul>
-<li>Finding Contours</li>
-<li>Manipulating contours</li>
+<li>Tuesday, 8:30-9:30am: Hot Chocolate with the MSCS Student Advisory Board (SAB)
+<ul>
+<li>Stop by to meet other MSCS students and members of SAB. Relatedly, are you a first year, sophomore, junior, or senior MSCS student / major / minor dedicated to building a welcoming, supportive, and inclusive MSCS community? Please consider applying to become a SAB member yourself! For more information about SAB and applications (due 11/4 by 11:00am), please check out this google form.</li>
+</ul></li>
+<li>Tuesday, 12:00-1:00pm: MSCS seminar with Mac Prof Dan Drake
+<ul>
+<li>Skeptical that “bad predictions” are sometimes better?! Come to this talk.</li>
+</ul></li>
+<li>Thursday, 3:00-4:30pm: weekly Math problem solving
+<ul>
+<li>Please drop in. All experience levels welcome!</li>
+</ul></li>
 </ul>
+<p><strong>Our class:</strong></p>
+<ul>
+<li>Homework 3, due November 7!</li>
+<li>Coding quiz redos: through the end of next week</li>
+<li>Office hours changing next week:
+<ul>
+<li>Monday + Wednesday: 4:30-5:30pm</li>
+<li>Tuesday + Thursday: 3:00-4:30pm</li>
+<li>By-appointment times: MW, 10:30-11:30 or MWF 1:00-2:00</li>
+</ul></li>
+<li>Be prepared to discuss Ethics and Sci-Fi 7 <strong>Today</strong></li>
+</ul>
+<section id="todays-topis-1" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topis-1">Today’s Topis</h3>
+<ul>
+<li>Image filters</li>
+<li>Convolutional filters
+<ul>
+<li>Edge detection</li>
+</ul></li>
+</ul>
+<p>See Readings for details!</p>
 <hr>
 </section>
 </section>
