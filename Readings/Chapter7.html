@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-16">
+<meta name="dcterms.date" content="2025-10-26">
 
 <title>Chapter 7, Detecting and Tracking Objects (without ML) – Vision Readings</title>
 <style>
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -42,6 +77,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -127,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 16, 2025</p>
+        <p class="date">October 26, 2025</p>
       </div>
     </div>
     
@@ -138,8 +176,32 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#finding-contours" id="toc-finding-contours" class="nav-link active" data-scroll-target="#finding-contours"><span class="header-section-number">1</span> Finding contours</a>
+  <ul class="collapse">
+  <li><a href="#inputs-to-findcontours" id="toc-inputs-to-findcontours" class="nav-link" data-scroll-target="#inputs-to-findcontours"><span class="header-section-number">1.1</span> Inputs to <code>findContours</code></a></li>
+  <li><a href="#outputs-from-findcontours" id="toc-outputs-from-findcontours" class="nav-link" data-scroll-target="#outputs-from-findcontours"><span class="header-section-number">1.2</span> Outputs from <code>findContours</code></a></li>
+  <li><a href="#an-example-of-findcontours" id="toc-an-example-of-findcontours" class="nav-link" data-scroll-target="#an-example-of-findcontours"><span class="header-section-number">1.3</span> An example of <code>findContours</code></a></li>
+  <li><a href="#drawing-contours" id="toc-drawing-contours" class="nav-link" data-scroll-target="#drawing-contours"><span class="header-section-number">1.4</span> Drawing contours</a></li>
+  <li><a href="#selecting-contours-by-area" id="toc-selecting-contours-by-area" class="nav-link" data-scroll-target="#selecting-contours-by-area"><span class="header-section-number">1.5</span> Selecting contours by area</a></li>
+  <li><a href="#functions-to-manipulate-contours" id="toc-functions-to-manipulate-contours" class="nav-link" data-scroll-target="#functions-to-manipulate-contours"><span class="header-section-number">1.6</span> Functions to manipulate contours</a>
+  <ul class="collapse">
+  <li><a href="#bounding-rectangle" id="toc-bounding-rectangle" class="nav-link" data-scroll-target="#bounding-rectangle"><span class="header-section-number">1.6.1</span> Bounding rectangle</a></li>
+  <li><a href="#minimum-enclosing-circle" id="toc-minimum-enclosing-circle" class="nav-link" data-scroll-target="#minimum-enclosing-circle"><span class="header-section-number">1.6.2</span> Minimum enclosing circle</a></li>
+  <li><a href="#best-fit-ellipse" id="toc-best-fit-ellipse" class="nav-link" data-scroll-target="#best-fit-ellipse"><span class="header-section-number">1.6.3</span> Best-fit ellipse</a></li>
+  <li><a href="#convex-hull" id="toc-convex-hull" class="nav-link" data-scroll-target="#convex-hull"><span class="header-section-number">1.6.4</span> Convex hull</a></li>
+  <li><a href="#minimum-enclosing-triangle" id="toc-minimum-enclosing-triangle" class="nav-link" data-scroll-target="#minimum-enclosing-triangle"><span class="header-section-number">1.6.5</span> Minimum enclosing triangle</a></li>
+  <li><a href="#results-of-drawing-shapes-for-contours" id="toc-results-of-drawing-shapes-for-contours" class="nav-link" data-scroll-target="#results-of-drawing-shapes-for-contours"><span class="header-section-number">1.6.6</span> Results of drawing shapes for contours</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#motion-detection-and-background-subtraction" id="toc-motion-detection-and-background-subtraction" class="nav-link" data-scroll-target="#motion-detection-and-background-subtraction"><span class="header-section-number">2</span> Motion detection and background subtraction</a></li>
+  <li><a href="#background-subtraction" id="toc-background-subtraction" class="nav-link" data-scroll-target="#background-subtraction"><span class="header-section-number">3</span> Background subtraction</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -148,15 +210,504 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Chapter topics:</p>
+<p>This chapter will look at several approaches that allow us to identify objects in images, and to track motion and color. The first section will look at tools for finding and manipulating <strong>contours</strong>, arrays of (x, y) coordinage points that form a closed polygon on the image. The next section will examine basic motion detection, and <em>background subtraction</em> algorithms, and the third section will look at the Camshift color tracking algorithm.</p>
+<p>(Later sections, if added, will examine line and circle detection, as well as corner detection)</p>
+<section id="finding-contours" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Finding contours</h1>
+<p>All the image processing we’ve done in previous chapters has ended up transforming one image into another. The goal of computer vision is <strong>to get information out of images</strong>, but we haven’t really done that yet. Finding contours will be the first approach we will look at that does give us information. A contour describes a section of the image defined by a list of points. The points form a closed shape, a polygon. The polygon lies along a bright edge in the image.</p>
+<p>The original contour algorithm was described in a paper by Satoshi Suzuki and Keiichi Abe in 1985 (<em>Toplogical Structure Analysis of Digitized Binary Images by Border Following</em>). The algorithm operates on a <em>binary image,</em> where all pixels are either white or black. If you give it a color image, its results are typically very noisy.</p>
+<p>The <code>findContours</code> algorithm scans the image for a pixel that sits on an edge (where bright and dark meet) (as shown in <a href="#fig-contours" class="quarto-xref">Figure&nbsp;1</a> below). It then determines neighbor pixels that are also edges, and follows the neighbors until it returns to the starting point, having traced a full closed shape on the image that lies along an edge. It repeats this task for the rest of the image, and returns a list of all the contours it found (as shown in <a href="#fig-contours" class="quarto-xref">Figure&nbsp;1</a>).</p>
+<div id="fig-contours" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-contours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/contourAlg1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="At the start, finding an edge pixel and searching for neighbors"><img src="Ch7-Images/contourAlg1.png" class="img-fluid figure-img"></a></p>
+<figcaption>At the start, finding an edge pixel and searching for neighbors</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/contourAlg2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="At the end, having found five contours"><img src="Ch7-Images/contourAlg2.png" class="img-fluid figure-img"></a></p>
+<figcaption>At the end, having found five contours</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-contours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Early and late in the contour-finding process
+</figcaption>
+</figure>
+</div>
+<section id="inputs-to-findcontours" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="inputs-to-findcontours"><span class="header-section-number">1.1</span> Inputs to <code>findContours</code></h2>
+<p>OpenCV implements this algorithm with the <code>findContours</code> function. This function takes in three inputs, and returns two values. The three inputs are:</p>
 <ul>
-<li>Finding contours</li>
-<li>Include corner detection?</li>
-<li>Motion detection</li>
-<li>Camshift… color tracking</li>
+<li>the binary image to be processed</li>
+<li>a code specifying the <strong>mode</strong> of the search, and</li>
+<li>a code specifying how much to approximate or optimize the contour that is found</li>
+</ul>
+<p>There are five different modes for the <code>findContours</code> search, described in the table below. <strong>For our purposes, we will really only need <code>cv2.RETR_LIST</code>.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Mode</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.RETR_EXTERNAL</code></td>
+<td style="text-align: left;">Retrieves only outermost contours, doesn’t keep any contours inside of other contours</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cv2.RETR_LIST</code></td>
+<td style="text-align: left;">Retrieves all contours without any hierarchical information about which contours are inside which others</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.RETR_TREE</code></td>
+<td style="text-align: left;">Retrieves all contours and constructs a tree representation of which contours are inside which others</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cv2.RETR_CCOMP</code></td>
+<td style="text-align: left;">Retrieves outer contours and connects them to holes in side of them but treats contours inside of holes as independent contours (CCOMP stands for “connected components” which is a mathematical term for these structures)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.RETR_FLOODFILL</code></td>
+<td style="text-align: left;">Uses a “flood fill” algorithm to build up regions of similar brightness or intensity, then makes contours of their borders (in essence, a completely different algorithm!)</td>
+</tr>
+</tbody>
+</table>
+<p>The third input specified the “contour approximation mode”. This determines how much the contour is simplified. The two main modes are <code>cv2.CHAIN_APPROX_NONE</code> and <code>cv2.CHAIN_APPROX_SIMPLE</code>, though there are more complex modes that are rarely used. The <code>NONE</code> mode does no optimization or approximation of the contours. Every border pixel is included in the contour array. The <code>SIMPLE</code> mode looks for horizontal, vertical, or pure diagonal segments of the contour, and stores only the end points, rather than every pixel.</p>
+</section>
+<section id="outputs-from-findcontours" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="outputs-from-findcontours"><span class="header-section-number">1.2</span> Outputs from <code>findContours</code></h2>
+<p>As noted above, <code>findContours</code> returns two values. The first is a list of contour arrays, all the contours retrieved by the algorithm. The second return value is a <em>hierarchy</em> object that represents how contours are nested with each other. We won’t typically use this, but it does play a role in tasks like recognizing QR codes!</p>
+</section>
+<section id="an-example-of-findcontours" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="an-example-of-findcontours"><span class="header-section-number">1.3</span> An example of <code>findContours</code></h2>
+<p>The code block below contains a short example of how to prepare an image for <code>findContours</code> and what it returns. In the code, we read in a picture of a peony flower, convert it to grayscale, and then perform a simple threshold to split all pixels brighter than 80 to 255, and all darker to 0.</p>
+<p>We then pass the threshold image to <code>findContours</code>, with typical mode inputs (<code>cv2.RETR_LIST</code> and <code>cv2.CHAIN_APPROX_SIMPLE</code>). We assign the two return values to the two variables <code>contours</code> and <code>hierarchy</code>. We won’t use <code>hierarchy</code> further.</p>
+<p>The <code>contours</code> variable holds a list of contour arrays. Just to get a sense of them, the code prints the number of contours found, <strong>a surprising 68</strong>, and also print the values of the first two contours in the list. Each contour ach contour is an array of (x, y) coordinates, representing the pixels that form the contour.</p>
+<div id="d3ce61dc" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>flowerPic <span class="op">=</span> cv2.imread(<span class="st">"Ch7-Images/peony.jpg"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>grayFlower <span class="op">=</span> cv2.cvtColor(flowerPic, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>thr, threshPic <span class="op">=</span> cv2.threshold(grayFlower, <span class="dv">80</span>, <span class="dv">255</span>, cv2.THRESH_BINARY)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>contours, hierarchy <span class="op">=</span> cv2.findContours(threshPic, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="bu">print</span>(<span class="bu">len</span>(contours))</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="bu">print</span>(<span class="st">"First contour:"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="bu">print</span>(contours[<span class="dv">0</span>])</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="bu">print</span>(<span class="st">"Second contour:"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="bu">print</span>(contours[<span class="dv">1</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>68
+First contour:
+[[[350 427]]
+
+ [[351 426]]
+
+ [[352 427]]
+
+ [[351 428]]]
+Second contour:
+[[[350 424]]
+
+ [[351 423]]
+
+ [[352 424]]
+
+ [[351 425]]]</code></pre>
+</div>
+</div>
+<p>Look closely at the contours that were printed. Each of them is only four pixels long. If you work out the locations of the four pixels, you will see that they form a diamond above, below, to the left, and to the right of <strong>a single pixel.</strong> These are the smallest possible contours, and usually not of interest to us. Many of the 68 contours are marking tiny patches of noise in the image (a demonstration of why we might want to blur or morph an image to get rid of these!).</p>
+</section>
+<section id="drawing-contours" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="drawing-contours"><span class="header-section-number">1.4</span> Drawing contours</h2>
+<p>OpenCV also provides a helper function, <code>drawContours</code> for drawing contours on an image. The code snippet below makes a copy of the original flower picture, and calls <code>drawContours</code> on it to draw all the contours on it. <a href="#fig-allContours1" class="quarto-xref">Figure&nbsp;2</a> shows the result of this code snippet.</p>
+<div id="303d3727" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>fl <span class="op">=</span> flowerPic.copy()</span>
+<span id="cb3-2"><a href="#cb3-2"></a>cv2.drawContours(fl, contours, <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>cv2.imshow(<span class="st">"All Contours"</span>, fl)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We pass at least five inputs to <code>drawContours</code>:</p>
+<ul>
+<li>the image to draw on</li>
+<li>a list of the contours</li>
+<li>an index into the list showing which contour to draw, or -1 if we want all contours drawn</li>
+<li>A color for the contour polygon to be drawn with</li>
+<li>A line thickness, or -1 for a filled in polygon</li>
+</ul>
+<div id="fig-allContours1" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-allContours1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch7-Images/allContours1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;2: All contours drawn in green on the original peony picture"><img src="Ch7-Images/allContours1.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-allContours1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: All contours drawn in green on the original peony picture
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="selecting-contours-by-area" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="selecting-contours-by-area"><span class="header-section-number">1.5</span> Selecting contours by area</h2>
+<p>We often need to reduce our list of contours to those that are of significant size to get rid of the noisy ones. The code block below, an extension of the previous one, introduces one of the many OpenCV functions that operate on contours: <code>cv2.contourArea</code>, which computes how many pixels are enclosed by a contour. We use it to keep only contours that enclose at least 100 pixels.</p>
+<div id="8ea11649" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>bigContours <span class="op">=</span> []</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="cf">for</span> contr <span class="kw">in</span> contours:</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">if</span> cv2.contourArea(contr) <span class="op">&gt;</span> <span class="dv">100</span>:</span>
+<span id="cb4-4"><a href="#cb4-4"></a>        bigContours.append(contr)</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="bu">print</span>(<span class="st">"Number of big contours:"</span>, <span class="bu">len</span>(bigContours))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of big contours: 4</code></pre>
+</div>
+</div>
+<p><a href="#fig-allContours2" class="quarto-xref">Figure&nbsp;3</a> shows the result of drawing just the big contours on a copy of the original image.</p>
+<div id="a6410312" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>fl <span class="op">=</span> flowerPic.copy()</span>
+<span id="cb6-2"><a href="#cb6-2"></a>cv2.drawContours(fl, bigContours, <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>cv2.imshow(<span class="st">"Big Contours"</span>, fl)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>cv2.imwrite(<span class="st">"allContours2.png"</span>, fl)</span>
+<span id="cb6-5"><a href="#cb6-5"></a>cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-allContours2" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-allContours2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch7-Images/allContours2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;3: Only contours with area above 100 drawn in green"><img src="Ch7-Images/allContours2.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-allContours2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Only contours with area above 100 drawn in green
+</figcaption>
+</figure>
+</div>
+<p>We can also view contours in isolation, by drawing them separately on either the original image or onto a blank image of the same shape. The code snippet below shows how to draw one contour at a time onto a black image. Note that the black image is recreated each time so that the contours show up separately from each other. <a href="#fig-yellowContours" class="quarto-xref">Figure&nbsp;4</a> shows each contour’s drawing, including one of the tiny contours that would included if this code ran on the full contour list.</p>
+<div id="15e80ff2" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(bigContours)):</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    bc <span class="op">=</span> bigContours[i]</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    blankIm <span class="op">=</span> np.zeros(flowerPic.shape, flowerPic.dtype)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    cv2.drawContours(blankIm, bigContours, i, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    cv2.imshow(<span class="st">"Contour"</span>, blankIm)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    cv2.waitKey()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice how the call to <code>drawContours</code> is different here. Instead of -1 for the index input, we are passing in an index into the list, so it draws only that contour onto the blank image.</p>
+<div id="fig-yellowContours" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yellowContours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/bigContours0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="First large contour"><img src="Ch7-Images/bigContours0.png" class="img-fluid figure-img"></a></p>
+<figcaption>First large contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/bigContours1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Second large contour"><img src="Ch7-Images/bigContours1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Second large contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/bigContours2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Third large contour"><img src="Ch7-Images/bigContours2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Third large contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/bigContours3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Fourth large contour"><img src="Ch7-Images/bigContours3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Fourth large contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/contours0.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Example tiny contour (first in overall contours list"><img src="Ch7-Images/contours0.png" class="img-fluid figure-img"></a></p>
+<figcaption>Example tiny contour (first in overall <code>contours</code> list</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yellowContours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The four large contours from our example, drawn separately onto a black image, plus the first contour from the original list, drawn on a black image.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="functions-to-manipulate-contours" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="functions-to-manipulate-contours"><span class="header-section-number">1.6</span> Functions to manipulate contours</h2>
+<p>OpenCV provides many functions that can manipulate contours; the <a href="https://docs.opencv.org/4.12.0/d3/dc0/group__imgproc__shape.html#ga17ed9f5d79ae97bd4c7cf18403e1689a">Structural Analysis and Shape Descriptors documentation</a> page lists many more than we will list here. With these functions we can compute simple geometric figures such as polygons, ellipses, or circles that are close in size to the contour, we can simplify the contour, and we can compute useful statistics such as the area enclosed by the contour.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Mode</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.drawContour(...)</code></td>
+<td style="text-align: left;">Draws contours onto an input image with givens color and line</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cv2.contourArea(contr)</code></td>
+<td style="text-align: left;">Returns the number of pixels enclosed by the contour</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.boundingRect(contr)</code></td>
+<td style="text-align: left;">Returns a tuple describing the rectangle that bounds the contour: (upperleftX, upperleftY, width, height) (can draw with <code>cv2.rectangle</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cv2.convexHull(contr)</code></td>
+<td style="text-align: left;">Returns a new contour that is a convex polygon fitted around the original contour</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.fitEllipse(contr)</code></td>
+<td style="text-align: left;">Returns an ellipse (or a rotated rectangle) that minimizes least-squares error for the contour (can draw with <code>cv2.ellipse</code>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cv2.minEnclosingCircle(contr)</code></td>
+<td style="text-align: left;">Returns the center and radius (float values) of the minimum-radius circle that encloses the contour (can draw with <code>cv2.circle</code>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cv2.minEnclosingTriangle(contr)</code></td>
+<td style="text-align: left;">Returns the vertices of the minimum-area triangle that encloses the contour (can draw with calls to <code>cv2.line</code> for each pair of vertices)</td>
+</tr>
+</tbody>
+</table>
+<p>Each code snippet below illustrates how to call each of the five <strong>new</strong> functions from the table above, where <code>bc</code> is one of the contours from <code>bigContours</code> above, and <code>fl</code> is a copy of the original peony picture. <a href="#fig-contShapes" class="quarto-xref">Figure&nbsp;5</a> shows the results of these code snippets on two of the contours.</p>
+<section id="bounding-rectangle" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="bounding-rectangle"><span class="header-section-number">1.6.1</span> Bounding rectangle</h3>
+<p>A <strong>bounding rectangle</strong> is the smallest rectangle that encloses a certain shape, in this case, a contour. Given a contour, the <code>boundingRect</code> function returns a tuple that describes the bounding rectangle, and which can be passed to <code>cv2.rectangle</code> in place of the two tuples we used before.</p>
+<div id="a2db7481" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>rect <span class="op">=</span> cv2.boundingRect(bc)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>cv2.rectangle(fl, rect, (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code first draws just the selected contour on the image, in yellow with one pixel’s thickness. It then computes the bounding rectangle, and draws that on the same image in cyan, with two pixels’ thickness. See the first row of <a href="#fig-contShapes" class="quarto-xref">Figure&nbsp;5</a> below for two examples.</p>
+<p>Besides drawing the shapes so that we can visualize the results, the bounding rectangle might be used to define an ROI that contains a targeted object, or if we were looking for a rectangular object, we could decide if this was it by comparing the area of the contour itself with the area of the rectangle.</p>
+</section>
+<section id="minimum-enclosing-circle" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="minimum-enclosing-circle"><span class="header-section-number">1.6.2</span> Minimum enclosing circle</h3>
+<p>A <strong>minimum enclosing circle</strong> is the smallest circle that completely encloses a shape. Given a contour, the <code>minEnclosingCircle</code> function returns a tuple for the circle. The outer tuple contains an inner tuple for the center point of the circle, and a radius for the circle. From this, we could compute the area of the circle or track its position. If we want to visualize it, unfortunately we need to convert the center point and radius to integer values instead of floating-point ones. Then we can use <code>cv2.circle</code> to view the circle that was found.</p>
+<div id="7f465dbf" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>circle <span class="op">=</span> cv2.minEnclosingCircle(bc)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>cent, rad <span class="op">=</span> circle</span>
+<span id="cb9-4"><a href="#cb9-4"></a>cx <span class="op">=</span> <span class="bu">int</span>(cent[<span class="dv">0</span>])</span>
+<span id="cb9-5"><a href="#cb9-5"></a>cy <span class="op">=</span> <span class="bu">int</span>(cent[<span class="dv">1</span>])</span>
+<span id="cb9-6"><a href="#cb9-6"></a>rad <span class="op">=</span> <span class="bu">int</span>(rad)</span>
+<span id="cb9-7"><a href="#cb9-7"></a>cv2.circle(fl, (cx, cy), rad, (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code first draws just the selected contour on the image, in yellow with one pixel’s thickness. It then computes the enclosing circle, converts its center and radius to integers, and draws a red circle on the image. See the second row below for two examples.</p>
+<p>As for rectangles, we can visualize the circle, but we could also compare its area to the area of the contour to see how round our contour object is, in order to determine whether it is the object we are looking for.</p>
+</section>
+<section id="best-fit-ellipse" class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3" class="anchored" data-anchor-id="best-fit-ellipse"><span class="header-section-number">1.6.3</span> Best-fit ellipse</h3>
+<p>A <strong>best-fit ellipse</strong> is an ellipse that best fits the points in the contour. In this case, it computes the least-squares error between the target ellipse and the contour, and minimizes that. In a sense, it is assuming the contour is supposed to describe an ellipse, and producing the best approximation to that ellipse that it can.</p>
+<div id="53994030" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a>ellipse <span class="op">=</span> cv2.fitEllipse(bc)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>cv2.ellipse(fl,ellipse, (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code first draws just the selected contour on the image, in yellow with one pixel’s thickness. It then computes the best-fit ellipse, and draws a blue ellipse on the image. Notice that we can pass the ellipse tuple from <code>fitEllipse</code> directly to the <code>ellipse</code> function to draw it, bypassing all the typical inputs needed to draw an ellipse. See the third row below for examples.</p>
+</section>
+<section id="convex-hull" class="level3" data-number="1.6.4">
+<h3 data-number="1.6.4" class="anchored" data-anchor-id="convex-hull"><span class="header-section-number">1.6.4</span> Convex hull</h3>
+<p>A <strong>convex hull</strong> is formed using a subset of the points in the contour, but ensuring that they form a convex polygon: a polygon with no indentations in its surface. Imaging stretching a rubber band around the outside of the contour: the points that it touches form the convex hull. Note that the returned value is another contour array: just one that describes a subset of the points from the original.</p>
+<div id="7ab88522" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>hullContour <span class="op">=</span> cv2.convexHull(bc)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>cv2.drawContours(fl, [hullContour], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code first draws just the selected contour on the image, in yellow with one pixel’s thickness. It then computes the convex hull, and draws a green hull contour on the image. The fourth row in <a href="#fig-contShapes" class="quarto-xref">Figure&nbsp;5</a> below shows examples.</p>
+<p>The convex hull is often used to clean up shapes where we have only partially matched the object with our threshold image. It can fill in for missing parts or places where an object is partially hidden by other objects. We can also use it, along with some other functions found on the documentation page, to count and measure the size of the indentations. This can be used to determine, for instance, how many fingers someone is holding up in front of the camera.</p>
+</section>
+<section id="minimum-enclosing-triangle" class="level3" data-number="1.6.5">
+<h3 data-number="1.6.5" class="anchored" data-anchor-id="minimum-enclosing-triangle"><span class="header-section-number">1.6.5</span> Minimum enclosing triangle</h3>
+<p>A <strong>minimum enclosing triangle</strong> is the smallest triangle that completely contains the contour’s points. While less commonly used than the others, this one could be very useful in finding triangular signs, cones, or other triangular shapes. The <code>minEnclosingTriangle</code> function returns the area of the triangle it found, and an array containing three (x, y) coordinates. Because these are all floating-point values, and an interesting structure, it takes a bit of work to extract the values from the returned array, and convert them to integers.</p>
+<div id="3fd25093" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>area, triVerts <span class="op">=</span> cv2.minEnclosingTriangle(bc)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>[x0, y0] <span class="op">=</span> [<span class="bu">int</span>(v) <span class="cf">for</span> v <span class="kw">in</span> triVerts[<span class="dv">0</span>, <span class="dv">0</span>]]</span>
+<span id="cb12-4"><a href="#cb12-4"></a>[x1, y1] <span class="op">=</span> [<span class="bu">int</span>(v) <span class="cf">for</span> v <span class="kw">in</span> triVerts[<span class="dv">1</span>, <span class="dv">0</span>]]</span>
+<span id="cb12-5"><a href="#cb12-5"></a>[x2, y2] <span class="op">=</span> [<span class="bu">int</span>(v) <span class="cf">for</span> v <span class="kw">in</span> triVerts[<span class="dv">2</span>, <span class="dv">0</span>]]</span>
+<span id="cb12-6"><a href="#cb12-6"></a>cv2.line(fl, (x0, y0), (x1, y1), (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
+<span id="cb12-7"><a href="#cb12-7"></a>cv2.line(fl, (x1, y1), (x2, y2), (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>cv2.line(fl, (x2, y2), (x0, y0), (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code first draws just the selected contour on the image, in yellow with one pixel’s thickness. It then computes the three corners of the triangle, and draws a magenta triangle between them, using the <code>cv2.line</code> function. The last row of <a href="#fig-contShapes" class="quarto-xref">Figure&nbsp;5</a> shows the result on the ant and peony contours.</p>
+</section>
+<section id="results-of-drawing-shapes-for-contours" class="level3" data-number="1.6.6">
+<h3 data-number="1.6.6" class="anchored" data-anchor-id="results-of-drawing-shapes-for-contours"><span class="header-section-number">1.6.6</span> Results of drawing shapes for contours</h3>
+<p>The results below were generated using the code snippets above on the ant and peony contours found earlier.</p>
+<div id="fig-contShapes" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-contShapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/rect2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Bounding rectangle for ant contour"><img src="Ch7-Images/rect2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Bounding rectangle for ant contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/rect3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Bounding rectangle for peony contour"><img src="Ch7-Images/rect3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Bounding rectangle for peony contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/circ2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Minimum enclosing circle for ant contour"><img src="Ch7-Images/circ2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Minimum enclosing circle for ant contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/circ3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Minimum enclosing circle for peony contour"><img src="Ch7-Images/circ3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Minimum enclosing circle for peony contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/ellipse2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Best-fit ellipse for ant contour"><img src="Ch7-Images/ellipse2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Best-fit ellipse for ant contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/ellipse3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Best-fit ellipse for peony contour"><img src="Ch7-Images/ellipse3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Best-fit ellipse for peony contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/convhull2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Convex hull for ant contour"><img src="Ch7-Images/convhull2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Convex hull for ant contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/convhull3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Convex hull for peony contour"><img src="Ch7-Images/convhull3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Convex hull for peony contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/tri2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Minimum enclosing triangle for ant contour"><img src="Ch7-Images/tri2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Minimum enclosing triangle for ant contour</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/tri3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Minimum enclosing triangle for peony contour"><img src="Ch7-Images/tri3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Minimum enclosing triangle for peony contour</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-contShapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The four large contours from our example, drawn separately onto a black image, plus the first contour from the original list, drawn on a black image.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="motion-detection-and-background-subtraction" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Motion detection and background subtraction</h1>
+<p>Detecting motion in a video signal is deceptively simple. Making sense of what is moving is much harder, and tracking a moving object is also not trivial. In the first case, we can detect changes from frame to frame in a video signal, and know that whatever is different represents movement in the image. Getting from there to distinguishing between a person moving through a scene, and the movement of trees in the wind, or rippling water, is where things get harder. Separating some movement from the rest and knowing that a particular object is moving takes even more processing.</p>
+<p>But we’ll start with the easy step first. The most simple method for detecting motion is simply to take the difference between two frames of an image. The code fragment below illustrates this. Work through what each line does, and then try it out.</p>
+<div id="c586fd2f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> cv2</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>cam <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a>ret, prevFrame <span class="op">=</span> cam.read()</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    ret, currFrame <span class="op">=</span> cam.read()</span>
+<span id="cb13-8"><a href="#cb13-8"></a>    diff <span class="op">=</span> cv2.absdiff(prevFrame, currFrame)</span>
+<span id="cb13-9"><a href="#cb13-9"></a>    cv2.imshow(<span class="st">"Motion"</span>, diff)</span>
+<span id="cb13-10"><a href="#cb13-10"></a>    x <span class="op">=</span> cv2.waitKey(<span class="dv">20</span>)</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    c <span class="op">=</span> <span class="bu">chr</span>(x <span class="op">&amp;</span> <span class="bn">0xFF</span>)</span>
+<span id="cb13-12"><a href="#cb13-12"></a>    <span class="cf">if</span> c <span class="op">==</span> <span class="st">"q"</span>:</span>
+<span id="cb13-13"><a href="#cb13-13"></a>        <span class="cf">break</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>    prevFrame <span class="op">=</span> currFrame</span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a>cam.release()</span>
+<span id="cb13-17"><a href="#cb13-17"></a>cv2.destroyAllWindows()   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="background-subtraction" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Background subtraction</h1>
+<p>More elaborate methods of separating foreground from background objects exist. The best ones rely on machine learning, which we’ll talk about later on. But there are several algorithmic approaches.</p>
+<p>They all have a similar form:</p>
+<ul>
+<li>Given a sequence of frames from a video, construct a “model” of the background of the space (based on which pixels do not change much in brightness or color).</li>
+<li>For a new frame of the video, compute the difference between the background frame and the new frame.</li>
+<li>Build a mask image of the pixels that are significantly different from the background: these mark the location of the foreground object</li>
+<li>Apply the mask to the new frame and display the results</li>
 </ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -598,6 +1149,38 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
