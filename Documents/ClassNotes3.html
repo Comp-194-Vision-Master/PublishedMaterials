@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-24">
+<meta name="dcterms.date" content="2025-10-27">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 24, 2025</p>
+        <p class="date">October 27, 2025</p>
       </div>
     </div>
     
@@ -225,6 +225,17 @@ window.Quarto = {
   <li><a href="#friday-october-24" id="toc-friday-october-24" class="nav-link" data-scroll-target="#friday-october-24">Friday, October 24</a>
   <ul class="collapse">
   <li><a href="#todays-topis-1" id="toc-todays-topis-1" class="nav-link" data-scroll-target="#todays-topis-1">Today’s Topis</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#week-9" id="toc-week-9" class="nav-link" data-scroll-target="#week-9">Week 9</a>
+  <ul class="collapse">
+  <li><a href="#monday-october-27" id="toc-monday-october-27" class="nav-link" data-scroll-target="#monday-october-27">Monday, October 27</a>
+  <ul class="collapse">
+  <li><a href="#announcements-2" id="toc-announcements-2" class="nav-link" data-scroll-target="#announcements-2">Announcements</a></li>
+  <li><a href="#todays-topics-1" id="toc-todays-topics-1" class="nav-link" data-scroll-target="#todays-topics-1">Today’s topics</a></li>
+  <li><a href="#short-essays-overview" id="toc-short-essays-overview" class="nav-link" data-scroll-target="#short-essays-overview">Short essays overview</a></li>
+  <li><a href="#extended-essay-overview" id="toc-extended-essay-overview" class="nav-link" data-scroll-target="#extended-essay-overview">Extended essay overview</a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project overview</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
@@ -298,7 +309,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="84994982" class="cell" data-execution_count="1">
+<div id="e89700c3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -377,7 +388,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="6db83d45" class="cell" data-execution_count="2">
+<div id="d1b53fd6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -396,7 +407,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="1dee4053" class="cell" data-execution_count="3">
+<div id="9d76d9fc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -493,6 +504,66 @@ c &amp; d &amp; t_y \\
 </ul></li>
 </ul>
 <p>See Readings for details!</p>
+</section>
+</section>
+</section>
+<section id="week-9" class="level1">
+<h1>Week 9</h1>
+<section id="monday-october-27" class="level2">
+<h2 class="anchored" data-anchor-id="monday-october-27">Monday, October 27</h2>
+<section id="announcements-2" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-2">Announcements</h3>
+<ul>
+<li>Homework 3: start on it soon! Due November 7
+<ul>
+<li>Focused on computer vision applications, particularly thresholds, masks, geometric transformations, filters, etc.</li>
+</ul></li>
+<li>Be prepared to discuss Ethics and Sci-Fi 8 <strong>Friday</strong></li>
+<li>New office hours: MW 4:30-5:30, TR 3:00-4:30, plus some “by appointment” hours earlier in the day (see calendar)</li>
+</ul>
+</section>
+<section id="todays-topics-1" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-1">Today’s topics</h3>
+<ul>
+<li>Upcoming essays
+<ul>
+<li>2 short essays, started in class</li>
+<li>Extended essay, requires some library research, connected (loosely) to team project</li>
+</ul></li>
+<li>Starting to think about the project
+<ul>
+<li>Team project: groups of 2 or 3</li>
+<li>Must involve OpenCV, Mediapipe, Tensorflow</li>
+<li>Programming project with milestones</li>
+</ul></li>
+</ul>
+</section>
+<section id="short-essays-overview" class="level3">
+<h3 class="anchored" data-anchor-id="short-essays-overview">Short essays overview</h3>
+<p>See <a href="https://docs.google.com/document/d/1dQWdiLw6L5iBpqdcVGqBQaT96_TcCOn0n2voi-QtBFU/edit?usp=sharing">Short Essay Guide</a> and <a href="https://docs.google.com/document/d/1KFVAqArIK0oR3N0hIn3JDAscaU1DuI08Y4NCsPb-TGY/edit?usp=sharing">Short Essay Rubric</a></p>
+<ul>
+<li>General subject announced ahead of time</li>
+<li>Bring any paper notes you would find helpful</li>
+<li>Specific prompt given at the start of class: 40 minutes to think, review notes, and outline/write a draft of the essay</li>
+<li>Last 20 minutes of class, meet with a peer and exchange outlines/drafts and give feedback about them</li>
+<li>Feedback from me after that class, about 1 week to finish the paper</li>
+</ul>
+<p><strong>Short essay 1 will include prompts that focus on themes around privacy: personal and data privacy, surveillance by government, society, or other individuals, expectations of privacy or anonymity in a modern, “connected” society</strong></p>
+</section>
+<section id="extended-essay-overview" class="level3">
+<h3 class="anchored" data-anchor-id="extended-essay-overview">Extended essay overview</h3>
+<p>See <a href="https://docs.google.com/document/d/1ZvgJNCfRoI6yPPTkx0iEb1B2rKRCD1TZKOHIdrfmkTw/edit?usp=sharing">Extended Essay Guide</a> and <a href="https://docs.google.com/document/d/1jOCFlSMTMmmHkhW8ZYaiLZQF8vPri4K_bhzt27Jxz4o/edit?usp=sharing">Extended Essay Rubric</a></p>
+<p>Extended essay will be about AI or personal ethics, or social issues caused by the use of AI, as these connect to computer vision, particularly your team project topic.</p>
+<p><strong>Activity: read through rubric, read through a paper assigned for this week, and look at how they connect to each other</strong></p>
+</section>
+<section id="project-overview" class="level3">
+<h3 class="anchored" data-anchor-id="project-overview">Project overview</h3>
+<ul>
+<li>Team project (2-3 is the norm, see me if you have reasons for exceptions)</li>
+<li>Projects must use OpenCV, Mediapipe, or Tensorflow</li>
+<li><strong>WIDE</strong> range of project topics, suitable to a wide range of programming experience</li>
+</ul>
+<p><strong>Activity: Read through the project overview document, and then add your name to projects that sound interesting to you</strong></p>
 <hr>
 </section>
 </section>
