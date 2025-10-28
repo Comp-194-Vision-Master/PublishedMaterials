@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-16">
+<meta name="dcterms.date" content="2025-10-28">
 
 <title>ICA: Finding Contours – Vision Readings</title>
 <style>
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 16, 2025</p>
+        <p class="date">October 28, 2025</p>
       </div>
     </div>
     
@@ -144,6 +144,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#using-findcontours-on-threshold-images" id="toc-using-findcontours-on-threshold-images" class="nav-link" data-scroll-target="#using-findcontours-on-threshold-images">Using <code>findContours</code> on threshold images</a></li>
+  <li><a href="#isolating-the-ball-contour" id="toc-isolating-the-ball-contour" class="nav-link" data-scroll-target="#isolating-the-ball-contour">Isolating the ball contour</a></li>
+  <li><a href="#trying-examples-on-your-own" id="toc-trying-examples-on-your-own" class="nav-link" data-scroll-target="#trying-examples-on-your-own">Trying examples on your own</a></li>
+  <li><a href="#optional-challenge" id="toc-optional-challenge" class="nav-link" data-scroll-target="#optional-challenge">Optional Challenge</a></li>
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
@@ -157,8 +161,35 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>???</p>
+<p>In this activity you will practice with using the <code>findContours</code> function and the various other functions that operate on contours. A contour, remember, is a closed polygon that lies along an edge in an image: a series of pixel coordinates that outline an edge in an image.</p>
 <p>The Github repository for this assignment will contain a starter code file, <code>activ14.py</code>. Put your code in this file, and create others, as directed below and according to the <code>TODO</code> comments in the file.</p>
+</section>
+<section id="using-findcontours-on-threshold-images" class="level1">
+<h1>Using <code>findContours</code> on threshold images</h1>
+<p>In an earlier activity, you tried the <code>threshold</code> function and the <code>inRange</code> function to isolate coins and balls in still images (and in video as well).</p>
+<p>Examine the program called <code>findPink</code> in <code>activ14.py</code>. This program is designed to find the bright pink lacrosse ball from my gray bag of computer vision supplies. The program relies on two tuples, <code>pinkLow</code> and <code>pinkHigh</code>, which define the color range for the pink ball.</p>
+<p>Try this program, borrowing my pink ball, or choosing an object of your own.</p>
+<p><strong>To determine color ranges for yourself:</strong></p>
+<ul>
+<li>Take a picture of the object with the webcam on your computer (Photobooth for Mac, not sure for Windows)</li>
+<li>Use a color picker tool to read the RGB values from various spots on the ball (Digital Color Meter on Mac)</li>
+<li>Use <a href="https://www.rapidtables.com/convert/color/rgb-to-hsv.html">an online converter</a> to translate those into HSV values</li>
+<li>To get OpenCV’s values, divide the Hue value by 2, and scale the other two to the range from 0 to 255, instead of 0 to 100</li>
+</ul>
+</section>
+<section id="isolating-the-ball-contour" class="level1">
+<h1>Isolating the ball contour</h1>
+<p>Using a combination of the contour’s area and its shape, pick one contour that seems most likely to be the ball. You can eliminate any contours that have very small area, and then compare the area of each of the remaining contours to the area of the minimum enclosing circle. Or you could see which contour has the most points that lie on the boundary of the minimum enclosing circle (a bit more math to doing that).</p>
+<p>Do these calculations in the <code>thresholdPink</code> function, and only draw the most likely ball contour on the original image.</p>
+</section>
+<section id="trying-examples-on-your-own" class="level1">
+<h1>Trying examples on your own</h1>
+<p>Go back to the programs I provided, or the ones you wrote, that used thresholding to isolate balls or coins in images. Try applying <code>findContours</code> to the best results you got from thresholding (possibly incorporating morphing or blurring). Can you determine where the balls or coins are in the images, using size or shape?</p>
+</section>
+<section id="optional-challenge" class="level1">
+<h1>Optional Challenge</h1>
+<p>Try using thresholding and <code>findContours</code> to find an outline around your hand held up in front of the camera. You might need an external camera for this, because you might need to use as simple and blank a background as possible (like the whiteboard, or a blank wall).</p>
+<p>From the size or shape of the contour, can you determine whether your hand is in a fist or a flat palm, or holding up one or two fingers?</p>
 </section>
 <section id="what-to-hand-in" class="level1">
 <h1>What to hand in</h1>
