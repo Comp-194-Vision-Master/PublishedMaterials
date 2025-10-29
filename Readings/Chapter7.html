@@ -309,7 +309,7 @@ Figure&nbsp;1: Early and late in the contour-finding process
 <p>The code block below contains a short example of how to prepare an image for <code>findContours</code> and what it returns. In the code, we read in a picture of a peony flower, convert it to grayscale, and then perform a simple threshold to split all pixels brighter than 80 to 255, and all darker to 0.</p>
 <p>We then pass the threshold image to <code>findContours</code>, with typical mode inputs (<code>cv2.RETR_LIST</code> and <code>cv2.CHAIN_APPROX_SIMPLE</code>). We assign the two return values to the two variables <code>contours</code> and <code>hierarchy</code>. We won’t use <code>hierarchy</code> further.</p>
 <p>The <code>contours</code> variable holds a list of contour arrays. Just to get a sense of them, the code prints the number of contours found, <strong>a surprising 68</strong>, and also print the values of the first two contours in the list. Each contour ach contour is an array of (x, y) coordinates, representing the pixels that form the contour.</p>
-<div id="d2af3148" class="cell" data-execution_count="2">
+<div id="fec0c9a0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>flowerPic <span class="op">=</span> cv2.imread(<span class="st">"Ch7-Images/peony.jpg"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>grayFlower <span class="op">=</span> cv2.cvtColor(flowerPic, cv2.COLOR_BGR2GRAY)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>thr, threshPic <span class="op">=</span> cv2.threshold(grayFlower, <span class="dv">80</span>, <span class="dv">255</span>, cv2.THRESH_BINARY)</span>
@@ -346,7 +346,7 @@ Second contour:
 <section id="drawing-contours" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="drawing-contours"><span class="header-section-number">1.4</span> Drawing contours</h2>
 <p>OpenCV also provides a helper function, <code>drawContours</code> for drawing contours on an image. The code snippet below makes a copy of the original flower picture, and calls <code>drawContours</code> on it to draw all the contours on it. <a href="#fig-allContours1" class="quarto-xref">Figure&nbsp;2</a> shows the result of this code snippet.</p>
-<div id="d89512b0" class="cell" data-execution_count="3">
+<div id="6ba1ac1f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>fl <span class="op">=</span> flowerPic.copy()</span>
 <span id="cb3-2"><a href="#cb3-2"></a>cv2.drawContours(fl, contours, <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">1</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a>cv2.imshow(<span class="st">"All Contours"</span>, fl)</span>
@@ -374,7 +374,7 @@ Figure&nbsp;2: All contours drawn in green on the original peony picture
 <section id="selecting-contours-by-area" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="selecting-contours-by-area"><span class="header-section-number">1.5</span> Selecting contours by area</h2>
 <p>We often need to reduce our list of contours to those that are of significant size to get rid of the noisy ones. The code block below, an extension of the previous one, introduces one of the many OpenCV functions that operate on contours: <code>cv2.contourArea</code>, which computes how many pixels are enclosed by a contour. We use it to keep only contours that enclose at least 100 pixels.</p>
-<div id="12282647" class="cell" data-execution_count="4">
+<div id="55278e73" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>bigContours <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="cf">for</span> contr <span class="kw">in</span> contours:</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">if</span> cv2.contourArea(contr) <span class="op">&gt;</span> <span class="dv">100</span>:</span>
@@ -386,7 +386,7 @@ Figure&nbsp;2: All contours drawn in green on the original peony picture
 </div>
 </div>
 <p><a href="#fig-allContours2" class="quarto-xref">Figure&nbsp;3</a> shows the result of drawing just the big contours on a copy of the original image.</p>
-<div id="4978d4a3" class="cell" data-execution_count="5">
+<div id="125e5f7b" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>fl <span class="op">=</span> flowerPic.copy()</span>
 <span id="cb6-2"><a href="#cb6-2"></a>cv2.drawContours(fl, bigContours, <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">1</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a>cv2.imshow(<span class="st">"Big Contours"</span>, fl)</span>
@@ -404,7 +404,7 @@ Figure&nbsp;3: Only contours with area above 100 drawn in green
 </figure>
 </div>
 <p>We can also view contours in isolation, by drawing them separately on either the original image or onto a blank image of the same shape. The code snippet below shows how to draw one contour at a time onto a black image. Note that the black image is recreated each time so that the contours show up separately from each other. <a href="#fig-yellowContours" class="quarto-xref">Figure&nbsp;4</a> shows each contour’s drawing, including one of the tiny contours that would included if this code ran on the full contour list.</p>
-<div id="19f14476" class="cell" data-execution_count="6">
+<div id="36d0779b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(bigContours)):</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    bc <span class="op">=</span> bigContours[i]</span>
 <span id="cb7-3"><a href="#cb7-3"></a>    blankIm <span class="op">=</span> np.zeros(flowerPic.shape, flowerPic.dtype)</span>
@@ -518,7 +518,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="bounding-rectangle" class="level3" data-number="1.6.1">
 <h3 data-number="1.6.1" class="anchored" data-anchor-id="bounding-rectangle"><span class="header-section-number">1.6.1</span> Bounding rectangle</h3>
 <p>A <strong>bounding rectangle</strong> is the smallest rectangle that encloses a certain shape, in this case, a contour. Given a contour, the <code>boundingRect</code> function returns a tuple that describes the bounding rectangle, and which can be passed to <code>cv2.rectangle</code> in place of the two tuples we used before.</p>
-<div id="b638eed4" class="cell" data-execution_count="7">
+<div id="95c2546d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>rect <span class="op">=</span> cv2.boundingRect(bc)</span>
 <span id="cb8-3"><a href="#cb8-3"></a>cv2.rectangle(fl, rect, (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -529,7 +529,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="minimum-enclosing-circle" class="level3" data-number="1.6.2">
 <h3 data-number="1.6.2" class="anchored" data-anchor-id="minimum-enclosing-circle"><span class="header-section-number">1.6.2</span> Minimum enclosing circle</h3>
 <p>A <strong>minimum enclosing circle</strong> is the smallest circle that completely encloses a shape. Given a contour, the <code>minEnclosingCircle</code> function returns a tuple for the circle. The outer tuple contains an inner tuple for the center point of the circle, and a radius for the circle. From this, we could compute the area of the circle or track its position. If we want to visualize it, unfortunately we need to convert the center point and radius to integer values instead of floating-point ones. Then we can use <code>cv2.circle</code> to view the circle that was found.</p>
-<div id="c774c5ce" class="cell" data-execution_count="8">
+<div id="49fc5cb1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a>circle <span class="op">=</span> cv2.minEnclosingCircle(bc)</span>
 <span id="cb9-3"><a href="#cb9-3"></a>cent, rad <span class="op">=</span> circle</span>
@@ -544,7 +544,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="best-fit-ellipse" class="level3" data-number="1.6.3">
 <h3 data-number="1.6.3" class="anchored" data-anchor-id="best-fit-ellipse"><span class="header-section-number">1.6.3</span> Best-fit ellipse</h3>
 <p>A <strong>best-fit ellipse</strong> is an ellipse that best fits the points in the contour. In this case, it computes the least-squares error between the target ellipse and the contour, and minimizes that. In a sense, it is assuming the contour is supposed to describe an ellipse, and producing the best approximation to that ellipse that it can.</p>
-<div id="4852b6e4" class="cell" data-execution_count="9">
+<div id="7242d572" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb10-2"><a href="#cb10-2"></a>ellipse <span class="op">=</span> cv2.fitEllipse(bc)</span>
 <span id="cb10-3"><a href="#cb10-3"></a>cv2.ellipse(fl,ellipse, (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -554,7 +554,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="convex-hull" class="level3" data-number="1.6.4">
 <h3 data-number="1.6.4" class="anchored" data-anchor-id="convex-hull"><span class="header-section-number">1.6.4</span> Convex hull</h3>
 <p>A <strong>convex hull</strong> is formed using a subset of the points in the contour, but ensuring that they form a convex polygon: a polygon with no indentations in its surface. Imaging stretching a rubber band around the outside of the contour: the points that it touches form the convex hull. Note that the returned value is another contour array: just one that describes a subset of the points from the original.</p>
-<div id="041e808f" class="cell" data-execution_count="10">
+<div id="bfae95a7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a>hullContour <span class="op">=</span> cv2.convexHull(bc)</span>
 <span id="cb11-3"><a href="#cb11-3"></a>cv2.drawContours(fl, [hullContour], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -565,7 +565,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="minimum-enclosing-triangle" class="level3" data-number="1.6.5">
 <h3 data-number="1.6.5" class="anchored" data-anchor-id="minimum-enclosing-triangle"><span class="header-section-number">1.6.5</span> Minimum enclosing triangle</h3>
 <p>A <strong>minimum enclosing triangle</strong> is the smallest triangle that completely contains the contour’s points. While less commonly used than the others, this one could be very useful in finding triangular signs, cones, or other triangular shapes. The <code>minEnclosingTriangle</code> function returns the area of the triangle it found, and an array containing three (x, y) coordinates. Because these are all floating-point values, and an interesting structure, it takes a bit of work to extract the values from the returned array, and convert them to integers.</p>
-<div id="31212751" class="cell" data-execution_count="11">
+<div id="78e24e33" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb12-2"><a href="#cb12-2"></a>area, triVerts <span class="op">=</span> cv2.minEnclosingTriangle(bc)</span>
 <span id="cb12-3"><a href="#cb12-3"></a>[x0, y0] <span class="op">=</span> [<span class="bu">int</span>(v) <span class="cf">for</span> v <span class="kw">in</span> triVerts[<span class="dv">0</span>, <span class="dv">0</span>]]</span>
@@ -686,7 +686,7 @@ Figure&nbsp;5: The four large contours from our example, drawn separately onto a
 <h1 data-number="2"><span class="header-section-number">2</span> Motion detection and background subtraction</h1>
 <p>Detecting motion in a video signal is deceptively simple. Making sense of what is moving is much harder, and tracking a moving object is also not trivial. In the first case, we can detect changes from frame to frame in a video signal, and know that whatever is different represents movement in the image. Getting from there to distinguishing between a person moving through a scene, and the movement of trees in the wind, or rippling water, is where things get harder. Separating some movement from the rest and knowing that a particular object is moving takes even more processing.</p>
 <p>But we’ll start with the easy step first. The most simple method for detecting motion is simply to take the difference between two frames of an image. The code fragment below illustrates this. Work through what each line does, and then try it out.</p>
-<div id="660f3628" class="cell" data-execution_count="12">
+<div id="df8be938" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> cv2</span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>cam <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
@@ -797,7 +797,7 @@ Figure&nbsp;6: Examples of motion detection through difference of frames, waving
 <h2 data-number="3.1" class="anchored" data-anchor-id="a-simple-attempt-at-background-subtraction"><span class="header-section-number">3.1</span> A simple attempt at background subtraction</h2>
 <p>The simplest approach is to take a picture without the foreground object in it, and just use that for the model. This has only mediocre results.</p>
 <p>The code sample below uses this method to produce a masked version of the original video feed with the background set to black. It first loops on the video feed, until the user hits q. At that point, the last frame read is set up as the background picture. A more elaborate implementation would perhaps read multiple frames and average them together to form the background image.</p>
-<div id="fa2d155b" class="cell" data-execution_count="13">
+<div id="2168e18b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
 <span id="cb14-3"><a href="#cb14-3"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
@@ -817,7 +817,7 @@ Figure&nbsp;6: Examples of motion detection through difference of frames, waving
 <span id="cb14-17"><a href="#cb14-17"></a>backgroundPic <span class="op">=</span> frame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After setting up the background image, the program continues in the next code sample. For each frame, it computes the difference from the background picture, and then combines the color channels together. In this case we average them together, instead of adding them as we did for motion detection above. Finally, we use a threshold to turn the difference image into a black-and-white mask, and we apply it to the frame to get just the foreground. <a href="#fig-backsub1" class="quarto-xref">Figure&nbsp;7</a> shows the background image, the foreground image, and the result of our attempt at background subtraction.</p>
-<div id="f436f051" class="cell" data-execution_count="14">
+<div id="eb368a9c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb15-2"><a href="#cb15-2"></a>    gotIm, frame <span class="op">=</span> capture.read()</span>
 <span id="cb15-3"><a href="#cb15-3"></a>    <span class="cf">if</span> <span class="kw">not</span> gotIm:</span>
@@ -876,7 +876,7 @@ Figure&nbsp;7: The background picture, foreground (unprocessed frame), and the r
 <h2 data-number="3.2" class="anchored" data-anchor-id="the-mog-mixture-of-gaussians-approach-to-background-subtraction"><span class="header-section-number">3.2</span> The MOG (Mixture of Gaussians) approach to background subtraction</h2>
 <p>OpenCV provides an implementation of an algorithm commonly calls “mixture of gaussians.” With this, we build a more complex model of the background of an image. By looking at a selection of recent video frames, the model starts with a range of values for each pixel in the background. They then characterize the range for each pixel as the combination, the <strong>mixture</strong>, of several gaussian functions. These allow the model to capture complex variations (like sudden brightening in one area caused by wind shifting tree branches, for example).</p>
 <p>The code sample below shows how to set up and use the MOG-based background subtraction method. <a href="#fig-backsub2" class="quarto-xref">Figure&nbsp;8</a> shows the original frame and the masked result for this method.</p>
-<div id="d2f311a7" class="cell" data-execution_count="15">
+<div id="f5a6047b" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>backSub1 <span class="op">=</span> cv2.createBackgroundSubtractorMOG2()</span>
 <span id="cb16-2"><a href="#cb16-2"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
@@ -963,7 +963,7 @@ Figure&nbsp;8: The original frame, the mask created from it by the MOG algorithm
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-knn-k-nearest-neighbor-approach-to-background-subtraction"><span class="header-section-number">3.3</span> The KNN (K-nearest neighbor) approach to background subtraction</h2>
 <p>The KNN backgroung subtraction algorithm defines a sphere for each pixel. The dimensions of the sphere are the BGR values (color channels). The size of the sphere is chosen dynamically so that it encloses K of the previous frames’ colors at that pixel. You can change K to tune this algorithm. For a new frame, if the color at a pixel falls within the sphere defined for that location, then it is categorized as a background pixel, and if it falls outside of it, then it is categorized as a foreground pixel. Much like the previous algorithm, what count as background is updated dynamically to accound for lighting changes that happen gradually over time.</p>
 <p>The code sample below shows how to set up and use the KNN-based background subtraction method. <a href="#fig-backsub3" class="quarto-xref">Figure&nbsp;9</a> shows the original frame and the masked result for this method.</p>
-<div id="7a04dd58" class="cell" data-execution_count="16">
+<div id="28abdd4d" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>backSub2 <span class="op">=</span> cv2.createBackgroundSubtractorKNN()</span>
 <span id="cb17-2"><a href="#cb17-2"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
@@ -1089,7 +1089,7 @@ Figure&nbsp;9: The original frame, the mask created from it by the MOG algorithm
 <div id="fig-orangeROI" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-orangeROI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="Ch7-Images/OrangeBG1Near.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="Figure&nbsp;10: Picture of orange ball with ROI for histogram marked by blue rectangle"><img src="Ch7-Images/OrangeBG1Near.jpg" class="img-fluid figure-img"></a>
+<a href="Ch7-Images/OrangeBG1Near.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="Figure&nbsp;10: Picture of orange ball with ROI for histogram marked by blue rectangle"><img src="Ch7-Images/OrangeBG1Near.jpg" class="img-fluid figure-img" style="width:14cm"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orangeROI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10: Picture of orange ball with ROI for histogram marked by blue rectangle
@@ -1109,7 +1109,7 @@ Figure&nbsp;10: Picture of orange ball with ROI for histogram marked by blue rec
 <div id="fig-orangeHist" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-orangeHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="Ch7-Images/OrangHist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="Figure&nbsp;11: Histogram for orange ball colors selected earlier"><img src="Ch7-Images/OrangHist.png" class="img-fluid figure-img"></a>
+<a href="Ch7-Images/OrangHist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="Figure&nbsp;11: Histogram for orange ball colors selected earlier"><img src="Ch7-Images/OrangHist.png" class="img-fluid figure-img" style="width:14cm"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orangeHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;11: Histogram for orange ball colors selected earlier
@@ -1248,7 +1248,7 @@ Figure&nbsp;13: Various back projections with different ball positions and light
 <p>One problem with the MeanShift algorithm is that the size of the track window is always the same. Objects could be closer to the camera, or further from it, and we’d like a track window that fits the size of the object, rather than always being a fixed size. The CamShift algorithm does exactly this. At each step in CamShift, the size of the track window is modified, based on how densely it is filled with matching pixels. If most of the track window matches the histogram, then CamShift increases the size of the window by 10% (or any percent you like). If relatively few pixels in the track window match the histogram, then it reduces the size of the window. This allows it to track objects that move closer or further from the camera.</p>
 <p>In addition to the track window, which is its main mechanism for tracking the colorful object, CamShift also computes a <strong>rotated rectangle</strong>, which can be visualized as an ellipse, that matches the tilt of the object, if any. This is, somewhat confusingly, called the “track box”. We often visualize the track box as an ellipse, rather than the tracking window, because it often fits closer to the object we are tracking.</p>
 <p>The code sample below implements a very simple version of CamShift, using a fixed reference image, the blue one shown above. It uses several helper functions to implement parts of the process. When calling the main function here, <code>camshift2</code> we must pass it a predefined reference image.</p>
-<div id="b0b53186" class="cell" data-execution_count="17">
+<div id="9da20ee8" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">def</span> camshift2(refImage1):</span>
 <span id="cb19-2"><a href="#cb19-2"></a>    <span class="co">"""Takes in a reference image and sets up the Camshift process for it. It makes a histograms, and sets</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="co">    up two a track window. It then runs Camshift on the images from a videe feed, using the histogram and</span></span>
