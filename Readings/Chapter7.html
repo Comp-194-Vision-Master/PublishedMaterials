@@ -208,6 +208,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#color-tracking-with-camshift" id="toc-color-tracking-with-camshift" class="nav-link" data-scroll-target="#color-tracking-with-camshift"><span class="header-section-number">4</span> Color-tracking with CAMShift</a>
   <ul class="collapse">
   <li><a href="#histograms-and-backprojection" id="toc-histograms-and-backprojection" class="nav-link" data-scroll-target="#histograms-and-backprojection"><span class="header-section-number">4.1</span> Histograms and Backprojection</a></li>
+  <li><a href="#the-meanshift-algorithm" id="toc-the-meanshift-algorithm" class="nav-link" data-scroll-target="#the-meanshift-algorithm"><span class="header-section-number">4.2</span> The MeanShift algorithm</a></li>
+  <li><a href="#the-camshift-algorithm" id="toc-the-camshift-algorithm" class="nav-link" data-scroll-target="#the-camshift-algorithm"><span class="header-section-number">4.3</span> The CamShift algorithm</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -307,7 +309,7 @@ Figure&nbsp;1: Early and late in the contour-finding process
 <p>The code block below contains a short example of how to prepare an image for <code>findContours</code> and what it returns. In the code, we read in a picture of a peony flower, convert it to grayscale, and then perform a simple threshold to split all pixels brighter than 80 to 255, and all darker to 0.</p>
 <p>We then pass the threshold image to <code>findContours</code>, with typical mode inputs (<code>cv2.RETR_LIST</code> and <code>cv2.CHAIN_APPROX_SIMPLE</code>). We assign the two return values to the two variables <code>contours</code> and <code>hierarchy</code>. We won’t use <code>hierarchy</code> further.</p>
 <p>The <code>contours</code> variable holds a list of contour arrays. Just to get a sense of them, the code prints the number of contours found, <strong>a surprising 68</strong>, and also print the values of the first two contours in the list. Each contour ach contour is an array of (x, y) coordinates, representing the pixels that form the contour.</p>
-<div id="f0850dbc" class="cell" data-execution_count="2">
+<div id="d2af3148" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>flowerPic <span class="op">=</span> cv2.imread(<span class="st">"Ch7-Images/peony.jpg"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>grayFlower <span class="op">=</span> cv2.cvtColor(flowerPic, cv2.COLOR_BGR2GRAY)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>thr, threshPic <span class="op">=</span> cv2.threshold(grayFlower, <span class="dv">80</span>, <span class="dv">255</span>, cv2.THRESH_BINARY)</span>
@@ -344,7 +346,7 @@ Second contour:
 <section id="drawing-contours" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="drawing-contours"><span class="header-section-number">1.4</span> Drawing contours</h2>
 <p>OpenCV also provides a helper function, <code>drawContours</code> for drawing contours on an image. The code snippet below makes a copy of the original flower picture, and calls <code>drawContours</code> on it to draw all the contours on it. <a href="#fig-allContours1" class="quarto-xref">Figure&nbsp;2</a> shows the result of this code snippet.</p>
-<div id="8e657e9f" class="cell" data-execution_count="3">
+<div id="d89512b0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>fl <span class="op">=</span> flowerPic.copy()</span>
 <span id="cb3-2"><a href="#cb3-2"></a>cv2.drawContours(fl, contours, <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">1</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a>cv2.imshow(<span class="st">"All Contours"</span>, fl)</span>
@@ -372,7 +374,7 @@ Figure&nbsp;2: All contours drawn in green on the original peony picture
 <section id="selecting-contours-by-area" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="selecting-contours-by-area"><span class="header-section-number">1.5</span> Selecting contours by area</h2>
 <p>We often need to reduce our list of contours to those that are of significant size to get rid of the noisy ones. The code block below, an extension of the previous one, introduces one of the many OpenCV functions that operate on contours: <code>cv2.contourArea</code>, which computes how many pixels are enclosed by a contour. We use it to keep only contours that enclose at least 100 pixels.</p>
-<div id="e1d52878" class="cell" data-execution_count="4">
+<div id="12282647" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>bigContours <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="cf">for</span> contr <span class="kw">in</span> contours:</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">if</span> cv2.contourArea(contr) <span class="op">&gt;</span> <span class="dv">100</span>:</span>
@@ -384,7 +386,7 @@ Figure&nbsp;2: All contours drawn in green on the original peony picture
 </div>
 </div>
 <p><a href="#fig-allContours2" class="quarto-xref">Figure&nbsp;3</a> shows the result of drawing just the big contours on a copy of the original image.</p>
-<div id="5fb624ac" class="cell" data-execution_count="5">
+<div id="4978d4a3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>fl <span class="op">=</span> flowerPic.copy()</span>
 <span id="cb6-2"><a href="#cb6-2"></a>cv2.drawContours(fl, bigContours, <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">1</span>)</span>
 <span id="cb6-3"><a href="#cb6-3"></a>cv2.imshow(<span class="st">"Big Contours"</span>, fl)</span>
@@ -402,7 +404,7 @@ Figure&nbsp;3: Only contours with area above 100 drawn in green
 </figure>
 </div>
 <p>We can also view contours in isolation, by drawing them separately on either the original image or onto a blank image of the same shape. The code snippet below shows how to draw one contour at a time onto a black image. Note that the black image is recreated each time so that the contours show up separately from each other. <a href="#fig-yellowContours" class="quarto-xref">Figure&nbsp;4</a> shows each contour’s drawing, including one of the tiny contours that would included if this code ran on the full contour list.</p>
-<div id="3262166e" class="cell" data-execution_count="6">
+<div id="19f14476" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(bigContours)):</span>
 <span id="cb7-2"><a href="#cb7-2"></a>    bc <span class="op">=</span> bigContours[i]</span>
 <span id="cb7-3"><a href="#cb7-3"></a>    blankIm <span class="op">=</span> np.zeros(flowerPic.shape, flowerPic.dtype)</span>
@@ -516,7 +518,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="bounding-rectangle" class="level3" data-number="1.6.1">
 <h3 data-number="1.6.1" class="anchored" data-anchor-id="bounding-rectangle"><span class="header-section-number">1.6.1</span> Bounding rectangle</h3>
 <p>A <strong>bounding rectangle</strong> is the smallest rectangle that encloses a certain shape, in this case, a contour. Given a contour, the <code>boundingRect</code> function returns a tuple that describes the bounding rectangle, and which can be passed to <code>cv2.rectangle</code> in place of the two tuples we used before.</p>
-<div id="f9b278f7" class="cell" data-execution_count="7">
+<div id="b638eed4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a>rect <span class="op">=</span> cv2.boundingRect(bc)</span>
 <span id="cb8-3"><a href="#cb8-3"></a>cv2.rectangle(fl, rect, (<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -527,7 +529,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="minimum-enclosing-circle" class="level3" data-number="1.6.2">
 <h3 data-number="1.6.2" class="anchored" data-anchor-id="minimum-enclosing-circle"><span class="header-section-number">1.6.2</span> Minimum enclosing circle</h3>
 <p>A <strong>minimum enclosing circle</strong> is the smallest circle that completely encloses a shape. Given a contour, the <code>minEnclosingCircle</code> function returns a tuple for the circle. The outer tuple contains an inner tuple for the center point of the circle, and a radius for the circle. From this, we could compute the area of the circle or track its position. If we want to visualize it, unfortunately we need to convert the center point and radius to integer values instead of floating-point ones. Then we can use <code>cv2.circle</code> to view the circle that was found.</p>
-<div id="b54c61ea" class="cell" data-execution_count="8">
+<div id="c774c5ce" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a>circle <span class="op">=</span> cv2.minEnclosingCircle(bc)</span>
 <span id="cb9-3"><a href="#cb9-3"></a>cent, rad <span class="op">=</span> circle</span>
@@ -542,7 +544,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="best-fit-ellipse" class="level3" data-number="1.6.3">
 <h3 data-number="1.6.3" class="anchored" data-anchor-id="best-fit-ellipse"><span class="header-section-number">1.6.3</span> Best-fit ellipse</h3>
 <p>A <strong>best-fit ellipse</strong> is an ellipse that best fits the points in the contour. In this case, it computes the least-squares error between the target ellipse and the contour, and minimizes that. In a sense, it is assuming the contour is supposed to describe an ellipse, and producing the best approximation to that ellipse that it can.</p>
-<div id="f9a3280f" class="cell" data-execution_count="9">
+<div id="4852b6e4" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb10-2"><a href="#cb10-2"></a>ellipse <span class="op">=</span> cv2.fitEllipse(bc)</span>
 <span id="cb10-3"><a href="#cb10-3"></a>cv2.ellipse(fl,ellipse, (<span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -552,7 +554,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="convex-hull" class="level3" data-number="1.6.4">
 <h3 data-number="1.6.4" class="anchored" data-anchor-id="convex-hull"><span class="header-section-number">1.6.4</span> Convex hull</h3>
 <p>A <strong>convex hull</strong> is formed using a subset of the points in the contour, but ensuring that they form a convex polygon: a polygon with no indentations in its surface. Imaging stretching a rubber band around the outside of the contour: the points that it touches form the convex hull. Note that the returned value is another contour array: just one that describes a subset of the points from the original.</p>
-<div id="153557ad" class="cell" data-execution_count="10">
+<div id="041e808f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb11-2"><a href="#cb11-2"></a>hullContour <span class="op">=</span> cv2.convexHull(bc)</span>
 <span id="cb11-3"><a href="#cb11-3"></a>cv2.drawContours(fl, [hullContour], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -563,7 +565,7 @@ Figure&nbsp;4: The four large contours from our example, drawn separately onto a
 <section id="minimum-enclosing-triangle" class="level3" data-number="1.6.5">
 <h3 data-number="1.6.5" class="anchored" data-anchor-id="minimum-enclosing-triangle"><span class="header-section-number">1.6.5</span> Minimum enclosing triangle</h3>
 <p>A <strong>minimum enclosing triangle</strong> is the smallest triangle that completely contains the contour’s points. While less commonly used than the others, this one could be very useful in finding triangular signs, cones, or other triangular shapes. The <code>minEnclosingTriangle</code> function returns the area of the triangle it found, and an array containing three (x, y) coordinates. Because these are all floating-point values, and an interesting structure, it takes a bit of work to extract the values from the returned array, and convert them to integers.</p>
-<div id="a224da2e" class="cell" data-execution_count="11">
+<div id="31212751" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>cv2.drawContours(fl, [bc], <span class="op">-</span><span class="dv">1</span>, (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">1</span>)</span>
 <span id="cb12-2"><a href="#cb12-2"></a>area, triVerts <span class="op">=</span> cv2.minEnclosingTriangle(bc)</span>
 <span id="cb12-3"><a href="#cb12-3"></a>[x0, y0] <span class="op">=</span> [<span class="bu">int</span>(v) <span class="cf">for</span> v <span class="kw">in</span> triVerts[<span class="dv">0</span>, <span class="dv">0</span>]]</span>
@@ -684,7 +686,7 @@ Figure&nbsp;5: The four large contours from our example, drawn separately onto a
 <h1 data-number="2"><span class="header-section-number">2</span> Motion detection and background subtraction</h1>
 <p>Detecting motion in a video signal is deceptively simple. Making sense of what is moving is much harder, and tracking a moving object is also not trivial. In the first case, we can detect changes from frame to frame in a video signal, and know that whatever is different represents movement in the image. Getting from there to distinguishing between a person moving through a scene, and the movement of trees in the wind, or rippling water, is where things get harder. Separating some movement from the rest and knowing that a particular object is moving takes even more processing.</p>
 <p>But we’ll start with the easy step first. The most simple method for detecting motion is simply to take the difference between two frames of an image. The code fragment below illustrates this. Work through what each line does, and then try it out.</p>
-<div id="1bf26285" class="cell" data-execution_count="12">
+<div id="660f3628" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="im">import</span> cv2</span>
 <span id="cb13-2"><a href="#cb13-2"></a></span>
 <span id="cb13-3"><a href="#cb13-3"></a>cam <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
@@ -795,7 +797,7 @@ Figure&nbsp;6: Examples of motion detection through difference of frames, waving
 <h2 data-number="3.1" class="anchored" data-anchor-id="a-simple-attempt-at-background-subtraction"><span class="header-section-number">3.1</span> A simple attempt at background subtraction</h2>
 <p>The simplest approach is to take a picture without the foreground object in it, and just use that for the model. This has only mediocre results.</p>
 <p>The code sample below uses this method to produce a masked version of the original video feed with the background set to black. It first loops on the video feed, until the user hits q. At that point, the last frame read is set up as the background picture. A more elaborate implementation would perhaps read multiple frames and average them together to form the background image.</p>
-<div id="5e5bf033" class="cell" data-execution_count="13">
+<div id="fa2d155b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb14-2"><a href="#cb14-2"></a></span>
 <span id="cb14-3"><a href="#cb14-3"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
@@ -815,7 +817,7 @@ Figure&nbsp;6: Examples of motion detection through difference of frames, waving
 <span id="cb14-17"><a href="#cb14-17"></a>backgroundPic <span class="op">=</span> frame</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After setting up the background image, the program continues in the next code sample. For each frame, it computes the difference from the background picture, and then combines the color channels together. In this case we average them together, instead of adding them as we did for motion detection above. Finally, we use a threshold to turn the difference image into a black-and-white mask, and we apply it to the frame to get just the foreground. <a href="#fig-backsub1" class="quarto-xref">Figure&nbsp;7</a> shows the background image, the foreground image, and the result of our attempt at background subtraction.</p>
-<div id="2ed2fcec" class="cell" data-execution_count="14">
+<div id="f436f051" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
 <span id="cb15-2"><a href="#cb15-2"></a>    gotIm, frame <span class="op">=</span> capture.read()</span>
 <span id="cb15-3"><a href="#cb15-3"></a>    <span class="cf">if</span> <span class="kw">not</span> gotIm:</span>
@@ -874,7 +876,7 @@ Figure&nbsp;7: The background picture, foreground (unprocessed frame), and the r
 <h2 data-number="3.2" class="anchored" data-anchor-id="the-mog-mixture-of-gaussians-approach-to-background-subtraction"><span class="header-section-number">3.2</span> The MOG (Mixture of Gaussians) approach to background subtraction</h2>
 <p>OpenCV provides an implementation of an algorithm commonly calls “mixture of gaussians.” With this, we build a more complex model of the background of an image. By looking at a selection of recent video frames, the model starts with a range of values for each pixel in the background. They then characterize the range for each pixel as the combination, the <strong>mixture</strong>, of several gaussian functions. These allow the model to capture complex variations (like sudden brightening in one area caused by wind shifting tree branches, for example).</p>
 <p>The code sample below shows how to set up and use the MOG-based background subtraction method. <a href="#fig-backsub2" class="quarto-xref">Figure&nbsp;8</a> shows the original frame and the masked result for this method.</p>
-<div id="1cc4f3d2" class="cell" data-execution_count="15">
+<div id="d2f311a7" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>backSub1 <span class="op">=</span> cv2.createBackgroundSubtractorMOG2()</span>
 <span id="cb16-2"><a href="#cb16-2"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
@@ -961,7 +963,7 @@ Figure&nbsp;8: The original frame, the mask created from it by the MOG algorithm
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-knn-k-nearest-neighbor-approach-to-background-subtraction"><span class="header-section-number">3.3</span> The KNN (K-nearest neighbor) approach to background subtraction</h2>
 <p>The KNN backgroung subtraction algorithm defines a sphere for each pixel. The dimensions of the sphere are the BGR values (color channels). The size of the sphere is chosen dynamically so that it encloses K of the previous frames’ colors at that pixel. You can change K to tune this algorithm. For a new frame, if the color at a pixel falls within the sphere defined for that location, then it is categorized as a background pixel, and if it falls outside of it, then it is categorized as a foreground pixel. Much like the previous algorithm, what count as background is updated dynamically to accound for lighting changes that happen gradually over time.</p>
 <p>The code sample below shows how to set up and use the KNN-based background subtraction method. <a href="#fig-backsub3" class="quarto-xref">Figure&nbsp;9</a> shows the original frame and the masked result for this method.</p>
-<div id="ff48abf7" class="cell" data-execution_count="16">
+<div id="7a04dd58" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>backSub2 <span class="op">=</span> cv2.createBackgroundSubtractorKNN()</span>
 <span id="cb17-2"><a href="#cb17-2"></a>capture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
@@ -1083,18 +1085,263 @@ Figure&nbsp;9: The original frame, the mask created from it by the MOG algorithm
 <p>The backprojection is then used by MeanShift and CAMShift to find the central object of the target color. MeanShift moves a fixed-size tracking box around the backprojection to find the region that is most dense with the target color, and where the pixels are the strongest matches to the target color. CAMShift adjusts the size of the tracking box each time through to match the density of the backprojection.</p>
 <section id="histograms-and-backprojection" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="histograms-and-backprojection"><span class="header-section-number">4.1</span> Histograms and Backprojection</h2>
-<p>These algorithms use the HSV color format, and construct a histogram of hues (colors) that are the targets. The histogram is constructed by providing or selecting a <em>reference image</em>, either a whole image or a region of interest where all the pixels are the target colors. The example picture below shows a region of interest in the overall picture that includes only the orange ball. We will use this region to build the histogram.</p>
-<p>To build the histogram, we: Convert the image to HSV Threshold/mask away pixels that have low saturation or low value (because very dark pixels tend to have nearly random hues assigned, so they are unreliable and noisy) Use only the resulting hue channel Have OpenCV build a histogram of the values in the hue channel</p>
-<p>A histogram has a set of “bins”, and the value in each bin represents how many instances had a value in the range of that bin. Hue values will always be an integer between 0 and 179. So if we chose to have 10 bins, then all hue values between 0 and 17, inclusive, would map to the first bin; all the values between 18 and 35 would map to the second bin, and so forth.</p>
+<p>These algorithms use the HSV color format, and construct a histogram of hues (colors) that are the targets. The histogram is constructed by providing or selecting a <em>reference image</em>, either a whole image or a region of interest where all the pixels are the target colors. The example picture in <a href="#fig-orangeROI" class="quarto-xref">Figure&nbsp;10</a> shows a region of interest in the overall picture that includes only the orange ball. We will use this region to build the histogram.</p>
+<div id="fig-orangeROI" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-orangeROI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch7-Images/OrangeBG1Near.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-44" title="Figure&nbsp;10: Picture of orange ball with ROI for histogram marked by blue rectangle"><img src="Ch7-Images/OrangeBG1Near.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orangeROI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Picture of orange ball with ROI for histogram marked by blue rectangle
+</figcaption>
+</figure>
+</div>
+<p>To build the histogram, we:</p>
+<ul>
+<li>Convert the image to HSV</li>
+<li>Threshold/mask away pixels that have low saturation or low value (because very dark pixels tend to have nearly random hues assigned, so they are unreliable and noisy)</li>
+<li>Use only the resulting hue channel</li>
+<li>Have OpenCV build a histogram of the values in the hue channel</li>
+</ul>
+<p>A histogram has a set of <em>bins</em>, and the value in each bin represents how many instances had a value in the range of that bin. Hue values will always be an integer between 0 and 179. So if we chose to have 10 bins, then all hue values between 0 and 17, inclusive, would map to the first bin; all the values between 18 and 35 would map to the second bin, and so forth.</p>
 <p>For this application, we usually choose 16 or 32 bins, for no particularly good reason.</p>
-<p>Thus the value in each bin of the histogram records how many pixels are within each range of hues in the target color image. Often the histogram emphasizes a single narrow range of hues, but you could also track a blue and green object with a histogram that contains both blue and green. Here is a view of the histogram that would result from the region of interest shown above.</p>
-<p>And here is another example of the histogram for a different color:</p>
-<p>When we want to find the target color/object in the video stream, we take a frame from the video, and extract its HSV Hue channel. Then for each pixel we compute the likelihood that its color is the target color, using the height of the bars in the histogram for that particular hue. This likelihood is stored as a grayscale “image” where strong matches are brighter than dim matches. This is called the backprojection, or backproject, of the frame. Here is a view of the backprojection for the blue image above, and also for a second image from the same set:</p>
-<p>MeanShift</p>
-<p>MeanShift is an algorithm used beyond computer vision; it is sometimes used in statistics or probability calculations as well. I’m just going to describe it in terms of computer vision. MeanShift takes the backproject of an image, and it starts with a fixed-size rectangular “tracking box” that is placed at some location in the image. The first time it is run, the box may be placed in any location. On subsequent runs, the box starts where it ended after the last run. MeanShift computes the “center of mass” of the backproject values in its box. That basically means the weighted average location. Imagine that the tracking box of the backproject is a flat platter, where the thickness at each point corresponds to the backproject value. The center of mass is the point where you could balance the flat platter on top of a pin.</p>
-<p>If the center of mass is located at the center of the tracking box, then the algorithm ends and reports the box’s current position. If the center of mass is not at the center, then MeanShift moves its tracking box to be centered on the center of mass, and then repeats (from the step where it computed the center of mass). It repeats this process of moving the tracking box until either some maximum number of iterations occurs, or the center of mass is at the center of the box.</p>
-<p>CAMShift</p>
-<p>One problem with the MeanShift algorithm is that the size of the tracking box is always the same. CAMShift works just like MeanShift, except that at each step the size of the tracking box is modified. If the whole tracking box is full of the target color, then CAMShift increases the size of the box by 10% (or any percent you like). If the target color is relatively sparse in the tracking box, then it reduces the size of the box. This allows it to track objects that move closer or further from the camera.</p>
+<p>Thus, the value in each bin of the histogram records how many pixels are within each range of hues in the target color image. Often the histogram emphasizes a single narrow range of hues, but you could also track a blue and green object with a histogram that contains both blue and green. <a href="#fig-orangeHist" class="quarto-xref">Figure&nbsp;11</a> is a view of the histogram that would result from the region of interest shown above.</p>
+<div id="fig-orangeHist" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-orangeHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch7-Images/OrangHist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45" title="Figure&nbsp;11: Histogram for orange ball colors selected earlier"><img src="Ch7-Images/OrangHist.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-orangeHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Histogram for orange ball colors selected earlier
+</figcaption>
+</figure>
+</div>
+<p>And <a href="#fig-blueROIHist" class="quarto-xref">Figure&nbsp;12</a> shows another example of the histogram for a different color:</p>
+<div id="fig-blueROIHist" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-blueROIHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/Blue1BGMARKED.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-46" title="A picture with a blue ball with the ROI for its histogram marked by a yellow rectangle"><img src="Ch7-Images/Blue1BGMARKED.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>A picture with a blue ball with the ROI for its histogram marked by a yellow rectangle</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/blueHist.png" class="lightbox" data-gallery="quarto-lightbox-gallery-47" title="Blue histogram built from the previous ROI"><img src="Ch7-Images/blueHist.png" class="img-fluid figure-img"></a></p>
+<figcaption>Blue histogram built from the previous ROI</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blueROIHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: A picture of a blue ball, with a suitable color ROI selected, and the hue histogram that would result.
+</figcaption>
+</figure>
+</div>
+<p>When we want to find the target color/object in the video stream, we take a frame from the video, and extract its HSV Hue channel. Then for each pixel we compute the likelihood that its color is the target color, using the height of the bars in the histogram for that particular hue. This likelihood is stored as a grayscale “image” where strong matches are brighter than dim matches. This is called the backprojection, or backproject, of the frame.</p>
+<p>#fig-backprojs shows four blue images, and the backprojections we get when applying the histogram above to each image. Some find the ball strongly, others less well because of other objects or very different lighting conditions.</p>
+<div id="fig-backprojs" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-backprojs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/Blue1BG1Near.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-48" title="Original image with ROI for reference image"><img src="Ch7-Images/Blue1BG1Near.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Original image with ROI for reference image</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/backProj1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-49" title="Backproject for original blue image"><img src="Ch7-Images/backProj1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Backproject for original blue image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/Blue1BG1Mid.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-50" title="Similar image with blue ball"><img src="Ch7-Images/Blue1BG1Mid.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Similar image with blue ball</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/backProj2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-51" title="Backproject for second image"><img src="Ch7-Images/backProj2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Backproject for second image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/Blue1BG2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-52" title="Similar image with different background"><img src="Ch7-Images/Blue1BG2.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Similar image with different background</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/backProj3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-53" title="Backproject for third image"><img src="Ch7-Images/backProj3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Backproject for third image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/Blue1BG3.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-54" title="Same ball in different context"><img src="Ch7-Images/Blue1BG3.jpg" class="img-fluid figure-img"></a></p>
+<figcaption>Same ball in different context</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch7-Images/backProj4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-55" title="Backproject for fourth image"><img src="Ch7-Images/backProj4.png" class="img-fluid figure-img"></a></p>
+<figcaption>Backproject for fourth image</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-backprojs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Various back projections with different ball positions and lighting
+</figcaption>
+</figure>
+</div>
+<p>The last example in <a href="#fig-backprojs" class="quarto-xref">Figure&nbsp;13</a> illustrates the limitations of color-tracking. Because the floor has a blue-ish tint to it, the blue ball is lost in a seat of other pixels that match the color well enough. We would have to perform some preprocessing to isolate the ball in this context.</p>
+</section>
+<section id="the-meanshift-algorithm" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="the-meanshift-algorithm"><span class="header-section-number">4.2</span> The MeanShift algorithm</h2>
+<p>MeanShift is an algorithm used beyond computer vision; it is sometimes used in statistics or probability calculations as well. I’m just going to describe it in terms of computer vision. MeanShift takes the backproject of an image, and it starts with a fixed-size rectangular <em>track window</em> that is placed at some location in the image. The first time it is run, the track window may be placed in any location. On subsequent runs, the track window starts where it ended after the last run.</p>
+<p>MeanShift computes the <strong>center of mass</strong> of the backproject values in its track window. That basically means the location, taking into account the backproject values as weights, where there is an equal amount of weight in every direction. Imagine that the track window of the backproject is a flat platter, where the thickness at each point corresponds to the backproject value. The center of mass is the point where you could balance the flat platter on top of a pin.</p>
+<p>If the center of mass is located at the center of the track window, then the algorithm ends and reports the window’s current position. If the center of mass is not at the center, then MeanShift moves its track window to be centered on the center-of-mass, and then repeats the process, from the step where it computed the center of mass. It repeats this process of moving the track window until either some maximum number of iterations occurs, or the center of mass is at the center of the window. The pseudocode below captures the main points of MeanShift</p>
+<pre><code>Algorithm meanShift(backProjImage, oldTrackWindow)
+1. Repeat at most N times
+2.     Let cm be the center of mass within oldTrackWindow of backProjImage
+3.     if cm is the center point of oldTrackWindow then
+4.         return oldTrackWindow
+5.     otherwise
+6.         Let oldTrackWindow = a new track window the same size, but centered on cm
+7. return oldTrackWindow  (didn't converge, but we ran out of iterations) </code></pre>
+</section>
+<section id="the-camshift-algorithm" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="the-camshift-algorithm"><span class="header-section-number">4.3</span> The CamShift algorithm</h2>
+<p>One problem with the MeanShift algorithm is that the size of the track window is always the same. Objects could be closer to the camera, or further from it, and we’d like a track window that fits the size of the object, rather than always being a fixed size. The CamShift algorithm does exactly this. At each step in CamShift, the size of the track window is modified, based on how densely it is filled with matching pixels. If most of the track window matches the histogram, then CamShift increases the size of the window by 10% (or any percent you like). If relatively few pixels in the track window match the histogram, then it reduces the size of the window. This allows it to track objects that move closer or further from the camera.</p>
+<p>In addition to the track window, which is its main mechanism for tracking the colorful object, CamShift also computes a <strong>rotated rectangle</strong>, which can be visualized as an ellipse, that matches the tilt of the object, if any. This is, somewhat confusingly, called the “track box”. We often visualize the track box as an ellipse, rather than the tracking window, because it often fits closer to the object we are tracking.</p>
+<p>The code sample below implements a very simple version of CamShift, using a fixed reference image, the blue one shown above. It uses several helper functions to implement parts of the process. When calling the main function here, <code>camshift2</code> we must pass it a predefined reference image.</p>
+<div id="b0b53186" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">def</span> camshift2(refImage1):</span>
+<span id="cb19-2"><a href="#cb19-2"></a>    <span class="co">"""Takes in a reference image and sets up the Camshift process for it. It makes a histograms, and sets</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">    up two a track window. It then runs Camshift on the images from a videe feed, using the histogram and</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co">    track window, and draws the resulting track box as an ellipse on the image."""</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>    cam <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a>    hueHist1 <span class="op">=</span> makeHueHist(refImage1)</span>
+<span id="cb19-7"><a href="#cb19-7"></a>    trackWindow1 <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a></span>
+<span id="cb19-9"><a href="#cb19-9"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb19-10"><a href="#cb19-10"></a>        ret, frame <span class="op">=</span> cam.read()</span>
+<span id="cb19-11"><a href="#cb19-11"></a>        <span class="cf">if</span> <span class="kw">not</span> ret:</span>
+<span id="cb19-12"><a href="#cb19-12"></a>            <span class="bu">print</span>(<span class="st">"No more frames..."</span>)</span>
+<span id="cb19-13"><a href="#cb19-13"></a>            <span class="cf">break</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a></span>
+<span id="cb19-15"><a href="#cb19-15"></a>        frame <span class="op">=</span> cv2.flip(frame, <span class="dv">1</span>)</span>
+<span id="cb19-16"><a href="#cb19-16"></a>        hgt, wid, dep <span class="op">=</span> frame.shape</span>
+<span id="cb19-17"><a href="#cb19-17"></a></span>
+<span id="cb19-18"><a href="#cb19-18"></a>        <span class="co"># Initialize the track window to be the whole frame the first time</span></span>
+<span id="cb19-19"><a href="#cb19-19"></a>        <span class="cf">if</span> emptyTrackWindow(trackWindow1):</span>
+<span id="cb19-20"><a href="#cb19-20"></a>            trackWindow1 <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, wid, hgt)</span>
+<span id="cb19-21"><a href="#cb19-21"></a></span>
+<span id="cb19-22"><a href="#cb19-22"></a>        trackBox1, trackWindow1 <span class="op">=</span> processFrame(frame, trackWindow1, hueHist1)</span>
+<span id="cb19-23"><a href="#cb19-23"></a>        cv2.ellipse(frame, trackBox1, (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>), <span class="dv">2</span>)</span>
+<span id="cb19-24"><a href="#cb19-24"></a></span>
+<span id="cb19-25"><a href="#cb19-25"></a>        cv2.imshow(<span class="st">'camshift'</span>, frame)</span>
+<span id="cb19-26"><a href="#cb19-26"></a>        v <span class="op">=</span> cv2.waitKey(<span class="dv">5</span>)</span>
+<span id="cb19-27"><a href="#cb19-27"></a>        <span class="cf">if</span> v <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">chr</span>(v) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="cb19-28"><a href="#cb19-28"></a>            <span class="cf">break</span></span>
+<span id="cb19-29"><a href="#cb19-29"></a></span>
+<span id="cb19-30"><a href="#cb19-30"></a></span>
+<span id="cb19-31"><a href="#cb19-31"></a><span class="kw">def</span> makeHueHist(refImage):</span>
+<span id="cb19-32"><a href="#cb19-32"></a>    <span class="co">"""Takes in a reference image, and it builds a histogram of its hue values. It masks away low value or</span></span>
+<span id="cb19-33"><a href="#cb19-33"></a><span class="co">    low saturation pixels, leaving them out of the histogram. It normalizes the values in the histogram so that</span></span>
+<span id="cb19-34"><a href="#cb19-34"></a><span class="co">    the max value is 255, letting us map from histogram values directly to brightness values in the back projection.</span></span>
+<span id="cb19-35"><a href="#cb19-35"></a><span class="co">    It returns the histogram it created."""</span></span>
+<span id="cb19-36"><a href="#cb19-36"></a>    hsvRef <span class="op">=</span> cv2.cvtColor(refImage, cv2.COLOR_BGR2HSV)</span>
+<span id="cb19-37"><a href="#cb19-37"></a>    maskedHistIm <span class="op">=</span> cv2.inRange(hsvRef, (<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">32</span>), (<span class="dv">180</span>, <span class="dv">255</span>, <span class="dv">255</span>))</span>
+<span id="cb19-38"><a href="#cb19-38"></a>    hist <span class="op">=</span> cv2.calcHist([hsvRef], [<span class="dv">0</span>], maskedHistIm, [<span class="dv">16</span>], [<span class="dv">0</span>, <span class="dv">180</span>])</span>
+<span id="cb19-39"><a href="#cb19-39"></a>    cv2.normalize(hist, hist, <span class="dv">0</span>, <span class="dv">255</span>, cv2.NORM_MINMAX)</span>
+<span id="cb19-40"><a href="#cb19-40"></a>    hist <span class="op">=</span> hist.reshape(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb19-41"><a href="#cb19-41"></a>    show_hist(hist)</span>
+<span id="cb19-42"><a href="#cb19-42"></a>    <span class="cf">return</span> hist</span>
+<span id="cb19-43"><a href="#cb19-43"></a></span>
+<span id="cb19-44"><a href="#cb19-44"></a></span>
+<span id="cb19-45"><a href="#cb19-45"></a><span class="kw">def</span> emptyTrackWindow(trackW):</span>
+<span id="cb19-46"><a href="#cb19-46"></a>    <span class="co">"""Takes in the current track window. If the track window is None, then this is the first frame, so we return</span></span>
+<span id="cb19-47"><a href="#cb19-47"></a><span class="co">    True: the track wondow is empty right now and should be reset. If the track window exists, but its size is too</span></span>
+<span id="cb19-48"><a href="#cb19-48"></a><span class="co">    small, then it returns True: the track window is nearly empty and should be reset. Otherwise, it returns False,</span></span>
+<span id="cb19-49"><a href="#cb19-49"></a><span class="co">    meaning that the track window is not empty."""</span></span>
+<span id="cb19-50"><a href="#cb19-50"></a>    <span class="cf">if</span> trackW <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb19-51"><a href="#cb19-51"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb19-52"><a href="#cb19-52"></a>    <span class="cf">else</span>:</span>
+<span id="cb19-53"><a href="#cb19-53"></a>        (x1, y1, x2, y2) <span class="op">=</span> trackW</span>
+<span id="cb19-54"><a href="#cb19-54"></a>        <span class="cf">return</span> <span class="bu">abs</span>(x2 <span class="op">-</span> x1) <span class="op">&lt;</span> <span class="dv">5</span> <span class="kw">or</span> <span class="bu">abs</span>(y2 <span class="op">-</span> y1) <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb19-55"><a href="#cb19-55"></a></span>
+<span id="cb19-56"><a href="#cb19-56"></a></span>
+<span id="cb19-57"><a href="#cb19-57"></a><span class="kw">def</span> processFrame(image, trackWindow, hist):</span>
+<span id="cb19-58"><a href="#cb19-58"></a>    <span class="co">"""Takes in an image, the track window and the histogram, and it runs the Camshift process. It converts</span></span>
+<span id="cb19-59"><a href="#cb19-59"></a><span class="co">    the image to HSV, masks away low saturation and low value pixels, and calculates the back-projection for</span></span>
+<span id="cb19-60"><a href="#cb19-60"></a><span class="co">    the resulting image. It then runs Camshift, which updates the position of the track window and creates a</span></span>
+<span id="cb19-61"><a href="#cb19-61"></a><span class="co">    track box, a rotated rectangle, for the object being tracked. It returns the track box and the track window."""</span></span>
+<span id="cb19-62"><a href="#cb19-62"></a>    hsv <span class="op">=</span> cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  <span class="co"># convert to HSV</span></span>
+<span id="cb19-63"><a href="#cb19-63"></a>    maskHSV <span class="op">=</span> cv2.inRange(hsv, (<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">32</span>), (<span class="dv">180</span>, <span class="dv">255</span>, <span class="dv">255</span>))</span>
+<span id="cb19-64"><a href="#cb19-64"></a>    prob <span class="op">=</span> cv2.calcBackProject([hsv], [<span class="dv">0</span>], hist, [<span class="dv">0</span>, <span class="dv">180</span>], <span class="dv">1</span>)</span>
+<span id="cb19-65"><a href="#cb19-65"></a>    prob <span class="op">&amp;=</span> maskHSV</span>
+<span id="cb19-66"><a href="#cb19-66"></a>    cv2.imshow(<span class="st">"Backproject"</span>, prob)</span>
+<span id="cb19-67"><a href="#cb19-67"></a></span>
+<span id="cb19-68"><a href="#cb19-68"></a>    term_crit <span class="op">=</span> (cv2.TERM_CRITERIA_EPS <span class="op">|</span> cv2.TERM_CRITERIA_COUNT, <span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb19-69"><a href="#cb19-69"></a>    trackBox, trackWindow <span class="op">=</span> cv2.CamShift(prob, trackWindow, term_crit)</span>
+<span id="cb19-70"><a href="#cb19-70"></a>    <span class="cf">return</span> trackBox, trackWindow</span>
+<span id="cb19-71"><a href="#cb19-71"></a></span>
+<span id="cb19-72"><a href="#cb19-72"></a></span>
+<span id="cb19-73"><a href="#cb19-73"></a><span class="kw">def</span> show_hist(hist):</span>
+<span id="cb19-74"><a href="#cb19-74"></a>    <span class="co">"""Takes in the histogram, and displays it in the histogram window."""</span></span>
+<span id="cb19-75"><a href="#cb19-75"></a>    bin_count <span class="op">=</span> hist.shape[<span class="dv">0</span>]</span>
+<span id="cb19-76"><a href="#cb19-76"></a>    bin_w <span class="op">=</span> <span class="dv">24</span></span>
+<span id="cb19-77"><a href="#cb19-77"></a>    image <span class="op">=</span> np.zeros((<span class="dv">256</span>, bin_count <span class="op">*</span> bin_w, <span class="dv">3</span>), np.uint8)</span>
+<span id="cb19-78"><a href="#cb19-78"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(bin_count):</span>
+<span id="cb19-79"><a href="#cb19-79"></a>        h <span class="op">=</span> <span class="bu">int</span>(hist[i])</span>
+<span id="cb19-80"><a href="#cb19-80"></a>        cv2.rectangle(image,</span>
+<span id="cb19-81"><a href="#cb19-81"></a>                      (i <span class="op">*</span> bin_w <span class="op">+</span> <span class="dv">2</span>, <span class="dv">255</span>),</span>
+<span id="cb19-82"><a href="#cb19-82"></a>                      ((i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> bin_w <span class="op">-</span> <span class="dv">2</span>, <span class="dv">255</span> <span class="op">-</span> h),</span>
+<span id="cb19-83"><a href="#cb19-83"></a>                      (<span class="bu">int</span>(<span class="fl">180.0</span> <span class="op">*</span> i <span class="op">/</span> bin_count), <span class="dv">255</span>, <span class="dv">255</span>),</span>
+<span id="cb19-84"><a href="#cb19-84"></a>                      <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb19-85"><a href="#cb19-85"></a>    image <span class="op">=</span> cv2.cvtColor(image, cv2.COLOR_HSV2BGR)</span>
+<span id="cb19-86"><a href="#cb19-86"></a>    cv2.imshow(<span class="st">'histogram'</span>, image)</span>
+<span id="cb19-87"><a href="#cb19-87"></a></span>
+<span id="cb19-88"><a href="#cb19-88"></a></span>
+<span id="cb19-89"><a href="#cb19-89"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb19-90"><a href="#cb19-90"></a>    refImg <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/refBlue.jpg"</span>)</span>
+<span id="cb19-91"><a href="#cb19-91"></a>    camshift2(refImg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the <code>SampleCode</code> folder, you also have a program called <code>camshiftDemo.py</code>. This allows you to click and drag on the video feed to select the color you want to track. Try it out, as well.</p>
 
 
 </section>
