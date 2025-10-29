@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-20">
+<meta name="dcterms.date" content="2025-10-29">
 
 <title>Homework 3 – Vision Readings</title>
 <style>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 20, 2025</p>
+        <p class="date">October 29, 2025</p>
       </div>
     </div>
     
@@ -395,7 +395,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <h2 class="anchored" data-anchor-id="add-the-two-images-together">Add the two images together</h2>
 <p>The last step is to add the two images together, and to <strong>return the result!</strong></p>
 <p>Below is a sample call to the function, and the final result.</p>
-<div id="d6901eab" class="cell" data-execution_count="1">
+<div id="6fc828d2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/winterRobin.jpg"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a>img2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/selbyWinter.jpg"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a>finalPic1 <span class="op">=</span> bubbleMix(img2, img1)</span>
@@ -511,7 +511,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 <li>Remember that you can’t modify tuples, you will need to rebuild them each time you make a change</li>
 <li>There is a cryptic but clever programming “hack” for times when you need a value to stay above (or below) a certain value. Suppose I am adding one to a variable <code>x</code>, and I want to make sure that <code>x</code> never goes over 100. I could write the following statement by itself to do this:</li>
 </ul>
-<div id="35b878ea" class="cell" data-execution_count="2">
+<div id="9fda6338" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>x <span class="op">=</span> <span class="bu">min</span>(<span class="dv">100</span>, x <span class="op">+</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="pseudocode-for-adjusthue" class="level2">
@@ -523,7 +523,7 @@ Figure&nbsp;3: The result of masking the two images with the two masks
 1. Let currHue be the average of the input lower-bound hue and the upper-bound hue
 2. Loop until the user indicates to quit
 3.     Call applyBounds and pass it image, lowerBounds, upperBounds, and a string "Adjusting hue"
-4.     Save the result of the call in a variable, newIm
+4.     Save the results of the call in three variable, newIm, center, radius
 5.     Display newIm with imshow
 6.     Use waitKey to pause and to get a key value from the user
 7.     If the user hit the space key, then break out of the loop
@@ -548,7 +548,7 @@ from applyBounds</code></pre>
 2. Let uppSat be the saturation upper bound from upperBounds
 3. Loop until the user indicates to quit
 4.     Call applyBounds and pass it image, lowerBounds, upperBounds, and a string "Adjusting sat"
-5.     Save the result of the call in a variable, newIm
+5.     Save the results of the call in three variable, newIm, center, radius
 6.     Display newIm with imshow
 7.     Use waitKey to pause and to get a key value from the user
 8.     If the user hit the space key, then break out of the loop
@@ -581,7 +581,7 @@ from applyBounds</code></pre>
 <li>Examine the visual results carefully and experiment until you can isolate the ball in each of the pictures.</li>
 </ul>
 <p>Below is a series of sample calls to this function, duplicated in the <code>hw3Checker.py</code> program. In <a href="#fig-q3results" class="quarto-xref">Figure&nbsp;4</a> you can see the kind of results you should be able to reach by adjusting hue, saturation, and value bounds.</p>
-<div id="e8cc7aa2" class="cell" data-execution_count="3">
+<div id="06670f23" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>pic1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Blue1BG1Mid.jpg"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a>pic2 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Blue1BG3.jpg"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a>pic3 <span class="op">=</span> cv2.imread(<span class="st">"SampleImage/BallFinding/Green1BG1Mid.jpg"</span>)</span>
