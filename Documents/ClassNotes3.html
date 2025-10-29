@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-27">
+<meta name="dcterms.date" content="2025-10-29">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 27, 2025</p>
+        <p class="date">October 29, 2025</p>
       </div>
     </div>
     
@@ -236,6 +236,11 @@ window.Quarto = {
   <li><a href="#short-essays-overview" id="toc-short-essays-overview" class="nav-link" data-scroll-target="#short-essays-overview">Short essays overview</a></li>
   <li><a href="#extended-essay-overview" id="toc-extended-essay-overview" class="nav-link" data-scroll-target="#extended-essay-overview">Extended essay overview</a></li>
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project overview</a></li>
+  </ul></li>
+  <li><a href="#wednesday-october-29" id="toc-wednesday-october-29" class="nav-link" data-scroll-target="#wednesday-october-29">Wednesday, October 29</a>
+  <ul class="collapse">
+  <li><a href="#announcements-3" id="toc-announcements-3" class="nav-link" data-scroll-target="#announcements-3">Announcements</a></li>
+  <li><a href="#todays-topics-2" id="toc-todays-topics-2" class="nav-link" data-scroll-target="#todays-topics-2">Today’s topics</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
@@ -309,7 +314,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="e89700c3" class="cell" data-execution_count="1">
+<div id="3839678b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -388,7 +393,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="d1b53fd6" class="cell" data-execution_count="2">
+<div id="c4cea0d7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -407,7 +412,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="9d76d9fc" class="cell" data-execution_count="3">
+<div id="94d1cbf6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -564,6 +569,32 @@ c &amp; d &amp; t_y \\
 <li><strong>WIDE</strong> range of project topics, suitable to a wide range of programming experience</li>
 </ul>
 <p><strong>Activity: Read through the project overview document, and then add your name to projects that sound interesting to you</strong></p>
+</section>
+</section>
+<section id="wednesday-october-29" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-october-29">Wednesday, October 29</h2>
+<section id="announcements-3" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-3">Announcements</h3>
+<ul>
+<li>Homework 3: start on it soon! Due November 7
+<ul>
+<li>Focused on computer vision applications, particularly thresholds, masks, geometric transformations, filters, etc.</li>
+</ul></li>
+<li>Be prepared to discuss Ethics and Sci-Fi 8 <strong>Friday</strong></li>
+<li>New office hours: MW 4:30-5:30, TR 3:00-4:30, plus some “by appointment” hours earlier in the day (see calendar)</li>
+</ul>
+</section>
+<section id="todays-topics-2" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-2">Today’s topics</h3>
+<ul>
+<li>Finding contours
+<ul>
+<li>What are they?</li>
+<li>The <code>findContours</code> function</li>
+</ul></li>
+<li>Functions that manipulate contours</li>
+</ul>
+<p>Going to use the readings here for examples</p>
 <hr>
 </section>
 </section>
