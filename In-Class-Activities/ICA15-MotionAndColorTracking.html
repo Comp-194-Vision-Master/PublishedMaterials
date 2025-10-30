@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-16">
+<meta name="dcterms.date" content="2025-10-30">
 
 <title>ICA: Motion and Color Tracking – Vision Readings</title>
 <style>
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 16, 2025</p>
+        <p class="date">October 30, 2025</p>
       </div>
     </div>
     
@@ -144,6 +144,9 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#simple-motion-detection" id="toc-simple-motion-detection" class="nav-link" data-scroll-target="#simple-motion-detection">Simple motion detection</a></li>
+  <li><a href="#background-subtraction" id="toc-background-subtraction" class="nav-link" data-scroll-target="#background-subtraction">Background subtraction</a></li>
+  <li><a href="#color-tracking-with-camshift" id="toc-color-tracking-with-camshift" class="nav-link" data-scroll-target="#color-tracking-with-camshift">Color-tracking with CamShift</a></li>
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
@@ -157,8 +160,39 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>???</p>
+<p>In this activity, you will explore simple motion detection, background subtraction, and color tracking. These allow us to find object by movement or color and to track them across the frames of a video.</p>
 <p>The Github repository for this assignment will contain a starter code file, <code>activ15.py</code>. Put your code in this file, and create others, as directed below and according to the <code>TODO</code> comments in the file.</p>
+</section>
+<section id="simple-motion-detection" class="level1">
+<h1>Simple motion detection</h1>
+<p>Simple motion detection just computes the difference between two adjacent frames in the video. Our motion detector then adds the differences found in the blue, green, and red channels, to ensure we don’t miss anything.</p>
+<p>Try out the <code>simpleMotion</code> function in <code>activ15.py</code>. There are three sample calls, try some other videos as well.</p>
+<p><strong>Try this to hand in:</strong> Use <code>threshold</code> to convert <code>diff2</code> into a black and white image, and then apply it as a mask to the original frame, and display the result. How well does it work? Optionally, try using opening or closing (morphological filters) to smooth and clean up the mask before applying it.</p>
+</section>
+<section id="background-subtraction" class="level1">
+<h1>Background subtraction</h1>
+<p>The readings talked about three different background subtraction methods, but here we will focus on the MOG2 and KNN methods that OpenCV implements.</p>
+<p>In <code>activ15.py</code>, there is a function called <code>backgroundSubtract</code>, which takes in a video source and a number for which model you want to run: 0 for MOG2 and 1 for KNN. Try out this program on various video feeds, and see how the MOG2 and KNN compare. When do they work well, and when do they struggle?</p>
+<p><strong>Try this to hand in:</strong> Pick one of these options for further exploration:</p>
+<ul>
+<li>Look at <a href="https://docs.opencv.org/4.x/de/de1/group__video__motion.html#gab7986eb7ed75982db12f525b5ca4a54c">the documentation for the <code>createBackgroundSubtractor</code> functions.</a> They each have optional inputs, including <code>history</code>, as well as thresholds for each algorithm. Try varying the history and/or the threshold values… how do those affect the behavior of the program?</li>
+<li>Use <code>findContours</code> to identify moving objects from the mask image, can you tune it to find interesting moving objects and not noise?</li>
+<li>Background subtraction is one step in a process called background substitution, where we substitute a different background for the black parts of the mask. Implement this:
+<ul>
+<li>Pick an image</li>
+<li>Resize it to match the video frame size,</li>
+<li>Define a second mask to be the opposite of the one from the background subtraction (0 where it has 255, and vice versa)</li>
+<li>Use the second mask to select just the background pixels you need</li>
+<li>Add together the masked foreground and the masked background</li>
+<li>Display the result</li>
+<li>(Note that this is the same general process as question 1 on Homework 3)</li>
+</ul></li>
+</ul>
+</section>
+<section id="color-tracking-with-camshift" class="level1">
+<h1>Color-tracking with CamShift</h1>
+<p>The <code>camshift</code> function in your <code>activ15.py</code> file takes in a reference image and then runs the Camshift algorithm to track the object and display what it has found. Try it out: the default reference image is for one of the bright blue floor hockey balls in my collection.</p>
+<p><strong>Try this to hand in:</strong> Create a reference image for a different colored object, and try tracking that instead.</p>
 </section>
 <section id="what-to-hand-in" class="level1">
 <h1>What to hand in</h1>
