@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-31">
+<meta name="dcterms.date" content="2025-11-03">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 31, 2025</p>
+        <p class="date">November 3, 2025</p>
       </div>
     </div>
     
@@ -250,6 +250,19 @@ window.Quarto = {
   <li><a href="#motion-detection" id="toc-motion-detection" class="nav-link" data-scroll-target="#motion-detection">Motion detection</a></li>
   <li><a href="#background-subtraction" id="toc-background-subtraction" class="nav-link" data-scroll-target="#background-subtraction">Background subtraction</a></li>
   <li><a href="#camshift-color-detection" id="toc-camshift-color-detection" class="nav-link" data-scroll-target="#camshift-color-detection">CAMShift color detection</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#week-10" id="toc-week-10" class="nav-link" data-scroll-target="#week-10">Week 10</a>
+  <ul class="collapse">
+  <li><a href="#monday-november-3" id="toc-monday-november-3" class="nav-link" data-scroll-target="#monday-november-3">Monday, November 3</a>
+  <ul class="collapse">
+  <li><a href="#announcements-5" id="toc-announcements-5" class="nav-link" data-scroll-target="#announcements-5">Announcements</a></li>
+  <li><a href="#todays-topics-4" id="toc-todays-topics-4" class="nav-link" data-scroll-target="#todays-topics-4">Today’s topics</a></li>
+  </ul></li>
+  <li><a href="#wednesday-november-5" id="toc-wednesday-november-5" class="nav-link" data-scroll-target="#wednesday-november-5">Wednesday, November 5</a>
+  <ul class="collapse">
+  <li><a href="#announcements-6" id="toc-announcements-6" class="nav-link" data-scroll-target="#announcements-6">Announcements</a></li>
+  <li><a href="#todays-topics-5" id="toc-todays-topics-5" class="nav-link" data-scroll-target="#todays-topics-5">Today’s topics</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
@@ -323,7 +336,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="94f8fa80" class="cell" data-execution_count="1">
+<div id="fab0d136" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -402,7 +415,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="693570c9" class="cell" data-execution_count="2">
+<div id="05eb55d6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -421,7 +434,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="79b1beb3" class="cell" data-execution_count="3">
+<div id="b0da731c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -709,6 +722,85 @@ c &amp; d &amp; t_y \\
 <li>Otherwise, move track window to center on center of mass, and repeat</li>
 </ul></li>
 </ul>
+</section>
+</section>
+</section>
+<section id="week-10" class="level1">
+<h1>Week 10</h1>
+<section id="monday-november-3" class="level2">
+<h2 class="anchored" data-anchor-id="monday-november-3">Monday, November 3</h2>
+<section id="announcements-5" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-5">Announcements</h3>
+<ul>
+<li>Due dates this week:
+<ul>
+<li>Homework 3: Due November 7</li>
+<li>Last Ethics and Sci-Fi is due Friday: no in-class discussion!</li>
+<li>Project 1: Due November 5</li>
+<li>Extended essay 1: Due November 7</li>
+</ul></li>
+<li><strong>Friday this week:</strong> Library session! Meet in same room in the library…
+<ul>
+<li>Focused on how to find resources for your extended essays</li>
+<li>Have topic determined by Friday</li>
+</ul></li>
+<li>Registration: you will register on November 13!</li>
+<li>MSCS Registration Ice Cream Social: Thursday, November 6</li>
+<li>MSCS Seminar this week, Thursday, 4:40-5:40pm</li>
+</ul>
+</section>
+<section id="todays-topics-4" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-4">Today’s topics</h3>
+<ul>
+<li>First short essay in-class start!</li>
+<li>Stage 1: 2:20pm-3:00pm
+<ul>
+<li>Read through the handout and pick <strong>one</strong> prompt</li>
+<li>Brainstorm what you want to say</li>
+<li>Create a detailed outline of your argument</li>
+<li>Start writing essay if you have time</li>
+<li>Put your name on each page, and number them!</li>
+</ul></li>
+<li>Stage 2: 3:00-3:20pm
+<ul>
+<li>Discuss your ideas with a peer and get/give feedback (3:00pm to 3:20pm)</li>
+<li>Hand in all paper brainstorming, outline, draft to me at the end</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="wednesday-november-5" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-november-5">Wednesday, November 5</h2>
+<section id="announcements-6" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-6">Announcements</h3>
+<ul>
+<li>Due dates this week:
+<ul>
+<li>Homework 3: Due November 7</li>
+<li>Last Ethics and Sci-Fi is due Friday: no in-class discussion!</li>
+<li>Project 1: Due November 5</li>
+<li>Extended essay 1: Due November 7</li>
+</ul></li>
+<li><strong>Friday this week:</strong> Library session! Meet in same room in the library…
+<ul>
+<li>Focused on how to find resources for your extended essays</li>
+<li>Have topic determined by Friday</li>
+</ul></li>
+<li>Registration: you will register on November 13!</li>
+<li>MSCS Registration Ice Cream Social: Thursday, November 6</li>
+<li>MSCS Seminar this week, Thursday, 4:40-5:40pm</li>
+</ul>
+</section>
+<section id="todays-topics-5" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-5">Today’s topics</h3>
+<ul>
+<li>Using trained models: Mediapipe!</li>
+<li>Basic face detection model</li>
+<li>Facial landmark detection</li>
+<li>Hand landmark detection (skeletonization)</li>
+<li>Body pose landmark detection</li>
+</ul>
+<p>The Mediapipe project provides sophisticated models trained on large datasets, that we can use and even modify for free.</p>
 <hr>
 </section>
 </section>
