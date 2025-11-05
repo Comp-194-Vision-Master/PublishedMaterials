@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-03">
+<meta name="dcterms.date" content="2025-11-05">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 3, 2025</p>
+        <p class="date">November 5, 2025</p>
       </div>
     </div>
     
@@ -336,7 +336,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="fab0d136" class="cell" data-execution_count="1">
+<div id="148bff5e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -415,7 +415,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="05eb55d6" class="cell" data-execution_count="2">
+<div id="46e03fb1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -434,7 +434,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="b0da731c" class="cell" data-execution_count="3">
+<div id="27a2fee7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -780,7 +780,15 @@ c &amp; d &amp; t_y \\
 <li>Last Ethics and Sci-Fi is due Friday: no in-class discussion!</li>
 <li>Project 1: Due November 5</li>
 <li>Extended essay 1: Due November 7</li>
+<li>Short essay 1: Due November 14
+<ul>
+<li><strong>Read carefully</strong> the Short Essay 1 Guide</li>
+<li>I am being lenient about what you handed in this time, but many of you might not have qualified for a Gold rating on the final paper if I hadn’t been lenient</li>
+<li>Next round, Short Essay 2, I will be more stringent about what you submit at the end of the first hour</li>
 </ul></li>
+</ul></li>
+<li><strong>Starting today!</strong> ICAs will <strong>be</strong> work on Homework 4</li>
+<li>I will post Milestone 2 of the project later today</li>
 <li><strong>Friday this week:</strong> Library session! Meet in same room in the library…
 <ul>
 <li>Focused on how to find resources for your extended essays</li>
@@ -788,7 +796,7 @@ c &amp; d &amp; t_y \\
 </ul></li>
 <li>Registration: you will register on November 13!</li>
 <li>MSCS Registration Ice Cream Social: Thursday, November 6</li>
-<li>MSCS Seminar this week, Thursday, 4:40-5:40pm</li>
+<li>MSCS Seminar this week, Wednesday, 4:40-5:40pm, OLRI 100</li>
 </ul>
 </section>
 <section id="todays-topics-5" class="level3">
@@ -801,6 +809,12 @@ c &amp; d &amp; t_y \\
 <li>Body pose landmark detection</li>
 </ul>
 <p>The Mediapipe project provides sophisticated models trained on large datasets, that we can use and even modify for free.</p>
+<p><strong>Key points</strong></p>
+<ul>
+<li>Try all four (five, optionally) demo programs</li>
+<li>Pick <strong>two</strong> to extend</li>
+<li>Extend them by selecting information from the detection results and using it to identify certain actions (facing left/right, closing eyes, palms versus fists, hands up or down)</li>
+</ul>
 <hr>
 </section>
 </section>
