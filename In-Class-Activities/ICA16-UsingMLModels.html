@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-16">
+<meta name="dcterms.date" content="2025-11-05">
 
 <title>ICA: Using ML Models – Vision Readings</title>
 <style>
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 16, 2025</p>
+        <p class="date">November 5, 2025</p>
       </div>
     </div>
     
@@ -144,6 +144,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#face-detection" id="toc-face-detection" class="nav-link" data-scroll-target="#face-detection">Face detection</a></li>
+  <li><a href="#facial-landmark-detection" id="toc-facial-landmark-detection" class="nav-link" data-scroll-target="#facial-landmark-detection">Facial landmark detection</a></li>
+  <li><a href="#hand-landmark-detection" id="toc-hand-landmark-detection" class="nav-link" data-scroll-target="#hand-landmark-detection">Hand landmark detection</a></li>
+  <li><a href="#body-pose-landmark-detection" id="toc-body-pose-landmark-detection" class="nav-link" data-scroll-target="#body-pose-landmark-detection">Body pose landmark detection</a></li>
+  <li><a href="#object-detection-optional-just-for-fun" id="toc-object-detection-optional-just-for-fun" class="nav-link" data-scroll-target="#object-detection-optional-just-for-fun">Object detection (OPTIONAL, just for fun!)</a></li>
   <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
   </ul>
 </nav>
@@ -157,19 +162,107 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>???</p>
-<p>The Github repository for this assignment will contain a starter code file, <code>activ16.py</code>. Put your code in this file, and create others, as directed below and according to the <code>TODO</code> comments in the file.</p>
+<p>This activity ties closely to Homework 4. It asks you to choose two of the Mediapipe programs that were provided to you, and to go beyond just visualizing the output of the model. Pull apart the data that is returned from each model, and use it to determine some aspect of the person’s facial expression or pose.</p>
+<p>The Github repository for this assignment will contain five starter code files, one for each Mediapipe model. You will also need to download the models themselves from our Moodle site, and move them into your Pycharm project.</p>
+<p><strong>Do not try to add the models to the Github repo! If asked about adding them, say NO. They are too large, and will cause every attempt to <em>push</em> your solutions to fail.</strong></p>
+<ul>
+<li><strong>First:</strong> run each of the four programs described in each section below</li>
+<li><strong>Second:</strong> choose <strong>TWO</strong> of the programs to modify for both this ICA and Questions 1 and 2 of Homework 4</li>
+</ul>
+</section>
+<section id="face-detection" class="level1">
+<h1>Face detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe face detection model</li>
+<li>Open the <code>mediapipeFaceDetect.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>If you have chosen to modify this program:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findFacing</code> in <code>runFaceDetect</code></li>
+<li>Modify <code>findFacing</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findFacing</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Experiment until you can figure out how to get the left ear and left eye coordinates out of the detection results</li>
+<li>Do the same with the right ear and right eye coordinates (assign variables to hold these four values)</li>
+<li>Compute the distance in the x dimension between the left ear and eye, and do the same for the right ear and eye</li>
+<li>Write an <code>if</code> statement that checks the distances, and if the distance between left eye and ear is small enough, and the distance between right eye and ear is large enough, then print that the person is facing toward the left</li>
+<li>Do something similar for facing toward the right</li>
+<li>If neither of these hold, then print facing forward</li>
+</ul></li>
+</ul>
+</section>
+<section id="facial-landmark-detection" class="level1">
+<h1>Facial landmark detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe facial landmark model</li>
+<li>Open the <code>mediapipeFaceLandmark.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>If you have chosen to modify this program:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findEyes</code> in <code>runFacialLandmarks</code></li>
+<li>Modify <code>findFacing</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findFacing</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Examine the blendshapes, and determine which ones will help you to discover if the person’s eyes are open or closed</li>
+<li>Experiment until you can figure out how to get the correct blendshape information from the detection results</li>
+<li>Determine a threshold or thresholds for when the blendshapes you have chosen indicate that eyes are closed</li>
+<li>Implement an <code>if</code> statement to test if eyes are open or closed, and print a message accordingly: “Eyes closed!” or “Eyes open”</li>
+</ul></li>
+</ul>
+</section>
+<section id="hand-landmark-detection" class="level1">
+<h1>Hand landmark detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe hand landmark model</li>
+<li>Open the <code>mediapipeHand.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>If you have chosen to modify this program:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findEyes</code> in <code>runFacialLandmarks</code></li>
+<li>Modify <code>findHandPose</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findHandPose</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Examine the landmarks that are returned. Determine some subset of landmarks that you could use to distinguish between someone making a fist and someone with an open palm (fingers up, palm forward).</li>
+<li>Experiment until you can figure out how to get the coordinates of those landmarks out of the detection results</li>
+<li>Determine what relationship between the landmark coordinates indicate a fist versus an open palm</li>
+<li>Implement an <code>if</code> statement to test whether the person is making a fist or an oopen palm, and print a message accordingly: “Palm” or “Fist”</li>
+</ul></li>
+</ul>
+</section>
+<section id="body-pose-landmark-detection" class="level1">
+<h1>Body pose landmark detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe body pose landmark model</li>
+<li>Open the <code>mediapipePose.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>If you have chosen to modify this program:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findEyes</code> in <code>runFacialLandmarks</code></li>
+<li>Modify <code>findHands</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findHands</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Examine the landmarks that are returned. Determine which landmarks would tell you the relative position of the person’s hands and their head: we want to tell if someone’s hands are above their head, or below or even with it</li>
+<li>Experiment until you can figure out how to get the coordinates of those landmarks out of the detection results</li>
+<li>Determine what relationship between the landmark coordinates indicate hands up or hands not up</li>
+<li>Implement an <code>if</code> statement to test whether the person has their hands up, and print a message accordingly: “Hands up” or “Hands down”</li>
+</ul></li>
+</ul>
+</section>
+<section id="object-detection-optional-just-for-fun" class="level1">
+<h1>Object detection (OPTIONAL, just for fun!)</h1>
+<p>If you like, experiment with the Object Detection code as well, and try to figure out some of the categories of objects it can detect.</p>
 </section>
 <section id="what-to-hand-in" class="level1">
 <h1>What to hand in</h1>
-<p>Put all of your function definitions for this activity into the <code>activ16.py</code> file to be submitted. Make sure you format your code appropriately:</p>
-<ul>
-<li>At the top of the file is a triple-quoted string describing the file</li>
-<li>Next you include all import statements</li>
-<li>Next you have your function definitions, visually separated by blank lines, and maybe comments with dashed or other visual horizontal lines</li>
-<li>Each function should have a triple-quoted descriptive comment right after the <code>def</code> line</li>
-<li>All calls to all functions should be in a script at the bottom of the file, ideally inside an <code>if __name__ ...</code> block</li>
-</ul>
+<p>You will be modifying two of the code files provided to you. Be sure to keep a copy of the modified code, to add to your Homework 4 project.</p>
 <p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
 
 
