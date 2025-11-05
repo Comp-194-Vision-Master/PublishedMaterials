@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.23">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Susan Eileen Fox">
+<meta name="dcterms.date" content="2025-11-05">
+
+<title>Chapter 8, Machine Learning and Computer Vision – Vision Readings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-226bd0f977fa82dfae4534cac220d79a.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Vision Readings</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Chapter 8, Machine Learning and Computer Vision</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Susan Eileen Fox </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 5, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-mediapipe-library" id="toc-the-mediapipe-library" class="nav-link active" data-scroll-target="#the-mediapipe-library"><span class="header-section-number">1</span> The Mediapipe library</a>
+  <ul class="collapse">
+  <li><a href="#mediapipe-face-detection" id="toc-mediapipe-face-detection" class="nav-link" data-scroll-target="#mediapipe-face-detection"><span class="header-section-number">1.1</span> Mediapipe face detection</a>
+  <ul class="collapse">
+  <li><a href="#examining-the-face-detection-program" id="toc-examining-the-face-detection-program" class="nav-link" data-scroll-target="#examining-the-face-detection-program"><span class="header-section-number">1.1.1</span> Examining the face detection program</a></li>
+  <li><a href="#face-detection-results" id="toc-face-detection-results" class="nav-link" data-scroll-target="#face-detection-results"><span class="header-section-number">1.1.2</span> Face detection results</a></li>
+  </ul></li>
+  <li><a href="#facial-feature-detection" id="toc-facial-feature-detection" class="nav-link" data-scroll-target="#facial-feature-detection"><span class="header-section-number">1.2</span> Facial feature detection</a>
+  <ul class="collapse">
+  <li><a href="#examining-the-facial-landmark-detection-program" id="toc-examining-the-facial-landmark-detection-program" class="nav-link" data-scroll-target="#examining-the-facial-landmark-detection-program"><span class="header-section-number">1.2.1</span> Examining the facial landmark detection program</a></li>
+  <li><a href="#face-landmark-results" id="toc-face-landmark-results" class="nav-link" data-scroll-target="#face-landmark-results"><span class="header-section-number">1.2.2</span> Face landmark results</a></li>
+  <li><a href="#blendshapes" id="toc-blendshapes" class="nav-link" data-scroll-target="#blendshapes"><span class="header-section-number">1.2.3</span> Blendshapes</a></li>
+  </ul></li>
+  <li><a href="#hand-landmark-skeletons" id="toc-hand-landmark-skeletons" class="nav-link" data-scroll-target="#hand-landmark-skeletons"><span class="header-section-number">1.3</span> Hand landmark skeletons</a>
+  <ul class="collapse">
+  <li><a href="#examining-the-hand-landmark-detection-program" id="toc-examining-the-hand-landmark-detection-program" class="nav-link" data-scroll-target="#examining-the-hand-landmark-detection-program"><span class="header-section-number">1.3.1</span> Examining the hand landmark detection program</a></li>
+  <li><a href="#hand-landmark-results" id="toc-hand-landmark-results" class="nav-link" data-scroll-target="#hand-landmark-results"><span class="header-section-number">1.3.2</span> Hand landmark results</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#mediapipe-pose-landmark-skeletons" id="toc-mediapipe-pose-landmark-skeletons" class="nav-link" data-scroll-target="#mediapipe-pose-landmark-skeletons"><span class="header-section-number">2</span> Mediapipe pose landmark skeletons</a>
+  <ul class="collapse">
+  <li><a href="#examining-the-body-pose-landmark-detection-program" id="toc-examining-the-body-pose-landmark-detection-program" class="nav-link" data-scroll-target="#examining-the-body-pose-landmark-detection-program"><span class="header-section-number">2.0.1</span> Examining the body pose landmark detection program</a></li>
+  <li><a href="#body-pose-landmark-results" id="toc-body-pose-landmark-results" class="nav-link" data-scroll-target="#body-pose-landmark-results"><span class="header-section-number">2.0.2</span> Body pose landmark results</a></li>
+  <li><a href="#object-detection-with-mediapipe-optional-challenge-section" id="toc-object-detection-with-mediapipe-optional-challenge-section" class="nav-link" data-scroll-target="#object-detection-with-mediapipe-optional-challenge-section"><span class="header-section-number">2.1</span> Object Detection with Mediapipe (OPTIONAL CHALLENGE SECTION)</a></li>
+  </ul></li>
+  <li><a href="#simple-machine-learning-with-opencv" id="toc-simple-machine-learning-with-opencv" class="nav-link" data-scroll-target="#simple-machine-learning-with-opencv"><span class="header-section-number">3</span> Simple Machine Learning with OpenCV</a></li>
+  <li><a href="#convolutional-neural-networks-a-building-block-for-deep-learning" id="toc-convolutional-neural-networks-a-building-block-for-deep-learning" class="nav-link" data-scroll-target="#convolutional-neural-networks-a-building-block-for-deep-learning"><span class="header-section-number">4</span> Convolutional Neural Networks (a building block for deep learning)</a></li>
+  <li><a href="#object-detection-and-segmentation-models" id="toc-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#object-detection-and-segmentation-models"><span class="header-section-number">5</span> Object Detection and Segmentation Models</a></li>
+  <li><a href="#imagevideo-generative-models" id="toc-imagevideo-generative-models" class="nav-link" data-scroll-target="#imagevideo-generative-models"><span class="header-section-number">6</span> Image/video generative models</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>This chapter will start by looking at some ways we can use existing trained models. It will then examine examples of machine learning for computer vision, starting from very simple data and models, and gradually increasing in complexity.</p>
+<section id="the-mediapipe-library" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The Mediapipe library</h1>
+<p>The <code>mediapipe</code> library was created by Google to share models they developed and trained for a number of different computer vision tasks. We will examine several models that can detect faces, facial features, and hand and body positions (with an optional example of an object detection model).</p>
+<p>To try these programs as you go along:</p>
+<ul>
+<li>Join the ICA 16 Github assignment, and clone the repository onto your own computer</li>
+<li>Download the <code>MediapipeModels.zip</code> file, unzip it, and move it into your project</li>
+</ul>
+<p>The five starter programs are very similar to each other, because Mediapipe standardized the set-up and operation of models. What differs are the detected features returned by the model, and how we can visualize them by drawing them on the original image.</p>
+<ul>
+<li><p>The five starter programs are all set up to work with the webcam: you may modify them to read a video file if you prefer. Each program:</p>
+<ul>
+<li>reads a frame from the video feed</li>
+<li>converts it to Mediapipe’s own image representation</li>
+<li>passes the result to the detector model, which returns an object that describes the items detected in the image (faces, hands, bodies)</li>
+<li>includes a TODO comment and a commented-out call to a function that would examine the detection results</li>
+<li>passes the detection results to a function that displays them on the original frame</li>
+</ul></li>
+</ul>
+<section id="mediapipe-face-detection" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="mediapipe-face-detection"><span class="header-section-number">1.1</span> Mediapipe face detection</h2>
+<p>Mediapipe has a state-of-the-art face detection model. Take a look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">Mediapipe Face Detection Guide</a> for more details about the model itself.</p>
+<p>The model detects a few specific landmarks of a face (eyes, nose tip, mouth, and sides of the face (cheeks or temples), and also provides a bounding box that surrounds the face. We will first walk through the demo program you have been provided, and then will look closely at the format of the data that is returned by the model.</p>
+<p>If you can, open the <code>mediapipeFaceDetect.py</code> program, which is also included in the code block below.</p>
+<div id="5d887af0" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>The <code>mediapipeFaceDetect.py</code> program, demonstrates the face detection model and its results</summary>
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="co">"""</span></span>
+<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="co">File: mediapipeFaceDetect.py</span></span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a><span class="co">Date: Fall 2025</span></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a></span>
+<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a><span class="co">This program provides a demo showing how to use Mediapipe's simple face detection model, and to visualize the results.</span></span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6"></a><span class="co">"""</span></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a></span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a><span class="im">import</span> math</span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a><span class="im">import</span> cv2</span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10"></a></span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11"></a><span class="im">import</span> mediapipe <span class="im">as</span> mp</span>
+<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12"></a><span class="im">from</span> mediapipe.tasks <span class="im">import</span> python</span>
+<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13"></a><span class="im">from</span> mediapipe.tasks.python <span class="im">import</span> vision</span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-15" class="code-annotation-target"><a href="#annotated-cell-1-15"></a>MARGIN <span class="op">=</span> <span class="dv">10</span>  <span class="co"># pixels</span></span>
+<span id="annotated-cell-1-16"><a href="#annotated-cell-1-16"></a>ROW_SIZE <span class="op">=</span> <span class="dv">10</span>  <span class="co"># pixels</span></span>
+<span id="annotated-cell-1-17"><a href="#annotated-cell-1-17"></a>FONT_SIZE <span class="op">=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18"></a>FONT_THICKNESS <span class="op">=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19"></a>CIRCLE_COLOR <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span>)  <span class="co"># green</span></span>
+<span id="annotated-cell-1-20"><a href="#annotated-cell-1-20"></a>TEXT_COLOR <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">255</span>)  <span class="co"># cyan, RGB, not a BGR</span></span>
+<span id="annotated-cell-1-21"><a href="#annotated-cell-1-21"></a></span>
+<span id="annotated-cell-1-22"><a href="#annotated-cell-1-22"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-23" class="code-annotation-target"><a href="#annotated-cell-1-23"></a><span class="kw">def</span> runFaceDetect(source<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="annotated-cell-1-24"><a href="#annotated-cell-1-24"></a>    <span class="co">"""Main program, sets up the blaze face detection model and then runs it on a video feed."""</span></span>
+<span id="annotated-cell-1-25"><a href="#annotated-cell-1-25"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-26" class="code-annotation-target"><a href="#annotated-cell-1-26"></a>    <span class="co"># Set up model</span></span>
+<span id="annotated-cell-1-27"><a href="#annotated-cell-1-27"></a>    modelPath <span class="op">=</span> <span class="st">"MediapipeModels/blaze_face_short_range.tflite"</span></span>
+<span id="annotated-cell-1-28"><a href="#annotated-cell-1-28"></a>    base_options <span class="op">=</span> python.BaseOptions(model_asset_path<span class="op">=</span>modelPath)</span>
+<span id="annotated-cell-1-29"><a href="#annotated-cell-1-29"></a>    options <span class="op">=</span> vision.FaceDetectorOptions(base_options<span class="op">=</span>base_options)</span>
+<span id="annotated-cell-1-30"><a href="#annotated-cell-1-30"></a>    detector <span class="op">=</span> vision.FaceDetector.create_from_options(options)</span>
+<span id="annotated-cell-1-31"><a href="#annotated-cell-1-31"></a></span>
+<span id="annotated-cell-1-32"><a href="#annotated-cell-1-32"></a>    <span class="co"># Set up camera</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-33" class="code-annotation-target"><a href="#annotated-cell-1-33"></a>    cap <span class="op">=</span> cv2.VideoCapture(source)</span>
+<span id="annotated-cell-1-34"><a href="#annotated-cell-1-34"></a></span>
+<span id="annotated-cell-1-35"><a href="#annotated-cell-1-35"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="annotated-cell-1-36"><a href="#annotated-cell-1-36"></a>        gotIm, frame <span class="op">=</span> cap.read()</span>
+<span id="annotated-cell-1-37"><a href="#annotated-cell-1-37"></a>        <span class="cf">if</span> <span class="kw">not</span> gotIm:</span>
+<span id="annotated-cell-1-38"><a href="#annotated-cell-1-38"></a>            <span class="cf">break</span></span>
+<span id="annotated-cell-1-39"><a href="#annotated-cell-1-39"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-40" class="code-annotation-target"><a href="#annotated-cell-1-40"></a>        <span class="co"># Convert the frame to a Mediapipe image representation</span></span>
+<span id="annotated-cell-1-41"><a href="#annotated-cell-1-41"></a>        image <span class="op">=</span> cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span>
+<span id="annotated-cell-1-42"><a href="#annotated-cell-1-42"></a>        mp_image <span class="op">=</span> mp.Image(image_format<span class="op">=</span>mp.ImageFormat.SRGB, data<span class="op">=</span>image)</span>
+<span id="annotated-cell-1-43"><a href="#annotated-cell-1-43"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-44" class="code-annotation-target"><a href="#annotated-cell-1-44"></a>        <span class="co"># Run the face detector model on the image</span></span>
+<span id="annotated-cell-1-45"><a href="#annotated-cell-1-45"></a>        detect_result <span class="op">=</span> detector.detect(mp_image)</span>
+<span id="annotated-cell-1-46"><a href="#annotated-cell-1-46"></a></span>
+<span id="annotated-cell-1-47"><a href="#annotated-cell-1-47"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: Uncomment this call to run the function that checks which way each detected face is pointing</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="7">7</button><span id="annotated-cell-1-48" class="code-annotation-target"><a href="#annotated-cell-1-48"></a>        <span class="co"># findFacing(detect_result)</span></span>
+<span id="annotated-cell-1-49"><a href="#annotated-cell-1-49"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="8">8</button><span id="annotated-cell-1-50" class="code-annotation-target"><a href="#annotated-cell-1-50"></a>        annot_image <span class="op">=</span> visualizeResults(mp_image.numpy_view(), detect_result)</span>
+<span id="annotated-cell-1-51"><a href="#annotated-cell-1-51"></a></span>
+<span id="annotated-cell-1-52"><a href="#annotated-cell-1-52"></a>        <span class="co"># Display the results on screen</span></span>
+<span id="annotated-cell-1-53"><a href="#annotated-cell-1-53"></a>        vis_image <span class="op">=</span> cv2.cvtColor(annot_image, cv2.COLOR_RGB2BGR)</span>
+<span id="annotated-cell-1-54"><a href="#annotated-cell-1-54"></a>        cv2.imshow(<span class="st">"Detected"</span>, vis_image)</span>
+<span id="annotated-cell-1-55"><a href="#annotated-cell-1-55"></a></span>
+<span id="annotated-cell-1-56"><a href="#annotated-cell-1-56"></a>        x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)                              </span>
+<span id="annotated-cell-1-57"><a href="#annotated-cell-1-57"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="annotated-cell-1-58"><a href="#annotated-cell-1-58"></a>            <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="annotated-cell-1-59"><a href="#annotated-cell-1-59"></a>                <span class="cf">break</span></span>
+<span id="annotated-cell-1-60"><a href="#annotated-cell-1-60"></a>    cap.release()</span>
+<span id="annotated-cell-1-61"><a href="#annotated-cell-1-61"></a></span>
+<span id="annotated-cell-1-62"><a href="#annotated-cell-1-62"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="9">9</button><span id="annotated-cell-1-63" class="code-annotation-target"><a href="#annotated-cell-1-63"></a><span class="kw">def</span> _normalized_to_pixel_coordinates(normalized_x, normalized_y, image_width, image_height):</span>
+<span id="annotated-cell-1-64"><a href="#annotated-cell-1-64"></a>    <span class="co">"""Converts normalized value pair to pixel coordinates."""</span></span>
+<span id="annotated-cell-1-65"><a href="#annotated-cell-1-65"></a></span>
+<span id="annotated-cell-1-66"><a href="#annotated-cell-1-66"></a>    <span class="co"># Checks if the float value is between 0 and 1.</span></span>
+<span id="annotated-cell-1-67"><a href="#annotated-cell-1-67"></a>    <span class="kw">def</span> is_valid_normalized_value(value):</span>
+<span id="annotated-cell-1-68"><a href="#annotated-cell-1-68"></a>        <span class="cf">return</span> (value <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">or</span> math.isclose(<span class="dv">0</span>, value)) <span class="kw">and</span> (value <span class="op">&lt;</span> <span class="dv">1</span> <span class="kw">or</span> math.isclose(<span class="dv">1</span>, value))</span>
+<span id="annotated-cell-1-69"><a href="#annotated-cell-1-69"></a></span>
+<span id="annotated-cell-1-70"><a href="#annotated-cell-1-70"></a>    <span class="cf">if</span> <span class="kw">not</span> is_valid_normalized_value(normalized_x):</span>
+<span id="annotated-cell-1-71"><a href="#annotated-cell-1-71"></a>        normalized_x <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.0</span>, <span class="bu">min</span>(<span class="fl">1.0</span>, normalized_x))</span>
+<span id="annotated-cell-1-72"><a href="#annotated-cell-1-72"></a>    <span class="cf">if</span> <span class="kw">not</span> is_valid_normalized_value(normalized_y):</span>
+<span id="annotated-cell-1-73"><a href="#annotated-cell-1-73"></a>        normalized_y <span class="op">=</span> <span class="bu">max</span>(<span class="fl">0.0</span>, <span class="bu">min</span>(<span class="fl">1.0</span>, normalized_y))</span>
+<span id="annotated-cell-1-74"><a href="#annotated-cell-1-74"></a>    x_px <span class="op">=</span> <span class="bu">min</span>(math.floor(normalized_x <span class="op">*</span> image_width), image_width <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="annotated-cell-1-75"><a href="#annotated-cell-1-75"></a>    y_px <span class="op">=</span> <span class="bu">min</span>(math.floor(normalized_y <span class="op">*</span> image_height), image_height <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="annotated-cell-1-76"><a href="#annotated-cell-1-76"></a>    <span class="cf">return</span> x_px, y_px</span>
+<span id="annotated-cell-1-77"><a href="#annotated-cell-1-77"></a></span>
+<span id="annotated-cell-1-78"><a href="#annotated-cell-1-78"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="10">10</button><span id="annotated-cell-1-79" class="code-annotation-target"><a href="#annotated-cell-1-79"></a><span class="kw">def</span> visualizeResults(image, detection_result):</span>
+<span id="annotated-cell-1-80"><a href="#annotated-cell-1-80"></a>    <span class="co">"""Draws bounding boxes and keypoints on the input image and return it.</span></span>
+<span id="annotated-cell-1-81"><a href="#annotated-cell-1-81"></a><span class="co">    Args:</span></span>
+<span id="annotated-cell-1-82"><a href="#annotated-cell-1-82"></a><span class="co">        image: The input RGB image.</span></span>
+<span id="annotated-cell-1-83"><a href="#annotated-cell-1-83"></a><span class="co">        detection_result: The list of all "Detection" entities to be visualized.</span></span>
+<span id="annotated-cell-1-84"><a href="#annotated-cell-1-84"></a><span class="co">    Returns: Image with bounding boxes.</span></span>
+<span id="annotated-cell-1-85"><a href="#annotated-cell-1-85"></a><span class="co">    """</span></span>
+<span id="annotated-cell-1-86"><a href="#annotated-cell-1-86"></a></span>
+<span id="annotated-cell-1-87"><a href="#annotated-cell-1-87"></a>    <span class="co"># Copy the original image and make changes to the copy</span></span>
+<span id="annotated-cell-1-88"><a href="#annotated-cell-1-88"></a>    annotated_image <span class="op">=</span> image.copy()</span>
+<span id="annotated-cell-1-89"><a href="#annotated-cell-1-89"></a>    height, width, _ <span class="op">=</span> image.shape</span>
+<span id="annotated-cell-1-90"><a href="#annotated-cell-1-90"></a></span>
+<span id="annotated-cell-1-91"><a href="#annotated-cell-1-91"></a>    <span class="cf">for</span> detection <span class="kw">in</span> detection_result.detections:</span>
+<span id="annotated-cell-1-92"><a href="#annotated-cell-1-92"></a>        <span class="co"># Draw bounding_box for each face detected</span></span>
+<span id="annotated-cell-1-93"><a href="#annotated-cell-1-93"></a>        bbox <span class="op">=</span> detection.bounding_box</span>
+<span id="annotated-cell-1-94"><a href="#annotated-cell-1-94"></a>        start_point <span class="op">=</span> bbox.origin_x, bbox.origin_y</span>
+<span id="annotated-cell-1-95"><a href="#annotated-cell-1-95"></a>        end_point <span class="op">=</span> bbox.origin_x <span class="op">+</span> bbox.width, bbox.origin_y <span class="op">+</span> bbox.height</span>
+<span id="annotated-cell-1-96"><a href="#annotated-cell-1-96"></a>        cv2.rectangle(annotated_image, start_point, end_point, TEXT_COLOR, <span class="dv">3</span>)</span>
+<span id="annotated-cell-1-97"><a href="#annotated-cell-1-97"></a></span>
+<span id="annotated-cell-1-98"><a href="#annotated-cell-1-98"></a>        <span class="co"># Draw face keypoints for each face detected</span></span>
+<span id="annotated-cell-1-99"><a href="#annotated-cell-1-99"></a>        <span class="cf">for</span> keypoint <span class="kw">in</span> detection.keypoints:</span>
+<span id="annotated-cell-1-100"><a href="#annotated-cell-1-100"></a>            keypoint_px <span class="op">=</span> _normalized_to_pixel_coordinates(keypoint.x, keypoint.y, width, height)</span>
+<span id="annotated-cell-1-101"><a href="#annotated-cell-1-101"></a>            cv2.circle(annotated_image, keypoint_px, <span class="dv">3</span>, CIRCLE_COLOR, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="annotated-cell-1-102"><a href="#annotated-cell-1-102"></a></span>
+<span id="annotated-cell-1-103"><a href="#annotated-cell-1-103"></a>        <span class="co"># Draw category label and confidence score as text on bounding box</span></span>
+<span id="annotated-cell-1-104"><a href="#annotated-cell-1-104"></a>        category <span class="op">=</span> detection.categories[<span class="dv">0</span>]</span>
+<span id="annotated-cell-1-105"><a href="#annotated-cell-1-105"></a>        category_name <span class="op">=</span> category.category_name</span>
+<span id="annotated-cell-1-106"><a href="#annotated-cell-1-106"></a>        category_name <span class="op">=</span> <span class="st">''</span> <span class="cf">if</span> category_name <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> category_name</span>
+<span id="annotated-cell-1-107"><a href="#annotated-cell-1-107"></a>        probability <span class="op">=</span> <span class="bu">round</span>(category.score, <span class="dv">2</span>)</span>
+<span id="annotated-cell-1-108"><a href="#annotated-cell-1-108"></a>        result_text <span class="op">=</span> category_name <span class="op">+</span> <span class="st">' ('</span> <span class="op">+</span> <span class="bu">str</span>(probability) <span class="op">+</span> <span class="st">')'</span></span>
+<span id="annotated-cell-1-109"><a href="#annotated-cell-1-109"></a>        text_location <span class="op">=</span> (MARGIN <span class="op">+</span> bbox.origin_x,</span>
+<span id="annotated-cell-1-110"><a href="#annotated-cell-1-110"></a>                         MARGIN <span class="op">+</span> ROW_SIZE <span class="op">+</span> bbox.origin_y)</span>
+<span id="annotated-cell-1-111"><a href="#annotated-cell-1-111"></a>        cv2.putText(annotated_image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,</span>
+<span id="annotated-cell-1-112"><a href="#annotated-cell-1-112"></a>                    FONT_SIZE, TEXT_COLOR, FONT_THICKNESS)</span>
+<span id="annotated-cell-1-113"><a href="#annotated-cell-1-113"></a></span>
+<span id="annotated-cell-1-114"><a href="#annotated-cell-1-114"></a>    <span class="cf">return</span> annotated_image</span>
+<span id="annotated-cell-1-115"><a href="#annotated-cell-1-115"></a></span>
+<span id="annotated-cell-1-116"><a href="#annotated-cell-1-116"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="11">11</button><span id="annotated-cell-1-117" class="code-annotation-target"><a href="#annotated-cell-1-117"></a><span class="kw">def</span> findFacing(detect_results):</span>
+<span id="annotated-cell-1-118"><a href="#annotated-cell-1-118"></a>    <span class="co">"""Takes in the face detection results and determines, for each face located, whether the</span></span>
+<span id="annotated-cell-1-119"><a href="#annotated-cell-1-119"></a><span class="co">    face is pointing forward, to the left, or to the right. It prints a message with the results."""</span></span>
+<span id="annotated-cell-1-120"><a href="#annotated-cell-1-120"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: for each face detected, determine the facing from the relative positions of each eye and</span></span>
+<span id="annotated-cell-1-121"><a href="#annotated-cell-1-121"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: the edge of the face on that side</span></span>
+<span id="annotated-cell-1-122"><a href="#annotated-cell-1-122"></a>    <span class="cf">pass</span></span>
+<span id="annotated-cell-1-123"><a href="#annotated-cell-1-123"></a></span>
+<span id="annotated-cell-1-124"><a href="#annotated-cell-1-124"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="12">12</button><span id="annotated-cell-1-125" class="code-annotation-target"><a href="#annotated-cell-1-125"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="annotated-cell-1-126"><a href="#annotated-cell-1-126"></a>    runFaceDetect(<span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="15,16,17,18,19,20" data-code-annotation="1">A set of constants that define the color, font, and other display details for visualizing the results</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="23" data-code-annotation="2">The main program</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="26,27,28,29,30" data-code-annotation="3">Set up the model (no need to understand the details)</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="33,35,36,37,38" data-code-annotation="4">Set up the video feed just as we have done</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="40,41,42" data-code-annotation="5">Convert the input frame to Mediapipe’s own representation of an image</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="44,45" data-code-annotation="6">Run the detector on the new representation of the frame</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="48" data-code-annotation="7">Call the helper function, for use with the ICA and homework</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="50,53,54" data-code-annotation="8">Call the <code>visualizeResult</code> function and show the final results</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="63" data-code-annotation="9">A function to convert from normalized coordinates to ordinary pixel coordinates for our image size</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="79" data-code-annotation="10">A function to draw the face results on the frame</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="11">11</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="117" data-code-annotation="11">A function to be completed by use for the ICA/Homework</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="12">12</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="125" data-code-annotation="12">The main script, which just calls the main function</span>
+</dd>
+</dl>
+</div>
+</div>
+<p><a href="#fig-faceDetect" class="quarto-xref">Figure&nbsp;1</a> shows several screenshots from the running of this program. Notice that it can detect multiple faces, and each face detected includes several parts: a bounding rectangle, a confidence value, and six key points (eyes, nose, mouth, and cheeks/temples).</p>
+<div id="fig-faceDetect" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-faceDetect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceDetect1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Straight ahead view of a face"><img src="Ch8-Images/faceDetect1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Straight ahead view of a face</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceDetect2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Face turned to one side"><img src="Ch8-Images/faceDetect2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Face turned to one side</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceDetect3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Tilted head"><img src="Ch8-Images/faceDetect3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Tilted head</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceDetect4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Face partially covered"><img src="Ch8-Images/faceDetect4.png" class="img-fluid figure-img"></a></p>
+<figcaption>Face partially covered</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceDetect5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Multiple faces"><img src="Ch8-Images/faceDetect5.png" class="img-fluid figure-img"></a></p>
+<figcaption>Multiple faces</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-faceDetect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Various results of face detection: notice detection is tuned to typical webcam sized faces
+</figcaption>
+</figure>
+</div>
+<section id="examining-the-face-detection-program" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="examining-the-face-detection-program"><span class="header-section-number">1.1.1</span> Examining the face detection program</h3>
+<p>There are four functions that make up this program, plus a very short script that calls the main function.</p>
+<p>The <code>runFaceDetect</code> function is the main program. It loads the model, connects to the webcam, and then runs the model on frames from the webcam, displaying the results. It includes a call to an unfinished function that you could choose to implement for the in-class activity.</p>
+<p>The <code>visualizeResults</code> function takes in an image represented as an RGB Numpy array (not quite OpenCV’s representation, but close), as well as the detection results from the model. It draws a bounding box around each face detected in the image, as well as several key points (eyes, nose, mouth, and edges of the face). It also adds a text label near the bounding box that lists the category (face) as well as the model’s confidence in its identification (probability that the identification is correct).</p>
+<p>The <code>_normalized_to_pixel_coordinates</code> function is used to convert from the “normalized” coordinates the model produces to normal pixel coordinates. Normalized coordinates are scaled to be real numbers between 0.0 and 1.0, so they represent the proportion of the distance along the given dimension, while being independent of the actual width or height of the image (often images are resized to submit to a deep learning model). A normalized value of 0.0 would correspond to the leftmost column or topmost row in the image. A normalized value of 0.5 would be halfway across or down the image, and a normalized value of 1.0 would be the rightmost column or bottommost row.</p>
+<p>The <code>findFacing</code> function does nothing initially, but is there for you to use when working with the detection results.</p>
+</section>
+<section id="face-detection-results" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="face-detection-results"><span class="header-section-number">1.1.2</span> Face detection results</h3>
+<p>The results returned from the face detection model are complex and layered. The table below breaks down these results and how to access them.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Accessing results</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>dt = detector.detect(mp_image)</code></td>
+<td style="text-align: left;"><code>dt</code> is a <code>DetectionResult</code> object. It has one instance variable called <code>detections</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dt.detections</code></td>
+<td style="text-align: left;"><code>detections</code> is a list containing <code>Detection</code> object, one for each face that has been detected. The list is empty when no faces are found</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>detObj = dt.detections[0]</code></td>
+<td style="text-align: left;"><code>detObj</code> is a <code>Detection</code> object. It has three variables within it: <code>bounding_box</code>, <code>categories</code>, and <code>keypoints</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><code>bb = detObj.bounding_box</code></p>
+<ul>
+<li><code>bb.origin_x</code></li>
+<li><code>bb.origin_y</code></li>
+<li><code>bb.width</code></li>
+<li><code>bb.height</code></li>
+</ul></td>
+<td style="text-align: left;"><code>bounding_box</code> holds a <code>BoundingBox</code> object, which describes a rectangle. It has four values: <code>origin_x</code>, <code>origin_y</code>, <code>width</code> and <code>height</code>, in image pixel coordinates. They give the upper-left corner and width and height of a rectangle</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>categs = detObj.categories</code></td>
+<td style="text-align: left;"><code>categs</code> is a list of <code>Category</code> objects. Each item in the list corresponds to one of the faces detected: the length of the <code>detections</code> list and <code>categs</code> are the same.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><code>cat1 = categs[0]</code></p>
+<ul>
+<li><code>conf = cat1.score</code></li>
+</ul></td>
+<td style="text-align: left;"><code>cat1</code> is a <code>Category</code> object. It has four variables in it: <code>index</code>, <code>score</code>, <code>display_name</code>, and <code>category_name</code>. We only need the score: the other three variables are used when detecting multiple kinds of objects, here we only have faces The score represents how confident the model is that it has found a face.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>kpts = detObj.keypoints</code></td>
+<td style="text-align: left;"><code>kpts</code> is a list containing six (x, y) coordinates. These points describe where certain landmarks on the face are detected to be.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>kpts[0]</code></td>
+<td style="text-align: left;"><code>kpts[0]</code> is a <code>NormalizedKeypoint</code> object, which has <code>x</code> and <code>y</code> variables, along with some others we don’t need. The coordinates are between 0.0 and 1.0.</td>
+</tr>
+</tbody>
+</table>
+<p>The keypoints reported by this model are always in the same order:</p>
+<ul>
+<li><code>kpts[0]</code> is the eye that appears toward the left side of the image</li>
+<li><code>kpts[1]</code> is the eye that appears toward the right side of the image</li>
+<li><code>kpts[2]</code> is the nose</li>
+<li><code>kpts[3]</code> is the mouth</li>
+<li><code>kpts[4]</code> is the ear that appears toward the left side of the image</li>
+<li><code>kpts[5]</code> is the ear that apepars toward the right side of the image</li>
+</ul>
+<p>In the ICA code, there is a text file, <code>faceDetectResults.txt</code> that shows the structure of the results for zero faces, one face, and two faces detected.</p>
+</section>
+</section>
+<section id="facial-feature-detection" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="facial-feature-detection"><span class="header-section-number">1.2</span> Facial feature detection</h2>
+<p>We can go well beyond finding a handful of keypoints on a face. Mediapipe includes a more elaborate face landmark detection object. Look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker">Mediapipe Face Landmark Detection guide</a> for more details.</p>
+<p>The face landmarker actually runs three separate models on the image it is given:</p>
+<ul>
+<li>The face detection model from the previous section</li>
+<li>A model that detects nearly 500 face landmarks</li>
+<li>A model that identifies <em>blendshapes:</em> configurations of the face landmarks that indicate a particular higher-level pattern, such as “outer end of left eyebrow raised”</li>
+</ul>
+<p>With the outputs from these models, we should be able to identify general emotions expressed in a face, or use these landmarks for motion capture, or to augment the user’s face with fake glasses, flowers, or makeup.</p>
+<p>If you can, open the <code>mediapipeFaceLandmark.py</code> program, which is also included in the code block below.</p>
+<div id="0ffae2c1" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>The <code>mediapipeFaceLandmark.py</code> program, demonstrates the facial landmark models and their results</summary>
+<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co">"""</span></span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a><span class="co">File: mediapipeFaceLandmark.py</span></span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a><span class="co">Date: Fall 2025</span></span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4"></a></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a><span class="co">This program provides a demo showing how to use Mediapipe's facial landmark model, and to visualize the results.</span></span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6"></a><span class="co">"""</span></span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7"></a></span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8"></a><span class="im">import</span> cv2</span>
+<span id="annotated-cell-2-9"><a href="#annotated-cell-2-9"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10"></a></span>
+<span id="annotated-cell-2-11"><a href="#annotated-cell-2-11"></a><span class="im">import</span> mediapipe <span class="im">as</span> mp</span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12"></a><span class="im">from</span> mediapipe.tasks <span class="im">import</span> python</span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13"></a><span class="im">from</span> mediapipe.tasks.python <span class="im">import</span> vision</span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14"></a></span>
+<span id="annotated-cell-2-15"><a href="#annotated-cell-2-15"></a><span class="im">from</span> mediapipe <span class="im">import</span> solutions</span>
+<span id="annotated-cell-2-16"><a href="#annotated-cell-2-16"></a><span class="im">from</span> mediapipe.framework.formats <span class="im">import</span> landmark_pb2</span>
+<span id="annotated-cell-2-17"><a href="#annotated-cell-2-17"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="annotated-cell-2-18"><a href="#annotated-cell-2-18"></a></span>
+<span id="annotated-cell-2-19"><a href="#annotated-cell-2-19"></a></span>
+<span id="annotated-cell-2-20"><a href="#annotated-cell-2-20"></a><span class="kw">def</span> runFacialLandmarks(source<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="annotated-cell-2-21"><a href="#annotated-cell-2-21"></a>    <span class="co"># Set up model</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-22" class="code-annotation-target"><a href="#annotated-cell-2-22"></a>    modelPath <span class="op">=</span> <span class="st">"MediapipeModels/face_landmarker_v2_with_blendshapes.task"</span></span>
+<span id="annotated-cell-2-23"><a href="#annotated-cell-2-23"></a>    base_options <span class="op">=</span> python.BaseOptions(model_asset_path<span class="op">=</span>modelPath)</span>
+<span id="annotated-cell-2-24"><a href="#annotated-cell-2-24"></a>    options <span class="op">=</span> vision.FaceLandmarkerOptions(base_options<span class="op">=</span>base_options,</span>
+<span id="annotated-cell-2-25"><a href="#annotated-cell-2-25"></a>                                           output_face_blendshapes<span class="op">=</span><span class="va">True</span>,</span>
+<span id="annotated-cell-2-26"><a href="#annotated-cell-2-26"></a>                                           output_facial_transformation_matrixes<span class="op">=</span><span class="va">True</span>,</span>
+<span id="annotated-cell-2-27"><a href="#annotated-cell-2-27"></a>                                           num_faces<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="annotated-cell-2-28"><a href="#annotated-cell-2-28"></a>    detector <span class="op">=</span> vision.FaceLandmarker.create_from_options(options)</span>
+<span id="annotated-cell-2-29"><a href="#annotated-cell-2-29"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-30" class="code-annotation-target"><a href="#annotated-cell-2-30"></a>    <span class="co"># Set up camera</span></span>
+<span id="annotated-cell-2-31"><a href="#annotated-cell-2-31"></a>    cap <span class="op">=</span> cv2.VideoCapture(source)</span>
+<span id="annotated-cell-2-32"><a href="#annotated-cell-2-32"></a></span>
+<span id="annotated-cell-2-33"><a href="#annotated-cell-2-33"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="annotated-cell-2-34"><a href="#annotated-cell-2-34"></a>        gotIm, frame <span class="op">=</span> cap.read()</span>
+<span id="annotated-cell-2-35"><a href="#annotated-cell-2-35"></a>        <span class="cf">if</span> <span class="kw">not</span> gotIm:</span>
+<span id="annotated-cell-2-36"><a href="#annotated-cell-2-36"></a>            <span class="cf">break</span></span>
+<span id="annotated-cell-2-37"><a href="#annotated-cell-2-37"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-38" class="code-annotation-target"><a href="#annotated-cell-2-38"></a>        <span class="co"># Convert image to Mediapipe image format</span></span>
+<span id="annotated-cell-2-39"><a href="#annotated-cell-2-39"></a>        image <span class="op">=</span> cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span>
+<span id="annotated-cell-2-40"><a href="#annotated-cell-2-40"></a>        mp_image <span class="op">=</span> mp.Image(image_format<span class="op">=</span>mp.ImageFormat.SRGB, data<span class="op">=</span>image)</span>
+<span id="annotated-cell-2-41"><a href="#annotated-cell-2-41"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-42" class="code-annotation-target"><a href="#annotated-cell-2-42"></a>        <span class="co"># Run facial landmark detector</span></span>
+<span id="annotated-cell-2-43"><a href="#annotated-cell-2-43"></a>        detect_result <span class="op">=</span> detector.detect(mp_image)</span>
+<span id="annotated-cell-2-44"><a href="#annotated-cell-2-44"></a></span>
+<span id="annotated-cell-2-45"><a href="#annotated-cell-2-45"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: Uncomment this call to run the function that checks whether eyes are open or closed</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-46" class="code-annotation-target"><a href="#annotated-cell-2-46"></a>        <span class="co"># findEyes(detect_result)</span></span>
+<span id="annotated-cell-2-47"><a href="#annotated-cell-2-47"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6">6</button><span id="annotated-cell-2-48" class="code-annotation-target"><a href="#annotated-cell-2-48"></a>        annot_image <span class="op">=</span> visualizeResults(mp_image.numpy_view(), detect_result)</span>
+<span id="annotated-cell-2-49"><a href="#annotated-cell-2-49"></a>        vis_image <span class="op">=</span> cv2.cvtColor(annot_image, cv2.COLOR_RGB2BGR)</span>
+<span id="annotated-cell-2-50"><a href="#annotated-cell-2-50"></a>        cv2.imshow(<span class="st">"Detected"</span>, vis_image)</span>
+<span id="annotated-cell-2-51"><a href="#annotated-cell-2-51"></a></span>
+<span id="annotated-cell-2-52"><a href="#annotated-cell-2-52"></a>        x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
+<span id="annotated-cell-2-53"><a href="#annotated-cell-2-53"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="annotated-cell-2-54"><a href="#annotated-cell-2-54"></a>            <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="annotated-cell-2-55"><a href="#annotated-cell-2-55"></a>                <span class="cf">break</span></span>
+<span id="annotated-cell-2-56"><a href="#annotated-cell-2-56"></a>            <span class="cf">elif</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'b'</span>:</span>
+<span id="annotated-cell-2-57"><a href="#annotated-cell-2-57"></a>                plot_face_blendshapes_bar_graph(detect_result.face_blendshapes[<span class="dv">0</span>])</span>
+<span id="annotated-cell-2-58"><a href="#annotated-cell-2-58"></a>    cap.release()</span>
+<span id="annotated-cell-2-59"><a href="#annotated-cell-2-59"></a></span>
+<span id="annotated-cell-2-60"><a href="#annotated-cell-2-60"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="7">7</button><span id="annotated-cell-2-61" class="code-annotation-target"><a href="#annotated-cell-2-61"></a><span class="kw">def</span> visualizeResults(rgb_image, detection_result):</span>
+<span id="annotated-cell-2-62"><a href="#annotated-cell-2-62"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-2-63"><a href="#annotated-cell-2-63"></a><span class="co">    Draw the face landmark mesh onto a copy of the input RGB image and returns it</span></span>
+<span id="annotated-cell-2-64"><a href="#annotated-cell-2-64"></a><span class="co">    :param rgb_image: an image in RGB format (as a Numpy array)</span></span>
+<span id="annotated-cell-2-65"><a href="#annotated-cell-2-65"></a><span class="co">    :param detection_result: The results of running the face landmarker model</span></span>
+<span id="annotated-cell-2-66"><a href="#annotated-cell-2-66"></a><span class="co">    :return: a copy of rgb_image with face landmark mesh drawn on it</span></span>
+<span id="annotated-cell-2-67"><a href="#annotated-cell-2-67"></a><span class="co">    """</span></span>
+<span id="annotated-cell-2-68"><a href="#annotated-cell-2-68"></a>    annotated_image <span class="op">=</span> np.copy(rgb_image)</span>
+<span id="annotated-cell-2-69"><a href="#annotated-cell-2-69"></a>    face_landmarks_list <span class="op">=</span> detection_result.face_landmarks</span>
+<span id="annotated-cell-2-70"><a href="#annotated-cell-2-70"></a></span>
+<span id="annotated-cell-2-71"><a href="#annotated-cell-2-71"></a>    <span class="co"># Loop through the detected faces to visualize.</span></span>
+<span id="annotated-cell-2-72"><a href="#annotated-cell-2-72"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(face_landmarks_list)):</span>
+<span id="annotated-cell-2-73"><a href="#annotated-cell-2-73"></a>        face_landmarks <span class="op">=</span> face_landmarks_list[idx]</span>
+<span id="annotated-cell-2-74"><a href="#annotated-cell-2-74"></a></span>
+<span id="annotated-cell-2-75"><a href="#annotated-cell-2-75"></a>        <span class="co"># Draw the face landmarks.</span></span>
+<span id="annotated-cell-2-76"><a href="#annotated-cell-2-76"></a>        face_landmarks_proto <span class="op">=</span> landmark_pb2.NormalizedLandmarkList()</span>
+<span id="annotated-cell-2-77"><a href="#annotated-cell-2-77"></a>        face_landmarks_proto.landmark.extend([</span>
+<span id="annotated-cell-2-78"><a href="#annotated-cell-2-78"></a>            landmark_pb2.NormalizedLandmark(x<span class="op">=</span>landmark.x, y<span class="op">=</span>landmark.y, z<span class="op">=</span>landmark.z) <span class="cf">for</span> landmark <span class="kw">in</span> face_landmarks</span>
+<span id="annotated-cell-2-79"><a href="#annotated-cell-2-79"></a>        ])</span>
+<span id="annotated-cell-2-80"><a href="#annotated-cell-2-80"></a></span>
+<span id="annotated-cell-2-81"><a href="#annotated-cell-2-81"></a>        solutions.drawing_utils.draw_landmarks(</span>
+<span id="annotated-cell-2-82"><a href="#annotated-cell-2-82"></a>            image<span class="op">=</span>annotated_image,</span>
+<span id="annotated-cell-2-83"><a href="#annotated-cell-2-83"></a>            landmark_list<span class="op">=</span>face_landmarks_proto,</span>
+<span id="annotated-cell-2-84"><a href="#annotated-cell-2-84"></a>            connections<span class="op">=</span>mp.solutions.face_mesh.FACEMESH_TESSELATION,</span>
+<span id="annotated-cell-2-85"><a href="#annotated-cell-2-85"></a>            landmark_drawing_spec<span class="op">=</span><span class="va">None</span>,</span>
+<span id="annotated-cell-2-86"><a href="#annotated-cell-2-86"></a>            connection_drawing_spec<span class="op">=</span>mp.solutions.drawing_styles</span>
+<span id="annotated-cell-2-87"><a href="#annotated-cell-2-87"></a>            .get_default_face_mesh_tesselation_style())</span>
+<span id="annotated-cell-2-88"><a href="#annotated-cell-2-88"></a>        solutions.drawing_utils.draw_landmarks(</span>
+<span id="annotated-cell-2-89"><a href="#annotated-cell-2-89"></a>            image<span class="op">=</span>annotated_image,</span>
+<span id="annotated-cell-2-90"><a href="#annotated-cell-2-90"></a>            landmark_list<span class="op">=</span>face_landmarks_proto,</span>
+<span id="annotated-cell-2-91"><a href="#annotated-cell-2-91"></a>            connections<span class="op">=</span>mp.solutions.face_mesh.FACEMESH_CONTOURS,</span>
+<span id="annotated-cell-2-92"><a href="#annotated-cell-2-92"></a>            landmark_drawing_spec<span class="op">=</span><span class="va">None</span>,</span>
+<span id="annotated-cell-2-93"><a href="#annotated-cell-2-93"></a>            connection_drawing_spec<span class="op">=</span>mp.solutions.drawing_styles</span>
+<span id="annotated-cell-2-94"><a href="#annotated-cell-2-94"></a>            .get_default_face_mesh_contours_style())</span>
+<span id="annotated-cell-2-95"><a href="#annotated-cell-2-95"></a>        solutions.drawing_utils.draw_landmarks(</span>
+<span id="annotated-cell-2-96"><a href="#annotated-cell-2-96"></a>            image<span class="op">=</span>annotated_image,</span>
+<span id="annotated-cell-2-97"><a href="#annotated-cell-2-97"></a>            landmark_list<span class="op">=</span>face_landmarks_proto,</span>
+<span id="annotated-cell-2-98"><a href="#annotated-cell-2-98"></a>            connections<span class="op">=</span>mp.solutions.face_mesh.FACEMESH_IRISES,</span>
+<span id="annotated-cell-2-99"><a href="#annotated-cell-2-99"></a>            landmark_drawing_spec<span class="op">=</span><span class="va">None</span>,</span>
+<span id="annotated-cell-2-100"><a href="#annotated-cell-2-100"></a>            connection_drawing_spec<span class="op">=</span>mp.solutions.drawing_styles</span>
+<span id="annotated-cell-2-101"><a href="#annotated-cell-2-101"></a>            .get_default_face_mesh_iris_connections_style())</span>
+<span id="annotated-cell-2-102"><a href="#annotated-cell-2-102"></a></span>
+<span id="annotated-cell-2-103"><a href="#annotated-cell-2-103"></a>    <span class="cf">return</span> annotated_image</span>
+<span id="annotated-cell-2-104"><a href="#annotated-cell-2-104"></a></span>
+<span id="annotated-cell-2-105"><a href="#annotated-cell-2-105"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="8">8</button><span id="annotated-cell-2-106" class="code-annotation-target"><a href="#annotated-cell-2-106"></a><span class="kw">def</span> plot_face_blendshapes_bar_graph(face_blendshapes):</span>
+<span id="annotated-cell-2-107"><a href="#annotated-cell-2-107"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-2-108"><a href="#annotated-cell-2-108"></a><span class="co">    Creates a plt bar graph to show how much each blendshape is present in a given image</span></span>
+<span id="annotated-cell-2-109"><a href="#annotated-cell-2-109"></a><span class="co">    :param face_blendshapes: output from the blendshapes model</span></span>
+<span id="annotated-cell-2-110"><a href="#annotated-cell-2-110"></a><span class="co">    :return:</span></span>
+<span id="annotated-cell-2-111"><a href="#annotated-cell-2-111"></a><span class="co">    """</span></span>
+<span id="annotated-cell-2-112"><a href="#annotated-cell-2-112"></a>    <span class="co"># Extract the face blendshapes category names and scores.</span></span>
+<span id="annotated-cell-2-113"><a href="#annotated-cell-2-113"></a>    face_blsh_names <span class="op">=</span> [face_blsh_category.category_name <span class="cf">for</span> face_blsh_category <span class="kw">in</span> face_blendshapes]</span>
+<span id="annotated-cell-2-114"><a href="#annotated-cell-2-114"></a>    face_blsh_scores <span class="op">=</span> [face_blsh_category.score <span class="cf">for</span> face_blsh_category <span class="kw">in</span> face_blendshapes]</span>
+<span id="annotated-cell-2-115"><a href="#annotated-cell-2-115"></a>    <span class="co"># The blendshapes are ordered in decreasing score value.</span></span>
+<span id="annotated-cell-2-116"><a href="#annotated-cell-2-116"></a>    face_blsh_ranks <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(face_blsh_names))</span>
+<span id="annotated-cell-2-117"><a href="#annotated-cell-2-117"></a></span>
+<span id="annotated-cell-2-118"><a href="#annotated-cell-2-118"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="annotated-cell-2-119"><a href="#annotated-cell-2-119"></a>    bar <span class="op">=</span> ax.barh(face_blsh_ranks, face_blsh_scores, label<span class="op">=</span>[<span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> face_blsh_ranks])</span>
+<span id="annotated-cell-2-120"><a href="#annotated-cell-2-120"></a>    ax.set_yticks(face_blsh_ranks, face_blsh_names)</span>
+<span id="annotated-cell-2-121"><a href="#annotated-cell-2-121"></a>    ax.invert_yaxis()</span>
+<span id="annotated-cell-2-122"><a href="#annotated-cell-2-122"></a></span>
+<span id="annotated-cell-2-123"><a href="#annotated-cell-2-123"></a>    <span class="co"># Label each bar with values</span></span>
+<span id="annotated-cell-2-124"><a href="#annotated-cell-2-124"></a>    <span class="cf">for</span> score, patch <span class="kw">in</span> <span class="bu">zip</span>(face_blsh_scores, bar.patches):</span>
+<span id="annotated-cell-2-125"><a href="#annotated-cell-2-125"></a>        plt.text(patch.get_x() <span class="op">+</span> patch.get_width(), patch.get_y(), <span class="ss">f"</span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">"</span>, va<span class="op">=</span><span class="st">"top"</span>)</span>
+<span id="annotated-cell-2-126"><a href="#annotated-cell-2-126"></a></span>
+<span id="annotated-cell-2-127"><a href="#annotated-cell-2-127"></a>    ax.set_xlabel(<span class="st">'Score'</span>)</span>
+<span id="annotated-cell-2-128"><a href="#annotated-cell-2-128"></a>    ax.set_title(<span class="st">"Face Blendshapes"</span>)</span>
+<span id="annotated-cell-2-129"><a href="#annotated-cell-2-129"></a>    plt.tight_layout()</span>
+<span id="annotated-cell-2-130"><a href="#annotated-cell-2-130"></a>    plt.show()</span>
+<span id="annotated-cell-2-131"><a href="#annotated-cell-2-131"></a></span>
+<span id="annotated-cell-2-132"><a href="#annotated-cell-2-132"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="9">9</button><span id="annotated-cell-2-133" class="code-annotation-target"><a href="#annotated-cell-2-133"></a><span class="kw">def</span> findEyes(detect_result):</span>
+<span id="annotated-cell-2-134"><a href="#annotated-cell-2-134"></a>    <span class="co">"""Takes in the facial landmark results and determines, for each face located, whether the</span></span>
+<span id="annotated-cell-2-135"><a href="#annotated-cell-2-135"></a><span class="co">        eyes are open or closed. Print a message"""</span></span>
+<span id="annotated-cell-2-136"><a href="#annotated-cell-2-136"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Look at the blendshapes for the eyes and determine if the eyes are open or closed</span></span>
+<span id="annotated-cell-2-137"><a href="#annotated-cell-2-137"></a>    <span class="cf">pass</span></span>
+<span id="annotated-cell-2-138"><a href="#annotated-cell-2-138"></a></span>
+<span id="annotated-cell-2-139"><a href="#annotated-cell-2-139"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="10">10</button><span id="annotated-cell-2-140" class="code-annotation-target"><a href="#annotated-cell-2-140"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="annotated-cell-2-141"><a href="#annotated-cell-2-141"></a>    runFacialLandmarks(<span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="22,23,24,25,26,27,28" data-code-annotation="1">Set up the model; note the <code>num_faces</code> input limits how many faces it will detect and you can change it</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="30,31,33,34,35,36" data-code-annotation="2">Set up the camera as usual</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="38,39,40" data-code-annotation="3">Convert the camera frame to a Mediapipe image</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="42,43" data-code-annotation="4">Run the face landmark detector on the converted image</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="46" data-code-annotation="5">Call optional function that processes the results for the ICA</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="48,49,50" data-code-annotation="6">Draw a visualization of the results on the frame</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="61" data-code-annotation="7">Function that draws results on the frame</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="106" data-code-annotation="8">Functino that displays what blendshapes were found</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="9">9</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="133" data-code-annotation="9">Function for processing the detected results for the ICA</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="10">10</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="140,141" data-code-annotation="10">Main script that just calls <code>runFacialLandmarks</code></span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Face landmarks are defined as 3-d points, with x and y values defined as usual in terms of the image itself, but also including distance in the z axis, which is perpendicular to both x and y, running between the camera and the camera’s subjects. The origin for x and y are in the upper left corner of the image, the origin for the z axis lies where the main face sits in the image. The z axis has to be inferred from the size of the face, based on the training data the model was trained on, so it is often much less accurate than the x and y coordinates.</p>
+<p>There are more than 400 landmarks found by this model (see <a href="https://storage.googleapis.com/mediapipe-assets/documentation/mediapipe_face_landmark_fullsize.png">the detailed image provided on the Mediapipe website</a>)</p>
+<p><a href="#fig-faceLandmark" class="quarto-xref">Figure&nbsp;2</a> shows several screenshots from the running of this program, and <a href="#fig-blendshapes" class="quarto-xref">Figure&nbsp;3</a> shows the blendshapes information that goes along with some of them.</p>
+<div id="fig-faceLandmark" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-faceLandmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceLandmark1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Straight ahead view"><img src="Ch8-Images/faceLandmark1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Straight ahead view</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceLandmark2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Eyes closed"><img src="Ch8-Images/faceLandmark2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Eyes closed</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceLandmark3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Smiling face"><img src="Ch8-Images/faceLandmark3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Smiling face</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/faceLandmark5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Partially blocked face"><img src="Ch8-Images/faceLandmark5.png" class="img-fluid figure-img"></a></p>
+<figcaption>Partially blocked face</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-faceLandmark-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Various results of facial landmark detection
+</figcaption>
+</figure>
+</div>
+<div id="fig-blendshapes" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-blendshapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/blendshapes1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Blendshapes for neutral face"><img src="Ch8-Images/blendshapes1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Blendshapes for neutral face</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/blendshapes2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Blendshapes for closed eyes"><img src="Ch8-Images/blendshapes2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Blendshapes for closed eyes</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/blendshapes3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Blendshapes for smiling face"><img src="Ch8-Images/blendshapes3.png" class="img-fluid figure-img"></a></p>
+<figcaption>Blendshapes for smiling face</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blendshapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Three sets of blendshape values for neutral, closed eyes, and smiling
+</figcaption>
+</figure>
+</div>
+<section id="examining-the-facial-landmark-detection-program" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="examining-the-facial-landmark-detection-program"><span class="header-section-number">1.2.1</span> Examining the facial landmark detection program</h3>
+<p>Much like the previous program, this program has four functions.</p>
+<p>The <code>runFacialLandmarks</code> function is the main program, setting up the facial landmark detector and then looping over the frames of a video feed, and running the detector on each frame.</p>
+<p>The <code>visualizeResults</code> function maps the 3d coordinates onto the 3d image, and draws an outline around the borders of the face, as well as outlining the mouth and eyes. It even identifies the center of the eye with a diamond. Notice that this code calls Mediapipe drawing tools because of the complexity of what is being drawn.</p>
+<p>The <code>plot_face_blendshapes_bar_graph</code> function is a somewhat glitchy function for building a <code>matplotlib</code> bar graph that shows how strongly each blendshape appears in the current frame. The program had a tendency to crash after creating this bar graph, so use it sparingly.</p>
+<p>The <code>findEyes</code> function will be completed as a part of the ICA, if you choose this portion. It will determine if eyes are open or shut.</p>
+</section>
+<section id="face-landmark-results" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="face-landmark-results"><span class="header-section-number">1.2.2</span> Face landmark results</h3>
+<p>The results returned from the face landmark detector, while long, have less complex structure than some of the other programs. The table below shows how to access each part of the results, and what each part means.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Accessing results</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>dt = detector.detect(mp_image)</code></td>
+<td style="text-align: left;"><code>dt</code> is a <code>FaceLandmarkerResult</code> object. It has three variables within it: <code>face_landmarks</code>, <code>face_blendshapes</code>, and <code>facial_transformation_matrixes</code>. We might use the landmarks themselves and the blendshapes, not the matrixes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dt.face_landmarks</code></td>
+<td style="text-align: left;"><code>face_landmarks</code> is a list of lists. Each sublist corresponds to one face that has been detected.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lmarks = dt.face_landmarks[0]</code></td>
+<td style="text-align: left;"><code>lmarks</code> is a list of normalized coordinates, one for each facial landmark detected. Each coordinate is a <code>NormalizedLandmark</code> object.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>lmarks[0]</code></td>
+<td style="text-align: left;"><code>lmarks[0]</code> is one <code>NormalizedLandmark</code>, which has <code>x</code>, <code>y</code>, and <code>z</code> variables, along with some others we don’t need. Each <code>x</code>, <code>y</code>, and <code>z</code> values is in the range from 0.0 to 1.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>blshList = dt.face_blendshapes</code></td>
+<td style="text-align: left;"><code>blshList</code> is a list of is a lists of <code>Category</code> objects. Each sublist corresponds to one of the faces detected: the length of the <code>face_landmarks</code> list and <code>blshList</code> are the</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>blsh1 = blshList[0]</code></td>
+<td style="text-align: left;"><code>blsh1</code> is a list of 52 <code>Category</code> objects, one for each of the <em>blendshapes</em> that have been learned (see list below).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><code>cat1 = blsh1[0]</code></p>
+<ul>
+<li><code>cat1.index</code></li>
+<li><code>cat1.score</code></li>
+<li><code>cat1.category_name</code></li>
+</ul></td>
+<td style="text-align: left;"><code>cat1</code> is a <code>Category</code> object (specifically the <code>neutral</code> blendshape). This is the same type of object used by the face detector for the face score. Here, we do want to use three of the four variables: <code>index</code>, <code>score</code>, and <code>category_name</code>. The index tells us which blendshape it is, the <code>score</code> represents how strongly that blendshape is present, and <code>category_name</code> is a printable label for which blendshape.</td>
+</tr>
+</tbody>
+</table>
+<p>In the ICA code, there is a text file, <code>faceLandmarkResults.txt</code> that shows the structure of the results for zero faces, one face, and two faces detected.</p>
+</section>
+<section id="blendshapes" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="blendshapes"><span class="header-section-number">1.2.3</span> Blendshapes</h3>
+<p>Each blendshape combines sets of landmarks and their relative positions to identify larger-scale movements of parts of the face. The blendshape model was trained on the landmark data to predict the correct blendshapes shown. These are not emotions, and not even facial expressions. But they could be the building blocks for identifying facial expressions. The table below lists the names of the 52 blendshapes that can be identified.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 25%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Blendshapes</th>
+<th style="text-align: left;">Blendshapes</th>
+<th style="text-align: left;">Blendshapes</th>
+<th style="text-align: left;">Blendshapes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0 - neutral</td>
+<td style="text-align: left;">14 - eyeLookInRight</td>
+<td style="text-align: left;">27 - mouthClose</td>
+<td style="text-align: left;">40 - mouthRollLower</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1 - browDownLeft</td>
+<td style="text-align: left;">15 - eyeLookOutLeft</td>
+<td style="text-align: left;">28 - mouthDimpleLeft</td>
+<td style="text-align: left;">41 - mouthRollUpper</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2 - browDownRight</td>
+<td style="text-align: left;">16 - eyeLookOutRight</td>
+<td style="text-align: left;">29 - mouthDimpleRight</td>
+<td style="text-align: left;">42 - mouthShrugLower</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3 - browInnerUp</td>
+<td style="text-align: left;">17 - eyeLookUpLeft</td>
+<td style="text-align: left;">30 - mouthFrownLeft</td>
+<td style="text-align: left;">43 - mouthShrugUpper</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4 - browOuterUpLeft</td>
+<td style="text-align: left;">18 - eyeLookUpRight</td>
+<td style="text-align: left;">31 - mouthFrownRight</td>
+<td style="text-align: left;">44 - mouthSmileLeft</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5 - browOuterUpRight</td>
+<td style="text-align: left;">19 - eyeSquintLeft</td>
+<td style="text-align: left;">32 - mouthFunnel</td>
+<td style="text-align: left;">45 - mouthSmileRight</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6 - cheekPuff</td>
+<td style="text-align: left;">20 - eyeSquintRight</td>
+<td style="text-align: left;">33 - mouthLeft</td>
+<td style="text-align: left;">46 - mouthStretchLeft</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7 - cheekSquintLeft</td>
+<td style="text-align: left;">21 - eyeWideLeft</td>
+<td style="text-align: left;">34 - mouthLowerDownLeft</td>
+<td style="text-align: left;">47 - mouthStretchRight</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8 - cheekSquintRight</td>
+<td style="text-align: left;">22 - eyeWideRight</td>
+<td style="text-align: left;">35 - mouthLowerDownRight</td>
+<td style="text-align: left;">48 - mouthUpperUpLeft</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9 - eyeBlinkLeft</td>
+<td style="text-align: left;">23 - jawForward</td>
+<td style="text-align: left;">36 - mouthPressLeft</td>
+<td style="text-align: left;">49 - mouthUpperUpRight</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10 - eyeBlinkRight</td>
+<td style="text-align: left;">24 - jawLeft</td>
+<td style="text-align: left;">37 - mouthPressRight</td>
+<td style="text-align: left;">50 - noseSneerLeft</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11 - eyeLookDownLeft</td>
+<td style="text-align: left;">25 - jawOpen</td>
+<td style="text-align: left;">38 - mouthPucker</td>
+<td style="text-align: left;">51 - noseSneerRight</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12 - eyeLookDownRight</td>
+<td style="text-align: left;">26 - jawRight</td>
+<td style="text-align: left;">39 - mouthRight</td>
+<td style="text-align: left;">52 - tongueOut</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13 - eyeLookInLeft</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="hand-landmark-skeletons" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="hand-landmark-skeletons"><span class="header-section-number">1.3</span> Hand landmark skeletons</h2>
+<p>In this section we will examine how to use Mediapipe’s hand landmark detector. This detects landmarks on a hand, and creates a <em>skeleton</em> of landmarks: it connects certain landmarks together as they correspond to connected body parts, allowing us to draw a skeleton-like framework showing how landmarks naturally fit together. It can detect whether a given skeleton is a right or left hand. See the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker">Mediapipe Hand Landmarks Detection Guide</a> for more details.</p>
+<p>The detector actually integrates two separate models: a palm detector and a hand landmark detector that uses the palm location to simplify its task.</p>
+<p>There are 21 hand landmarks for each hand. <a href="#fig-handlandmarks" class="quarto-xref">Figure&nbsp;4</a>, from the Mediapipe guide, illustrates what all 21 landmarks represent:</p>
+<div id="fig-handlandmarks" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-handlandmarks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/hand-landmarks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;4: Hand landmarks"><img src="Ch8-Images/hand-landmarks.png" class="img-fluid figure-img" style="width:12cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-handlandmarks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Hand landmarks
+</figcaption>
+</figure>
+</div>
+<p>If you can, open the <code>mediapipeHand.py</code> program, which is also included in the code block below.</p>
+<div id="deef2a0f" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>The <code>mediapipeHand.py</code> program, demonstrates the hand landmark detection model and its results</summary>
+<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co">"""</span></span>
+<span id="annotated-cell-3-2"><a href="#annotated-cell-3-2"></a><span class="co">File: mediapipeHand.py</span></span>
+<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a><span class="co">Date: Fall 2025</span></span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4"></a></span>
+<span id="annotated-cell-3-5"><a href="#annotated-cell-3-5"></a><span class="co">This program provides a demo showing how to use Mediapipe's hand pose detection model, and how to visualize</span></span>
+<span id="annotated-cell-3-6"><a href="#annotated-cell-3-6"></a><span class="co">the results.</span></span>
+<span id="annotated-cell-3-7"><a href="#annotated-cell-3-7"></a><span class="co">"""</span></span>
+<span id="annotated-cell-3-8"><a href="#annotated-cell-3-8"></a></span>
+<span id="annotated-cell-3-9"><a href="#annotated-cell-3-9"></a><span class="im">import</span> cv2</span>
+<span id="annotated-cell-3-10"><a href="#annotated-cell-3-10"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="annotated-cell-3-11"><a href="#annotated-cell-3-11"></a></span>
+<span id="annotated-cell-3-12"><a href="#annotated-cell-3-12"></a><span class="im">import</span> mediapipe <span class="im">as</span> mp</span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13"></a><span class="im">from</span> mediapipe.tasks <span class="im">import</span> python</span>
+<span id="annotated-cell-3-14"><a href="#annotated-cell-3-14"></a><span class="im">from</span> mediapipe.tasks.python <span class="im">import</span> vision</span>
+<span id="annotated-cell-3-15"><a href="#annotated-cell-3-15"></a></span>
+<span id="annotated-cell-3-16"><a href="#annotated-cell-3-16"></a><span class="im">from</span> mediapipe <span class="im">import</span> solutions</span>
+<span id="annotated-cell-3-17"><a href="#annotated-cell-3-17"></a><span class="im">from</span> mediapipe.framework.formats <span class="im">import</span> landmark_pb2</span>
+<span id="annotated-cell-3-18"><a href="#annotated-cell-3-18"></a></span>
+<span id="annotated-cell-3-19"><a href="#annotated-cell-3-19"></a>MARGIN <span class="op">=</span> <span class="dv">10</span>  <span class="co"># pixels</span></span>
+<span id="annotated-cell-3-20"><a href="#annotated-cell-3-20"></a>FONT_SIZE <span class="op">=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-3-21"><a href="#annotated-cell-3-21"></a>FONT_THICKNESS <span class="op">=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-3-22"><a href="#annotated-cell-3-22"></a>HANDEDNESS_TEXT_COLOR <span class="op">=</span> (<span class="dv">88</span>, <span class="dv">205</span>, <span class="dv">54</span>)  <span class="co"># vibrant green</span></span>
+<span id="annotated-cell-3-23"><a href="#annotated-cell-3-23"></a></span>
+<span id="annotated-cell-3-24"><a href="#annotated-cell-3-24"></a></span>
+<span id="annotated-cell-3-25"><a href="#annotated-cell-3-25"></a><span class="kw">def</span> runHandModel(source):</span>
+<span id="annotated-cell-3-26"><a href="#annotated-cell-3-26"></a>    <span class="co">"""Main program, sets up the model, then runs it on a video feed"""</span></span>
+<span id="annotated-cell-3-27"><a href="#annotated-cell-3-27"></a></span>
+<span id="annotated-cell-3-28"><a href="#annotated-cell-3-28"></a>    <span class="co"># Set up model</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-29" class="code-annotation-target"><a href="#annotated-cell-3-29"></a>    modelPath <span class="op">=</span> <span class="st">"MediapipeModels/hand_landmarker.task"</span></span>
+<span id="annotated-cell-3-30"><a href="#annotated-cell-3-30"></a>    base_options <span class="op">=</span> python.BaseOptions(model_asset_path<span class="op">=</span>modelPath)</span>
+<span id="annotated-cell-3-31"><a href="#annotated-cell-3-31"></a>    options <span class="op">=</span> vision.HandLandmarkerOptions(base_options<span class="op">=</span>base_options, num_hands<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="annotated-cell-3-32"><a href="#annotated-cell-3-32"></a>    detector <span class="op">=</span> vision.HandLandmarker.create_from_options(options)</span>
+<span id="annotated-cell-3-33"><a href="#annotated-cell-3-33"></a></span>
+<span id="annotated-cell-3-34"><a href="#annotated-cell-3-34"></a>    <span class="co"># Set up camera</span></span>
+<span id="annotated-cell-3-35"><a href="#annotated-cell-3-35"></a>    cap <span class="op">=</span> cv2.VideoCapture(source)</span>
+<span id="annotated-cell-3-36"><a href="#annotated-cell-3-36"></a></span>
+<span id="annotated-cell-3-37"><a href="#annotated-cell-3-37"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="annotated-cell-3-38"><a href="#annotated-cell-3-38"></a>        ret, frame <span class="op">=</span> cap.read()</span>
+<span id="annotated-cell-3-39"><a href="#annotated-cell-3-39"></a>        <span class="cf">if</span> <span class="kw">not</span> ret:</span>
+<span id="annotated-cell-3-40"><a href="#annotated-cell-3-40"></a>            <span class="cf">break</span></span>
+<span id="annotated-cell-3-41"><a href="#annotated-cell-3-41"></a></span>
+<span id="annotated-cell-3-42"><a href="#annotated-cell-3-42"></a>        <span class="co"># Convert camera image to Mediapipe representation</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-43" class="code-annotation-target"><a href="#annotated-cell-3-43"></a>        image <span class="op">=</span> cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span>
+<span id="annotated-cell-3-44"><a href="#annotated-cell-3-44"></a>        mp_image <span class="op">=</span> mp.Image(image_format<span class="op">=</span>mp.ImageFormat.SRGB, data<span class="op">=</span>image)</span>
+<span id="annotated-cell-3-45"><a href="#annotated-cell-3-45"></a></span>
+<span id="annotated-cell-3-46"><a href="#annotated-cell-3-46"></a>        <span class="co"># Run the hand pose detector, receive detection information</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-47" class="code-annotation-target"><a href="#annotated-cell-3-47"></a>        detect_result <span class="op">=</span> detector.detect(mp_image)</span>
+<span id="annotated-cell-3-48"><a href="#annotated-cell-3-48"></a></span>
+<span id="annotated-cell-3-49"><a href="#annotated-cell-3-49"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: Uncomment this to detect whether the hand is open palm or fist</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="4">4</button><span id="annotated-cell-3-50" class="code-annotation-target"><a href="#annotated-cell-3-50"></a>        <span class="co"># findHandPose(detect_result)</span></span>
+<span id="annotated-cell-3-51"><a href="#annotated-cell-3-51"></a></span>
+<span id="annotated-cell-3-52"><a href="#annotated-cell-3-52"></a>        <span class="co"># Draw the results using mediapipe tools, then display the result</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="5">5</button><span id="annotated-cell-3-53" class="code-annotation-target"><a href="#annotated-cell-3-53"></a>        annot_image <span class="op">=</span> visualizeResults(mp_image.numpy_view(), detect_result)</span>
+<span id="annotated-cell-3-54"><a href="#annotated-cell-3-54"></a>        vis_image <span class="op">=</span> cv2.cvtColor(annot_image, cv2.COLOR_RGB2BGR)</span>
+<span id="annotated-cell-3-55"><a href="#annotated-cell-3-55"></a>        cv2.imshow(<span class="st">"Detected"</span>, vis_image)</span>
+<span id="annotated-cell-3-56"><a href="#annotated-cell-3-56"></a></span>
+<span id="annotated-cell-3-57"><a href="#annotated-cell-3-57"></a>        x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
+<span id="annotated-cell-3-58"><a href="#annotated-cell-3-58"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="annotated-cell-3-59"><a href="#annotated-cell-3-59"></a>            <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="annotated-cell-3-60"><a href="#annotated-cell-3-60"></a>                <span class="cf">break</span></span>
+<span id="annotated-cell-3-61"><a href="#annotated-cell-3-61"></a>    cap.release()</span>
+<span id="annotated-cell-3-62"><a href="#annotated-cell-3-62"></a></span>
+<span id="annotated-cell-3-63"><a href="#annotated-cell-3-63"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="6">6</button><span id="annotated-cell-3-64" class="code-annotation-target"><a href="#annotated-cell-3-64"></a><span class="kw">def</span> visualizeResults(rgb_image, detection_result):</span>
+<span id="annotated-cell-3-65"><a href="#annotated-cell-3-65"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-3-66"><a href="#annotated-cell-3-66"></a><span class="co">    Draws hand skeleton for each hand visible in an image</span></span>
+<span id="annotated-cell-3-67"><a href="#annotated-cell-3-67"></a><span class="co">    :param rgb_image: An RGB image array</span></span>
+<span id="annotated-cell-3-68"><a href="#annotated-cell-3-68"></a><span class="co">    :param detection_result: The results from the hand landmark detector</span></span>
+<span id="annotated-cell-3-69"><a href="#annotated-cell-3-69"></a><span class="co">    :return: a copy of the input array with the hand skeleton drawn on it, labeled with left or right handedness</span></span>
+<span id="annotated-cell-3-70"><a href="#annotated-cell-3-70"></a><span class="co">    """</span></span>
+<span id="annotated-cell-3-71"><a href="#annotated-cell-3-71"></a>    annotated_image <span class="op">=</span> np.copy(rgb_image)</span>
+<span id="annotated-cell-3-72"><a href="#annotated-cell-3-72"></a></span>
+<span id="annotated-cell-3-73"><a href="#annotated-cell-3-73"></a>    hand_landmarks_list <span class="op">=</span> detection_result.hand_landmarks</span>
+<span id="annotated-cell-3-74"><a href="#annotated-cell-3-74"></a>    handedness_list <span class="op">=</span> detection_result.handedness</span>
+<span id="annotated-cell-3-75"><a href="#annotated-cell-3-75"></a></span>
+<span id="annotated-cell-3-76"><a href="#annotated-cell-3-76"></a>    <span class="co"># Loop through the detected hands to visualize.</span></span>
+<span id="annotated-cell-3-77"><a href="#annotated-cell-3-77"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(hand_landmarks_list)):</span>
+<span id="annotated-cell-3-78"><a href="#annotated-cell-3-78"></a>        hand_landmarks <span class="op">=</span> hand_landmarks_list[idx]</span>
+<span id="annotated-cell-3-79"><a href="#annotated-cell-3-79"></a>        handedness <span class="op">=</span> handedness_list[idx]</span>
+<span id="annotated-cell-3-80"><a href="#annotated-cell-3-80"></a></span>
+<span id="annotated-cell-3-81"><a href="#annotated-cell-3-81"></a>        <span class="co"># Draw the hand landmarks.</span></span>
+<span id="annotated-cell-3-82"><a href="#annotated-cell-3-82"></a>        hand_landmarks_proto <span class="op">=</span> landmark_pb2.NormalizedLandmarkList()</span>
+<span id="annotated-cell-3-83"><a href="#annotated-cell-3-83"></a>        hand_landmarks_proto.landmark.extend([</span>
+<span id="annotated-cell-3-84"><a href="#annotated-cell-3-84"></a>            landmark_pb2.NormalizedLandmark(x<span class="op">=</span>landmark.x, y<span class="op">=</span>landmark.y, z<span class="op">=</span>landmark.z) <span class="cf">for</span> landmark <span class="kw">in</span> hand_landmarks</span>
+<span id="annotated-cell-3-85"><a href="#annotated-cell-3-85"></a>        ])</span>
+<span id="annotated-cell-3-86"><a href="#annotated-cell-3-86"></a>        solutions.drawing_utils.draw_landmarks(</span>
+<span id="annotated-cell-3-87"><a href="#annotated-cell-3-87"></a>            annotated_image,</span>
+<span id="annotated-cell-3-88"><a href="#annotated-cell-3-88"></a>            hand_landmarks_proto,</span>
+<span id="annotated-cell-3-89"><a href="#annotated-cell-3-89"></a>            solutions.hands.HAND_CONNECTIONS,</span>
+<span id="annotated-cell-3-90"><a href="#annotated-cell-3-90"></a>            solutions.drawing_styles.get_default_hand_landmarks_style(),</span>
+<span id="annotated-cell-3-91"><a href="#annotated-cell-3-91"></a>            solutions.drawing_styles.get_default_hand_connections_style())</span>
+<span id="annotated-cell-3-92"><a href="#annotated-cell-3-92"></a></span>
+<span id="annotated-cell-3-93"><a href="#annotated-cell-3-93"></a>        <span class="co"># Get the top left corner of the detected hand's bounding box.</span></span>
+<span id="annotated-cell-3-94"><a href="#annotated-cell-3-94"></a>        height, width, _ <span class="op">=</span> annotated_image.shape</span>
+<span id="annotated-cell-3-95"><a href="#annotated-cell-3-95"></a>        x_coordinates <span class="op">=</span> [landmark.x <span class="cf">for</span> landmark <span class="kw">in</span> hand_landmarks]</span>
+<span id="annotated-cell-3-96"><a href="#annotated-cell-3-96"></a>        y_coordinates <span class="op">=</span> [landmark.y <span class="cf">for</span> landmark <span class="kw">in</span> hand_landmarks]</span>
+<span id="annotated-cell-3-97"><a href="#annotated-cell-3-97"></a>        text_x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">min</span>(x_coordinates) <span class="op">*</span> width)</span>
+<span id="annotated-cell-3-98"><a href="#annotated-cell-3-98"></a>        text_y <span class="op">=</span> <span class="bu">int</span>(<span class="bu">min</span>(y_coordinates) <span class="op">*</span> height) <span class="op">-</span> MARGIN</span>
+<span id="annotated-cell-3-99"><a href="#annotated-cell-3-99"></a></span>
+<span id="annotated-cell-3-100"><a href="#annotated-cell-3-100"></a>        <span class="co"># Draw handedness (left or right hand) on the image.</span></span>
+<span id="annotated-cell-3-101"><a href="#annotated-cell-3-101"></a>        cv2.putText(annotated_image, <span class="ss">f"</span><span class="sc">{</span>handedness[<span class="dv">0</span>]<span class="sc">.</span>category_name<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="annotated-cell-3-102"><a href="#annotated-cell-3-102"></a>                    (text_x, text_y), cv2.FONT_HERSHEY_DUPLEX,</span>
+<span id="annotated-cell-3-103"><a href="#annotated-cell-3-103"></a>                    FONT_SIZE, HANDEDNESS_TEXT_COLOR, FONT_THICKNESS, cv2.LINE_AA)</span>
+<span id="annotated-cell-3-104"><a href="#annotated-cell-3-104"></a></span>
+<span id="annotated-cell-3-105"><a href="#annotated-cell-3-105"></a>    <span class="cf">return</span> annotated_image</span>
+<span id="annotated-cell-3-106"><a href="#annotated-cell-3-106"></a></span>
+<span id="annotated-cell-3-107"><a href="#annotated-cell-3-107"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="7">7</button><span id="annotated-cell-3-108" class="code-annotation-target"><a href="#annotated-cell-3-108"></a><span class="kw">def</span> findHandPose(detect_results):</span>
+<span id="annotated-cell-3-109"><a href="#annotated-cell-3-109"></a>    <span class="co">"""Takes in the hand position results and determines whether the hand is an open palm, fingers up,</span></span>
+<span id="annotated-cell-3-110"><a href="#annotated-cell-3-110"></a><span class="co">    or a closed fist"""</span></span>
+<span id="annotated-cell-3-111"><a href="#annotated-cell-3-111"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: for each detected hand, extract the appropriate features and check them. Print the result</span></span>
+<span id="annotated-cell-3-112"><a href="#annotated-cell-3-112"></a>    <span class="cf">pass</span></span>
+<span id="annotated-cell-3-113"><a href="#annotated-cell-3-113"></a></span>
+<span id="annotated-cell-3-114"><a href="#annotated-cell-3-114"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="8">8</button><span id="annotated-cell-3-115" class="code-annotation-target"><a href="#annotated-cell-3-115"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="annotated-cell-3-116"><a href="#annotated-cell-3-116"></a>    runHandModel(<span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="29,30,31,32" data-code-annotation="1">Set up the hand landmark model; note that we can specify the maximum number of hands for it to recognize</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="43,44" data-code-annotation="2">Convert the video frame to a Mediapipe image</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="47" data-code-annotation="3">Run the model on the converted image</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="50" data-code-annotation="4">Call an optional function to process the results</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="53,54,55" data-code-annotation="5">Draw the results on the frame, and display it</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="64" data-code-annotation="6">A function to draw the results</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="108" data-code-annotation="7">A function for you to complete with the ICA</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="115" data-code-annotation="8">The main script that calls the main function</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Much like face landmarks, the hand landmarks are defined as 3d points, with the z axis perpendicular to the x and y axes, along the line between camera and camera subject. The origin for the z axis is typically one of the landmarks, such as the base of the palm.</p>
+<p><a href="#fig-handSkels" class="quarto-xref">Figure&nbsp;5</a> shows several screenshots from the running of this program, showing one or both hands in various orientations. Pay attention to the skeleton form, which allows us to estimate the location of landmarks that are blocked from view.</p>
+<div id="fig-handSkels" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-handSkels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/handDetect60.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="One hand, open palms"><img src="Ch8-Images/handDetect60.png" class="img-fluid figure-img"></a></p>
+<figcaption>One hand, open palms</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/handDetect120.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Two hands, open palms"><img src="Ch8-Images/handDetect120.png" class="img-fluid figure-img"></a></p>
+<figcaption>Two hands, open palms</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/handDetect90.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Two hands, in fists"><img src="Ch8-Images/handDetect90.png" class="img-fluid figure-img"></a></p>
+<figcaption>Two hands, in fists</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/handDetect330.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Two hands, fists forward"><img src="Ch8-Images/handDetect330.png" class="img-fluid figure-img"></a></p>
+<figcaption>Two hands, fists forward</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/handDetect240.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="One hand, back of the hand"><img src="Ch8-Images/handDetect240.png" class="img-fluid figure-img"></a></p>
+<figcaption>One hand, back of the hand</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-handSkels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Various results of hand landmark detection
+</figcaption>
+</figure>
+</div>
+<section id="examining-the-hand-landmark-detection-program" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="examining-the-hand-landmark-detection-program"><span class="header-section-number">1.3.1</span> Examining the hand landmark detection program</h3>
+<p>This program has three functions, plus a short main script that calls the main function.</p>
+<p>The <code>runHandMode</code> function is the main function. Like the other demo programs, it sets up the hand landmark model and then uses it on frames from a video feed. It includes a commented-out function that can interpret the results from the model, if you choose to work on this program.</p>
+<p>The <code>visualizeResults</code> function draws the results on the current frame. It uses Mediapipe’s more sophisticated drawing tools, in order to draw the skeleton and the 3d points most easily.</p>
+<p>The <code>findHandPose</code> function is for you to implement, if you choose. It would try to distinguish between open palms and fists.</p>
+</section>
+<section id="hand-landmark-results" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="hand-landmark-results"><span class="header-section-number">1.3.2</span> Hand landmark results</h3>
+<p>The results returned from the hand landmark detector have many fewer landmarks than the facial landmark detector. That said, it includes each hand landmark in two forms, as a <code>NormalizedLandmark</code> and as a “world landmark,” where the values are given as distances in metric units. The table below shows how to access each part of the results, and what each part means.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Accessing results</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>dt = detector.detect(mp_image)</code></td>
+<td style="text-align: left;"><code>dt</code> is a <code>HandLandmarkerResult</code> object. It has three variables within it: <code>handedness</code>, <code>hand_landmarks</code>, and <code>hand_world_landmarks</code>. We could use any of these three, although the world landmarks are unreliable below a certain confidence score.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dt.handedness</code></td>
+<td style="text-align: left;"><code>handedness</code> is a list of lists. Each sublist corresponds to one hand that has been detected.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>catList = dt.handedness[0]</code> * <code>catList[0].index</code> * <code>catList[0].score</code> * <code>catList[0].category_name</code></td>
+<td style="text-align: left;"><code>catList</code> is a list containing a <code>Category</code> object. Here the <code>index</code> variable tells us right vs.&nbsp;left hand, the <code>score</code> variable holds the confidence, and the <code>category_name</code> holds a string version of which hand.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>hlmarks = dt.hand_landmarks</code></td>
+<td style="text-align: left;"><code>hlmarks</code> is a list of lists. Each sublist corresponds to one hand that has been detected. Each set of data puts the data for the same hand in the same position in the list.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>landList = hlmarks[0]</code></td>
+<td style="text-align: left;"><code>landList</code> is a list of <code>NormalizedLandmark</code> objects, one for each landmark. As in other examples, each landmark object has <code>x</code>, <code>y</code>, and <code>z</code> variables, with <code>x</code> and <code>y</code> values scaled to be between 0.0 and 1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>wldmarks = dt.world_hand_landmarks</code></td>
+<td style="text-align: left;"><code>wldmarks</code> has the same structure as <code>hlmarks</code> above. The The difference is that the 3d points are represented as <code>Landmark</code> objects, with values in global measurements, some kind of metric unit here. For hands, probably centimeters.</td>
+</tr>
+</tbody>
+</table>
+<p>In the ICA code, there is a text file, <code>handLandmarkResults.txt</code> that shows the structure of the results for no hands, one hand, two hands, and four hands (in an abbreviated form).</p>
+</section>
+</section>
+</section>
+<section id="mediapipe-pose-landmark-skeletons" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Mediapipe pose landmark skeletons</h1>
+<p>Mediapipe’s pose landmark detector finds landmarks on a whole body (or as much as is visible to the camera), and creates a <em>skeleton</em> view of the landmarks and how they connect to each other. The detector tracks 33 landmarks of the body. See the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker">Mediapipe PoseLandmarks Detection Guide</a> for more details.</p>
+<p>Much like other landmarks, the pose skeleton points are defined as 3d points, with the z axis used for the dimension between camera and subjects. There are 33 body pose landmarks. <a href="#fig-poselandmarks" class="quarto-xref">Figure&nbsp;6</a>, from the Mediapipe guide, illustrates what all 33 landmarks represent:</p>
+<div id="fig-poselandmarks" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poselandmarks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/pose_landmarks_index.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19" title="Figure&nbsp;6: Pose landmarks"><img src="Ch8-Images/pose_landmarks_index.png" class="img-fluid figure-img" style="width:12cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poselandmarks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Pose landmarks
+</figcaption>
+</figure>
+</div>
+<p>If you can, open the <code>mediapipePose.py</code> program, which is also included in the code block below.</p>
+<div id="26cea996" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>The <code>mediapipePose.py</code> program, demonstrates the body pose landmark detection model and its results</summary>
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co">"""</span></span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a><span class="co">File: mediapipePose.py</span></span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a><span class="co">Date: Fall 2025</span></span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a></span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a><span class="co">This program provides a demo showing how to use Mediapipe's body pose detection model, and visualize the results.</span></span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a><span class="co">"""</span></span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a></span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a><span class="im">import</span> cv2</span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a></span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11"></a><span class="im">import</span> mediapipe <span class="im">as</span> mp</span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a><span class="im">from</span> mediapipe <span class="im">import</span> solutions</span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13"></a><span class="im">from</span> mediapipe.framework.formats <span class="im">import</span> landmark_pb2</span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14"></a><span class="im">from</span> mediapipe.tasks <span class="im">import</span> python</span>
+<span id="annotated-cell-4-15"><a href="#annotated-cell-4-15"></a><span class="im">from</span> mediapipe.tasks.python <span class="im">import</span> vision</span>
+<span id="annotated-cell-4-16"><a href="#annotated-cell-4-16"></a></span>
+<span id="annotated-cell-4-17"><a href="#annotated-cell-4-17"></a>MARGIN <span class="op">=</span> <span class="dv">10</span>  <span class="co"># pixels</span></span>
+<span id="annotated-cell-4-18"><a href="#annotated-cell-4-18"></a>FONT_SIZE <span class="op">=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-4-19"><a href="#annotated-cell-4-19"></a>FONT_THICKNESS <span class="op">=</span> <span class="dv">1</span></span>
+<span id="annotated-cell-4-20"><a href="#annotated-cell-4-20"></a>HANDEDNESS_TEXT_COLOR <span class="op">=</span> (<span class="dv">88</span>, <span class="dv">205</span>, <span class="dv">54</span>)  <span class="co"># vibrant green</span></span>
+<span id="annotated-cell-4-21"><a href="#annotated-cell-4-21"></a></span>
+<span id="annotated-cell-4-22"><a href="#annotated-cell-4-22"></a></span>
+<span id="annotated-cell-4-23"><a href="#annotated-cell-4-23"></a><span class="kw">def</span> runPoseDetector(source<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="annotated-cell-4-24"><a href="#annotated-cell-4-24"></a>    <span class="co">"""Sets up the pose landmark model, and runs it on a video feed, visualizing the results"""</span></span>
+<span id="annotated-cell-4-25"><a href="#annotated-cell-4-25"></a></span>
+<span id="annotated-cell-4-26"><a href="#annotated-cell-4-26"></a>    <span class="co"># Set up model</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-27" class="code-annotation-target"><a href="#annotated-cell-4-27"></a>    modelPath <span class="op">=</span> <span class="st">"MediapipeModels/Pose landmark detection/pose_landmarker_full.task"</span></span>
+<span id="annotated-cell-4-28"><a href="#annotated-cell-4-28"></a>    base_options <span class="op">=</span> python.BaseOptions(model_asset_path<span class="op">=</span>modelPath)</span>
+<span id="annotated-cell-4-29"><a href="#annotated-cell-4-29"></a>    options <span class="op">=</span> vision.PoseLandmarkerOptions(base_options<span class="op">=</span>base_options,</span>
+<span id="annotated-cell-4-30"><a href="#annotated-cell-4-30"></a>                                           output_segmentation_masks<span class="op">=</span><span class="va">True</span>)</span>
+<span id="annotated-cell-4-31"><a href="#annotated-cell-4-31"></a>    detector <span class="op">=</span> vision.PoseLandmarker.create_from_options(options)</span>
+<span id="annotated-cell-4-32"><a href="#annotated-cell-4-32"></a></span>
+<span id="annotated-cell-4-33"><a href="#annotated-cell-4-33"></a>    <span class="co"># Set up camera</span></span>
+<span id="annotated-cell-4-34"><a href="#annotated-cell-4-34"></a>    cap <span class="op">=</span> cv2.VideoCapture(source)</span>
+<span id="annotated-cell-4-35"><a href="#annotated-cell-4-35"></a></span>
+<span id="annotated-cell-4-36"><a href="#annotated-cell-4-36"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="annotated-cell-4-37"><a href="#annotated-cell-4-37"></a>        gotIm, frame <span class="op">=</span> cap.read()</span>
+<span id="annotated-cell-4-38"><a href="#annotated-cell-4-38"></a>        <span class="cf">if</span> <span class="kw">not</span> gotIm:</span>
+<span id="annotated-cell-4-39"><a href="#annotated-cell-4-39"></a>            <span class="cf">break</span></span>
+<span id="annotated-cell-4-40"><a href="#annotated-cell-4-40"></a></span>
+<span id="annotated-cell-4-41"><a href="#annotated-cell-4-41"></a>        <span class="co"># Convert the frame to be a Mediapipe image format</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-42" class="code-annotation-target"><a href="#annotated-cell-4-42"></a>        image <span class="op">=</span> cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)</span>
+<span id="annotated-cell-4-43"><a href="#annotated-cell-4-43"></a>        mp_image <span class="op">=</span> mp.Image(image_format<span class="op">=</span>mp.ImageFormat.SRGB, data<span class="op">=</span>image)</span>
+<span id="annotated-cell-4-44"><a href="#annotated-cell-4-44"></a></span>
+<span id="annotated-cell-4-45"><a href="#annotated-cell-4-45"></a>        <span class="co"># Run the pose detector on the image</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-46" class="code-annotation-target"><a href="#annotated-cell-4-46"></a>        detect_result <span class="op">=</span> detector.detect(mp_image)</span>
+<span id="annotated-cell-4-47"><a href="#annotated-cell-4-47"></a></span>
+<span id="annotated-cell-4-48"><a href="#annotated-cell-4-48"></a>        <span class="co"># </span><span class="al">TODO</span><span class="co">: Uncomment this call to run the function that checks if that hands are above the head or not</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-49" class="code-annotation-target"><a href="#annotated-cell-4-49"></a>        <span class="co"># findHandsUp(detect_result)</span></span>
+<span id="annotated-cell-4-50"><a href="#annotated-cell-4-50"></a></span>
+<span id="annotated-cell-4-51"><a href="#annotated-cell-4-51"></a>        <span class="co"># Visualize the pose skeleton on the frame</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="5">5</button><span id="annotated-cell-4-52" class="code-annotation-target"><a href="#annotated-cell-4-52"></a>        annot_image <span class="op">=</span> visualizeResults(mp_image.numpy_view(), detect_result)</span>
+<span id="annotated-cell-4-53"><a href="#annotated-cell-4-53"></a>        vis_image <span class="op">=</span> cv2.cvtColor(annot_image, cv2.COLOR_RGB2BGR)</span>
+<span id="annotated-cell-4-54"><a href="#annotated-cell-4-54"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="6">6</button><span id="annotated-cell-4-55" class="code-annotation-target"><a href="#annotated-cell-4-55"></a>        <span class="co"># If image segementation was done, display the segmentation masks</span></span>
+<span id="annotated-cell-4-56"><a href="#annotated-cell-4-56"></a>        segMasks <span class="op">=</span> detect_result.segmentation_masks</span>
+<span id="annotated-cell-4-57"><a href="#annotated-cell-4-57"></a>        <span class="cf">if</span> segMasks <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> <span class="bu">len</span>(segMasks) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="annotated-cell-4-58"><a href="#annotated-cell-4-58"></a>            segIm <span class="op">=</span> segMasks[<span class="dv">0</span>].numpy_view()</span>
+<span id="annotated-cell-4-59"><a href="#annotated-cell-4-59"></a>            cv2.imshow(<span class="st">"SegMask"</span>, segIm)</span>
+<span id="annotated-cell-4-60"><a href="#annotated-cell-4-60"></a>        cv2.imshow(<span class="st">"Detected"</span>, vis_image)</span>
+<span id="annotated-cell-4-61"><a href="#annotated-cell-4-61"></a></span>
+<span id="annotated-cell-4-62"><a href="#annotated-cell-4-62"></a>        x <span class="op">=</span> cv2.waitKey(<span class="dv">10</span>)</span>
+<span id="annotated-cell-4-63"><a href="#annotated-cell-4-63"></a>        <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="annotated-cell-4-64"><a href="#annotated-cell-4-64"></a>            <span class="cf">if</span> <span class="bu">chr</span>(x) <span class="op">==</span> <span class="st">'q'</span>:</span>
+<span id="annotated-cell-4-65"><a href="#annotated-cell-4-65"></a>                <span class="cf">break</span></span>
+<span id="annotated-cell-4-66"><a href="#annotated-cell-4-66"></a>    cap.release()</span>
+<span id="annotated-cell-4-67"><a href="#annotated-cell-4-67"></a></span>
+<span id="annotated-cell-4-68"><a href="#annotated-cell-4-68"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="7">7</button><span id="annotated-cell-4-69" class="code-annotation-target"><a href="#annotated-cell-4-69"></a><span class="kw">def</span> visualizeResults(rgb_image, detection_result):</span>
+<span id="annotated-cell-4-70"><a href="#annotated-cell-4-70"></a>    <span class="co">"""</span></span>
+<span id="annotated-cell-4-71"><a href="#annotated-cell-4-71"></a><span class="co">    Draws the pose skeleton on a copy of the input image, based on the data in detection_result</span></span>
+<span id="annotated-cell-4-72"><a href="#annotated-cell-4-72"></a><span class="co">    :param rgb_image: an image in RGB format</span></span>
+<span id="annotated-cell-4-73"><a href="#annotated-cell-4-73"></a><span class="co">    :param detection_result: The results of the pose landmark detector</span></span>
+<span id="annotated-cell-4-74"><a href="#annotated-cell-4-74"></a><span class="co">    :return: a copy of the input image with the pose drawn on it</span></span>
+<span id="annotated-cell-4-75"><a href="#annotated-cell-4-75"></a><span class="co">    """</span></span>
+<span id="annotated-cell-4-76"><a href="#annotated-cell-4-76"></a>    annotated_image <span class="op">=</span> np.copy(rgb_image)</span>
+<span id="annotated-cell-4-77"><a href="#annotated-cell-4-77"></a>    pose_landmarks_list <span class="op">=</span> detection_result.pose_landmarks</span>
+<span id="annotated-cell-4-78"><a href="#annotated-cell-4-78"></a></span>
+<span id="annotated-cell-4-79"><a href="#annotated-cell-4-79"></a>    <span class="co"># Loop through the detected poses to visualize.</span></span>
+<span id="annotated-cell-4-80"><a href="#annotated-cell-4-80"></a>    <span class="cf">for</span> idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(pose_landmarks_list)):</span>
+<span id="annotated-cell-4-81"><a href="#annotated-cell-4-81"></a>        pose_landmarks <span class="op">=</span> pose_landmarks_list[idx]</span>
+<span id="annotated-cell-4-82"><a href="#annotated-cell-4-82"></a></span>
+<span id="annotated-cell-4-83"><a href="#annotated-cell-4-83"></a>        <span class="co"># Draw the pose landmarks.</span></span>
+<span id="annotated-cell-4-84"><a href="#annotated-cell-4-84"></a>        pose_landmarks_proto <span class="op">=</span> landmark_pb2.NormalizedLandmarkList()</span>
+<span id="annotated-cell-4-85"><a href="#annotated-cell-4-85"></a>        pose_landmarks_proto.landmark.extend([</span>
+<span id="annotated-cell-4-86"><a href="#annotated-cell-4-86"></a>            landmark_pb2.NormalizedLandmark(x<span class="op">=</span>landmark.x, y<span class="op">=</span>landmark.y, z<span class="op">=</span>landmark.z) <span class="cf">for</span> landmark <span class="kw">in</span> pose_landmarks</span>
+<span id="annotated-cell-4-87"><a href="#annotated-cell-4-87"></a>        ])</span>
+<span id="annotated-cell-4-88"><a href="#annotated-cell-4-88"></a>        solutions.drawing_utils.draw_landmarks(</span>
+<span id="annotated-cell-4-89"><a href="#annotated-cell-4-89"></a>            annotated_image,</span>
+<span id="annotated-cell-4-90"><a href="#annotated-cell-4-90"></a>            pose_landmarks_proto,</span>
+<span id="annotated-cell-4-91"><a href="#annotated-cell-4-91"></a>            solutions.pose.POSE_CONNECTIONS,</span>
+<span id="annotated-cell-4-92"><a href="#annotated-cell-4-92"></a>            solutions.drawing_styles.get_default_pose_landmarks_style())</span>
+<span id="annotated-cell-4-93"><a href="#annotated-cell-4-93"></a>    <span class="cf">return</span> annotated_image</span>
+<span id="annotated-cell-4-94"><a href="#annotated-cell-4-94"></a>    plt.show()</span>
+<span id="annotated-cell-4-95"><a href="#annotated-cell-4-95"></a></span>
+<span id="annotated-cell-4-96"><a href="#annotated-cell-4-96"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="8">8</button><span id="annotated-cell-4-97" class="code-annotation-target"><a href="#annotated-cell-4-97"></a><span class="kw">def</span> findHandsUp(detect_result):</span>
+<span id="annotated-cell-4-98"><a href="#annotated-cell-4-98"></a>    <span class="co">"""Takes in the pose landmark information, and for each body detected, determines if the hands are</span></span>
+<span id="annotated-cell-4-99"><a href="#annotated-cell-4-99"></a><span class="co">    above the head or not. Prints a message."""</span></span>
+<span id="annotated-cell-4-100"><a href="#annotated-cell-4-100"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: Look at the hand and head positions and determine whether hands are above head or not</span></span>
+<span id="annotated-cell-4-101"><a href="#annotated-cell-4-101"></a>    <span class="cf">pass</span></span>
+<span id="annotated-cell-4-102"><a href="#annotated-cell-4-102"></a></span>
+<span id="annotated-cell-4-103"><a href="#annotated-cell-4-103"></a></span>
+<span id="annotated-cell-4-104"><a href="#annotated-cell-4-104"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="annotated-cell-4-105"><a href="#annotated-cell-4-105"></a>    runPoseDetector(<span class="dv">0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="27,28,29,30,31" data-code-annotation="1">Set up the model</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="42,43" data-code-annotation="2">Convert the video frame to the Mediapipe image representation</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="46" data-code-annotation="3">Run the model on the converted image</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="49" data-code-annotation="4">Run an optional function to process the model results</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="52,53" data-code-annotation="5">Draw the results onto the frame image, and display it</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="55,56,57,58,59,60" data-code-annotation="6">Show the image segmentation masks if they were created, outlining the pixels where particular objects are</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="69" data-code-annotation="7">The function to draw results on the frame</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="8">8</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="97" data-code-annotation="8">The optional function to check body pose, for use with the ICA</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>The landmark results, like hand and even facial landmarks, are represented as normalized coordinates in 3-d space. The x and y axes are as normal, and the z axis once again represents distances along the axis between the camera and its subjects.</p>
+<p><a href="#fig-poseExamples" class="quarto-xref">Figure&nbsp;7</a> shows several screenshots from the running of this program, showing both the skeleton drawn onto the original frame, and also the <strong>segmentation mask</strong>, which shows the region of the image where the model thinks a person is. Note that the model’s default options look for one person, and not every person in view.</p>
+<div id="fig-poseExamples" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poseExamples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSkel120.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20" title="Close up view, skeleton"><img src="Ch8-Images/poseSkel120.png" class="img-fluid figure-img"></a></p>
+<figcaption>Close up view, skeleton</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSegm120.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21" title="Close up view, segmentation"><img src="Ch8-Images/poseSegm120.png" class="img-fluid figure-img"></a></p>
+<figcaption>Close up view, segmentation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSkel330.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22" title="Medium close, hands up, skeleton"><img src="Ch8-Images/poseSkel330.png" class="img-fluid figure-img"></a></p>
+<figcaption>Medium close, hands up, skeleton</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSegm330.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23" title="Medium close, hands up, segmentation"><img src="Ch8-Images/poseSegm330.png" class="img-fluid figure-img"></a></p>
+<figcaption>Medium close, hands up, segmentation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSkel570.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24" title="Medium distance, hands up, skeleton"><img src="Ch8-Images/poseSkel570.png" class="img-fluid figure-img"></a></p>
+<figcaption>Medium distance, hands up, skeleton</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSegm570.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25" title="Medium distance, hands up, segmentation"><img src="Ch8-Images/poseSegm570.png" class="img-fluid figure-img"></a></p>
+<figcaption>Medium distance, hands up, segmentation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSkel660.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26" title="Medium distance, hands on hips, skeleton"><img src="Ch8-Images/poseSkel660.png" class="img-fluid figure-img"></a></p>
+<figcaption>Medium distance, hands on hips, skeleton</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/poseSegm660.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27" title="Medium distance, hands on hips, segmentation"><img src="Ch8-Images/poseSegm660.png" class="img-fluid figure-img"></a></p>
+<figcaption>Medium distance, hands on hips, segmentation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poseExamples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Various results of hand landmark detection
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-poseFull" class="quarto-xref">Figure&nbsp;8</a> shows the skeleton and segmentation for a more distant view of a person</p>
+<div id="fig-poseFull" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poseFull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/womanPose1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28" title="Woman dancing on beach, skeleton"><img src="Ch8-Images/womanPose1.png" class="img-fluid figure-img"></a></p>
+<figcaption>Woman dancing on beach, skeleton</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Ch8-Images/womanPose2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29" title="Woman dancing on beach, segmentation"><img src="Ch8-Images/womanPose2.png" class="img-fluid figure-img"></a></p>
+<figcaption>Woman dancing on beach, segmentation</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poseFull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Distant view, showing head-to-toe skeleton and segmentation
+</figcaption>
+</figure>
+</div>
+<section id="examining-the-body-pose-landmark-detection-program" class="level3" data-number="2.0.1">
+<h3 data-number="2.0.1" class="anchored" data-anchor-id="examining-the-body-pose-landmark-detection-program"><span class="header-section-number">2.0.1</span> Examining the body pose landmark detection program</h3>
+<p>This program has three functions, plus a short main script that calls the main function.</p>
+<p>The <code>runPoseDetector</code> function is the main function. Like the other demo programs, it sets up the pose landmark model and then uses it on frames from a video feed. It includes a commented-out function that can interpret the results from the model, if you choose to work on this program.</p>
+<p>The <code>visualizeResults</code> function draws the results on the current frame. It uses Mediapipe’s more sophisticated drawing tools, in order to draw the skeleton and the 3d points most easily.</p>
+<p>The <code>findHandsUp</code> function is for you to implement, if you choose. It would try to distinguish between hands above the head versus below.</p>
+</section>
+<section id="body-pose-landmark-results" class="level3" data-number="2.0.2">
+<h3 data-number="2.0.2" class="anchored" data-anchor-id="body-pose-landmark-results"><span class="header-section-number">2.0.2</span> Body pose landmark results</h3>
+<p>The results returned from the body pose landmark detector are similar to the hand landmark detector. The landmarks are given in two forms, as <em>normalized landmarks</em> and as <em>world landmarks</em>, a third part of the result (optional) holds a segmentation image mask, showing where the person is.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Accessing results</th>
+<th style="text-align: left;">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>dt = detector.detect(mp_image)</code></td>
+<td style="text-align: left;"><code>dt</code> is a <code>PoseLandmarkerResult</code> object. It has three variables within it: <code>pose_landmarks</code>, <code>pose_world_landmarks</code>, and <code>segmentation_masks</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pLmarks = dt.pose_landmarks</code></td>
+<td style="text-align: left;"><code>pLmarks</code> is a list of lists. Each sublist corresponds to one person detected, though the model by default detects only one person.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>pLmarks[0]</code></td>
+<td style="text-align: left;"><code>pLmarks[0]</code> is a list of <code>NormalizedLandmark</code> objects. It contains the 33 body pose landmarks, all given as 3d normalized coordinates. <code>NormalizedLandmark</code> objects, as seen before, have <code>x</code>, <code>y</code>, and <code>z</code> variables.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>wLmarks = dt.world_pose_landmarks</code></td>
+<td style="text-align: left;"><code>wLmarks</code> is the same as <code>pLmarks</code>, except that the data are represented as <code>Landmark</code> objects and the <code>x</code>, <code>y</code>, and <code>z</code> values estimate real-world distances (in metric)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>segImgs = dt.segmentation_masks</code></td>
+<td style="text-align: left;"><code>segImgs</code> is a list containing Mediapipe images. Each image segments one detected person from the rest of the image. The image contains floating-point values between 0.0 and 1.0. The higher the value, the more likely it is part of the person.</td>
+</tr>
+</tbody>
+</table>
+<p>In the ICA code, there is a text file, <code>poseLandmarkResults.txt</code> that shows one example of the form of results.</p>
+</section>
+<section id="object-detection-with-mediapipe-optional-challenge-section" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="object-detection-with-mediapipe-optional-challenge-section"><span class="header-section-number">2.1</span> Object Detection with Mediapipe (OPTIONAL CHALLENGE SECTION)</h2>
+<p>If you feel inspired, try out Mediapipe’s Object Detection model. Here are abbreviated instructions:</p>
+<ul>
+<li>Read through and run the <code>mediapipeObjects.py</code> demo program</li>
+<li>Print the results of running the model, and see what the structure is</li>
+</ul>
+</section>
+</section>
+<section id="simple-machine-learning-with-opencv" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Simple Machine Learning with OpenCV</h1>
+</section>
+<section id="convolutional-neural-networks-a-building-block-for-deep-learning" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Convolutional Neural Networks (a building block for deep learning)</h1>
+</section>
+<section id="object-detection-and-segmentation-models" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Object Detection and Segmentation Models</h1>
+</section>
+<section id="imagevideo-generative-models" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Image/video generative models</h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
