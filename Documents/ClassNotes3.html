@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-05">
+<meta name="dcterms.date" content="2025-11-07">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 5, 2025</p>
+        <p class="date">November 7, 2025</p>
       </div>
     </div>
     
@@ -263,6 +263,33 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#announcements-6" id="toc-announcements-6" class="nav-link" data-scroll-target="#announcements-6">Announcements</a></li>
   <li><a href="#todays-topics-5" id="toc-todays-topics-5" class="nav-link" data-scroll-target="#todays-topics-5">Today’s topics</a></li>
+  </ul></li>
+  <li><a href="#friday-november-7" id="toc-friday-november-7" class="nav-link" data-scroll-target="#friday-november-7">Friday, November 7</a>
+  <ul class="collapse">
+  <li><a href="#announcements-7" id="toc-announcements-7" class="nav-link" data-scroll-target="#announcements-7">Announcements</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#week-11" id="toc-week-11" class="nav-link" data-scroll-target="#week-11">Week 11</a>
+  <ul class="collapse">
+  <li><a href="#monday-november-10" id="toc-monday-november-10" class="nav-link" data-scroll-target="#monday-november-10">Monday, November 10</a>
+  <ul class="collapse">
+  <li><a href="#announcements-8" id="toc-announcements-8" class="nav-link" data-scroll-target="#announcements-8">Announcements</a></li>
+  <li><a href="#todays-topics-6" id="toc-todays-topics-6" class="nav-link" data-scroll-target="#todays-topics-6">Today’s topics</a></li>
+  <li><a href="#designing-your-project" id="toc-designing-your-project" class="nav-link" data-scroll-target="#designing-your-project">Designing your project</a></li>
+  <li><a href="#example-hunt-the-wumpus-my-ai-students-work-with-this-one" id="toc-example-hunt-the-wumpus-my-ai-students-work-with-this-one" class="nav-link" data-scroll-target="#example-hunt-the-wumpus-my-ai-students-work-with-this-one">Example: Hunt the Wumpus (my AI students work with this one)</a></li>
+  <li><a href="#top-down-design" id="toc-top-down-design" class="nav-link" data-scroll-target="#top-down-design">Top-Down Design:</a></li>
+  <li><a href="#bottom-up-implementation-with-testing-integrated" id="toc-bottom-up-implementation-with-testing-integrated" class="nav-link" data-scroll-target="#bottom-up-implementation-with-testing-integrated">Bottom-up Implementation with testing integrated</a></li>
+  <li><a href="#examples-of-design-documents-from-comp-123" id="toc-examples-of-design-documents-from-comp-123" class="nav-link" data-scroll-target="#examples-of-design-documents-from-comp-123">Examples of design documents from Comp 123</a></li>
+  </ul></li>
+  <li><a href="#wednesday-november-12" id="toc-wednesday-november-12" class="nav-link" data-scroll-target="#wednesday-november-12">Wednesday, November 12</a>
+  <ul class="collapse">
+  <li><a href="#announcements-9" id="toc-announcements-9" class="nav-link" data-scroll-target="#announcements-9">Announcements</a></li>
+  <li><a href="#todays-topics-7" id="toc-todays-topics-7" class="nav-link" data-scroll-target="#todays-topics-7">Today’s topics</a></li>
+  </ul></li>
+  <li><a href="#friday-november-14" id="toc-friday-november-14" class="nav-link" data-scroll-target="#friday-november-14">Friday, November 14</a>
+  <ul class="collapse">
+  <li><a href="#announcements-10" id="toc-announcements-10" class="nav-link" data-scroll-target="#announcements-10">Announcements</a></li>
+  <li><a href="#todays-topics-8" id="toc-todays-topics-8" class="nav-link" data-scroll-target="#todays-topics-8">Today’s topics</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
@@ -336,7 +363,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="148bff5e" class="cell" data-execution_count="1">
+<div id="4237d24b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -415,7 +442,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="46e03fb1" class="cell" data-execution_count="2">
+<div id="999a0ebf" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -434,7 +461,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="27a2fee7" class="cell" data-execution_count="3">
+<div id="34267bda" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -814,6 +841,218 @@ c &amp; d &amp; t_y \\
 <li>Try all four (five, optionally) demo programs</li>
 <li>Pick <strong>two</strong> to extend</li>
 <li>Extend them by selecting information from the detection results and using it to identify certain actions (facing left/right, closing eyes, palms versus fists, hands up or down)</li>
+</ul>
+</section>
+</section>
+<section id="friday-november-7" class="level2">
+<h2 class="anchored" data-anchor-id="friday-november-7">Friday, November 7</h2>
+<section id="announcements-7" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-7">Announcements</h3>
+<ul>
+<li><p>Due dates this week:</p>
+<ul>
+<li><strong>Due today:</strong>
+<ul>
+<li>Homework 3: Due November 7</li>
+<li>Ethics and Sci-Fi 9</li>
+<li>Extended essay 1: Due November 7</li>
+</ul></li>
+<li><strong>Due last Wednesday:</strong>
+<ul>
+<li>Project 1: Due November 5</li>
+</ul></li>
+<li>Short essay 1: Due November 14
+<ul>
+<li><strong>Read carefully</strong> the Short Essay 1 Guide</li>
+<li>I am being lenient about what you handed in this time, but many of you might not have qualified for a Gold rating on the final paper if I hadn’t been lenient</li>
+<li>Next round, Short Essay 2, I will be more stringent about what you submit at the end of the first hour</li>
+</ul></li>
+</ul></li>
+<li><p>Homework 4 is posted, with 3 questions ready for you to work on</p></li>
+<li><p>Project Milestone 2 is posted</p></li>
+<li><p><strong>Today:</strong> Library session! Meet in Library 206</p>
+<ul>
+<li>Focused on how to find resources for your extended essays</li>
+</ul></li>
+<li><p>Registration: you will register on November 13!</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="week-11" class="level1">
+<h1>Week 11</h1>
+<section id="monday-november-10" class="level2">
+<h2 class="anchored" data-anchor-id="monday-november-10">Monday, November 10</h2>
+<section id="announcements-8" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-8">Announcements</h3>
+<ul>
+<li>Upcoming due dates
+<ul>
+<li><strong>November 14:</strong>
+<ul>
+<li>Short essay 1: <strong>Read carefully</strong> the Short Essay 1 Guide</li>
+<li>Make-up Ethics and Sci-Fi available this week (if you missed one, do this to make it up!)</li>
+</ul></li>
+<li><strong>November 21:</strong>
+<ul>
+<li>Project Milestone 2</li>
+<li>Extended essay rough draft</li>
+</ul></li>
+<li><strong>December 3:</strong>
+<ul>
+<li>Homework 4 (currently only 3 questions are ready)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="todays-topics-6" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-6">Today’s topics</h3>
+<ul>
+<li>Designing your project</li>
+<li>Convolutional Neural Networks
+<ul>
+<li>What are they?</li>
+<li>How do they work?</li>
+<li>How do we train them?</li>
+</ul></li>
+</ul>
+</section>
+<section id="designing-your-project" class="level3">
+<h3 class="anchored" data-anchor-id="designing-your-project">Designing your project</h3>
+<ul>
+<li><strong>Why?</strong>
+<ul>
+<li>Working in a team? Everyone has to agree or pieces don’t fit</li>
+<li>Get past programmer’s block: break problem into bite-sized pieces that you can then tackle without getting overwhelmed</li>
+<li>Make coding easier and faster</li>
+<li>Avoid bad design through haphazard programming</li>
+</ul></li>
+<li>Define the problem clearly and thoroughly
+<ul>
+<li>How does someone interact with your program?</li>
+<li>What does it do, exactly?</li>
+</ul></li>
+<li>What features will the program have for sure, what are optional add-ons?
+<ul>
+<li>Think about information that program needs</li>
+<li>Data structures</li>
+<li>Information in files?</li>
+</ul></li>
+<li>Break program into separate sensible functions (a hierarchy)</li>
+<li>What modules/tools do you need (OpenCV, Mediapipe, Tensorflow, etc.)</li>
+</ul>
+</section>
+<section id="example-hunt-the-wumpus-my-ai-students-work-with-this-one" class="level3">
+<h3 class="anchored" data-anchor-id="example-hunt-the-wumpus-my-ai-students-work-with-this-one">Example: Hunt the Wumpus (my AI students work with this one)</h3>
+<ul>
+<li>Specify the game:
+<ul>
+<li>Will display the game board and all the known squares for the user, including where the user is</li>
+<li>Game board is a 2d grid which wraps around from side to side</li>
+<li>Somewhere in the grid there is a Wumpus, a monster. The monster makes all cells that are within 2 of the wumpus have a terrible smell. The wumpus is sleeping in a cell; we don’t know where. If the hero enters the cell where the wumpus is, the wumpus will wake up and eat them.</li>
+<li>There are some number of pits in cells of the grid, we don’t know where. If the hero enters a cell with a pit, they will fall in the pit and die.</li>
+<li>The hero can kill the wumpus (and win the game) by figuring out where it is, and shooting an arrow toward the cell where the wumpus is. If the hero guesses wrong, the sound of the arrow will awaken the wumpus, wherever it is, and it will come to find the hero and kill them.</li>
+</ul></li>
+<li>Ask the user which direction to move or which direction to shoot the arrow</li>
+<li>Did the user die or win the game?</li>
+<li>If not, display the updated map with new information on it and repeat</li>
+</ul>
+</section>
+<section id="top-down-design" class="level3">
+<h3 class="anchored" data-anchor-id="top-down-design">Top-Down Design:</h3>
+<p><strong>Start this only once you have determined what the program should do, and kinds of data you will be using for the program.</strong></p>
+<p>Designing in a “top-down” way, from the main program to its helpers, can ensure that the pieces we design all fit together, and it can be easier to think about the whole overall task first, and then drill down to the finer details of the helper functions.</p>
+<ul>
+<li>Start with pseudocode to describe the main program</li>
+<li>Any steps that seem complicated, or making the pseudocode too long, turn that step into its own function
+<ul>
+<li>This simplifies the main program, now that step is just one line, a call to the function</li>
+<li>Thinking about the complicated step in isolation can be simpler</li>
+</ul></li>
+<li>Repeat this for each helper function, maybe generating more helper functions for it!</li>
+<li>Build a “tree” of functions, each specified in pseudocode
+<ul>
+<li>For each pseudocode function, figure out what input parameters it needs, and what returned values or effects it has</li>
+</ul></li>
+</ul>
+<p>Write out the entire design and make sure that it all makes sense. Is anything left out?</p>
+</section>
+<section id="bottom-up-implementation-with-testing-integrated" class="level3">
+<h3 class="anchored" data-anchor-id="bottom-up-implementation-with-testing-integrated">Bottom-up Implementation with testing integrated</h3>
+<p>While designing from the top down works well, implementing the program that way does <strong>not</strong> work well for most of us. Instead, we will start with the “leaves” of our tree of functions, because they are the most simple parts, and they don’t rely on any other functions we need to implement.</p>
+<p>The goal is to implement <strong>and test/debug</strong> one function at a time, working from the leaves at the bottom gradually up to the main program itself. This keeps the testing and debugging focused on a small amount of code at any time, and ensures that when you implement a function, you <strong>can</strong> test it right away, because you’ve already implemented and tested any functions it relies on.</p>
+<ul>
+<li>Start with “leaves” of the tree, simplest functions.</li>
+<li>Implement, document, and test before going on</li>
+</ul>
+</section>
+<section id="examples-of-design-documents-from-comp-123" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-design-documents-from-comp-123">Examples of design documents from Comp 123</h3>
+<p>Below is a link to a document containing sample design documents from several years ago in Comp 123. While their project topics are different, the project requirements are very similar. Not all of these design documents earned full credit: my grading comments are included, though the student names are blocked out.</p>
+<p><a href="https://drive.google.com/file/d/1Vm6qewS_mPGU0afyOb9d0mCYNwAT4sn3/view?usp=drive_link">SampleDesignDocs.zip</a></p>
+</section>
+</section>
+<section id="wednesday-november-12" class="level2">
+<h2 class="anchored" data-anchor-id="wednesday-november-12">Wednesday, November 12</h2>
+<section id="announcements-9" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-9">Announcements</h3>
+<ul>
+<li>Upcoming due dates
+<ul>
+<li><strong>November 14:</strong>
+<ul>
+<li>Short essay 1: <strong>Read carefully</strong> the Short Essay 1 Guide</li>
+<li>Make-up Ethics and Sci-Fi available this week (if you missed one, do this to make it up!)</li>
+</ul></li>
+<li><strong>November 21:</strong>
+<ul>
+<li>Project Milestone 2</li>
+<li>Extended essay rough draft</li>
+</ul></li>
+<li><strong>December 3:</strong>
+<ul>
+<li>Homework 4 (currently only 3 questions are ready)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="todays-topics-7" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-7">Today’s topics</h3>
+<ul>
+<li>Continuing work with Convolutional Neural Networks</li>
+</ul>
+</section>
+</section>
+<section id="friday-november-14" class="level2">
+<h2 class="anchored" data-anchor-id="friday-november-14">Friday, November 14</h2>
+<section id="announcements-10" class="level3">
+<h3 class="anchored" data-anchor-id="announcements-10">Announcements</h3>
+<ul>
+<li>Upcoming due dates
+<ul>
+<li><strong>Due TODAY:</strong>
+<ul>
+<li>Short essay 1: <strong>Read carefully</strong> the Short Essay 1 Guide</li>
+<li>Make-up Ethics and Sci-Fi available this week (if you missed one, do this to make it up!)</li>
+</ul></li>
+<li><strong>November 21:</strong>
+<ul>
+<li>Project Milestone 2</li>
+<li>Extended essay rough draft</li>
+</ul></li>
+<li><strong>December 3:</strong>
+<ul>
+<li>Homework 4 (currently only 3 questions are ready)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="todays-topics-8" class="level3">
+<h3 class="anchored" data-anchor-id="todays-topics-8">Today’s topics</h3>
+<ul>
+<li>Object detection</li>
+<li>Segmentation</li>
+<li>Generative AI overview</li>
 </ul>
 <hr>
 </section>
