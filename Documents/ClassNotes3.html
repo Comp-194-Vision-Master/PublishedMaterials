@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-07">
+<meta name="dcterms.date" content="2025-11-09">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -191,7 +191,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 7, 2025</p>
+        <p class="date">November 9, 2025</p>
       </div>
     </div>
     
@@ -280,6 +280,9 @@ window.Quarto = {
   <li><a href="#top-down-design" id="toc-top-down-design" class="nav-link" data-scroll-target="#top-down-design">Top-Down Design:</a></li>
   <li><a href="#bottom-up-implementation-with-testing-integrated" id="toc-bottom-up-implementation-with-testing-integrated" class="nav-link" data-scroll-target="#bottom-up-implementation-with-testing-integrated">Bottom-up Implementation with testing integrated</a></li>
   <li><a href="#examples-of-design-documents-from-comp-123" id="toc-examples-of-design-documents-from-comp-123" class="nav-link" data-scroll-target="#examples-of-design-documents-from-comp-123">Examples of design documents from Comp 123</a></li>
+  <li><a href="#machine-learning" id="toc-machine-learning" class="nav-link" data-scroll-target="#machine-learning">Machine Learning</a></li>
+  <li><a href="#convolutional-neural-networks" id="toc-convolutional-neural-networks" class="nav-link" data-scroll-target="#convolutional-neural-networks">Convolutional Neural Networks</a></li>
+  <li><a href="#how-will-we-work-with-cnns" id="toc-how-will-we-work-with-cnns" class="nav-link" data-scroll-target="#how-will-we-work-with-cnns">How will we work with CNNs?</a></li>
   </ul></li>
   <li><a href="#wednesday-november-12" id="toc-wednesday-november-12" class="nav-link" data-scroll-target="#wednesday-november-12">Wednesday, November 12</a>
   <ul class="collapse">
@@ -363,7 +366,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="4237d24b" class="cell" data-execution_count="1">
+<div id="fd5a636a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -442,7 +445,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="999a0ebf" class="cell" data-execution_count="2">
+<div id="27c0a4ba" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -461,7 +464,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="34267bda" class="cell" data-execution_count="3">
+<div id="c7d9ca33" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -991,6 +994,176 @@ c &amp; d &amp; t_y \\
 <p>Below is a link to a document containing sample design documents from several years ago in Comp 123. While their project topics are different, the project requirements are very similar. Not all of these design documents earned full credit: my grading comments are included, though the student names are blocked out.</p>
 <p><a href="https://drive.google.com/file/d/1Vm6qewS_mPGU0afyOb9d0mCYNwAT4sn3/view?usp=drive_link">SampleDesignDocs.zip</a></p>
 </section>
+<section id="machine-learning" class="level3">
+<h3 class="anchored" data-anchor-id="machine-learning">Machine Learning</h3>
+<section id="what-is-machine-learning" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-machine-learning">What is Machine Learning?</h4>
+<ul>
+<li>An algorithm that finds patterns in data (to solve some task)</li>
+<li>Given a <strong>dataset</strong> of examples, predict the correct outcomes</li>
+<li><strong>Generalize</strong> to new examples that it hasn’t seen before</li>
+</ul>
+</section>
+<section id="why-use-ml" class="level4">
+<h4 class="anchored" data-anchor-id="why-use-ml">Why use ML?</h4>
+<ul>
+<li>To learn about learning</li>
+<li>To make a system that can adapt to changes in its environment</li>
+<li>Because we don’t know how to solve a problem otherwise
+<ul>
+<li>Computer is better at finding statistical patterns in large, complex data than we are</li>
+</ul></li>
+</ul>
+</section>
+<section id="terminology" class="level4">
+<h4 class="anchored" data-anchor-id="terminology">Terminology</h4>
+<ul>
+<li><strong>induction</strong>, the process of generalizing from examples to a general rule (this is really what ML does)</li>
+<li><strong>prior knowledge</strong>, what the agent knows before learning starts</li>
+<li><strong>training “from scratch”</strong>, assuming no prior knowledge in the agent</li>
+<li><strong>factored/vector representation</strong>, when the input data is in the form of a vector of attribute values Other representations are possible, including images, sounds, text, but require special handling</li>
+<li><strong>classification</strong>, probably the most common ML task, categorizing input examples into a finite set of classes or categories</li>
+<li><strong>regression</strong>, from input examples, produce an output number (thus the artifact is approximation a numerical function of some kind)</li>
+<li><strong>transfer learning</strong>, using a model trained for a different task as a starting point Variations on this: transfer learning, retraining, finetuning</li>
+</ul>
+</section>
+<section id="kinds-of-machine-learning" class="level4">
+<h4 class="anchored" data-anchor-id="kinds-of-machine-learning">Kinds of machine learning</h4>
+<p>What kind of feedback is the ML system given about its learning task</p>
+<ul>
+<li><strong>Supervised learning,</strong> the most common kind, where the system is given both the input example and the correct output and just needs to learn to produce one from the other
+<ul>
+<li>Training a robot car to drive on a track by recording a human driving on tracks, and then asking the robot to replicate what the human would do</li>
+</ul></li>
+<li><strong>Self-supervised learning,</strong> to me this is just a special case of supervised learning: the target values are intrinsic parts of the data itself, so getting targets is automated
+<ul>
+<li><strong>Auto-association,</strong> model trained to reproduce its input</li>
+<li>Sequential data, predict-the-next (this is what LMMs do)</li>
+</ul></li>
+<li><strong>Reinforcement learning,</strong> difficult, but more interesting! The system is given input examples, chooses some action, and then is rewarded or punished based on the action it takes. It is not told the right answer
+<ul>
+<li>Training a robot car to drive on a track by rewarding it for staying in its lane, or following a line</li>
+</ul></li>
+<li><strong>Unsupervised learning,</strong> The system is given input examples, and produces something from them with no goal stated
+<ul>
+<li>Clustering is the most common kind: collecting examples by similarity into some fixed number of groups</li>
+<li>Some deep learning systems leverage a smallish supervised learning dataset to extend to a large unlabeled dataset, sometimes called <strong>semi-supervised learning</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="supervised-learning" class="level4">
+<h4 class="anchored" data-anchor-id="supervised-learning">Supervised learning</h4>
+<p>Given a training set that specifies input examples and the correct outputs for them, find patterns and regularities in the data that allow you to infer outputs from inputs</p>
+<ul>
+<li><strong>Training set:</strong> often written as (x, y), where x = (x1, x2, …, xn) and y = (y1, y2, …, yn), and x is the input, y is the correct output</li>
+<li>Algorithm builds a <strong>model</strong></li>
+<li><strong>Goal is generalization</strong>
+<ul>
+<li>It is (fairly) easy to build a model that performs well on the examples it was trained on (it can just memorize the dataset, if nothing else)</li>
+<li>We really want the model to perform well on new examples it has never seen before!</li>
+</ul></li>
+<li><strong>Overfitting:</strong> When the model incorporates irrelevant features of the data because of peculiarities of its particular dataset, so it pays attention to too much, and doesn’t generalize well</li>
+<li><strong>Underfitting:</strong> When the model can’t successfully operate on the training data, when it hasn’t learned the task (perhaps because it lacks enough information or can’t represent the pattern)</li>
+</ul>
+</section>
+<section id="process-for-running-an-ml-supervised-learning-algorithm" class="level4">
+<h4 class="anchored" data-anchor-id="process-for-running-an-ml-supervised-learning-algorithm">Process for running an ML supervised learning algorithm:</h4>
+<ul>
+<li>Build a dataset and label each example with the correct answer (or acquire an existing dataset, much easier!)</li>
+<li>Perform any preprocessing on the data, including various transformations and things like principal components analysis (PCA), that let you simplify the data</li>
+<li>Divide the dataset into at least two parts, better yet three parts
+<ul>
+<li>Training data: the data the ML algorithm will actually see</li>
+<li>Validation data: data you will reserve to assess the generalization and overfitting of the model, as you are tweaking its parameters and form</li>
+<li>Testing data: data you hold in reserve and never use during the development of the model; you use it only to test the final trained model to evaluate if the model has become biased toward the validation data</li>
+<li>Sometimes the testing set is omitted, and we call the validation set the testing set for simplicity</li>
+</ul></li>
+<li>Run the ML algorithm, then tweak it, and run it again, and repeat until the performance of the model is as good as you can get it</li>
+</ul>
+</section>
+<section id="evaluating-ml-models" class="level4">
+<h4 class="anchored" data-anchor-id="evaluating-ml-models">Evaluating ML Models</h4>
+<p><strong>Loss</strong></p>
+<ul>
+<li><p>The loss function is how the algorithm computes the error in the performance of the ML model. It captures differences between the target and the actual output of the model.</p></li>
+<li><p>There are many many loss functions for different machine learning models, you don’t need to know about them</p></li>
+</ul>
+<p><strong>Accuracy</strong></p>
+<p>One measure of how well the model works: percentage of samples for which the correct answer was given</p>
+</section>
+</section>
+<section id="convolutional-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="convolutional-neural-networks">Convolutional Neural Networks</h3>
+<ul>
+<li>Designed to process images or other matrix-like data</li>
+<li>Architecture depends on the task</li>
+<li>Classification/regression (simplest)</li>
+<li>Autoencoding, image segmentation, or augmentation (more complicated, U networks)</li>
+<li>Object detection (YOLO, RCNN…)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ClassNotes-Images/simpleCNN.png" class="img-fluid figure-img"></p>
+<figcaption>Simple view of classification CNN, found multiple places, perhaps originally from <a href="https://www.mathworks.com/discovery/convolutional-neural-network.html">Mathworks</a></figcaption>
+</figure>
+</div>
+<ul>
+<li>Input: an image (in this case a color one)</li>
+<li>Output: one of a set of categories</li>
+<li>Feature learning: uses two new kinds of layers: convolution and pooling</li>
+<li>Classification: Converts the multi-d representation of features into a linear vector, and runs as a traditional neural network</li>
+</ul>
+<section id="convolutional-layer" class="level4">
+<h4 class="anchored" data-anchor-id="convolutional-layer">Convolutional layer</h4>
+<ul>
+<li>Each layer contains a set of <strong>convolutional filters</strong> of a fixed size.</li>
+<li>Each filter has a <strong>kernel</strong>, a matrix containing weights. These weights are learned by the training algorithm, and are initially random</li>
+<li>The filter is applied to a small region of the image, and performs a weighted sum of the weights with the values in the region. We then slide the filter all over the image, computing the weighted sum at each location, and we produce a feature map where larger values indicate the presence of the feature the kernel is looking for (remember that this “feature” is initially random, and gradually is learned through training)</li>
+<li>The output of the layer is the set of feature maps produced by each filter in the layer</li>
+</ul>
+</section>
+<section id="pooling-layers" class="level4">
+<h4 class="anchored" data-anchor-id="pooling-layers">Pooling layers</h4>
+<p>Pooling layers are not modified in the learning process. They just reduce the size of the feature map given to them. This is sometimes called downsampling in computer vision terms.</p>
+<p>The most common kind of pooling is max-pooling: given a small region of an image, pick the max value: the region turns into one value</p>
+<p>Why?</p>
+<p>Size of data can blow up if we don’t reduce it (apply 64 filters to a 100x100 image and get roughly 64x100x100 out! Looking for larger-scale features that sprawl across a larger region of the image: downsampling scales those features down to where our filters can detect them</p>
+<p>Other layers to know about</p>
+<ul>
+<li>Drop-out layers: to help with overfitting, on any particular sample being processed, some adjacent units are disabled. Forces generalization and lack of reliance on any specific part of the network</li>
+<li>Softmax: an output layer that converts the output activations of the previous layer into probabilities: we can choose the highest probability as the network’s output</li>
+</ul>
+</section>
+<section id="cnn-size-and-complexity-can-be-small-to-huge" class="level4">
+<h4 class="anchored" data-anchor-id="cnn-size-and-complexity-can-be-small-to-huge">CNN size and complexity can be small to huge!</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ClassNotes-Images/VGGArchitecture.png" class="img-fluid figure-img"></p>
+<figcaption>The VGG Network, a small but popular CNN model <a href="https://neurohive.io/en/popular-networks/vgg16/">From Neurohive</a></figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ClassNotes-Images/inceptionv3.png" class="img-fluid figure-img"></p>
+<figcaption>Google’s Inception V3 Network <a href="https://viso.ai/deep-learning/googlenet-explained-the-inception-model-that-won-imagenet/">From Viso.ai</a></figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="how-will-we-work-with-cnns" class="level3">
+<h3 class="anchored" data-anchor-id="how-will-we-work-with-cnns">How will we work with CNNs?</h3>
+<ul>
+<li>You will train a classification CNN, first running code that I provide, then modifying the code for a different dataset</li>
+<li>Training deep learning networks is too much work for most laptops</li>
+<li>We will use Google Colab for this
+<ul>
+<li>A cloud-based Python programming environment</li>
+<li>Google lets us borrow time and resources from its data centers (for free!)</li>
+<li>It comes with all the major libraries we need already installed</li>
+<li>It uses a different programming model, the “notebook” style</li>
+</ul></li>
+</ul>
+</section>
 </section>
 <section id="wednesday-november-12" class="level2">
 <h2 class="anchored" data-anchor-id="wednesday-november-12">Wednesday, November 12</h2>
@@ -1054,6 +1227,28 @@ c &amp; d &amp; t_y \\
 <li>Segmentation</li>
 <li>Generative AI overview</li>
 </ul>
+<p>Object Detection + Segmentation: YOLO</p>
+<p>Object detection models (RCNN, YOLO) Find bounding boxes around objects of interest Use CNNs as a part of the process, but have much more complex architectures Segmentation Label each pixel</p>
+<p>See Medium blog for explanation of YOLO architecture</p>
+<p>More detailed view of YOLO:</p>
+<p>Encoder-Decoder Models</p>
+<p>U-shaped networks</p>
+<p>These are for autoencoding, image segmentation, or image augmentation</p>
+<p>Recurrent networks</p>
+<p>Common traditional recurrent network: All layers are fully connected The input to the network is one of a sequence of inputs The input is paired up with the previous step’s hidden layer values Hidden layer representation is learned such that it stores the past information that is needed for the task</p>
+<p>LSTM: Include LSTM units that can learn to remember things for varying numbers of steps, so can be more flexible than traditional recurrent networks</p>
+<p>Transformers</p>
+<p>Sequential data all presented at once Encoder/Decoder model Data is encoded in vector form, combined with positional data (where in the sequence it is) Attention is a key concept: I recommend this series of posts by Dr.&nbsp;Stefania Cristina that explain the concept of “attention” and how it is implemented) How Transformer Models Work is also fairly readable, at a higher level Attention module builds a representation of what is important, what relates to what self-attention: sequence is provided all at once, and it can learn relationships among words in the sequence attention(Q, K, V)=softmax(QKTdk)V multi-head attention: transforms the input embedding to different spaces/forms and then runs self-attention on it</p>
+<p>https://huggingface.co/blog/bert-101</p>
+<p>Generative AI Many different forms Chat GPT: Generative Pretrained Transformer Transformer model trained on massive amounts of data Model was then fine-tuned to do “chat” with supervised learning and reinforcement learning</p>
+<p>Generative Adversarial Networks (GANs)</p>
+<p>Generator network and Discriminator network trained together Generator is given random noise, generates an output Discriminator is given a mix of target outputs and generator outputs, its task is to predict which ones are “real” and which ones are “generated” When the discriminator correctly identifies a generated output, generator is given high loss (is punished) When discriminator is incorrect, it is given high loss</p>
+<p>From https://semiengineering.com/knowledge_centers/artificial-intelligence/neural-networks/generative-adversarial-network-gan/</p>
+<p>Diffusion networks Take original image, gradually add random noise to it until it is all noise Reconstruct the original from the noisy version, using the ones generated as targets</p>
+<p>General view:</p>
+<p>Pure Diffusion</p>
+<p>From https://codoraven.com/blog/ai/stable-diffusion-clearly-explained/</p>
+<p>Stable Diffusion</p>
 <hr>
 </section>
 </section>
