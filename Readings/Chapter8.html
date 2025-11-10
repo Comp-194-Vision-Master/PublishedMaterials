@@ -224,8 +224,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pooling-layers" id="toc-pooling-layers" class="nav-link" data-scroll-target="#pooling-layers"><span class="header-section-number">3.1.2</span> Pooling layers</a></li>
   <li><a href="#other-layers-to-know-about" id="toc-other-layers-to-know-about" class="nav-link" data-scroll-target="#other-layers-to-know-about"><span class="header-section-number">3.1.3</span> Other layers to know about</a></li>
   </ul></li>
-  <li><a href="#cnn-examples" id="toc-cnn-examples" class="nav-link" data-scroll-target="#cnn-examples"><span class="header-section-number">3.2</span> CNN Examples</a></li>
-  <li><a href="#how-will-we-work-with-cnns" id="toc-how-will-we-work-with-cnns" class="nav-link" data-scroll-target="#how-will-we-work-with-cnns"><span class="header-section-number">3.3</span> How will we work with CNNs?</a></li>
+  <li><a href="#cnn-training-process" id="toc-cnn-training-process" class="nav-link" data-scroll-target="#cnn-training-process"><span class="header-section-number">3.2</span> CNN training process</a></li>
+  <li><a href="#cnn-examples" id="toc-cnn-examples" class="nav-link" data-scroll-target="#cnn-examples"><span class="header-section-number">3.3</span> CNN Examples</a></li>
+  <li><a href="#how-will-we-work-with-cnns" id="toc-how-will-we-work-with-cnns" class="nav-link" data-scroll-target="#how-will-we-work-with-cnns"><span class="header-section-number">3.4</span> How will we work with CNNs?</a></li>
   </ul></li>
   <li><a href="#object-detection-and-segmentation-models" id="toc-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#object-detection-and-segmentation-models"><span class="header-section-number">4</span> Object Detection and Segmentation Models</a></li>
   <li><a href="#imagevideo-generative-models" id="toc-imagevideo-generative-models" class="nav-link" data-scroll-target="#imagevideo-generative-models"><span class="header-section-number">5</span> Image/video generative models</a></li>
@@ -264,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mediapipe has a state-of-the-art face detection model. Take a look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">Mediapipe Face Detection Guide</a> for more details about the model itself.</p>
 <p>The model detects a few specific landmarks of a face (eyes, nose tip, mouth, and sides of the face (cheeks or temples), and also provides a bounding box that surrounds the face. We will first walk through the demo program you have been provided, and then will look closely at the format of the data that is returned by the model.</p>
 <p>If you can, open the <code>mediapipeFaceDetect.py</code> program, which is also included in the code block below.</p>
-<div id="175fcbf4" class="cell" data-execution_count="2">
+<div id="99d372be" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceDetect.py</code> program, demonstrates the face detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="co">"""</span></span>
@@ -592,7 +593,7 @@ Figure&nbsp;1: Various results of face detection: notice detection is tuned to t
 </ul>
 <p>With the outputs from these models, we should be able to identify general emotions expressed in a face, or use these landmarks for motion capture, or to augment the user’s face with fake glasses, flowers, or makeup.</p>
 <p>If you can, open the <code>mediapipeFaceLandmark.py</code> program, which is also included in the code block below.</p>
-<div id="b37627a2" class="cell" data-execution_count="3">
+<div id="3e340863" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceLandmark.py</code> program, demonstrates the facial landmark models and their results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co">"""</span></span>
@@ -1050,7 +1051,7 @@ Figure&nbsp;4: Hand landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipeHand.py</code> program, which is also included in the code block below.</p>
-<div id="4be2836a" class="cell" data-execution_count="4">
+<div id="752a79f1" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>The <code>mediapipeHand.py</code> program, demonstrates the hand landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co">"""</span></span>
@@ -1330,7 +1331,7 @@ Figure&nbsp;6: Pose landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipePose.py</code> program, which is also included in the code block below.</p>
-<div id="f8a5df6f" class="cell" data-execution_count="5">
+<div id="22f50c6e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>The <code>mediapipePose.py</code> program, demonstrates the body pose landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co">"""</span></span>
@@ -1734,8 +1735,14 @@ Figure&nbsp;11: Simple view of classification CNN, found multiple places, perhap
 <p><strong>Softmax layers</strong> are typically used for the output layer. They take the values computed by the weighted sum and run through the Relu activation function, and they scale them so that the values are all between 0.0 and 1.0, and they add up to 1.0. This lets us treat the values as probabilities: the likelihood that each output unit is the correct label for the current input. We can pick the largest probability as the model’s guess for the category, and we can treat the model’s value as reflecting its confidence in its answer.</p>
 </section>
 </section>
-<section id="cnn-examples" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="cnn-examples"><span class="header-section-number">3.2</span> CNN Examples</h2>
+<section id="cnn-training-process" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="cnn-training-process"><span class="header-section-number">3.2</span> CNN training process</h2>
+<p>When we create a new neural network, we set all the weights within it to random values. Then we want the model to make small changes to its weights in response to each example, based on the details of the **loss*, or error, between the model’s output and the target output we want it to make. It make a small change to each weight to make the model closer to producing the target value.</p>
+<p>The change in weights has to be small, to balance the changes that need to be made across all the images in the dataset. If we made large changes, the model could end up swinging from weights that work for one particular image, to weights that only work for a different image, and back, without finding a compromise set of weights that work for both images.</p>
+<p>We present all the images in the dataset to the model, and update it as we go with changes to its weights. We call that one <strong>epoch</strong> in the training of the model. Training a neural network requires us to run through the dataset multiple times, for multiple epochs, until the performance of the model is sufficient, or stops changing. For a small model and a small dataset, we may only need to run the model for 10-20 epochs. For larger, or more complex tasks, we may need to traing the model through hundreds or even thousands of epochs.</p>
+</section>
+<section id="cnn-examples" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cnn-examples"><span class="header-section-number">3.3</span> CNN Examples</h2>
 <p>While CNNs are simple enough that we can build small ones from scratch, there are many existing CNN architectures that have been applied to many problems and proven broadly effective. These include VGG and Resnet, which are both older models. Google’s Inception models are too large for practical use, but worked very well. More recently, architectures like MobileNet, DenseNet, and EfficientNet have become standard.</p>
 <p><a href="#fig-vgg" class="quarto-xref">Figure&nbsp;12</a> shows the structure of the VGG architecture. It uses only the kinds of layers we discussed above, and has limited numbers of each kind of layer. Nevertheless, it works well on many smaller tasks, and is often a good choice to try before attempting a more complex model</p>
 <div id="fig-vgg" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
@@ -1761,8 +1768,8 @@ Figure&nbsp;13: Google’s Inception V3 Network <a href="https://viso.ai/deep-le
 </div>
 <p>Since Inception v3’s creation, work shifted to models that were smaller, lighter-weight, and yet could work well. EfficientNet and Densenet are two general-purpose architectures, while MobileNet was explicitly created to be small enough to run on a mobile device.</p>
 </section>
-<section id="how-will-we-work-with-cnns" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="how-will-we-work-with-cnns"><span class="header-section-number">3.3</span> How will we work with CNNs?</h2>
+<section id="how-will-we-work-with-cnns" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="how-will-we-work-with-cnns"><span class="header-section-number">3.4</span> How will we work with CNNs?</h2>
 <p>Because even smaller CNNs are best trained on a system with access to powerful GPUs, we will be using Google Colab to train CNNs for some straightforward image classification tasks. Colab is available for free: with it, we can create Python programs that run on a machine from one of Google’s data centers. All the machine learning libraries we need are provided in Colab, and we have access to Google’s GPUs to speed up the training process.</p>
 <p>Colab uses a <em>notebook</em> model for Python programming. The notebook integrates text blocks and code blocks, and allows us to run each code block individually. While the can be run separately, all code blocks operate in the same global space. Variables defined in one block are available in all the other blocks that run afterward. This leads to a more script-heavy programming style than we have been using thus far. But this is what a large percentage of data science work in Python looks like these days.</p>
 </section>
