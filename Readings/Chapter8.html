@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-05">
+<meta name="dcterms.date" content="2025-11-10">
 
 <title>Chapter 8, Machine Learning and Computer Vision – Vision Readings</title>
 <style>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 5, 2025</p>
+        <p class="date">November 10, 2025</p>
       </div>
     </div>
     
@@ -199,17 +199,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#examining-the-hand-landmark-detection-program" id="toc-examining-the-hand-landmark-detection-program" class="nav-link" data-scroll-target="#examining-the-hand-landmark-detection-program"><span class="header-section-number">1.3.1</span> Examining the hand landmark detection program</a></li>
   <li><a href="#hand-landmark-results" id="toc-hand-landmark-results" class="nav-link" data-scroll-target="#hand-landmark-results"><span class="header-section-number">1.3.2</span> Hand landmark results</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#mediapipe-pose-landmark-skeletons" id="toc-mediapipe-pose-landmark-skeletons" class="nav-link" data-scroll-target="#mediapipe-pose-landmark-skeletons"><span class="header-section-number">2</span> Mediapipe pose landmark skeletons</a>
+  <li><a href="#mediapipe-pose-landmark-skeletons" id="toc-mediapipe-pose-landmark-skeletons" class="nav-link" data-scroll-target="#mediapipe-pose-landmark-skeletons"><span class="header-section-number">1.4</span> Mediapipe pose landmark skeletons</a>
   <ul class="collapse">
-  <li><a href="#examining-the-body-pose-landmark-detection-program" id="toc-examining-the-body-pose-landmark-detection-program" class="nav-link" data-scroll-target="#examining-the-body-pose-landmark-detection-program"><span class="header-section-number">2.0.1</span> Examining the body pose landmark detection program</a></li>
-  <li><a href="#body-pose-landmark-results" id="toc-body-pose-landmark-results" class="nav-link" data-scroll-target="#body-pose-landmark-results"><span class="header-section-number">2.0.2</span> Body pose landmark results</a></li>
-  <li><a href="#object-detection-with-mediapipe-optional-challenge-section" id="toc-object-detection-with-mediapipe-optional-challenge-section" class="nav-link" data-scroll-target="#object-detection-with-mediapipe-optional-challenge-section"><span class="header-section-number">2.1</span> Object Detection with Mediapipe (OPTIONAL CHALLENGE SECTION)</a></li>
+  <li><a href="#examining-the-body-pose-landmark-detection-program" id="toc-examining-the-body-pose-landmark-detection-program" class="nav-link" data-scroll-target="#examining-the-body-pose-landmark-detection-program"><span class="header-section-number">1.4.1</span> Examining the body pose landmark detection program</a></li>
+  <li><a href="#body-pose-landmark-results" id="toc-body-pose-landmark-results" class="nav-link" data-scroll-target="#body-pose-landmark-results"><span class="header-section-number">1.4.2</span> Body pose landmark results</a></li>
   </ul></li>
-  <li><a href="#simple-machine-learning-with-opencv" id="toc-simple-machine-learning-with-opencv" class="nav-link" data-scroll-target="#simple-machine-learning-with-opencv"><span class="header-section-number">3</span> Simple Machine Learning with OpenCV</a></li>
-  <li><a href="#convolutional-neural-networks-a-building-block-for-deep-learning" id="toc-convolutional-neural-networks-a-building-block-for-deep-learning" class="nav-link" data-scroll-target="#convolutional-neural-networks-a-building-block-for-deep-learning"><span class="header-section-number">4</span> Convolutional Neural Networks (a building block for deep learning)</a></li>
-  <li><a href="#object-detection-and-segmentation-models" id="toc-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#object-detection-and-segmentation-models"><span class="header-section-number">5</span> Object Detection and Segmentation Models</a></li>
-  <li><a href="#imagevideo-generative-models" id="toc-imagevideo-generative-models" class="nav-link" data-scroll-target="#imagevideo-generative-models"><span class="header-section-number">6</span> Image/video generative models</a></li>
+  <li><a href="#object-detection-with-mediapipe-optional-challenge-section" id="toc-object-detection-with-mediapipe-optional-challenge-section" class="nav-link" data-scroll-target="#object-detection-with-mediapipe-optional-challenge-section"><span class="header-section-number">1.5</span> Object Detection with Mediapipe (OPTIONAL CHALLENGE SECTION)</a></li>
+  </ul></li>
+  <li><a href="#overview-of-machine-learning" id="toc-overview-of-machine-learning" class="nav-link" data-scroll-target="#overview-of-machine-learning"><span class="header-section-number">2</span> Overview of Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#what-is-machine-learning" id="toc-what-is-machine-learning" class="nav-link" data-scroll-target="#what-is-machine-learning"><span class="header-section-number">2.1</span> What is Machine Learning?</a></li>
+  <li><a href="#why-use-ml" id="toc-why-use-ml" class="nav-link" data-scroll-target="#why-use-ml"><span class="header-section-number">2.2</span> Why use ML?</a></li>
+  <li><a href="#kinds-of-machine-learning-for-computer-vision" id="toc-kinds-of-machine-learning-for-computer-vision" class="nav-link" data-scroll-target="#kinds-of-machine-learning-for-computer-vision"><span class="header-section-number">2.3</span> Kinds of machine learning for computer vision</a>
+  <ul class="collapse">
+  <li><a href="#supervised-learning-in-computer-vision" id="toc-supervised-learning-in-computer-vision" class="nav-link" data-scroll-target="#supervised-learning-in-computer-vision"><span class="header-section-number">2.3.1</span> Supervised learning in computer vision</a></li>
+  <li><a href="#generative-ai-for-images" id="toc-generative-ai-for-images" class="nav-link" data-scroll-target="#generative-ai-for-images"><span class="header-section-number">2.3.2</span> Generative AI for images</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#convolutional-neural-networks" id="toc-convolutional-neural-networks" class="nav-link" data-scroll-target="#convolutional-neural-networks"><span class="header-section-number">3</span> Convolutional Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#convolutional-network-layers" id="toc-convolutional-network-layers" class="nav-link" data-scroll-target="#convolutional-network-layers"><span class="header-section-number">3.1</span> Convolutional network layers</a>
+  <ul class="collapse">
+  <li><a href="#the-convolutional-layer" id="toc-the-convolutional-layer" class="nav-link" data-scroll-target="#the-convolutional-layer"><span class="header-section-number">3.1.1</span> The convolutional layer</a></li>
+  <li><a href="#pooling-layers" id="toc-pooling-layers" class="nav-link" data-scroll-target="#pooling-layers"><span class="header-section-number">3.1.2</span> Pooling layers</a></li>
+  <li><a href="#other-layers-to-know-about" id="toc-other-layers-to-know-about" class="nav-link" data-scroll-target="#other-layers-to-know-about"><span class="header-section-number">3.1.3</span> Other layers to know about</a></li>
+  </ul></li>
+  <li><a href="#cnn-examples" id="toc-cnn-examples" class="nav-link" data-scroll-target="#cnn-examples"><span class="header-section-number">3.2</span> CNN Examples</a></li>
+  <li><a href="#how-will-we-work-with-cnns" id="toc-how-will-we-work-with-cnns" class="nav-link" data-scroll-target="#how-will-we-work-with-cnns"><span class="header-section-number">3.3</span> How will we work with CNNs?</a></li>
+  </ul></li>
+  <li><a href="#object-detection-and-segmentation-models" id="toc-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#object-detection-and-segmentation-models"><span class="header-section-number">4</span> Object Detection and Segmentation Models</a></li>
+  <li><a href="#imagevideo-generative-models" id="toc-imagevideo-generative-models" class="nav-link" data-scroll-target="#imagevideo-generative-models"><span class="header-section-number">5</span> Image/video generative models</a></li>
   </ul>
 </nav>
     </div>
@@ -245,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mediapipe has a state-of-the-art face detection model. Take a look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">Mediapipe Face Detection Guide</a> for more details about the model itself.</p>
 <p>The model detects a few specific landmarks of a face (eyes, nose tip, mouth, and sides of the face (cheeks or temples), and also provides a bounding box that surrounds the face. We will first walk through the demo program you have been provided, and then will look closely at the format of the data that is returned by the model.</p>
 <p>If you can, open the <code>mediapipeFaceDetect.py</code> program, which is also included in the code block below.</p>
-<div id="5d887af0" class="cell" data-execution_count="2">
+<div id="175fcbf4" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceDetect.py</code> program, demonstrates the face detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="co">"""</span></span>
@@ -573,7 +592,7 @@ Figure&nbsp;1: Various results of face detection: notice detection is tuned to t
 </ul>
 <p>With the outputs from these models, we should be able to identify general emotions expressed in a face, or use these landmarks for motion capture, or to augment the user’s face with fake glasses, flowers, or makeup.</p>
 <p>If you can, open the <code>mediapipeFaceLandmark.py</code> program, which is also included in the code block below.</p>
-<div id="0ffae2c1" class="cell" data-execution_count="3">
+<div id="b37627a2" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceLandmark.py</code> program, demonstrates the facial landmark models and their results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co">"""</span></span>
@@ -1031,7 +1050,7 @@ Figure&nbsp;4: Hand landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipeHand.py</code> program, which is also included in the code block below.</p>
-<div id="deef2a0f" class="cell" data-execution_count="4">
+<div id="4be2836a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>The <code>mediapipeHand.py</code> program, demonstrates the hand landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co">"""</span></span>
@@ -1296,9 +1315,8 @@ Figure&nbsp;5: Various results of hand landmark detection
 <p>In the ICA code, there is a text file, <code>handLandmarkResults.txt</code> that shows the structure of the results for no hands, one hand, two hands, and four hands (in an abbreviated form).</p>
 </section>
 </section>
-</section>
-<section id="mediapipe-pose-landmark-skeletons" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Mediapipe pose landmark skeletons</h1>
+<section id="mediapipe-pose-landmark-skeletons" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="mediapipe-pose-landmark-skeletons"><span class="header-section-number">1.4</span> Mediapipe pose landmark skeletons</h2>
 <p>Mediapipe’s pose landmark detector finds landmarks on a whole body (or as much as is visible to the camera), and creates a <em>skeleton</em> view of the landmarks and how they connect to each other. The detector tracks 33 landmarks of the body. See the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker">Mediapipe PoseLandmarks Detection Guide</a> for more details.</p>
 <p>Much like other landmarks, the pose skeleton points are defined as 3d points, with the z axis used for the dimension between camera and subjects. There are 33 body pose landmarks. <a href="#fig-poselandmarks" class="quarto-xref">Figure&nbsp;6</a>, from the Mediapipe guide, illustrates what all 33 landmarks represent:</p>
 <div id="fig-poselandmarks" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
@@ -1312,7 +1330,7 @@ Figure&nbsp;6: Pose landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipePose.py</code> program, which is also included in the code block below.</p>
-<div id="26cea996" class="cell" data-execution_count="5">
+<div id="f8a5df6f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>The <code>mediapipePose.py</code> program, demonstrates the body pose landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co">"""</span></span>
@@ -1569,15 +1587,15 @@ Figure&nbsp;8: Distant view, showing head-to-toe skeleton and segmentation
 </figcaption>
 </figure>
 </div>
-<section id="examining-the-body-pose-landmark-detection-program" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="examining-the-body-pose-landmark-detection-program"><span class="header-section-number">2.0.1</span> Examining the body pose landmark detection program</h3>
+<section id="examining-the-body-pose-landmark-detection-program" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="examining-the-body-pose-landmark-detection-program"><span class="header-section-number">1.4.1</span> Examining the body pose landmark detection program</h3>
 <p>This program has three functions, plus a short main script that calls the main function.</p>
 <p>The <code>runPoseDetector</code> function is the main function. Like the other demo programs, it sets up the pose landmark model and then uses it on frames from a video feed. It includes a commented-out function that can interpret the results from the model, if you choose to work on this program.</p>
 <p>The <code>visualizeResults</code> function draws the results on the current frame. It uses Mediapipe’s more sophisticated drawing tools, in order to draw the skeleton and the 3d points most easily.</p>
 <p>The <code>findHandsUp</code> function is for you to implement, if you choose. It would try to distinguish between hands above the head versus below.</p>
 </section>
-<section id="body-pose-landmark-results" class="level3" data-number="2.0.2">
-<h3 data-number="2.0.2" class="anchored" data-anchor-id="body-pose-landmark-results"><span class="header-section-number">2.0.2</span> Body pose landmark results</h3>
+<section id="body-pose-landmark-results" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="body-pose-landmark-results"><span class="header-section-number">1.4.2</span> Body pose landmark results</h3>
 <p>The results returned from the body pose landmark detector are similar to the hand landmark detector. The landmarks are given in two forms, as <em>normalized landmarks</em> and as <em>world landmarks</em>, a third part of the result (optional) holds a segmentation image mask, showing where the person is.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1615,8 +1633,9 @@ Figure&nbsp;8: Distant view, showing head-to-toe skeleton and segmentation
 </table>
 <p>In the ICA code, there is a text file, <code>poseLandmarkResults.txt</code> that shows one example of the form of results.</p>
 </section>
-<section id="object-detection-with-mediapipe-optional-challenge-section" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="object-detection-with-mediapipe-optional-challenge-section"><span class="header-section-number">2.1</span> Object Detection with Mediapipe (OPTIONAL CHALLENGE SECTION)</h2>
+</section>
+<section id="object-detection-with-mediapipe-optional-challenge-section" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="object-detection-with-mediapipe-optional-challenge-section"><span class="header-section-number">1.5</span> Object Detection with Mediapipe (OPTIONAL CHALLENGE SECTION)</h2>
 <p>If you feel inspired, try out Mediapipe’s Object Detection model. Here are abbreviated instructions:</p>
 <ul>
 <li>Read through and run the <code>mediapipeObjects.py</code> demo program</li>
@@ -1624,17 +1643,135 @@ Figure&nbsp;8: Distant view, showing head-to-toe skeleton and segmentation
 </ul>
 </section>
 </section>
-<section id="simple-machine-learning-with-opencv" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Simple Machine Learning with OpenCV</h1>
+<section id="overview-of-machine-learning" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Overview of Machine Learning</h1>
+<p>Machine learning can seem like magic when you first encounter it, and then it can be disillusioning to realize what “learning” by a computer actually is. While machine learning can be, on the surface, a simple idea, there are many variations, including the kind of task to be learned, the approach, and the outcomes. Whether or not machine learning corresponds to how people or animals learn, it has been tremendously successful in recent years, infiltrating many of the digital systems we work with every day, and having a huge impact on our society.</p>
+<p>How to manage that impact, and AI systems, for the common good is a major study of AI ethics, which we won’t discuss here (it’s very important, and we’ll talk about it elsewhere!).</p>
+<section id="what-is-machine-learning" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="what-is-machine-learning"><span class="header-section-number">2.1</span> What is Machine Learning?</h2>
+<p>Machine learning systems comprise hundreds of different algorithms and approaches, but they are all fundamentally working on the same task: <strong>finding patterns in data</strong>. This is what machine learning boils down to. Most ML algorithms take in data, and look for statistical relationships among the data, and often between the data and the output to be learned.</p>
+<p>A <strong>dataset</strong> is a collection of examples of the problem we want the ML system to learn. Most often, the dataset includes both input data and the correct answer, but sometimes it has only input data, or other more complicated configurations.</p>
+<p>The main goal of a machine learning algorithm is to build a <strong>model</strong> that captures those statistical regularities. We want the model not only to give the correct outputs for the data in the dataset, we also need it to <strong>generalize</strong> to give correct outputs for new examples it has never seen before. That is the hard part!</p>
 </section>
-<section id="convolutional-neural-networks-a-building-block-for-deep-learning" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Convolutional Neural Networks (a building block for deep learning)</h1>
+<section id="why-use-ml" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="why-use-ml"><span class="header-section-number">2.2</span> Why use ML?</h2>
+<p>Some AI researchers explore machine learning because they want to understand learning better. Perhaps that means simulating human or animal learning with the computer, or just exploring the limits of what machine learning can do, to illuminate our understanding of learning in general.</p>
+<p>Most researchers and practitioners in industry, however, turn to machine learning to solve a problem because we don’t know how to solve the problem otherwise. A problem that is large and complex, or poory-specified, often cannot be solved by building an algorithm by hand. Computers are much better at finding statistical patterns in large, complex data than we humans are.</p>
 </section>
-<section id="object-detection-and-segmentation-models" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Object Detection and Segmentation Models</h1>
+<section id="kinds-of-machine-learning-for-computer-vision" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="kinds-of-machine-learning-for-computer-vision"><span class="header-section-number">2.3</span> Kinds of machine learning for computer vision</h2>
+<p>Other resources will discuss the differences between supervised, unsupervised, and reinforcement learning, as well as hybrid variations like self-supervised, auto-associative, and semi-supervised learning. Here we will focus on what those variations look like in the context of computer vision tasks.</p>
+<section id="supervised-learning-in-computer-vision" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="supervised-learning-in-computer-vision"><span class="header-section-number">2.3.1</span> Supervised learning in computer vision</h3>
+<p><strong>Supervised learning</strong> is the most common kind of machine learning. The ML algorithm is given both input data, often an example of a problem to be solved, and also the correct output. The task is just to learn how to map the input example to its corresponding output.</p>
+<p>In computer vision, supervised learning is also the most common results. Common tasks include image classification, object detection, and image segmentation.</p>
+<p>For image classification, the input is an image, and the output is a category that the content of the image falls into. Categories could be things like digits, for hand-written digit recognition, or ASL letters, or animals we want to identify (cats versus dogs, bird species, butterfly or moth identification). This is the most common and versatile approach, and the most straightforward. Inputs are typically a single image, and the output is a code that indicates the category or <strong>class</strong> the image falls into. Imagenet is an example of a very large image classification dataset: it contains millions of pictures, each classified as one of 1000 categories.</p>
+<p>Object detection is also addressed with supervised learning, but the output is significantly different from classification. With object detection the output is a list of <em>bounding boxes</em>, rectangular regions that contain an identified object. Each bounding box has a category associated with it. <a href="#fig-objDetect" class="quarto-xref">Figure&nbsp;9</a> shows a sample output from an object detection model that has been trained to identify vehicles from a dashcam video (a common task for autonomous driving systems). This example shows the category assigned to each object. Often we have a confidence value for each object, as well, indicating how sure the model is that it has correctly identified an object.</p>
+<div id="fig-objDetect" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-objDetect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/objectDetect.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30" title="Figure&nbsp;9: Object detection example, showing bounding boxes of identified objects (from Sumit Singh’s blog)"><img src="Ch8-Images/objectDetect.png" class="img-fluid figure-img" style="width:18cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-objDetect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Object detection example, showing bounding boxes of identified objects (from <a href="https://www.labellerr.com/blog/create-object-detection-model-using-python-open-cv/">Sumit Singh’s blog</a>)
+</figcaption>
+</figure>
+</div>
+<p>Object detection provides a more detailed output than classification: while classification associated the whole image with one label, object detection detects multiple objects, and identifies their class and location in the image. Image segmentation takes this one step further, and labels each pixel with what object it belongs to. <a href="#fig-segment" class="quarto-xref">Figure&nbsp;10</a> shows an example segmentation. Segmentation gives us the most detailed response, but is the most difficult task for the machine learning system.</p>
+<div id="fig-segment" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-segment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/imgSegmentation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31" title="Figure&nbsp;10: Image segmentation, including original image, segmented image, and a color-code key to identify each kind of object (from Hoda et al.&nbsp;(2020))"><img src="Ch8-Images/imgSegmentation.png" class="img-fluid figure-img" style="width:18cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-segment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Image segmentation, including original image, segmented image, and a color-code key to identify each kind of object (from <a href="https://www.proquest.com/docview/2655133178?fromopenview=true&amp;pq-origsite=gscholar&amp;sourcetype=Scholarly%20Journals">Hoda et al.&nbsp;(2020)</a>)
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="imagevideo-generative-models" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Image/video generative models</h1>
+<section id="generative-ai-for-images" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="generative-ai-for-images"><span class="header-section-number">2.3.2</span> Generative AI for images</h3>
+<p>Generative AI systems contain, at their core, a large model trained on an incredibly large dataset. They are typically trained with a <em>self-supervised</em> approach where the target output derives naturally from the dataset itself. So for natural language text, the model is typically given a sequence of words, and asked to predict the next word (or sometimes to fill in a blank in the sequence). For image generators, the nature of the target depends on the method used. One top method, diffusion, relies on adding random noise to an image, and then asking the model to recreate the original image from the noisy one. This is an example of <strong>auto-association</strong>, because the target is the same as the original input.</p>
+<p>Generative AI systems include some that work with multiple modalities (text, images, audio, video, etc.), while others focus on just one modality, such as images. While Generative AI systems are more complex than models that perform image classification, or even object detection or segmentation, they often use the same convolutional building blocks to perform their tasks. We’ll take a look at how these models work in a later section.</p>
+</section>
+</section>
+</section>
+<section id="convolutional-neural-networks" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Convolutional Neural Networks</h1>
+<p>Convolutional neural networks introduced a number of operations that have become the foundation for almost all deep learning computer vision models. The most simple models, which we’ll examine here, perform image classification. <a href="#fig-simpleCnn" class="quarto-xref">Figure&nbsp;11</a> shows the parts of a typical CNN model.</p>
+<div id="fig-simpleCnn" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-simpleCnn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/simpleCNN.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32" title="Figure&nbsp;11: Simple view of classification CNN, found multiple places, perhaps originally from Mathworks"><img src="Ch8-Images/simpleCNN.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simpleCnn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Simple view of classification CNN, found multiple places, perhaps originally from <a href="https://www.mathworks.com/discovery/convolutional-neural-network.html">Mathworks</a>
+</figcaption>
+</figure>
+</div>
+<p>To run this model, we input an image (shown on the left). The image data passes through multiple layers that seek to extract meaningful features from the image (much like the work we did with blurring, morphing, edge detection, etc.). At each point the data is transformed either by convolutional filters or <strong>pooling</strong>, where the data is reduced in size. Finally, the condensed representation of the image and its features is passed through several final layers that use the features that were detected to determine the class the image belongs to. The final output, on the right of the model, is a real value for each category. The value represents the likelihood that the input image belongs to that category. If we look at the largest output value, it corresponds to the most likely class for the input image. We can also interpret the output real number as the model’s confidence in its classification: the higher the value, the more sure the model is that it is classifying correctly.</p>
+<p>Running the model is a complicated and computationally-expensive task. Training the model is even more so. We will take up the question of training a CNN in a later section, after discussing the layers that make up the model.</p>
+<section id="convolutional-network-layers" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="convolutional-network-layers"><span class="header-section-number">3.1</span> Convolutional network layers</h2>
+<p>A typical CNN is built from a set of 4-6 typical layers, although dozens of variations and additional layers have been invented. The main layers include (1) convolutional layers, (2) pooling layers, (3) a flattening layer, and (4) dense layers, plus optional dropout layers, and the special dense layer that comprises the output layer, usually defined to perform the <strong>softmax</strong> operation.</p>
+<section id="the-convolutional-layer" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="the-convolutional-layer"><span class="header-section-number">3.1.1</span> The convolutional layer</h3>
+<p>A convolutional layer contains a set of independent <strong>convolutional filters</strong>, all using the same neighborhood size. Each of these filters has its own kernel, and applies that kernel to the input data, producing a single-channel feature map whose values are based on the weighted sum of the kernel with each overlapping neighborhood in the original image. The filter is applied to a small region of the image, and performs a weighted sum of the weights with the values in the region. We then slide the filter all over the image, computing the weighted sum at each location, and we produce a feature map where larger values indicate the presence of the feature the kernel is looking for.</p>
+<p>If we have 20 filters in a single convolutional layer, then the output of the layer will be 20 channels deep: one channel for each feature map created by the 20 separate filters. The results of the convolutional filters are modified additionally by the <strong>Relu</strong> activation function. Relu, which stands for Rectified Linear Unit, is nonlinear, which is mathematically important for the model to learn any pattern. When given a value from one of the filters, it converts all negative values to zero, and leaves all positive values alone.</p>
+<p>Each filter has a <strong>kernel</strong>, a matrix containing weights. These weights identify <em>interesting</em> features in the image. Convolutional filters can be used to identify edges, as we have seen, but also to detect color patterns, stripes or lines with specific orientations, or circular/semi-circular patterns. These simple patterns may then be combined by later convolutional layers to detect complex patterns.</p>
+<p>When training a model, the kernel weights are set initially to random values, and then the weights get tweaked by the training algorithm to make the model work better.</p>
+</section>
+<section id="pooling-layers" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="pooling-layers"><span class="header-section-number">3.1.2</span> Pooling layers</h3>
+<p>Pooling layers reduce the size of the data that comes into them, without modifying the number of channels. This is sometimes called downsampling in computer vision terms. The pooling layer divides the image into small patches of a fixed size, not overlapping with each other. It then keeps one value from each patch, reducing the size of the image correspondingly.</p>
+<p>The most common kind of pooling is max-pooling: given a small region of an image, it keeps only the largest value. Suppose that our pooling patch size is 2 by 2. We keep one value from this patch of four values, reducing the height and width of the image to half their previous size.</p>
+<p><strong>Why do we need pooling?</strong></p>
+<p>The main reason to perform pooling has to do with the nature of convolutional filters. It turns out that these filters work best and most efficiently when we keep the neighborhood sizes very small (3 by 3, 5 by 5, possibly 7 by 7). But suppose there are patterns in an image that are larger than that neighborhood size! The small filters can’t see them. We can’t really increase the size of the neighborhoods to guarantee that we can detect every such pattern. But if we scale the image down, then the features will eventually become small enough to be detected by the filters. This is called building an <strong>image pyramid</strong>, and it has its uses from earlier, algorithmic approaches to computer vision, before the growth in deep learning.</p>
+</section>
+<section id="other-layers-to-know-about" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="other-layers-to-know-about"><span class="header-section-number">3.1.3</span> Other layers to know about</h3>
+<p><strong>Drop-out layers</strong> help with overfitting by blocking some data from passing through them. At any particular time, a drop-out layer choose a random number of values to block (a percentage given when we create the layer). This forces the model to incorporate redundancy into its operations, requiring it to generalize more.</p>
+<p><strong>Softmax layers</strong> are typically used for the output layer. They take the values computed by the weighted sum and run through the Relu activation function, and they scale them so that the values are all between 0.0 and 1.0, and they add up to 1.0. This lets us treat the values as probabilities: the likelihood that each output unit is the correct label for the current input. We can pick the largest probability as the model’s guess for the category, and we can treat the model’s value as reflecting its confidence in its answer.</p>
+</section>
+</section>
+<section id="cnn-examples" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="cnn-examples"><span class="header-section-number">3.2</span> CNN Examples</h2>
+<p>While CNNs are simple enough that we can build small ones from scratch, there are many existing CNN architectures that have been applied to many problems and proven broadly effective. These include VGG and Resnet, which are both older models. Google’s Inception models are too large for practical use, but worked very well. More recently, architectures like MobileNet, DenseNet, and EfficientNet have become standard.</p>
+<p><a href="#fig-vgg" class="quarto-xref">Figure&nbsp;12</a> shows the structure of the VGG architecture. It uses only the kinds of layers we discussed above, and has limited numbers of each kind of layer. Nevertheless, it works well on many smaller tasks, and is often a good choice to try before attempting a more complex model</p>
+<div id="fig-vgg" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vgg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/VGGArchitecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33" title="Figure&nbsp;12: The VGG Network, a small but popular CNN model From Neurohive"><img src="Ch8-Images/VGGArchitecture.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vgg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: The VGG Network, a small but popular CNN model <a href="https://neurohive.io/en/popular-networks/vgg16/">From Neurohive</a>
+</figcaption>
+</figure>
+</div>
+<p>At the other end of the spectrum, <a href="#fig-inception" class="quarto-xref">Figure&nbsp;13</a> shows Google’s Inception version 3 model. This model has a complex structure and many many layers. It was highly successful at learning and generalizing from the Imagenet dataset (with 1000 classes and millions of sample images). Because of its size and complexity, Inception v3 was difficult to run on an ordinary laptop or desktop machine, and it had to be trained with a supercomputer or the resources of a data center.</p>
+<div id="fig-inception" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inception-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/inceptionv3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34" title="Figure&nbsp;13: Google’s Inception V3 Network From Viso.ai"><img src="Ch8-Images/inceptionv3.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inception-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Google’s Inception V3 Network <a href="https://viso.ai/deep-learning/googlenet-explained-the-inception-model-that-won-imagenet/">From Viso.ai</a>
+</figcaption>
+</figure>
+</div>
+<p>Since Inception v3’s creation, work shifted to models that were smaller, lighter-weight, and yet could work well. EfficientNet and Densenet are two general-purpose architectures, while MobileNet was explicitly created to be small enough to run on a mobile device.</p>
+</section>
+<section id="how-will-we-work-with-cnns" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="how-will-we-work-with-cnns"><span class="header-section-number">3.3</span> How will we work with CNNs?</h2>
+<p>Because even smaller CNNs are best trained on a system with access to powerful GPUs, we will be using Google Colab to train CNNs for some straightforward image classification tasks. Colab is available for free: with it, we can create Python programs that run on a machine from one of Google’s data centers. All the machine learning libraries we need are provided in Colab, and we have access to Google’s GPUs to speed up the training process.</p>
+<p>Colab uses a <em>notebook</em> model for Python programming. The notebook integrates text blocks and code blocks, and allows us to run each code block individually. While the can be run separately, all code blocks operate in the same global space. Variables defined in one block are available in all the other blocks that run afterward. This leads to a more script-heavy programming style than we have been using thus far. But this is what a large percentage of data science work in Python looks like these days.</p>
+</section>
+</section>
+<section id="object-detection-and-segmentation-models" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Object Detection and Segmentation Models</h1>
+</section>
+<section id="imagevideo-generative-models" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Image/video generative models</h1>
 
 
 </section>
