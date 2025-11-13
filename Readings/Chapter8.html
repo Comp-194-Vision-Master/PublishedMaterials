@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-10">
+<meta name="dcterms.date" content="2025-11-12">
 
 <title>Chapter 8, Machine Learning and Computer Vision – Vision Readings</title>
 <style>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 10, 2025</p>
+        <p class="date">November 12, 2025</p>
       </div>
     </div>
     
@@ -227,9 +227,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cnn-training-process" id="toc-cnn-training-process" class="nav-link" data-scroll-target="#cnn-training-process"><span class="header-section-number">3.2</span> CNN training process</a></li>
   <li><a href="#cnn-examples" id="toc-cnn-examples" class="nav-link" data-scroll-target="#cnn-examples"><span class="header-section-number">3.3</span> CNN Examples</a></li>
   <li><a href="#how-will-we-work-with-cnns" id="toc-how-will-we-work-with-cnns" class="nav-link" data-scroll-target="#how-will-we-work-with-cnns"><span class="header-section-number">3.4</span> How will we work with CNNs?</a></li>
+  <li><a href="#where-do-the-datasets-come-from" id="toc-where-do-the-datasets-come-from" class="nav-link" data-scroll-target="#where-do-the-datasets-come-from"><span class="header-section-number">3.5</span> Where do the datasets come from?</a></li>
   </ul></li>
-  <li><a href="#object-detection-and-segmentation-models" id="toc-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#object-detection-and-segmentation-models"><span class="header-section-number">4</span> Object Detection and Segmentation Models</a></li>
-  <li><a href="#imagevideo-generative-models" id="toc-imagevideo-generative-models" class="nav-link" data-scroll-target="#imagevideo-generative-models"><span class="header-section-number">5</span> Image/video generative models</a></li>
+  <li><a href="#object-detection-and-segmentation-models" id="toc-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#object-detection-and-segmentation-models"><span class="header-section-number">4</span> Object Detection and Segmentation Models</a>
+  <ul class="collapse">
+  <li><a href="#object-detection-in-the-context-of-deep-learning" id="toc-object-detection-in-the-context-of-deep-learning" class="nav-link" data-scroll-target="#object-detection-in-the-context-of-deep-learning"><span class="header-section-number">4.1</span> Object detection in the context of deep learning</a></li>
+  <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation"><span class="header-section-number">4.2</span> Image segmentation</a></li>
+  <li><a href="#where-do-the-datasets-come-from-1" id="toc-where-do-the-datasets-come-from-1" class="nav-link" data-scroll-target="#where-do-the-datasets-come-from-1"><span class="header-section-number">4.3</span> Where do the datasets come from?</a></li>
+  </ul></li>
+  <li><a href="#image-generating-models" id="toc-image-generating-models" class="nav-link" data-scroll-target="#image-generating-models"><span class="header-section-number">5</span> Image-generating models</a></li>
   </ul>
 </nav>
     </div>
@@ -265,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mediapipe has a state-of-the-art face detection model. Take a look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">Mediapipe Face Detection Guide</a> for more details about the model itself.</p>
 <p>The model detects a few specific landmarks of a face (eyes, nose tip, mouth, and sides of the face (cheeks or temples), and also provides a bounding box that surrounds the face. We will first walk through the demo program you have been provided, and then will look closely at the format of the data that is returned by the model.</p>
 <p>If you can, open the <code>mediapipeFaceDetect.py</code> program, which is also included in the code block below.</p>
-<div id="99d372be" class="cell" data-execution_count="2">
+<div id="bc0f67c7" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceDetect.py</code> program, demonstrates the face detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="co">"""</span></span>
@@ -593,7 +599,7 @@ Figure&nbsp;1: Various results of face detection: notice detection is tuned to t
 </ul>
 <p>With the outputs from these models, we should be able to identify general emotions expressed in a face, or use these landmarks for motion capture, or to augment the user’s face with fake glasses, flowers, or makeup.</p>
 <p>If you can, open the <code>mediapipeFaceLandmark.py</code> program, which is also included in the code block below.</p>
-<div id="3e340863" class="cell" data-execution_count="3">
+<div id="e2823824" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceLandmark.py</code> program, demonstrates the facial landmark models and their results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co">"""</span></span>
@@ -1051,7 +1057,7 @@ Figure&nbsp;4: Hand landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipeHand.py</code> program, which is also included in the code block below.</p>
-<div id="752a79f1" class="cell" data-execution_count="4">
+<div id="07e6dd1a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>The <code>mediapipeHand.py</code> program, demonstrates the hand landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co">"""</span></span>
@@ -1331,7 +1337,7 @@ Figure&nbsp;6: Pose landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipePose.py</code> program, which is also included in the code block below.</p>
-<div id="22f50c6e" class="cell" data-execution_count="5">
+<div id="a72bbf37" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>The <code>mediapipePose.py</code> program, demonstrates the body pose landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co">"""</span></span>
@@ -1773,12 +1779,74 @@ Figure&nbsp;13: Google’s Inception V3 Network <a href="https://viso.ai/deep-le
 <p>Because even smaller CNNs are best trained on a system with access to powerful GPUs, we will be using Google Colab to train CNNs for some straightforward image classification tasks. Colab is available for free: with it, we can create Python programs that run on a machine from one of Google’s data centers. All the machine learning libraries we need are provided in Colab, and we have access to Google’s GPUs to speed up the training process.</p>
 <p>Colab uses a <em>notebook</em> model for Python programming. The notebook integrates text blocks and code blocks, and allows us to run each code block individually. While the can be run separately, all code blocks operate in the same global space. Variables defined in one block are available in all the other blocks that run afterward. This leads to a more script-heavy programming style than we have been using thus far. But this is what a large percentage of data science work in Python looks like these days.</p>
 </section>
+<section id="where-do-the-datasets-come-from" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="where-do-the-datasets-come-from"><span class="header-section-number">3.5</span> Where do the datasets come from?</h2>
+<p>It is fairly easy to create a dataset for image classification: collect a huge number of images, and then sort them by category into separate folders, one folder for each category. Many CNN libraries come with functions that can read data in this structure automatically, but it also isn’t too difficult to write a few functions that would read in images stored in this way, and associate each with a number assigned to the folder they came from (you could do it!).</p>
+<p>The biggest issue is the large number of images we need for successful classifications, and the need for accurate categorizations. For large-scale problems, the work of assigning each image to a category is outsourced, either to volunteers or, through websites like Taskrabbit or Amazon’s Mechanical Turk, to people being paid a small amount for each image processed. Maintaining accuracy under these circumstances is a huge problem. There are also ethical issues with the low pay rate workers receive for this work.</p>
+</section>
 </section>
 <section id="object-detection-and-segmentation-models" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Object Detection and Segmentation Models</h1>
+<p>Object detection and image segmentation are two tasks that machine learning models have been able to tackle successfully, while traditional algorithms have not worked well.</p>
+<p>We have seen examples of color tracking, like Camshift, that detect the location of a colorful object in an image or video. You’ve experimented with detecting coins and balls in images using various computer vision techniques (thresholding, edge detection, finding contours, etc.). You’ve also experimented with motion detection and background subtraction as ways of identifying where important foreground objects are in an image. You’ve also seen how glitchy, finicky, and incomplete these methods can be.</p>
+<p>Deep learning neural networks perform so much better than the alternatives.</p>
+<section id="object-detection-in-the-context-of-deep-learning" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="object-detection-in-the-context-of-deep-learning"><span class="header-section-number">4.1</span> Object detection in the context of deep learning</h2>
+<p>Object detection systems take in an image or frames from a video, and they identify any number of objects in the image (usually there is an upper bound in practice). For each object, they categorize it into one of N classes, the categories it knows about, and they draw a <strong>bounding box</strong>, a rectangle that contains the object. <a href="#fig-objdetect2" class="quarto-xref">Figure&nbsp;14</a> shows an example of the output of an object detection model trained on the COCO dataset.</p>
+<div id="fig-objdetect2" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-objdetect2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/objDetectExample.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35" title="Figure&nbsp;14: Response of YOLOv11 trained on COCO"><img src="Ch8-Images/objDetectExample.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-objdetect2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: Response of YOLOv11 trained on COCO
+</figcaption>
+</figure>
+</div>
+<p>Notice that the bounding boxes overlap, and are very different sizes. Also notice that the results are not completely accurate, and the model outputs a confidence value as well as the bounding box and category. It is only 75% confident that the foreground object is pizza, and mis-identifies something as a person, but with only 40% confidence.</p>
+<p>Object detection neural networks have several different structures, but all of them incorporate feature-detection sections like the CNNs in the prevous section, as well as dense, fully-connected layers used to classify features. Here, those classifications happen repeatedly for each bounding box that was discovered.</p>
+<p>We will focus on one example of an object detection network: the YOLO (You Only Look Once) family of networks, developed by the Ultralytics company, and freely available through them. Ultralytics has developed a whole series of YOLO models (up to version 11 currently) for both object detection and image segmentation tasks.</p>
+<p><a href="#fig-yolo11" class="quarto-xref">Figure&nbsp;15</a> shows a diagram of the YOLO version 11 model (you do not need to grasp all the details here).</p>
+<div id="fig-yolo11" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yolo11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/YOLO-v11-network-architecture-diagram.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36" title="Figure&nbsp;15: YOLOv11 model architectures, from (Zhang et al., 2025)"><img src="Ch8-Images/YOLO-v11-network-architecture-diagram.png" class="img-fluid figure-img" style="width:14cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yolo11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: YOLOv11 model architectures, from <a href="https://www.mdpi.com/2077-0472/15/16/1765">(Zhang et al., 2025)</a>
+</figcaption>
+</figure>
+</div>
+<p>The <em>Backbone</em> section on the left is similar to a CNN feature detection component, although it has some special-purpose layers (C3k2, SPPF, C2PSA) that, themselves, involve convolutional layers and smaller special-purpose layers. The purpose of the backbone is to identify interesting features in the image at different scales, places where objects to be identified might be. Information from different scales is passed from this part of the model to the <em>Neck</em> section. The Neck integrates the information from different scales. <em>Concat</em> layers just combine multiple values together, <em>Upsample</em> scales an array up to a larger size, and so on.</p>
+<p>Finally, information at different scales is passed to the <em>Head</em> units, which perform the classification (or segmentation) on the regions identified to be of interest. The Head produces the final output.</p>
+<p>One reason that YOLO is so popular is that Ultralytics has made it extremely easy to load pretrained models (models that they have trained on general-purpose datasets), and also to retrain them (usually called <em>finetuning</em>) on new data. YOLO models are larger than ordinary CNNs, though, so we really need cloud resources to work with them.</p>
 </section>
-<section id="imagevideo-generative-models" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Image/video generative models</h1>
+<section id="image-segmentation" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="image-segmentation"><span class="header-section-number">4.2</span> Image segmentation</h2>
+<p>Image segmentation is a harder task than object detection. An image segmenter outputs a copy of the original image, where each pixel belonging to an object that has been detected is marked with a code that indicates its object. A segmentation of an image is like a mask, except that instead of being black and white it is typically black for background pixels, and then a set of colors, one for each detected object. <a href="#fig-yolo-seg" class="quarto-xref">Figure&nbsp;16</a> shows the result of using YOLO’s own display function to show the result of the segmentation. It shows <em>both</em> the object detection values, <em>and</em> tints each pixel in the original image to show the segmentation.</p>
+<div id="fig-yolo-seg" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-yolo-seg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/yolosegmentExample.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37" title="Figure&nbsp;16: YOLO image segmentation result"><img src="Ch8-Images/yolosegmentExample.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-yolo-seg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: YOLO image segmentation result
+</figcaption>
+</figure>
+</div>
+<p>The dog on the right is shown in a different color because the system is confused. It thinks it could be a dog, but behind that on the picture is drawn another classification: it thinks the dog on the right might possibly be a horse. That is why it is shown in a different color.</p>
+</section>
+<section id="where-do-the-datasets-come-from-1" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="where-do-the-datasets-come-from-1"><span class="header-section-number">4.3</span> Where do the datasets come from?</h2>
+<p>The YOLO models about were trained on the COCO dataset, one of the classic datasets for object detection and segmentation. This dataset, called Common Objects in Context, has over 300,000 images, each of which may have multiple objects in it, for a total of 1.5 million annotated objects. Each object is assigned to one of 80 object categories. Each image also has five captions that describe the scene. More than 200,000 of the images are annotated: the bounding boxes, categories, and segmentation maps have been created by hand. This is a <strong>large</strong> dataset, took a tremendous amount of work to create, and requires massic computational resources to use.</p>
+<p>We noted in the previous section that image classification datasets are relatively straightforward to create. That is not the case for object detection and image segmentation datasets. These models are still <strong>supervised learning</strong> systems. They must be given the correct answer in order to train them to perform the task. That means that someone has to annotate each image in the dataset with the bounding boxes, or paint the pixels for the segmentation. This is painstaking work, particularly given the large size needed for these datasets.</p>
+<p>There are online tools available to help with this annotation. Some of them even integrate AI models that already perform object detection or segmentation for some general task, and then try to learn from your initial annotations what it is you want. These help, but still the task of building a dataset for object detection is extremely difficult.</p>
+</section>
+</section>
+<section id="image-generating-models" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Image-generating models</h1>
+<p>Generating images might seem quite different from processing images to recognize objects in them, but it turns out that similar underlying methods actually come into play. Generative AI models use convolutional and pooling layers, at least during training, along with upsampling and other specialty layers as well.</p>
+<p>Image generators grew out of work on <strong>encoder-decoder models</strong>.</p>
 
 
 </section>

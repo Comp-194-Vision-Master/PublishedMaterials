@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-10-21">
+<meta name="dcterms.date" content="2025-11-11">
 
 <title>Comp 194 In-Class Activities – ToC – Vision Readings</title>
 <style>
@@ -70,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -156,7 +127,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 21, 2025</p>
+        <p class="date">November 11, 2025</p>
       </div>
     </div>
     
@@ -205,20 +176,9 @@ window.Quarto = {
 <li><a href="ICA14-FindingContours.html">ICA 14 - Finding Contours</a></li>
 <li><a href="ICA15-MotionAndColorTracking.html">ICA 15 - Motion and Color Tracking</a></li>
 <li><a href="ICA16-UsingMLModels.html">ICA 16 - Using ML Models</a></li>
-<li><a href="ICA17-KNNDigits.html">ICA 17 - KNN and Digit Classification</a></li>
-<li><a href="ICA18-CNNTraining.html">ICA 18 - CNNs and Image Classification</a></li>
-<li><a href="ICA19-ObjDetectModels.html">ICA 19 - Object Detection Models</a></li>
-<li><a href="ICA20-ImageGenModels.html">ICA 20 - Image Generation Models</a></li>
+<li><a href="https://colab.research.google.com/drive/1E5RhAK0TgbZQgZwJBgpTgY8Njy_fTXZk?usp=sharing">ICA 17 - Image Classification with CNNs</a></li>
+<li><a href="">ICA 18 - Object Detection and Generative AI</a></li>
 </ul>
-<p><span class="math display">\[
-\begin{array}{cc}
-K &amp; = \begin{bmatrix}
-    K[-1, -1] &amp; K[-1, 0] &amp; K-1, 1] \\
-    K[0, -1] &amp; K[0, 0] &amp; K[0, 1] \\
-    K[1, -1] &amp; K[1, 0] &amp; K[1, 1] \\
-   \end{bmatrix}
-\end{array}
-\]</span></p>
 
 
 </section>
