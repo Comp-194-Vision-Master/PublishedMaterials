@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-12">
+<meta name="dcterms.date" content="2025-11-13">
 
 <title>Comp 194 Class Notes - Weeks 8-11 – Vision Readings</title>
 <style>
@@ -77,6 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-9011e249e8d359b0658fa71d60c1fa6f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -191,7 +194,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 12, 2025</p>
+        <p class="date">November 13, 2025</p>
       </div>
     </div>
     
@@ -293,6 +296,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#announcements-10" id="toc-announcements-10" class="nav-link" data-scroll-target="#announcements-10">Announcements</a></li>
   <li><a href="#todays-topics-8" id="toc-todays-topics-8" class="nav-link" data-scroll-target="#todays-topics-8">Today’s topics</a></li>
+  <li><a href="#object-detection-segmentation-yolo" id="toc-object-detection-segmentation-yolo" class="nav-link" data-scroll-target="#object-detection-segmentation-yolo">Object Detection + Segmentation: YOLO</a></li>
+  <li><a href="#generative-ai" id="toc-generative-ai" class="nav-link" data-scroll-target="#generative-ai">Generative AI</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#additional-class-notes-documents" id="toc-additional-class-notes-documents" class="nav-link" data-scroll-target="#additional-class-notes-documents">Additional Class Notes documents</a></li>
@@ -366,7 +371,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="e1758a4f" class="cell" data-execution_count="1">
+<div id="0fde1ad4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -445,7 +450,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="67071a00" class="cell" data-execution_count="2">
+<div id="46bf9494" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -464,7 +469,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="b1aae9f9" class="cell" data-execution_count="3">
+<div id="8a7d3356" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1219,9 +1224,25 @@ c &amp; d &amp; t_y \\
 <li>Project Milestone 2</li>
 <li>Extended essay rough draft</li>
 </ul></li>
+<li><strong>November 24:</strong>
+<ul>
+<li>Short essay 2 (start in class)</li>
+</ul></li>
 <li><strong>December 3:</strong>
 <ul>
 <li>Homework 4 (currently only 3 questions are ready)</li>
+</ul></li>
+<li><strong>December 5:</strong>
+<ul>
+<li>Short essay 2 final version submitted</li>
+</ul></li>
+<li><strong>December 8:</strong>
+<ul>
+<li>Project Milestone 3</li>
+</ul></li>
+<li><strong>December 10:</strong>
+<ul>
+<li>Last day of classes!</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1233,29 +1254,90 @@ c &amp; d &amp; t_y \\
 <li>Segmentation</li>
 <li>Generative AI overview</li>
 </ul>
-<p>Object Detection + Segmentation: YOLO</p>
-<p>Object detection models (RCNN, YOLO) Find bounding boxes around objects of interest Use CNNs as a part of the process, but have much more complex architectures Segmentation Label each pixel</p>
-<p>See Medium blog for explanation of YOLO architecture</p>
-<p>More detailed view of YOLO:</p>
-<p>Encoder-Decoder Models</p>
-<p>U-shaped networks</p>
-<p>These are for autoencoding, image segmentation, or image augmentation</p>
-<p>Recurrent networks</p>
-<p>Common traditional recurrent network: All layers are fully connected The input to the network is one of a sequence of inputs The input is paired up with the previous step’s hidden layer values Hidden layer representation is learned such that it stores the past information that is needed for the task</p>
-<p>LSTM: Include LSTM units that can learn to remember things for varying numbers of steps, so can be more flexible than traditional recurrent networks</p>
-<p>Transformers</p>
-<p>Sequential data all presented at once Encoder/Decoder model Data is encoded in vector form, combined with positional data (where in the sequence it is) Attention is a key concept: I recommend this series of posts by Dr.&nbsp;Stefania Cristina that explain the concept of “attention” and how it is implemented) How Transformer Models Work is also fairly readable, at a higher level Attention module builds a representation of what is important, what relates to what self-attention: sequence is provided all at once, and it can learn relationships among words in the sequence attention(Q, K, V)=softmax(QKTdk)V multi-head attention: transforms the input embedding to different spaces/forms and then runs self-attention on it</p>
-<p>https://huggingface.co/blog/bert-101</p>
-<p>Generative AI Many different forms Chat GPT: Generative Pretrained Transformer Transformer model trained on massive amounts of data Model was then fine-tuned to do “chat” with supervised learning and reinforcement learning</p>
-<p>Generative Adversarial Networks (GANs)</p>
-<p>Generator network and Discriminator network trained together Generator is given random noise, generates an output Discriminator is given a mix of target outputs and generator outputs, its task is to predict which ones are “real” and which ones are “generated” When the discriminator correctly identifies a generated output, generator is given high loss (is punished) When discriminator is incorrect, it is given high loss</p>
-<p>From https://semiengineering.com/knowledge_centers/artificial-intelligence/neural-networks/generative-adversarial-network-gan/</p>
-<p>Diffusion networks Take original image, gradually add random noise to it until it is all noise Reconstruct the original from the noisy version, using the ones generated as targets</p>
-<p>General view:</p>
-<p>Pure Diffusion</p>
-<p>From https://codoraven.com/blog/ai/stable-diffusion-clearly-explained/</p>
-<p>Stable Diffusion</p>
+</section>
+<section id="object-detection-segmentation-yolo" class="level3">
+<h3 class="anchored" data-anchor-id="object-detection-segmentation-yolo">Object Detection + Segmentation: YOLO</h3>
+<ul>
+<li>Object detection models (RCNN, YOLO)
+<ul>
+<li>Find bounding boxes around objects of interest</li>
+<li>Use CNNs as a part of the process, but have much more complex architectures</li>
+</ul></li>
+<li>Segmentation
+<ul>
+<li>Label each pixel with which object it belongs to</li>
+<li>Similar architectures to object detection, except for the ending point</li>
+</ul></li>
+</ul>
+<p>YOLO is popular and easy to use.</p>
+</section>
+<section id="generative-ai" class="level3">
+<h3 class="anchored" data-anchor-id="generative-ai">Generative AI</h3>
+<ul>
+<li>Many different forms</li>
+<li>Chat GPT: Generative Pretrained Transformer</li>
+<li>Text-generators and image generators were different technology
+<ul>
+<li>Text: Transformers</li>
+<li>Image generators: GANs or diffusion models</li>
+</ul></li>
+<li>Now, <strong>multimodal</strong> generators are the current goal</li>
+</ul>
+<section id="encoder-decoder-models" class="level4">
+<h4 class="anchored" data-anchor-id="encoder-decoder-models">Encoder-Decoder Models</h4>
+<ul>
+<li>Two parts: encoder and decoder</li>
+<li>Encoder builds a compressed, condensed representation of the input</li>
+<li>Decoder unpacks that representation to produce a segmentation map or the original image again</li>
+<li>Once it is trained, break apart the encoder and decoder and use them separately
+<ul>
+<li>Result of encoder can be a vectorized representation of the data</li>
+<li>Decoder can restore the original</li>
+<li>Feed random vector representation into the decoder, you <strong>might</strong> get a new valid output</li>
+</ul></li>
+</ul>
+</section>
+<section id="u-shaped-networks" class="level4">
+<h4 class="anchored" data-anchor-id="u-shaped-networks">U-shaped networks</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ClassNotes-Images/UNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="U-Net encoder-decoder model"><img src="ClassNotes-Images/UNet.png" class="img-fluid figure-img" alt="U-Net encoder-decoder model"></a></p>
+<figcaption>U-Net encoder-decoder model</figcaption>
+</figure>
+</div>
+<p>U-Net is used for:</p>
+<ul>
+<li>auto-association (sometimes called autoencoding)</li>
+<li>image segmentation</li>
+<li>image augmentation</li>
+<li>or really bad image generation</li>
+</ul>
+</section>
+<section id="generative-adversarial-networks-gans" class="level4">
+<h4 class="anchored" data-anchor-id="generative-adversarial-networks-gans">Generative Adversarial Networks (GANs)</h4>
+<ul>
+<li>Generator network and Discriminator network trained together</li>
+<li>Generator is given random noise, generates an output</li>
+<li>Discriminator is given a mix of target outputs and generator outputs, its task is to predict which ones are “real” and which ones are “generated”</li>
+<li>When the discriminator correctly identifies a generated output, generator is given high loss (is punished)</li>
+<li>When discriminator is incorrect, it is given high loss</li>
+</ul>
+<p><a href="ClassNotes-Images/GANArchitecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="GAN architecture"><img src="ClassNotes-Images/GANArchitecture.png" class="img-fluid" alt="GAN architecture"></a> From <a href="https://semiengineering.com/knowledge_centers/artificial-intelligence/neural-networks/generative-adversarial-network-gan/">Semiconductor Engineering blog</a></p>
+</section>
+<section id="diffusion-networks" class="level4">
+<h4 class="anchored" data-anchor-id="diffusion-networks">Diffusion networks</h4>
+<ul>
+<li>Take original image, gradually add random noise to it until it is all noise</li>
+<li>Reconstruct the original from the noisy version, using the ones generated as targets</li>
+</ul>
+<p><strong>General view:</strong></p>
+<p><a href="ClassNotes-Images/DiffusionGeneral.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="General idea of diffusion models"><img src="ClassNotes-Images/DiffusionGeneral.png" class="img-fluid" alt="General idea of diffusion models"></a> From <a href="https://bestarion.com/us/stable-diffusion-the-expert-guide/">Nguyen, 2025</a></p>
+<p><strong>Pure Diffusion:</strong></p>
+<p><a href="ClassNotes-Images/pureDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Pure (original) diffusion"><img src="ClassNotes-Images/pureDiffusion.png" class="img-fluid" alt="Pure (original) diffusion"></a> From <a href="https://codoraven.com/blog/ai/stable-diffusion-clearly-explained/">Steins, 2023</a></p>
+<p><strong>Stable Diffusion:</strong></p>
+<p><a href="ClassNotes-Images/stableDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Stable diffusion"><img src="ClassNotes-Images/stableDiffusion.png" class="img-fluid" alt="Stable diffusion"></a> From <a href="https://codoraven.com/blog/ai/stable-diffusion-clearly-explained/">Steins, 2023</a></p>
 <hr>
+</section>
 </section>
 </section>
 </section>
@@ -1711,6 +1793,38 @@ c &amp; d &amp; t_y \\
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
