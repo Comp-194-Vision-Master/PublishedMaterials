@@ -235,7 +235,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#image-segmentation" id="toc-image-segmentation" class="nav-link" data-scroll-target="#image-segmentation"><span class="header-section-number">4.2</span> Image segmentation</a></li>
   <li><a href="#where-do-the-datasets-come-from-1" id="toc-where-do-the-datasets-come-from-1" class="nav-link" data-scroll-target="#where-do-the-datasets-come-from-1"><span class="header-section-number">4.3</span> Where do the datasets come from?</a></li>
   </ul></li>
-  <li><a href="#image-generating-models" id="toc-image-generating-models" class="nav-link" data-scroll-target="#image-generating-models"><span class="header-section-number">5</span> Image-generating models</a></li>
+  <li><a href="#image-generating-models" id="toc-image-generating-models" class="nav-link" data-scroll-target="#image-generating-models"><span class="header-section-number">5</span> Image-generating models</a>
+  <ul class="collapse">
+  <li><a href="#encoder-decoder-models" id="toc-encoder-decoder-models" class="nav-link" data-scroll-target="#encoder-decoder-models"><span class="header-section-number">5.1</span> Encoder-decoder models</a></li>
+  <li><a href="#generative-adversarial-networks-gans" id="toc-generative-adversarial-networks-gans" class="nav-link" data-scroll-target="#generative-adversarial-networks-gans"><span class="header-section-number">5.2</span> Generative Adversarial Networks (GANs)</a></li>
+  <li><a href="#diffusion-models" id="toc-diffusion-models" class="nav-link" data-scroll-target="#diffusion-models"><span class="header-section-number">5.3</span> Diffusion models</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -271,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mediapipe has a state-of-the-art face detection model. Take a look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">Mediapipe Face Detection Guide</a> for more details about the model itself.</p>
 <p>The model detects a few specific landmarks of a face (eyes, nose tip, mouth, and sides of the face (cheeks or temples), and also provides a bounding box that surrounds the face. We will first walk through the demo program you have been provided, and then will look closely at the format of the data that is returned by the model.</p>
 <p>If you can, open the <code>mediapipeFaceDetect.py</code> program, which is also included in the code block below.</p>
-<div id="bc0f67c7" class="cell" data-execution_count="2">
+<div id="000e3a80" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceDetect.py</code> program, demonstrates the face detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="co">"""</span></span>
@@ -599,7 +604,7 @@ Figure&nbsp;1: Various results of face detection: notice detection is tuned to t
 </ul>
 <p>With the outputs from these models, we should be able to identify general emotions expressed in a face, or use these landmarks for motion capture, or to augment the user’s face with fake glasses, flowers, or makeup.</p>
 <p>If you can, open the <code>mediapipeFaceLandmark.py</code> program, which is also included in the code block below.</p>
-<div id="e2823824" class="cell" data-execution_count="3">
+<div id="d6570019" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceLandmark.py</code> program, demonstrates the facial landmark models and their results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co">"""</span></span>
@@ -1057,7 +1062,7 @@ Figure&nbsp;4: Hand landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipeHand.py</code> program, which is also included in the code block below.</p>
-<div id="07e6dd1a" class="cell" data-execution_count="4">
+<div id="909dae9e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>The <code>mediapipeHand.py</code> program, demonstrates the hand landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co">"""</span></span>
@@ -1337,7 +1342,7 @@ Figure&nbsp;6: Pose landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipePose.py</code> program, which is also included in the code block below.</p>
-<div id="a72bbf37" class="cell" data-execution_count="5">
+<div id="79519d21" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>The <code>mediapipePose.py</code> program, demonstrates the body pose landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co">"""</span></span>
@@ -1846,9 +1851,100 @@ Figure&nbsp;16: YOLO image segmentation result
 <section id="image-generating-models" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Image-generating models</h1>
 <p>Generating images might seem quite different from processing images to recognize objects in them, but it turns out that similar underlying methods actually come into play. Generative AI models use convolutional and pooling layers, at least during training, along with upsampling and other specialty layers as well.</p>
-<p>Image generators grew out of work on <strong>encoder-decoder models</strong>.</p>
+<section id="encoder-decoder-models" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="encoder-decoder-models"><span class="header-section-number">5.1</span> Encoder-decoder models</h2>
+<p>Image generators grew out of work on <strong>encoder-decoder models</strong>. These models look, generally, as shown in <a href="#fig-encodeDecode" class="quarto-xref">Figure&nbsp;17</a>.</p>
+<div id="fig-encodeDecode" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-encodeDecode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/encoderDecoder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38" title="Figure&nbsp;17: General structure of encoder-decoder models"><img src="Ch8-Images/encoderDecoder.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-encodeDecode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: General structure of encoder-decoder models
+</figcaption>
+</figure>
+</div>
+<p>The first half of the model might be like the CNN feature-detector part, or the backbone of the YOLO model. It converts the input image, or any kind of input data, into an encoded form, usually significantly smaller than the original image.</p>
+<p>Then, the decoder part of the model unpacks the encoded form into the final result. The final result might be any number of different things: perhaps a text description of the input image, or a segmentation map of the original image. One of the most curious target outputs is to have the model output <strong>the same image as was input</strong>. This is called <strong>auto-association</strong>.</p>
+<p>A common encoder-decoder model for computer vision is called the U-Net. <a href="#fig-unet" class="quarto-xref">Figure&nbsp;18</a> illustrates this architecture. The left half is the encoder, and it is essentially the same as a CNN feature detection component. The second half is the decoder, and it reverses the pooling effect by <em>upsampling</em> the data, while incorporating some of the data generated by the encoder at corresponding steps.</p>
+<div id="fig-unet" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/UNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39" title="Figure&nbsp;18: Typical Unet architecture, from (Guo et al., 2020)"><img src="Ch8-Images/UNet.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18: Typical Unet architecture, from (<a href="https://www.mdpi.com/2073-8994/12/6/1056">Guo et al., 2020</a>)
+</figcaption>
+</figure>
+</div>
+<p>Why would we want to build a model that takes in an image and output the same image? Precisely because of the bottleneck at the center of the encoder-decoder shape. If we can decode the pattern into the original image, then that pattern represents all the important information from the image, in a condensed form.</p>
+<p>Once the model is trained, we can split the model into two pieces. A common use is <em>data compression</em>: we can use the encoder to build a compressed representation of the image, transmit that to a new location, and then use just the decoder to reconstruct the original image.</p>
+<p>Another less obvious use for the decoder is image generation. If we build a random array or vector in the style of the encoder’s output, then the decoder may unpack it into a brand-new image!</p>
+<p>This allows us to produce new iamges, but usually not very good ones. Two more complex architectures have followed on the basic encoder-decoder model, with remarkable success: Generative Adversarial Networks (GANs), and Diffusion models.</p>
+</section>
+<section id="generative-adversarial-networks-gans" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="generative-adversarial-networks-gans"><span class="header-section-number">5.2</span> Generative Adversarial Networks (GANs)</h2>
+<p>GANs were the first highly successful image generators. They could make recognizable images, though they were more liable to have strange artifacts (too many fingers, strange shapes intruding) than later models.</p>
+<p>With a GAN, we actually are training two separate models in tandem with each other: the Generator, and the Discriminator. <a href="#fig-GAN" class="quarto-xref">Figure&nbsp;19</a> shows a typical GAN architecture.</p>
+<div id="fig-GAN" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-GAN-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/GANArchitecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40" title="Figure&nbsp;19: Typical GAN architecture from (Semiconductor Engineering)"><img src="Ch8-Images/GANArchitecture.png" class="img-fluid figure-img" style="width:14cm"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-GAN-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Typical GAN architecture from (<a href="https://semiengineering.com/knowledge_centers/artificial-intelligence/neural-networks/generative-adversarial-network-gan/">Semiconductor Engineering</a>)
+</figcaption>
+</figure>
+</div>
+<p>We have a dataset of real images, and we want to train the models to generate and assess images of that type. The generator model takes in random noise, and it generates an image based on that noise. The discriminator is given an image, which is randomly chosen to be either a real image or a fake one created by the generator. The discriminator’s task is to correctly identify real from fake images. If the discriminator correctly identifies the output from the generator as fake, then it has low loss, and so isn’t change much, but the generator is given a large loss, pushing it to do better. If the discriminator outputs the incorrect answer, then it has a large loss, and the generator has a small loss.</p>
+<p>The two architectures develop in an adversarial way, each one pushing the other to improve.</p>
+<p>Once the model is trained, we can extract just the generator, and use it to generate new images.</p>
+<p>GANS were notoriously difficult to train: they were finicky and the two models could collapse into a situation where one or the other always won. They also couldn’t get rid of certain artifacts that immediately identified the output as computer-generated.</p>
+</section>
+<section id="diffusion-models" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="diffusion-models"><span class="header-section-number">5.3</span> Diffusion models</h2>
+<p>Diffusion models are at the heart of current state-of-the-art image generators. The general idea is fairly easy to understand, though the details are more complex. <a href="#fig-diffusion1" class="quarto-xref">Figure&nbsp;20</a> illustrates the general process.</p>
+<div id="fig-diffusion1" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diffusion1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/DiffusionGeneral.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41" title="Figure&nbsp;20: General diffusion process, from (Nguyen, 2025)"><img src="Ch8-Images/DiffusionGeneral.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diffusion1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: General diffusion process, from (<a href="https://bestarion.com/us/stable-diffusion-the-expert-guide/">Nguyen, 2025</a>)
+</figcaption>
+</figure>
+</div>
+<p>The input to the model is an image, and in the encoder phase it passes through a sequence of steps that add random noise to it. Each increasingly noisy image is saved. (No learning happens in the encoder phase.)</p>
+<p>In the decoder phase, the model learns to transform each noisy image into its predecessor image in the sequence. Let’s take a closer look at the diffusion architecture to see how that works. <a href="#fig-diffusion2" class="quarto-xref">Figure&nbsp;21</a> shows the <em>pure diffusion</em> process. Once the model is trained, we can use just the decoder half to generate new images: we provide random noise in the shape of an image, and generate a new image from that.</p>
+<div id="fig-diffusion2" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diffusion2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/pureDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42" title="Figure&nbsp;21: Pure diffusion model, from (Steins, 2023)"><img src="Ch8-Images/pureDiffusion.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diffusion2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21: Pure diffusion model, from (<a href="https://codoraven.com/blog/ai/stable-diffusion-clearly-explained/">Steins, 2023</a>)
+</figcaption>
+</figure>
+</div>
+<p>In between each pair of noisy images the pure diffusion model has an encoder-decoder model, in this case, a U-net. The <em>sequence</em> of U-nets is trained to reproduce the original sequence of noisy images, but in reverse order. The U-net model does also take in additional data, in this case an input that tells it what staget in the process it belongs to.</p>
+<p>Pure diffusion worked better than GAN models at generating realistic-looking images, and it was somewhat easier to train. But training a whole sequence of U-nets was very expensive!</p>
+<p>Stable diffusion introduces another layer of complexity, but it works much much better than its predecessor, and is much more efficient to train. Stable diffusion assumes that we already had an encode-decoder model trained to perform autoassociation. We use the encoder part at the start, to convert from the original image representation to the condensed, compressed representation. We call this a representation in <strong>latent space</strong>. We then add noise to the latent representation, and train the decoder half of the diffusion process to produce from one noisy representation the next less noisy representation. At the very end the decoder half of the autoassociator converts from the latent representation back to an image representation.</p>
+<div id="fig-diffusion3" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diffusion3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="Ch8-Images/stableDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43" title="Figure&nbsp;22: Stable diffusion model, from (Steins, 2023)"><img src="Ch8-Images/stableDiffusion.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diffusion3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22: Stable diffusion model, from (<a href="https://codoraven.com/blog/ai/stable-diffusion-clearly-explained/">Steins, 2023</a>)
+</figcaption>
+</figure>
+</div>
+<p>Notice that, once again, the networks between each pair of noisy representations is a U-net. Each U-Net combines the latent representation with other data, such as the text guiding what should be produced, which is encoded separately.</p>
+<p>Once the diffusion model is trained, we can provide a text input, and some random noise, to the decoder half of the diffusion model, and it will generate a series of encodings, decoding the last one into an actual image.</p>
+<p>Stable diffusion was a big step forward in image generation. Most current image generators use something like stable diffusion to perform their task.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

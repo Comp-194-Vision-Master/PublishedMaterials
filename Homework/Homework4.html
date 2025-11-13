@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-06">
+<meta name="dcterms.date" content="2025-11-12">
 
 <title>Homework 4 – Vision Readings</title>
 <style>
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 6, 2025</p>
+        <p class="date">November 12, 2025</p>
       </div>
     </div>
     
@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#specifications-for-question-2" id="toc-specifications-for-question-2" class="nav-link" data-scroll-target="#specifications-for-question-2">Specifications for Question 2</a></li>
   </ul></li>
-  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3: ???</a>
+  <li><a href="#question-3-data-preparation-for-image-classification" id="toc-question-3-data-preparation-for-image-classification" class="nav-link" data-scroll-target="#question-3-data-preparation-for-image-classification">Question 3: Data preparation for image classification</a>
   <ul class="collapse">
   <li><a href="#specifications-for-question-3" id="toc-specifications-for-question-3" class="nav-link" data-scroll-target="#specifications-for-question-3">Specifications for Question 3</a></li>
   </ul></li>
@@ -160,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#specifications-for-question-4" id="toc-specifications-for-question-4" class="nav-link" data-scroll-target="#specifications-for-question-4">Specifications for Question 4</a></li>
   </ul></li>
-  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5: ???</a>
+  <li><a href="#question-5-experimenting-with-object-detection-and-segmentation-models" id="toc-question-5-experimenting-with-object-detection-and-segmentation-models" class="nav-link" data-scroll-target="#question-5-experimenting-with-object-detection-and-segmentation-models">Question 5: Experimenting with Object Detection and Segmentation Models</a>
   <ul class="collapse">
   <li><a href="#specifications-for-question-5" id="toc-specifications-for-question-5" class="nav-link" data-scroll-target="#specifications-for-question-5">Specifications for Question 5</a></li>
   </ul></li>
@@ -278,52 +278,64 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="question-3" class="level1">
-<h1>Question 3: ???</h1>
+<section id="question-3-data-preparation-for-image-classification" class="level1">
+<h1>Question 3: Data preparation for image classification</h1>
+<p>In ICA 17, you work through an example of training a CNN to perform image classification. The second half of the activity asks you to repeat the process for a new dataset.</p>
+<p>Open the <a href="https://colab.research.google.com/drive/1E5RhAK0TgbZQgZwJBgpTgY8Njy_fTXZk?usp=sharing">ICA Colab Notebook</a>, make a copy for your team, and work through these sections:</p>
+<ul>
+<li>Step 1: Reading in the data</li>
+<li>Step 2: Examining the data</li>
+<li>Step 3: Preprocessing the data</li>
+</ul>
 <section id="specifications-for-question-3" class="level2">
 <h2 class="anchored" data-anchor-id="specifications-for-question-3">Specifications for Question 3</h2>
 <p><strong>Base specifications:</strong></p>
 <ul>
-<li>???</li>
+<li>Code block successfully reads in both training and validation data (using the <code>as_supervised</code> input)</li>
+<li>Code block displays 3x3 grid of sample images from the start of the dataset</li>
+<li>Code block correctly creates the <code>preprocess</code> mini-model to adapt the dataset</li>
+<li>Code block correctly applies the <code>preprocess</code> mini-model to both training and validation sets</li>
 </ul>
 <p><strong>Extended specifications:</strong></p>
 <ul>
-<li>Code includes a triple-quoted <em>docstring</em> that describes the function’s input, purpose, and results</li>
-<li>Student name is at the top of the file</li>
+<li>A link to the Colab Notebook is added to the README.md file in Github</li>
+<li>Student names are added to the top of the Colab notebook</li>
 <li>Any completed TODO comments have been removed</li>
-<li>File format has appropriate style:
-<ul>
-<li><code>import</code> statements at the top</li>
-<li>then function definitions with no script elements</li>
-<li>then the main script, all insidde the <code>if __name__ == '__main__':</code> statement</li>
-</ul></li>
 </ul>
 <p><strong>Ratings:</strong></p>
 <ul>
-<li>To receive a gold rating, complete at least 3 general specifications, plus at least 5 specifications for each function</li>
-<li>To receive a silver rating, complete at least 2 general specifications, plus at least 4 specifications for each function</li>
-<li>To receive a bronze rating, complete at least 2 general specifications, plus at least 3 specifications for each function</li>
+<li>To receive a gold rating, complete at least 5 specifications, at least 3 of which are base</li>
+<li>To receive a silver rating, complete at least 4 specifications, at least 3 of which are base</li>
+<li>To receive a bronze rating, complete at least 3 specifications, at least 2 of which are base</li>
 </ul>
 </section>
 </section>
 <section id="question-4" class="level1">
 <h1>Question 4: ???</h1>
+<p>In ICA 17, you work through an example of training a CNN to perform image classification. The second half of the activity asks you to repeat the process for a new dataset.</p>
+<p>Open the <a href="https://colab.research.google.com/drive/1E5RhAK0TgbZQgZwJBgpTgY8Njy_fTXZk?usp=sharing">ICA Colab Notebook</a>, make a copy for your team, and work through these sections:</p>
+<ul>
+<li>Step 4: Setting up the CNN</li>
+<li>Step 5: Compiling the model</li>
+<li>Step 6: Traianing the network</li>
+<li>Step 7: Visualizing the results</li>
+<li>Step 8: Trying another model</li>
+</ul>
 <section id="specifications-for-question-4" class="level2">
 <h2 class="anchored" data-anchor-id="specifications-for-question-4">Specifications for Question 4</h2>
 <p><strong>Base specifications:</strong></p>
 <ul>
-<li>???</li>
+<li>Code block correctly builds the model similar to the CIFAR10 model</li>
+<li>Code block correctly configures the model for training</li>
+<li>Code block correctly runs the training algorithm</li>
+<li>Code block(s) correctly display the loss and accuracy epoch-by-epoch</li>
+<li>Final code blocks correctly set up the VGG-19 model and train it on the data</li>
 </ul>
 <p><strong>Extended specifications:</strong></p>
 <ul>
-<li>Student name is at the top of the file</li>
+<li>A link to the Colab Notebook is added to the README.md file in Github</li>
+<li>Student names are added to the top of the Colab notebook</li>
 <li>Any completed TODO comments have been removed</li>
-<li>File format has appropriate style:
-<ul>
-<li><code>import</code> statements at the top</li>
-<li>then function definitions with no script elements</li>
-<li>then the main script, all inside the <code>if __name__ == '__main__':</code> statement</li>
-</ul></li>
 </ul>
 <p><strong>Ratings:</strong></p>
 <ul>
@@ -333,8 +345,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="question-5" class="level1">
-<h1>Question 5: ???</h1>
+<section id="question-5-experimenting-with-object-detection-and-segmentation-models" class="level1">
+<h1>Question 5: Experimenting with Object Detection and Segmentation Models</h1>
 <section id="specifications-for-question-5" class="level2">
 <h2 class="anchored" data-anchor-id="specifications-for-question-5">Specifications for Question 5</h2>
 <p><strong>Base specifications:</strong></p>
