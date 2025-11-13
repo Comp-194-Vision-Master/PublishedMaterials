@@ -371,7 +371,7 @@ window.Quarto = {
 <li>Can resize by specifying new height and width <strong>or</strong> by scaling old height or width</li>
 <li>Has alternate algorithms for interpolation (you can try them out if you like)</li>
 </ul>
-<div id="75d38a1e" class="cell" data-execution_count="1">
+<div id="63e2cdfb" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1"></a>img1 <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/bryceCanyon.jpg"</span>)</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>cv2.imshow(<span class="st">"Original"</span>, img1)</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>cv2.waitKey()</span>
@@ -450,7 +450,7 @@ y_{old} \\
 \]</span></p>
 <p>Depending on the values for <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(t_x\)</span> and <span class="math inline">\(t_y\)</span>, we change the view of the image in very different ways (translating, rotating, skewing, stretching/squashing, … warping!)</p>
 <p>All of these geometric transformation will be done with the <code>warpAffine</code> function. To call it we do this:</p>
-<div id="9cc78f3a" class="cell" data-execution_count="2">
+<div id="6f577768" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>newImage <span class="op">=</span> cv2.warpAffine(oldImage, matrix, size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function takes in three inputs:</p>
@@ -469,7 +469,7 @@ c &amp; d &amp; t_y \\
 <h3 class="anchored" data-anchor-id="translation">Translation</h3>
 <p>When we translate an image, we move all the pixels right or left by some fixed amount, and up or down as well. Translation is the simplest of the affine warp transformations. Because of this, OpenCV doesn’t provide a helper function to help us to create the 2x3 matrix that the <code>warpAffine</code> function needs.</p>
 <p><strong>A simple example:</strong></p>
-<div id="bbf11714" class="cell" data-execution_count="3">
+<div id="58d83673" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>astilIm <span class="op">=</span> cv2.imread(<span class="st">"SampleImages/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -1263,13 +1263,34 @@ c &amp; d &amp; t_y \\
 <li>Find bounding boxes around objects of interest</li>
 <li>Use CNNs as a part of the process, but have much more complex architectures</li>
 </ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ClassNotes-Images/objDetectExample.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Sample output from YOLOv11 object detection model"><img src="ClassNotes-Images/objDetectExample.png" class="img-fluid figure-img" alt="Sample output from YOLOv11 object detection model"></a></p>
+<figcaption>Sample output from YOLOv11 object detection model</figcaption>
+</figure>
+</div>
+<ul>
 <li>Segmentation
 <ul>
 <li>Label each pixel with which object it belongs to</li>
 <li>Similar architectures to object detection, except for the ending point</li>
 </ul></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ClassNotes-Images/yolosegmentExample.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Sample output from YOLOv11 segmentation model: notice it does object detection and segmentation"><img src="ClassNotes-Images/yolosegmentExample.png" class="img-fluid figure-img" alt="Sample output from YOLOv11 segmentation model: notice it does object detection and segmentation"></a></p>
+<figcaption>Sample output from YOLOv11 segmentation model: notice it does object detection <strong>and</strong> segmentation</figcaption>
+</figure>
+</div>
 <p>YOLO is popular and easy to use.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ClassNotes-Images/YOLO-v11-network-architecture-diagram.png" class="img-fluid figure-img"></p>
+<figcaption>Yolo v11 architecture</figcaption>
+</figure>
+</div>
+<p>From <a href="https://www.mdpi.com/2077-0472/15/16/1765">Zhang et al., 2025</a></p>
 </section>
 <section id="generative-ai" class="level3">
 <h3 class="anchored" data-anchor-id="generative-ai">Generative AI</h3>
@@ -1301,7 +1322,7 @@ c &amp; d &amp; t_y \\
 <h4 class="anchored" data-anchor-id="u-shaped-networks">U-shaped networks</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ClassNotes-Images/UNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="U-Net encoder-decoder model"><img src="ClassNotes-Images/UNet.png" class="img-fluid figure-img" alt="U-Net encoder-decoder model"></a></p>
+<p><a href="ClassNotes-Images/UNet.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="U-Net encoder-decoder model"><img src="ClassNotes-Images/UNet.png" class="img-fluid figure-img" alt="U-Net encoder-decoder model"></a></p>
 <figcaption>U-Net encoder-decoder model</figcaption>
 </figure>
 </div>
@@ -1324,7 +1345,7 @@ c &amp; d &amp; t_y \\
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ClassNotes-Images/GANArchitecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="GAN architecture"><img src="ClassNotes-Images/GANArchitecture.png" class="img-fluid figure-img" alt="GAN architecture"></a></p>
+<p><a href="ClassNotes-Images/GANArchitecture.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="GAN architecture"><img src="ClassNotes-Images/GANArchitecture.png" class="img-fluid figure-img" alt="GAN architecture"></a></p>
 <figcaption>GAN architecture</figcaption>
 </figure>
 </div>
@@ -1339,7 +1360,7 @@ c &amp; d &amp; t_y \\
 <p><strong>General view:</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ClassNotes-Images/DiffusionGeneral.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="General idea of diffusion models"><img src="ClassNotes-Images/DiffusionGeneral.png" class="img-fluid figure-img" alt="General idea of diffusion models"></a></p>
+<p><a href="ClassNotes-Images/DiffusionGeneral.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="General idea of diffusion models"><img src="ClassNotes-Images/DiffusionGeneral.png" class="img-fluid figure-img" alt="General idea of diffusion models"></a></p>
 <figcaption>General idea of diffusion models</figcaption>
 </figure>
 </div>
@@ -1347,7 +1368,7 @@ c &amp; d &amp; t_y \\
 <p><strong>Pure Diffusion:</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ClassNotes-Images/pureDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Pure (original) diffusion"><img src="ClassNotes-Images/pureDiffusion.png" class="img-fluid figure-img" alt="Pure (original) diffusion"></a></p>
+<p><a href="ClassNotes-Images/pureDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Pure (original) diffusion"><img src="ClassNotes-Images/pureDiffusion.png" class="img-fluid figure-img" alt="Pure (original) diffusion"></a></p>
 <figcaption>Pure (original) diffusion</figcaption>
 </figure>
 </div>
@@ -1355,7 +1376,7 @@ c &amp; d &amp; t_y \\
 <p><strong>Stable Diffusion:</strong></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ClassNotes-Images/stableDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Stable diffusion"><img src="ClassNotes-Images/stableDiffusion.png" class="img-fluid figure-img" alt="Stable diffusion"></a></p>
+<p><a href="ClassNotes-Images/stableDiffusion.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Stable diffusion"><img src="ClassNotes-Images/stableDiffusion.png" class="img-fluid figure-img" alt="Stable diffusion"></a></p>
 <figcaption>Stable diffusion</figcaption>
 </figure>
 </div>
