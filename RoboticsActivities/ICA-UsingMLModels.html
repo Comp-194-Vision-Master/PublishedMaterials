@@ -9,7 +9,7 @@
 <meta name="author" content="Susan Eileen Fox">
 <meta name="dcterms.date" content="2026-02-24">
 
-<title>Comp 480 Computer Vision Activities – ToC – Vision Readings</title>
+<title>ICA: Using ML Models – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Comp 480 Computer Vision Activities – ToC</h1>
+      <h1 class="title">ICA: Using ML Models</h1>
                       </div>
   </div>
     
@@ -143,7 +143,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#in-class-activities" id="toc-in-class-activities" class="nav-link active" data-scroll-target="#in-class-activities">In-Class Activities</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#face-detection" id="toc-face-detection" class="nav-link" data-scroll-target="#face-detection">Face detection</a></li>
+  <li><a href="#facial-landmark-detection" id="toc-facial-landmark-detection" class="nav-link" data-scroll-target="#facial-landmark-detection">Facial landmark detection</a></li>
+  <li><a href="#hand-landmark-detection" id="toc-hand-landmark-detection" class="nav-link" data-scroll-target="#hand-landmark-detection">Hand landmark detection</a></li>
+  <li><a href="#body-pose-landmark-detection" id="toc-body-pose-landmark-detection" class="nav-link" data-scroll-target="#body-pose-landmark-detection">Body pose landmark detection</a></li>
+  <li><a href="#object-detection-optional-just-for-fun" id="toc-object-detection-optional-just-for-fun" class="nav-link" data-scroll-target="#object-detection-optional-just-for-fun">Object detection (OPTIONAL, just for fun!)</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps…</a></li>
   </ul>
 </nav>
     </div>
@@ -154,16 +160,111 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Computer Vision Activities for Comp 480 (Robotics) are stored here.</p>
-<hr>
-<section id="in-class-activities" class="level1">
-<h1>In-Class Activities</h1>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This activity uses the Mediapipe library to demonstrate how we can take existing deep learning models trained on computer vision tasks, and build on their results. We won’t be re-training these models on new data, although that is one common use case.</p>
 <ul>
-<li><a href="ICA-OpenCVBasics.html">ICA 7 - Getting Started with OpenCV</a></li>
-<li><a href="ICA-FiltersFeatures.html">ICA 8 - Filters and Features (Finding things in images)</a></li>
-<li><a href="ICA-UsingMLModels.html">ICA 9 - Machine Learning for CV</a></li>
-<li><a href="ICA-DeepLearning.html">ICA10 - Training Deep Learning Models</a></li>
-<li></li>
+<li>The Github repository for this assignment will contain five starter code files, one for each Mediapipe model.</li>
+<li>You will also need to download the models themselves from our Moodle site (also available on the Mediapipe website), and move them into your Pycharm project.</li>
+</ul>
+<p><strong>Do not try to add the models to the Github repo! If asked about adding them, say NO. They are too large!</strong></p>
+</section>
+<section id="face-detection" class="level1">
+<h1>Face detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe face detection model</li>
+<li>Open the <code>mediapipeFaceDetect.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findFacing</code> in <code>runFaceDetect</code></li>
+<li>Modify <code>findFacing</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findFacing</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Experiment until you can figure out how to get the left ear and left eye coordinates out of the detection results</li>
+<li>Do the same with the right ear and right eye coordinates (assign variables to hold these four values)</li>
+<li>Compute the distance in the x dimension between the left ear and eye, and do the same for the right ear and eye</li>
+<li>Write an <code>if</code> statement that checks the distances, and if the distance between left eye and ear is small enough, and the distance between right eye and ear is large enough, then print that the person is facing toward the left</li>
+<li>Do something similar for facing toward the right</li>
+<li>If neither of these hold, then print facing forward</li>
+</ul></li>
+</ul>
+</section>
+<section id="facial-landmark-detection" class="level1">
+<h1>Facial landmark detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe facial landmark model</li>
+<li>Open the <code>mediapipeFaceLandmark.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findEyes</code> in <code>runFacialLandmarks</code></li>
+<li>Modify <code>findFacing</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findFacing</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Examine the blendshapes, and determine which ones will help you to discover if the person’s eyes are open or closed</li>
+<li>Experiment until you can figure out how to get the correct blendshape information from the detection results</li>
+<li>Determine a threshold or thresholds for when the blendshapes you have chosen indicate that eyes are closed</li>
+<li>Implement an <code>if</code> statement to test if eyes are open or closed, and print a message accordingly: “Eyes closed!” or “Eyes open”</li>
+</ul></li>
+</ul>
+</section>
+<section id="hand-landmark-detection" class="level1">
+<h1>Hand landmark detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe hand landmark model</li>
+<li>Open the <code>mediapipeHand.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findEyes</code> in <code>runFacialLandmarks</code></li>
+<li>Modify <code>findHandPose</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findHandPose</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Examine the landmarks that are returned. Determine some subset of landmarks that you could use to distinguish between someone making a fist and someone with an open palm (fingers up, palm forward).</li>
+<li>Experiment until you can figure out how to get the coordinates of those landmarks out of the detection results</li>
+<li>Determine what relationship between the landmark coordinates indicate a fist versus an open palm</li>
+<li>Implement an <code>if</code> statement to test whether the person is making a fist or an oopen palm, and print a message accordingly: “Palm” or “Fist”</li>
+</ul></li>
+</ul>
+</section>
+<section id="body-pose-landmark-detection" class="level1">
+<h1>Body pose landmark detection</h1>
+<ul>
+<li>Open up the Chapter 8 readings about the Mediapipe body pose landmark model</li>
+<li>Open the <code>mediapipePose.py</code> program</li>
+<li>Try running the program, to see how it works</li>
+</ul>
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Study the structure of the results returned by the model when it is run on an image. This is described in the Chapter 8 readings</li>
+<li>Uncomment the call to <code>findEyes</code> in <code>runFacialLandmarks</code></li>
+<li>Modify <code>findHands</code> by doing the following:
+<ul>
+<li>Remove the <code>pass</code> statement from the definition of <code>findHands</code>, and replace it by code that prints the <code>detect_results</code> (temporarily, until you figure out the format of the results, then comment out the print statement)</li>
+<li>Examine the landmarks that are returned. Determine which landmarks would tell you the relative position of the person’s hands and their head: we want to tell if someone’s hands are above their head, or below or even with it</li>
+<li>Experiment until you can figure out how to get the coordinates of those landmarks out of the detection results</li>
+<li>Determine what relationship between the landmark coordinates indicate hands up or hands not up</li>
+<li>Implement an <code>if</code> statement to test whether the person has their hands up, and print a message accordingly: “Hands up” or “Hands down”</li>
+</ul></li>
+</ul>
+</section>
+<section id="object-detection-optional-just-for-fun" class="level1">
+<h1>Object detection (OPTIONAL, just for fun!)</h1>
+<p>If you like, experiment with the Object Detection code as well, and try to figure out some of the categories of objects it can detect.</p>
+</section>
+<section id="next-steps" class="level1">
+<h1>Next steps…</h1>
+<p>Explore the two websites listed below. Each hosts hundreds of thousands or even millions of models trained for various purposes. HuggingFace is focused more on transformer models than CNN or object detection, but they both have interesting work.</p>
+<ul>
+<li><a href="https://roboflow.com/">Roboflow</a></li>
+<li><a href="https://huggingface.co/">HuggingFace</a></li>
 </ul>
 
 
