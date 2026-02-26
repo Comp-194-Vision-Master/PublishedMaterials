@@ -9,7 +9,7 @@
 <meta name="author" content="Susan Eileen Fox">
 <meta name="dcterms.date" content="2026-02-26">
 
-<title>ICA: Using ML Models – Vision Readings</title>
+<title>ICA: Deep Learning – Vision Readings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">ICA: Using ML Models</h1>
+      <h1 class="title">ICA: Deep Learning</h1>
                       </div>
   </div>
     
@@ -190,9 +190,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#classifying-handwritten-digits" id="toc-classifying-handwritten-digits" class="nav-link" data-scroll-target="#classifying-handwritten-digits">Classifying handwritten digits</a>
   <ul class="collapse">
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data Wrangling</a></li>
+  <li><a href="#complete-the-knn-training-and-testing" id="toc-complete-the-knn-training-and-testing" class="nav-link" data-scroll-target="#complete-the-knn-training-and-testing">Complete the KNN training and testing</a></li>
+  <li><a href="#experiment" id="toc-experiment" class="nav-link" data-scroll-target="#experiment">Experiment!</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#what-to-hand-in" id="toc-what-to-hand-in" class="nav-link" data-scroll-target="#what-to-hand-in">What to hand in</a></li>
+  <li><a href="#convolutional-neural-networks" id="toc-convolutional-neural-networks" class="nav-link" data-scroll-target="#convolutional-neural-networks">Convolutional Neural Networks</a>
+  <ul class="collapse">
+  <li><a href="#using-google-colab" id="toc-using-google-colab" class="nav-link" data-scroll-target="#using-google-colab">Using Google Colab</a></li>
+  <li><a href="#proceed-from-here-in-colab" id="toc-proceed-from-here-in-colab" class="nav-link" data-scroll-target="#proceed-from-here-in-colab">Proceed from here in Colab</a></li>
+  </ul></li>
+  <li><a href="#object-detection-and-segmentation" id="toc-object-detection-and-segmentation" class="nav-link" data-scroll-target="#object-detection-and-segmentation">Object Detection and Segmentation</a>
+  <ul class="collapse">
+  <li><a href="#proceed-from-here-in-colab-1" id="toc-proceed-from-here-in-colab-1" class="nav-link" data-scroll-target="#proceed-from-here-in-colab-1">Proceed from here in Colab</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -205,85 +215,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>???</p>
-<p>The Github repository for this assignment will contain a starter code file, <code>activ16.py</code>. Put your code in this file, and create others, as directed below and according to the <code>TODO</code> comments in the file.</p>
+<p>This activity walks you through the use of very simple machine learning (K-Nearest Neighbor) for a computer vision task, and then teaches you how to use the Tensorflow library to train an image classifier, and the YOLO library to finetune an object detection network. We will use Google Colab to train the deep learning models.</p>
+<ul>
+<li>The Github repository for this assignment will contain starter code for the simple machine learning examples</li>
+<li>The <a href="">ImageClassifier Colab notebook</a> will contain the instructions and code for the Tensorflow portion</li>
+<li>The <a href="">ObjectDetector Colab notebook</a> will contain the instructions and code for the YOLO portion</li>
+</ul>
+<p>The first two tasks are examples of <strong>image classification</strong>. Image classification is a straightforward task, where we input an image, and the network assigns a category to it. For example, we might want to classify images according to what kind of vehicle is in them: car, truck, bicycle, train, etc. Or we might want to classify images of handwritten letters or digits by what letter or digit they contain.</p>
+<p>The third task looks at a more complex problem: <strong>object detection</strong>. Here, we go beyond a category for the entire image. Instead, we locate objects within the image and mark them with a rectangular bounding box, and categorize each object found.</p>
+<p>You <strong>can</strong> install Tensorflow and YOLO on your own computer. However, the training time with CPU only will be ridiculously long, and it often takes days to correctly set up your computer so that these libraries can use your GPU, if it is possible at all.</p>
 </section>
 <section id="k-nearest-neighbor" class="level1">
 <h1>K-Nearest Neighbor</h1>
 <section id="creating-artificial-data" class="level2">
 <h2 class="anchored" data-anchor-id="creating-artificial-data">Creating artificial data</h2>
 <p>The code below, adapted from the OpenCV Machine Learning tutorial, generates random data, and assigns half of them to one category and the other half to a second category. It then generates a new random value. It plots this data as a scatterplot (note: you must close the plot window for the program to go on).</p>
-<div id="bf407d6e" class="cell" data-execution_count="2">
+<div id="dd783917" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="im">import</span> os</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="im">import</span> random</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a><span class="im">import</span> time</span>
 <span id="annotated-cell-1-4"><a href="#annotated-cell-1-4"></a></span>
 <span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a><span class="im">import</span> cv2</span>
 <span id="annotated-cell-1-6"><a href="#annotated-cell-1-6"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt   <span class="co"># Used to display plots and chart of data (and sometimes images)</span></span>
-<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a></span>
-<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a><span class="kw">def</span> plotDataAndPoint(data, categ, newPoints):</span>
-<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10"></a>    <span class="co">"""Takes in data and a list of responses, as well as a list of new points, and it creates a scatter plot</span></span>
-<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11"></a><span class="co">    red triangles: data with categ = 0</span></span>
-<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12"></a><span class="co">    blue squares:  data with categ = 1</span></span>
-<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13"></a><span class="co">    green circles: unknown data"""</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-14" class="code-annotation-target"><a href="#annotated-cell-1-14"></a>    red <span class="op">=</span> data[categ<span class="op">==</span><span class="dv">0</span>]   <span class="co"># this selects just data where bool is true</span></span>
-<span id="annotated-cell-1-15"><a href="#annotated-cell-1-15"></a>    plt.scatter(red[:, <span class="dv">0</span>], red[:, <span class="dv">1</span>], <span class="dv">80</span>, <span class="st">'r'</span>, <span class="st">'^'</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-16" class="code-annotation-target"><a href="#annotated-cell-1-16"></a>    blue <span class="op">=</span> data[categ<span class="op">==</span><span class="dv">1</span>]</span>
-<span id="annotated-cell-1-17"><a href="#annotated-cell-1-17"></a>    plt.scatter(blue[:, <span class="dv">0</span>], blue[:, <span class="dv">1</span>], <span class="dv">80</span>, <span class="st">'b'</span>, <span class="st">'s'</span>)</span>
-<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18"></a></span>
-<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19"></a>    <span class="co"># Plot a new point in green</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="7">7</button><span id="annotated-cell-1-20" class="code-annotation-target"><a href="#annotated-cell-1-20"></a>    plt.scatter(newPoints[:, <span class="dv">0</span>], newPoint[:, <span class="dv">1</span>], <span class="dv">80</span>, <span class="st">'g'</span>, <span class="st">'o'</span>)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="8">8</button><span id="annotated-cell-1-21" class="code-annotation-target"><a href="#annotated-cell-1-21"></a>    plt.show()</span>
-<span id="annotated-cell-1-22"><a href="#annotated-cell-1-22"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-23" class="code-annotation-target"><a href="#annotated-cell-1-23"></a>trainData <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">100</span>, (<span class="dv">40</span>, <span class="dv">2</span>)).astype(np.float32)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-24" class="code-annotation-target"><a href="#annotated-cell-1-24"></a>trainLabels <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">40</span>).astype(np.float32)</span>
-<span id="annotated-cell-1-25"><a href="#annotated-cell-1-25"></a></span>
-<span id="annotated-cell-1-26"><a href="#annotated-cell-1-26"></a><span class="co"># Generate a new point</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-27" class="code-annotation-target"><a href="#annotated-cell-1-27"></a>newPoint <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">100</span>, (<span class="dv">1</span>, <span class="dv">2</span>)).astype(np.float32)</span>
-<span id="annotated-cell-1-28"><a href="#annotated-cell-1-28"></a></span>
-<span id="annotated-cell-1-29"><a href="#annotated-cell-1-29"></a><span class="co"># Plot random data, and new (random) point</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-30" class="code-annotation-target"><a href="#annotated-cell-1-30"></a>plotDataAndPoint(trainData, trainLabels, newPoint)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="annotated-cell-1-8"><a href="#annotated-cell-1-8"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt   <span class="co"># Used to display plots and chart of data (and sometimes images)</span></span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9"></a></span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10"></a><span class="kw">def</span> plotDataAndPoint(data, categ, newPoints):</span>
+<span id="annotated-cell-1-11"><a href="#annotated-cell-1-11"></a>    <span class="co">"""Takes in data and a list of responses, as well as a list of new points, and it creates a scatter plot</span></span>
+<span id="annotated-cell-1-12"><a href="#annotated-cell-1-12"></a><span class="co">    red triangles: data with categ = 0</span></span>
+<span id="annotated-cell-1-13"><a href="#annotated-cell-1-13"></a><span class="co">    blue squares:  data with categ = 1</span></span>
+<span id="annotated-cell-1-14"><a href="#annotated-cell-1-14"></a><span class="co">    green circles: unknown data"""</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-15" class="code-annotation-target"><a href="#annotated-cell-1-15"></a>    red <span class="op">=</span> data[categ<span class="op">==</span><span class="dv">0</span>]   <span class="co"># this selects just data where bool is true</span></span>
+<span id="annotated-cell-1-16"><a href="#annotated-cell-1-16"></a>    plt.scatter(red[:, <span class="dv">0</span>], red[:, <span class="dv">1</span>], <span class="dv">80</span>, <span class="st">'r'</span>, <span class="st">'^'</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-17" class="code-annotation-target"><a href="#annotated-cell-1-17"></a>    blue <span class="op">=</span> data[categ<span class="op">==</span><span class="dv">1</span>]</span>
+<span id="annotated-cell-1-18"><a href="#annotated-cell-1-18"></a>    plt.scatter(blue[:, <span class="dv">0</span>], blue[:, <span class="dv">1</span>], <span class="dv">80</span>, <span class="st">'b'</span>, <span class="st">'s'</span>)</span>
+<span id="annotated-cell-1-19"><a href="#annotated-cell-1-19"></a></span>
+<span id="annotated-cell-1-20"><a href="#annotated-cell-1-20"></a>    <span class="co"># Plot a new point in green</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="7">7</button><span id="annotated-cell-1-21" class="code-annotation-target"><a href="#annotated-cell-1-21"></a>    plt.scatter(newPoints[:, <span class="dv">0</span>], newPoint[:, <span class="dv">1</span>], <span class="dv">80</span>, <span class="st">'g'</span>, <span class="st">'o'</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="8">8</button><span id="annotated-cell-1-22" class="code-annotation-target"><a href="#annotated-cell-1-22"></a>    plt.show()</span>
+<span id="annotated-cell-1-23"><a href="#annotated-cell-1-23"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-24" class="code-annotation-target"><a href="#annotated-cell-1-24"></a>trainData <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">100</span>, (<span class="dv">40</span>, <span class="dv">2</span>)).astype(np.float32)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-25" class="code-annotation-target"><a href="#annotated-cell-1-25"></a>trainLabels <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">40</span>).astype(np.float32)</span>
+<span id="annotated-cell-1-26"><a href="#annotated-cell-1-26"></a></span>
+<span id="annotated-cell-1-27"><a href="#annotated-cell-1-27"></a><span class="co"># Generate a new point</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-28" class="code-annotation-target"><a href="#annotated-cell-1-28"></a>newPoint <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">100</span>, (<span class="dv">1</span>, <span class="dv">2</span>)).astype(np.float32)</span>
+<span id="annotated-cell-1-29"><a href="#annotated-cell-1-29"></a></span>
+<span id="annotated-cell-1-30"><a href="#annotated-cell-1-30"></a><span class="co"># Plot random data, and new (random) point</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-31" class="code-annotation-target"><a href="#annotated-cell-1-31"></a>plotDataAndPoint(trainData, trainLabels, newPoint)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="23" data-code-annotation="1">Create a <code>float</code> matrix with 40 rows and 2 columns, filled with random values between 0 and 100: (x, y) coordinates</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="24" data-code-annotation="1">Create a <code>float</code> matrix with 40 rows and 2 columns, filled with random values between 0 and 100: (x, y) coordinates</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="24" data-code-annotation="2">Create a <code>float</code> array with 40 rows, filled with random 0’s and 1s: the two categories we want it to learn</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="25" data-code-annotation="2">Create a <code>float</code> array with 40 rows, filled with random 0’s and 1s: the two categories we want it to learn</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="27" data-code-annotation="3">Generate a new float matrix that has 1 row and 2 columns, with random values between 0 and 100: this is our unknown point. Note that we can also generate multiple unknown points to test by increasing the number of rows</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="28" data-code-annotation="3">Generate a new float matrix that has 1 row and 2 columns, with random values between 0 and 100: this is our unknown point. Note that we can also generate multiple unknown points to test by increasing the number of rows</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="30" data-code-annotation="4">Plot the data</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="31" data-code-annotation="4">Plot the data</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="14,15" data-code-annotation="5">Select the rows from the data where the corresponding category value is 0, and plot them with red triangles</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="15,16" data-code-annotation="5">Select the rows from the data where the corresponding category value is 0, and plot them with red triangles</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="16,17" data-code-annotation="6">Select the rows from the data where the corresponding category value is 1, and plot them with blue squares</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="17,18" data-code-annotation="6">Select the rows from the data where the corresponding category value is 1, and plot them with blue squares</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="7">7</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="20" data-code-annotation="7">Plot the unknown point(s) as green circles</span>
+<span data-code-cell="annotated-cell-1" data-code-lines="21" data-code-annotation="7">Plot the unknown point(s) as green circles</span>
 </dd>
 <dt data-target-cell="annotated-cell-1" data-target-annotation="8">8</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="21" data-code-annotation="8">To see the window, you must call <code>plt.show</code></span>
+<span data-code-cell="annotated-cell-1" data-code-lines="22" data-code-annotation="8">To see the window, you must call <code>plt.show</code></span>
 </dd>
 </dl>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ICA17-KNNDigits_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="ICA-DeepLearning_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -293,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="building-and-training-a-knn-model">Building and training a KNN model</h2>
 <p>OpenCV implements several simple ML models, including KNN.</p>
 <p>Here we set up the KNN model as a n object, and train it on the data from the previous section:</p>
-<div id="ff144f9d" class="cell" data-execution_count="3">
+<div id="c3befd54" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co"># Create KNN object and train on data</span></span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>knn <span class="op">=</span> cv2.ml.KNearest_create()</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>knn.train(trainData, cv2.ml.ROW_SAMPLE, trainLabels)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -305,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dd>
 </dl>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="80">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>True</code></pre>
 </div>
 </div>
@@ -313,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="classifying-the-unknown-point" class="level2">
 <h2 class="anchored" data-anchor-id="classifying-the-unknown-point">Classifying the unknown point</h2>
 <p>Next we run the trained model on our new point, and see the results.</p>
-<div id="72f64b9e" class="cell" data-execution_count="4">
+<div id="bced94c1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co"># Report category of new point (based on k=3)</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>ret, result, neighbors, dist <span class="op">=</span> knn.findNearest(newPoint, <span class="dv">3</span>)</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a><span class="bu">print</span>(<span class="st">"ret:"</span>, ret)</span>
@@ -341,10 +359,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dl>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ret: 1.0
-result: [[1.]]
-neighbors: [[1. 1. 0.]]
-distances: [[  9. 261. 296.]]</code></pre>
+<pre><code>ret: 0.0
+result: [[0.]]
+neighbors: [[1. 0. 0.]]
+distances: [[  5. 338. 365.]]</code></pre>
 </div>
 </div>
 <p>You can try out this example in the <code>knnExample.py</code> starter file.</p>
@@ -355,7 +373,7 @@ distances: [[  9. 261. 296.]]</code></pre>
 <div id="fig-flowers" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-flowers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="ICA17-Images/digits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Dataset stored as an image"><img src="ICA17-Images/digits.png" class="img-fluid figure-img" style="width:25cm"></a>
+<a href="ICA-Images/digits.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Dataset stored as an image"><img src="ICA-Images/digits.png" class="img-fluid figure-img" style="width:25cm"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flowers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Dataset stored as an image
@@ -374,87 +392,114 @@ Figure&nbsp;1: Dataset stored as an image
 <section id="step-1-break-up-the-big-picture" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-break-up-the-big-picture">Step 1: Break up the big picture</h4>
 <p>The code below reads in the digits image, converts it to grayscale, and then breaks it up into 20x20 chunks. The vsplit and hsplit functions from Numpy divide an array into the given number of sub-arrays: vsplit splits up the rows of the array, and hsplit splits up the columns. This code combines them using a list comprehension, producing a list of arrays of 20x20 grayscale images. The final step converts that list back into a Numpy array, with 50 rows, 100 columns, and each value within that is a small image.</p>
-<div id="ab2884df" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>digitDataIm <span class="op">=</span> cv2.imread(sampleDataPath <span class="op">+</span> <span class="st">"digits.png"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># cv2.imshow("digit data image", digitDataIm)</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>gray <span class="op">=</span> cv2.cvtColor(digitDataIm, cv2.COLOR_BGR2GRAY)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Now we split the image first into 50 rows, and then each row into 100 columns, each 20x20 size</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>rows <span class="op">=</span> np.vsplit(gray, <span class="dv">50</span>)</span>
-<span id="cb3-7"><a href="#cb3-7"></a>cells <span class="op">=</span> [np.hsplit(row, <span class="dv">100</span>) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
-<span id="cb3-8"><a href="#cb3-8"></a></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co"># Make it into a Numpy array: its size should be (50, 100, 20, 20)</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>x <span class="op">=</span> np.array(cells)</span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="bu">print</span>(x.shape)</span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># Lastly, we will make a matrix that is 50x100 and contains codes for each digit (0 through 9). These will be the</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co"># targets, the labels for each image.</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a>y <span class="op">=</span> np.zeros((<span class="dv">50</span>, <span class="dv">100</span>), np.float32)</span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="cf">for</span> digit <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb3-17"><a href="#cb3-17"></a>    row <span class="op">=</span> digit <span class="op">*</span> <span class="dv">5</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>    y[row:row<span class="op">+</span><span class="dv">5</span>, :] <span class="op">=</span> digit</span>
-<span id="cb3-19"><a href="#cb3-19"></a></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="bu">print</span>(y)</span>
-<span id="cb3-21"><a href="#cb3-21"></a></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="bu">print</span>(x.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b8061234" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>sampleDataPath <span class="op">=</span> <span class="st">"SampleData/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a52ad420" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>digitDataIm <span class="op">=</span> cv2.imread(sampleDataPath <span class="op">+</span> <span class="st">"digits.png"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># cv2.imshow("digit data image", digitDataIm)</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>gray <span class="op">=</span> cv2.cvtColor(digitDataIm, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Now we split the image first into 50 rows, and then each row into 100 columns, each 20x20 size</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>rows <span class="op">=</span> np.vsplit(gray, <span class="dv">50</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>cells <span class="op">=</span> [np.hsplit(row, <span class="dv">100</span>) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Make it into a Numpy array: its size should be (50, 100, 20, 20)</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>x <span class="op">=</span> np.array(cells)</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co"># Make a matrix that is 50x100 and contains codes for each digit (0 through 9). These will be the targets, the labels</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>y <span class="op">=</span> np.zeros((<span class="dv">50</span>, <span class="dv">100</span>), np.float32)</span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="cf">for</span> digit <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb4-15"><a href="#cb4-15"></a>    row <span class="op">=</span> digit <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    y[row:row<span class="op">+</span><span class="dv">5</span>, :] <span class="op">=</span> digit</span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="bu">print</span>(x.shape, y.shape)</span>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co"># Finally we will reshape the data to combine the 50 rows and 100 columns, to get something that is 5000 by 20 by 20</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>x <span class="op">=</span> x.reshape(<span class="op">-</span><span class="dv">1</span>, x.shape[<span class="dv">2</span>], x.shape[<span class="dv">3</span>])</span>
+<span id="cb4-22"><a href="#cb4-22"></a>y <span class="op">=</span> y.flatten()</span>
+<span id="cb4-23"><a href="#cb4-23"></a></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="bu">print</span>(x.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(50, 100, 20, 20)
-[[0. 0. 0. ... 0. 0. 0.]
- [0. 0. 0. ... 0. 0. 0.]
- [0. 0. 0. ... 0. 0. 0.]
- ...
- [9. 9. 9. ... 9. 9. 9.]
- [9. 9. 9. ... 9. 9. 9.]
- [9. 9. 9. ... 9. 9. 9.]]
-(50, 100, 20, 20) (50, 100)</code></pre>
+<pre><code>(50, 100, 20, 20) (50, 100)
+(5000, 20, 20) (5000,)</code></pre>
 </div>
 </div>
 </section>
 <section id="step-2-divide-data-into-training-and-validation-sets" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-divide-data-into-training-and-validation-sets">Step 2: Divide data into training and validation sets</h4>
-<p>For this example, we will just have training data and validation data (we won’t break the dataset into three parts). We’re going to assume that, within each digit, the individual pictures are randomized. So we can create training and validation data by using some columns of the x array for training, and the rest for validation. Initially, we will split the data in half (in the milestone you’ll experiment with other splits).</p>
-<p>Remember that the x array has 100 columns. We will take the first 75 for training, and the second 25 for validation. I am recording how many training images I have per digit with the third line below, so that I can generate the correct categories for each training example later.</p>
-<div id="76c6f4bf" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1"></a>trainCols <span class="op">=</span> <span class="dv">75</span></span>
-<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2"></a>validCols <span class="op">=</span> <span class="dv">100</span> <span class="op">-</span> trainCols</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3"></a>trainX <span class="op">=</span> x[:, :trainCols]</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4"></a>validX <span class="op">=</span> x[:, trainCols:]</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3">3</button><span id="annotated-cell-5-5" class="code-annotation-target"><a href="#annotated-cell-5-5"></a>trainPerDigit <span class="op">=</span> <span class="dv">500</span> <span class="op">/</span> (<span class="dv">100</span> <span class="op">/</span> trainCols)</span>
-<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6"></a>validPerDigit <span class="op">=</span> <span class="dv">500</span> <span class="op">/</span> (<span class="dv">100</span> <span class="op">/</span> validCols)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="1">Split the first <code>trainCols</code> columns to be the training input data</span>
-</dd>
-<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="2">Split the remaining columns to be the validation input data</span>
-</dd>
-<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="5,6" data-code-annotation="3">Each digit has 500 pictures, so this calculates how many of that 500 belong to training versus validation. With this we can generate the correct labels for training and validation.</span>
-</dd>
-</dl>
+<p>For this example, we will just have training data and validation data (we won’t break the dataset into three parts). We are going to use a function from the Scikit-Learn library. This is a great machine learning library for Python: it implements many ML tools, though typically not deep learning. Even when Python ML projects are not directly using Scikit-Learn, they may borrow tools from it. A common example is the <code>train_test_split</code> function in Scikit-Learn, which takes in the instances and target values for a dataset and divides them into training and validation (or testing) sets. It is remarkably useful: we’ll use it here to show how it works.</p>
+<div id="be86d48f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>trainX, validX, trainY, validY <span class="op">=</span> train_test_split(x, y,</span>
+<span id="cb6-2"><a href="#cb6-2"></a>                                                  train_size<span class="op">=</span><span class="fl">0.75</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>                                                  random_state<span class="op">=</span><span class="dv">38271</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section>
-</section>
-</section>
-</section>
-<section id="what-to-hand-in" class="level1">
-<h1>What to hand in</h1>
-<p>Put all of your function definitions for this activity into the <code>activ16.py</code> file to be submitted. Make sure you format your code appropriately:</p>
+<p>The first two inputs define the dataset: they must have the same size in the first dimension (5000 in our case).</p>
+<p>The inputs to <code>train_test_split</code> are:</p>
 <ul>
-<li>At the top of the file is a triple-quoted string describing the file</li>
-<li>Next you include all import statements</li>
-<li>Next you have your function definitions, visually separated by blank lines, and maybe comments with dashed or other visual horizontal lines</li>
-<li>Each function should have a triple-quoted descriptive comment right after the <code>def</code> line</li>
-<li>All calls to all functions should be in a script at the bottom of the file, ideally inside an <code>if __name__ ...</code> block</li>
+<li>the input array, typically called X (required)</li>
+<li>the target array, typically called Y (required)</li>
+<li><code>train_size</code>, the percentagee of the dataset to use for the training split, between 0.0 and 1.0 (optional)</li>
+<li><code>random_state</code>, a seed for the random number generator</li>
 </ul>
-<p>Use <em>commit</em> and <em>push</em> to copy your code to Github to submit this work.</p>
+<p>The random seed makes sure that every time we run this function, we get the same division of data into training and validation (or testing) data. This is good if you want to compare the performance of different models on the same data: keeping the same split between training and validation ensures that the split itself won’t confound your results. It is especially important for deep learning, where we might need to train a model over several sessions: we need the same split every time.</p>
+</section>
+</section>
+<section id="complete-the-knn-training-and-testing" class="level3">
+<h3 class="anchored" data-anchor-id="complete-the-knn-training-and-testing">Complete the KNN training and testing</h3>
+<p>The steps above end with data that is in the correct format for the KNearest object. Look back at the example that used artificial data, and follow that format to set up a KNearest object, and train it on the digits training data. Then, Call <code>findNearest</code> on the <code>validX</code> from above.</p>
+<p>Compare the <code>results</code> array with the <code>validY</code>, which holds the correct values. Use that to compute the accuracy of the model.</p>
+</section>
+<section id="experiment" class="level3">
+<h3 class="anchored" data-anchor-id="experiment">Experiment!</h3>
+<p>After you get the KNN algorithm working on the data, try some experimentation.</p>
+<p>A major component of working with machine learning is experimenting with how changing the parameters of the problem changes the outcomes. Try the experiments here, and be prepared to report on your findings!</p>
+<ul>
+<li>Dig into the raw results a bit more. Compute the accuracy for each digit. Is KNN equally accurate on all categories, or does it do better on some than on others? Are there patterns to when it is right or wrong?</li>
+<li>Try changing the number of neighbors. For which number of neighbors was the resulting accuracy the best?</li>
+<li>Try changing the number of columns allocated to training versus testing. How does that affect the performance of the algorithm on the test data?</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="convolutional-neural-networks" class="level1">
+<h1>Convolutional Neural Networks</h1>
+<p>Simple convolutional neural networks are often used for classification or regression tasks. The convolutional/pooling section of the network finds useful patterns or features in an image, and then the dense neural network section uses the detected patterns/features to produce the right output.</p>
+<p>For this task and the next one, we will write our programs in Google Colab, a free cloud-based environment designed for training deep learning models.</p>
+<section id="using-google-colab" class="level2">
+<h2 class="anchored" data-anchor-id="using-google-colab">Using Google Colab</h2>
+<p>Google Colab allows you to create and run programs in the cloud. It makes it easy to work with complicated libraries like OpenCV, dlib, scikit-learn, and Tensorflow. You can also collaborate together with other people, and you have access to powerful cloud-based processors, both CPUs and GPUs.</p>
+<p>Before starting this section, you should explore Google Colab (you have access through your Macalester email). You might look through these tutorials:</p>
+<ul>
+<li><a href="https://colab.research.google.com/notebooks/intro.ipynb">Welcome to Colaboratory</a></li>
+<li><a href="https://colab.research.google.com/notebooks/basic_features_overview.ipynb">Overview of Colaboratory Features</a></li>
+</ul>
+</section>
+<section id="proceed-from-here-in-colab" class="level2">
+<h2 class="anchored" data-anchor-id="proceed-from-here-in-colab">Proceed from here in Colab</h2>
+<ul>
+<li>Open the <a href="https://colab.research.google.com/drive/1E5RhAK0TgbZQgZwJBgpTgY8Njy_fTXZk?usp=sharing">Deep Learning for Image Classification Colab notebook</a></li>
+<li>Make a copy of the notebook for yourself</li>
+<li>Share that notebook with your teammates, and with <strong>me</strong></li>
+<li>Work through the activity</li>
+</ul>
+</section>
+</section>
+<section id="object-detection-and-segmentation" class="level1">
+<h1>Object Detection and Segmentation</h1>
+<p>Object detection models need to identify where interesting objects are, and then classify each object that has been found. They have more complex architectures than classification models, but they do often include convolutional/pooling sections. This activity will experiment with the YOLO (You Only Look Once) architecture, which has “backbone”, “neck”, and “head” sections. The first two sections do include convolutional/pooling layers.</p>
+<p>Image segmentation goes a step further than object detection. Instead of finding bounding rectangles around objects of interest it marks each pixel in the image based on which object it belongs to. The output of this network is a copy of the image where each pixel has been market. YOLO provides a variation on its object detection model that performs segmentation instead.</p>
+<section id="proceed-from-here-in-colab-1" class="level2">
+<h2 class="anchored" data-anchor-id="proceed-from-here-in-colab-1">Proceed from here in Colab</h2>
+<ul>
+<li>Open the <a href="https://colab.research.google.com/drive/1wQkm6m9KHhhbwbWvnFbyG3fwGu7t9cN_?usp=sharing">Object Detection and Segmentation with YOLOv11</a></li>
+<li>Make a copy of the notebook for yourself</li>
+<li>Share that notebook with your teammates, and with <strong>me</strong></li>
+<li>Work through the activity</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
