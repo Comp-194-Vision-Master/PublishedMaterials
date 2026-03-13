@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2026-02-26">
+<meta name="dcterms.date" content="2026-03-13">
 
 <title>ICA: Deep Learning – Vision Readings</title>
 <style>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 26, 2026</p>
+        <p class="date">March 13, 2026</p>
       </div>
     </div>
     
@@ -218,8 +218,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This activity walks you through the use of very simple machine learning (K-Nearest Neighbor) for a computer vision task, and then teaches you how to use the Tensorflow library to train an image classifier, and the YOLO library to finetune an object detection network. We will use Google Colab to train the deep learning models.</p>
 <ul>
 <li>The Github repository for this assignment will contain starter code for the simple machine learning examples</li>
-<li>The <a href="">ImageClassifier Colab notebook</a> will contain the instructions and code for the Tensorflow portion</li>
-<li>The <a href="">ObjectDetector Colab notebook</a> will contain the instructions and code for the YOLO portion</li>
+<li>The <a href="https://colab.research.google.com/drive/1E5RhAK0TgbZQgZwJBgpTgY8Njy_fTXZk?usp=sharing">ImageClassifier Colab notebook</a> will contain the instructions and code for the Tensorflow portion</li>
+<li>The <a href="https://colab.research.google.com/drive/1wQkm6m9KHhhbwbWvnFbyG3fwGu7t9cN_?usp=sharing">ObjectDetector Colab notebook</a> will contain the instructions and code for the YOLO portion</li>
 </ul>
 <p>The first two tasks are examples of <strong>image classification</strong>. Image classification is a straightforward task, where we input an image, and the network assigns a category to it. For example, we might want to classify images according to what kind of vehicle is in them: car, truck, bicycle, train, etc. Or we might want to classify images of handwritten letters or digits by what letter or digit they contain.</p>
 <p>The third task looks at a more complex problem: <strong>object detection</strong>. Here, we go beyond a category for the entire image. Instead, we locate objects within the image and mark them with a rectangular bounding box, and categorize each object found.</p>
@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="creating-artificial-data" class="level2">
 <h2 class="anchored" data-anchor-id="creating-artificial-data">Creating artificial data</h2>
 <p>The code below, adapted from the OpenCV Machine Learning tutorial, generates random data, and assigns half of them to one category and the other half to a second category. It then generates a new random value. It plots this data as a scatterplot (note: you must close the plot window for the program to go on).</p>
-<div id="dd783917" class="cell" data-execution_count="1">
+<div id="a3ddc3ce" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="im">import</span> os</span>
 <span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a><span class="im">import</span> random</span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a><span class="im">import</span> time</span>
@@ -298,10 +298,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dd>
 </dl>
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:11: UserWarning:
+
+A NumPy version &gt;=1.23.5 and &lt;2.3.0 is required for this version of SciPy (detected version 2.3.1)
+</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ICA-DeepLearning_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="ICA-DeepLearning_files/figure-html/cell-2-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -311,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="building-and-training-a-knn-model">Building and training a KNN model</h2>
 <p>OpenCV implements several simple ML models, including KNN.</p>
 <p>Here we set up the KNN model as a n object, and train it on the data from the previous section:</p>
-<div id="c3befd54" class="cell" data-execution_count="2">
+<div id="1ed8b258" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co"># Create KNN object and train on data</span></span>
 <span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>knn <span class="op">=</span> cv2.ml.KNearest_create()</span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3"></a>knn.train(trainData, cv2.ml.ROW_SAMPLE, trainLabels)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -323,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </dd>
 </dl>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>True</code></pre>
 </div>
 </div>
@@ -331,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="classifying-the-unknown-point" class="level2">
 <h2 class="anchored" data-anchor-id="classifying-the-unknown-point">Classifying the unknown point</h2>
 <p>Next we run the trained model on our new point, and see the results.</p>
-<div id="bced94c1" class="cell" data-execution_count="3">
+<div id="9afd493e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co"># Report category of new point (based on k=3)</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2"></a>ret, result, neighbors, dist <span class="op">=</span> knn.findNearest(newPoint, <span class="dv">3</span>)</span>
 <span id="annotated-cell-3-3"><a href="#annotated-cell-3-3"></a><span class="bu">print</span>(<span class="st">"ret:"</span>, ret)</span>
@@ -361,8 +367,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>ret: 0.0
 result: [[0.]]
-neighbors: [[1. 0. 0.]]
-distances: [[  5. 338. 365.]]</code></pre>
+neighbors: [[0. 0. 1.]]
+distances: [[ 17.  97. 136.]]</code></pre>
 </div>
 </div>
 <p>You can try out this example in the <code>knnExample.py</code> starter file.</p>
@@ -392,34 +398,34 @@ Figure&nbsp;1: Dataset stored as an image
 <section id="step-1-break-up-the-big-picture" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-break-up-the-big-picture">Step 1: Break up the big picture</h4>
 <p>The code below reads in the digits image, converts it to grayscale, and then breaks it up into 20x20 chunks. The vsplit and hsplit functions from Numpy divide an array into the given number of sub-arrays: vsplit splits up the rows of the array, and hsplit splits up the columns. This code combines them using a list comprehension, producing a list of arrays of 20x20 grayscale images. The final step converts that list back into a Numpy array, with 50 rows, 100 columns, and each value within that is a small image.</p>
-<div id="b8061234" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>sampleDataPath <span class="op">=</span> <span class="st">"SampleData/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8eb55c68" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>sampleDataPath <span class="op">=</span> <span class="st">"SampleData/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a52ad420" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>digitDataIm <span class="op">=</span> cv2.imread(sampleDataPath <span class="op">+</span> <span class="st">"digits.png"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># cv2.imshow("digit data image", digitDataIm)</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>gray <span class="op">=</span> cv2.cvtColor(digitDataIm, cv2.COLOR_BGR2GRAY)</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Now we split the image first into 50 rows, and then each row into 100 columns, each 20x20 size</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>rows <span class="op">=</span> np.vsplit(gray, <span class="dv">50</span>)</span>
-<span id="cb4-7"><a href="#cb4-7"></a>cells <span class="op">=</span> [np.hsplit(row, <span class="dv">100</span>) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Make it into a Numpy array: its size should be (50, 100, 20, 20)</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>x <span class="op">=</span> np.array(cells)</span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co"># Make a matrix that is 50x100 and contains codes for each digit (0 through 9). These will be the targets, the labels</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a>y <span class="op">=</span> np.zeros((<span class="dv">50</span>, <span class="dv">100</span>), np.float32)</span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="cf">for</span> digit <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb4-15"><a href="#cb4-15"></a>    row <span class="op">=</span> digit <span class="op">*</span> <span class="dv">5</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>    y[row:row<span class="op">+</span><span class="dv">5</span>, :] <span class="op">=</span> digit</span>
-<span id="cb4-17"><a href="#cb4-17"></a></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="bu">print</span>(x.shape, y.shape)</span>
-<span id="cb4-19"><a href="#cb4-19"></a></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co"># Finally we will reshape the data to combine the 50 rows and 100 columns, to get something that is 5000 by 20 by 20</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a>x <span class="op">=</span> x.reshape(<span class="op">-</span><span class="dv">1</span>, x.shape[<span class="dv">2</span>], x.shape[<span class="dv">3</span>])</span>
-<span id="cb4-22"><a href="#cb4-22"></a>y <span class="op">=</span> y.flatten()</span>
-<span id="cb4-23"><a href="#cb4-23"></a></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="bu">print</span>(x.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ff300f72" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>digitDataIm <span class="op">=</span> cv2.imread(sampleDataPath <span class="op">+</span> <span class="st">"digits.png"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># cv2.imshow("digit data image", digitDataIm)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>gray <span class="op">=</span> cv2.cvtColor(digitDataIm, cv2.COLOR_BGR2GRAY)</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Now we split the image first into 50 rows, and then each row into 100 columns, each 20x20 size</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>rows <span class="op">=</span> np.vsplit(gray, <span class="dv">50</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>cells <span class="op">=</span> [np.hsplit(row, <span class="dv">100</span>) <span class="cf">for</span> row <span class="kw">in</span> rows]</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># Make it into a Numpy array: its size should be (50, 100, 20, 20)</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>x <span class="op">=</span> np.array(cells)</span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Make a matrix that is 50x100 and contains codes for each digit (0 through 9). These will be the targets, the labels</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>y <span class="op">=</span> np.zeros((<span class="dv">50</span>, <span class="dv">100</span>), np.float32)</span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="cf">for</span> digit <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb5-15"><a href="#cb5-15"></a>    row <span class="op">=</span> digit <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>    y[row:row<span class="op">+</span><span class="dv">5</span>, :] <span class="op">=</span> digit</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="bu">print</span>(x.shape, y.shape)</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co"># Finally we will reshape the data to combine the 50 rows and 100 columns, to get something that is 5000 by 20 by 20</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>x <span class="op">=</span> x.reshape(<span class="op">-</span><span class="dv">1</span>, x.shape[<span class="dv">2</span>], x.shape[<span class="dv">3</span>])</span>
+<span id="cb5-22"><a href="#cb5-22"></a>y <span class="op">=</span> y.flatten()</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="bu">print</span>(x.shape, y.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(50, 100, 20, 20) (50, 100)
 (5000, 20, 20) (5000,)</code></pre>
@@ -429,10 +435,10 @@ Figure&nbsp;1: Dataset stored as an image
 <section id="step-2-divide-data-into-training-and-validation-sets" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-divide-data-into-training-and-validation-sets">Step 2: Divide data into training and validation sets</h4>
 <p>For this example, we will just have training data and validation data (we won’t break the dataset into three parts). We are going to use a function from the Scikit-Learn library. This is a great machine learning library for Python: it implements many ML tools, though typically not deep learning. Even when Python ML projects are not directly using Scikit-Learn, they may borrow tools from it. A common example is the <code>train_test_split</code> function in Scikit-Learn, which takes in the instances and target values for a dataset and divides them into training and validation (or testing) sets. It is remarkably useful: we’ll use it here to show how it works.</p>
-<div id="be86d48f" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>trainX, validX, trainY, validY <span class="op">=</span> train_test_split(x, y,</span>
-<span id="cb6-2"><a href="#cb6-2"></a>                                                  train_size<span class="op">=</span><span class="fl">0.75</span>,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                                                  random_state<span class="op">=</span><span class="dv">38271</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="66a08ec0" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>trainX, validX, trainY, validY <span class="op">=</span> train_test_split(x, y,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>                                                  train_size<span class="op">=</span><span class="fl">0.75</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>                                                  random_state<span class="op">=</span><span class="dv">38271</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first two inputs define the dataset: they must have the same size in the first dimension (5000 in our case).</p>
 <p>The inputs to <code>train_test_split</code> are:</p>
