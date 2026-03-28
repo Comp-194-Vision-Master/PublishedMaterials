@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Susan Eileen Fox">
-<meta name="dcterms.date" content="2025-11-12">
+<meta name="dcterms.date" content="2026-03-28">
 
 <title>Chapter 8, Machine Learning and Computer Vision – Vision Readings</title>
 <style>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 12, 2025</p>
+        <p class="date">March 28, 2026</p>
       </div>
     </div>
     
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Mediapipe has a state-of-the-art face detection model. Take a look at the <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector">Mediapipe Face Detection Guide</a> for more details about the model itself.</p>
 <p>The model detects a few specific landmarks of a face (eyes, nose tip, mouth, and sides of the face (cheeks or temples), and also provides a bounding box that surrounds the face. We will first walk through the demo program you have been provided, and then will look closely at the format of the data that is returned by the model.</p>
 <p>If you can, open the <code>mediapipeFaceDetect.py</code> program, which is also included in the code block below.</p>
-<div id="000e3a80" class="cell" data-execution_count="2">
+<div id="c903d8de" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceDetect.py</code> program, demonstrates the face detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="co">"""</span></span>
@@ -562,7 +562,7 @@ Figure&nbsp;1: Various results of face detection: notice detection is tuned to t
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>categs = detObj.categories</code></td>
-<td style="text-align: left;"><code>categs</code> is a list of <code>Category</code> objects. Each item in the list corresponds to one of the faces detected: the length of the <code>detections</code> list and <code>categs</code> are the same.</td>
+<td style="text-align: left;"><code>categs</code> is a list of <code>Category</code> objects, containing one category object</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><p><code>cat1 = categs[0]</code></p>
@@ -604,7 +604,7 @@ Figure&nbsp;1: Various results of face detection: notice detection is tuned to t
 </ul>
 <p>With the outputs from these models, we should be able to identify general emotions expressed in a face, or use these landmarks for motion capture, or to augment the user’s face with fake glasses, flowers, or makeup.</p>
 <p>If you can, open the <code>mediapipeFaceLandmark.py</code> program, which is also included in the code block below.</p>
-<div id="d6570019" class="cell" data-execution_count="3">
+<div id="025e1929" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>The <code>mediapipeFaceLandmark.py</code> program, demonstrates the facial landmark models and their results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="co">"""</span></span>
@@ -1062,7 +1062,7 @@ Figure&nbsp;4: Hand landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipeHand.py</code> program, which is also included in the code block below.</p>
-<div id="909dae9e" class="cell" data-execution_count="4">
+<div id="95fd8ee3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>The <code>mediapipeHand.py</code> program, demonstrates the hand landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1"></a><span class="co">"""</span></span>
@@ -1342,7 +1342,7 @@ Figure&nbsp;6: Pose landmarks
 </figure>
 </div>
 <p>If you can, open the <code>mediapipePose.py</code> program, which is also included in the code block below.</p>
-<div id="79519d21" class="cell" data-execution_count="5">
+<div id="b7d2c0e3" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>The <code>mediapipePose.py</code> program, demonstrates the body pose landmark detection model and its results</summary>
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource python code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a><span class="co">"""</span></span>
